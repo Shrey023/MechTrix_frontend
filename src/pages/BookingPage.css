@@ -1,0 +1,204 @@
+/* Reset and base styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.booking-page {
+  font-family: 'Arial', sans-serif;
+  background: linear-gradient(135deg, #F7F8FA 60%, #4CAF50 100%); /* Off White to Lime Green */
+  color: #2D2D2D; /* Gunmetal Gray */
+  min-height: 100vh;
+  width: 100%;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.loading-text {
+  text-align: center;
+  font-size: clamp(1rem, 3.5vw, 1.2rem);
+  color: #2D2D2D; /* Gunmetal Gray */
+  padding: 2rem;
+}
+
+.error-text {
+  text-align: center;
+  font-size: clamp(0.9rem, 3.5vw, 1.1rem);
+  color: #FF6B35; /* Safety Orange */
+  background-color: rgba(255, 107, 53, 0.1);
+  border: 1px solid #FF6B35;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  margin: 2rem auto;
+  max-width: 600px;
+}
+
+.mechanic-title {
+  color: #1E2A78; /* Deep Indigo Blue */
+  font-size: clamp(1.8rem, 6vw, 2.2rem);
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.mechanic-info {
+  font-size: clamp(0.9rem, 3vw, 1rem);
+  color: #2D2D2D; /* Gunmetal Gray */
+  margin: 0.3rem 0;
+  text-align: center;
+}
+
+.booking-form {
+  background-color: #F7F8FA; /* Off White */
+  border: 2px solid #2D2D2D; /* Gunmetal Gray */
+  border-radius: 1rem;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  padding: clamp(1rem, 4vw, 1.5rem);
+  max-width: clamp(300px, 80vw, 500px);
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.input-field {
+  width: 100%;
+  padding: clamp(0.6rem, 2.5vw, 0.8rem);
+  border: 2px solid #2D2D2D; /* Gunmetal Gray */
+  border-radius: 0.5rem;
+  font-size: clamp(0.9rem, 3vw, 1rem);
+  background-color: #F7F8FA; /* Off White */
+  color: #2D2D2D; /* Gunmetal Gray */
+  transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
+}
+
+.input-field:focus {
+  outline: none;
+  border-color: #FF6B35; /* Safety Orange */
+  box-shadow: 0 0 8px rgba(255, 107, 53, 0.4);
+  transform: translateY(-2px);
+}
+
+.textarea {
+  resize: vertical;
+  min-height: 80px;
+  max-height: 200px;
+}
+
+.submit-button {
+  background: linear-gradient(90deg, #FF6B35, #FFD23F); /* Safety Orange to Warm Yellow */
+  color: #2D2D2D; /* Gunmetal Gray */
+  border: none;
+  padding: clamp(0.8rem, 2.5vw, 1rem);
+  font-size: clamp(0.9rem, 3vw, 1.1rem);
+  font-weight: bold;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+.submit-button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(255, 107, 53, 0.4);
+}
+
+.message {
+  text-align: center;
+  font-size: clamp(0.9rem, 3.5vw, 1rem);
+  margin: 1rem 0;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  max-width: 600px;
+}
+
+.message.success {
+  color: #4CAF50; /* Lime Green */
+  background-color: rgba(76, 175, 80, 0.1);
+  border: 1px solid #4CAF50;
+}
+
+.message.error {
+  color: #FF6B35; /* Safety Orange */
+  background-color: rgba(255, 107, 53, 0.1);
+  border: 1px solid #FF6B35;
+}
+
+.dashboard-button {
+  background: linear-gradient(90deg, #1E2A78, #4CAF50); /* Deep Indigo Blue to Lime Green */
+  color: #F7F8FA; /* Off White */
+  border: none;
+  padding: clamp(0.6rem, 2vw, 0.8rem) clamp(1rem, 3vw, 1.5rem);
+  font-size: clamp(0.9rem, 3vw, 1rem);
+  font-weight: bold;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+.dashboard-button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(30, 42, 120, 0.4);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .booking-page {
+    padding: 1rem;
+  }
+
+  .mechanic-title {
+    font-size: clamp(1.5rem, 5vw, 1.8rem);
+  }
+
+  .booking-form {
+    padding: 1rem;
+    max-width: 90vw;
+  }
+
+  .input-field {
+    padding: 0.6rem;
+    font-size: clamp(0.85rem, 3vw, 0.95rem);
+  }
+
+  .submit-button,
+  .dashboard-button {
+    padding: 0.7rem;
+    font-size: clamp(0.85rem, 3vw, 1rem);
+  }
+}
+
+@media (max-width: 480px) {
+  .mechanic-title {
+    font-size: clamp(1.3rem, 5vw, 1.6rem);
+  }
+
+  .mechanic-info {
+    font-size: clamp(0.8rem, 3vw, 0.9rem);
+  }
+
+  .booking-form {
+    padding: 0.8rem;
+    max-width: 95vw;
+  }
+
+  .input-field {
+    padding: 0.5rem;
+    font-size: clamp(0.8rem, 3vw, 0.9rem);
+  }
+
+  .submit-button,
+  .dashboard-button {
+    padding: 0.6rem;
+    font-size: clamp(0.8rem, 3vw, 0.9rem);
+  }
+
+  .message,
+  .loading-text,
+  .error-text {
+    font-size: clamp(0.8rem, 3.5vw, 0.9rem);
+    padding: 0.8rem;
+  }
+}

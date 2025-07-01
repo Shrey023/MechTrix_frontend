@@ -1,0 +1,97 @@
+
+.mechanic-register {
+  font-family: 'Arial', sans-serif;
+  background-color: #F7F8FA; /* Off White */
+  color: #2D2D2D; /* Gunmetal Gray */
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 2rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.mechanic-register h2 {
+  color: #1E2A78; /* Deep Indigo Blue */
+  font-size: 2rem;
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.mechanic-register form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.mechanic-register label {
+  color: #2D2D2D; /* Gunmetal Gray */
+  font-size: 1rem;
+  font-weight: bold;
+  margin-bottom: 0.25rem;
+}
+
+.mechanic-register input,
+.mechanic-register select {
+  padding: 0.75rem;
+  border: 1px solid #2D2D2D; /* Gunmetal Gray */
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  background-color: #F7F8FA; /* Off White */
+  color: #2D2D2D; /* Gunmetal Gray */
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.mechanic-register input:focus,
+.mechanic-register select:focus {
+  outline: none;
+  border-color: #FF6B35; /* Safety Orange */
+  box-shadow: 0 0 5px rgba(255, 107, 53, 0.3);
+}
+
+.mechanic-register select {
+  height: 100px; /* Allow multiple selections to be visible */
+}
+
+.mechanic-register input[type="file"] {
+  padding: 0.5rem;
+}
+
+.mechanic-register button {
+  background-color: #FF6B35; /* Safety Orange */
+  color: #F7F8FA; /* Off White */
+  border: none;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  margin-top: 1rem;
+}
+
+.mechanic-register button:hover {
+  background-color: #FFD23F; /* Warm Yellow */
+  transform: scale(1.05);
+}
+
+.mechanic-register .message {
+  margin-top: 1rem;
+  text-align: center;
+  font-size: 1rem;
+}
+
+.mechanic-register .message::before {
+  content: '';
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  margin-right: 0.5rem;
+  vertical-align: middle;
+}
+
+.mechanic-register .message[class*="✅"] {
+  color: #4CAF50; /* Lime Green */
+}
+
+.mechanic-register .message[class*="❌"] {
+  color: #FF6B35; /* Safety Orange */
+}

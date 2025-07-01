@@ -1,156 +1,126 @@
 import React, { useEffect, useState } from 'react';
-import {
-  GoogleMap,
-  Marker,
-  DirectionsRenderer,
-  useJsApiLoader,
-} from '@react-google-maps/api';
+import { useParams } from 'react-router-dom';
+import { GoogleMap, MarkerF, PolylineF, useJsApiLoader } from '@react-google-maps/api';
 import { io } from 'socket.io-client';
+import axios from '../api/axios';
 
 const socket = io('http://localhost:5000');
 
 const containerStyle = {
   width: '100%',
-  height: '80vh',
-  borderRadius: '10px',
-  overflow: 'hidden',
+  height: '90vh',
 };
 
-const defaultCenter = {
-  lat: 23.1308,
-  lng: 79.90535,
-};
-
-function MechanicTracker() {
+const MechanicTracker = () => {
+  const { bookingId } = useParams();
+  const [mechanicId, setMechanicId] = useState(null);
   const [mechanicLocation, setMechanicLocation] = useState(null);
   const [customerLocation, setCustomerLocation] = useState(null);
-  const [directions, setDirections] = useState(null);
-  const [distance, setDistance] = useState('');
-  const [duration, setDuration] = useState('');
+  const [eta, setEta] = useState(null);
+  const [distance, setDistance] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   const { isLoaded } = useJsApiLoader({
-    googleMapsApiKey: 'REMOVED_GOOGLE_MAPS_KEY', // replace with your real API key
-    libraries: ['places'],
+    googleMapsApiKey: import.meta.env.VITE_GOOGLE_MAPS_API_KEY,
   });
 
-  // Get customer's current location from browser
   useEffect(() => {
-    navigator.geolocation.getCurrentPosition(
-      (pos) => {
-        const { latitude, longitude } = pos.coords;
-        setCustomerLocation({ lat: latitude, lng: longitude });
-      },
-      (err) => {
-        console.error('Geolocation error:', err);
-        setCustomerLocation(defaultCenter);
-      }
-    );
-  }, []);
+    const getBookingDetails = async () => {
+      try {
+        const res = await axios.get(`/bookings/${bookingId}`);
+        setMechanicId(res.data.mechanic._id);
 
-  // Listen to mechanic's location via socket
+        navigator.geolocation.getCurrentPosition((pos) => {
+          setCustomerLocation({
+            lat: pos.coords.latitude,
+            lng: pos.coords.longitude,
+          });
+        });
+      } catch (err) {
+        console.error("❌ Failed to fetch booking:", err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    getBookingDetails();
+  }, [bookingId]);
+
   useEffect(() => {
-    socket.on('locationUpdate', ({ coordinates }) => {
-      setMechanicLocation({
-        lat: coordinates[1],
-        lng: coordinates[0],
-      });
+    if (!mechanicId) return;
+
+    socket.on('locationUpdate', ({ mechanicId: incomingId, coordinates }) => {
+      if (incomingId === mechanicId) {
+        const location = {
+          lat: coordinates[1],
+          lng: coordinates[0],
+        };
+        setMechanicLocation(location);
+      }
     });
 
-    return () => socket.off('locationUpdate');
-  }, []);
+    return () => {
+      socket.off('locationUpdate');
+    };
+  }, [mechanicId]);
 
-  // Calculate route, distance, and ETA
+  // 🧠 Calculate ETA and distance
   useEffect(() => {
-    if (mechanicLocation && customerLocation) {
-      const directionsService = new window.google.maps.DirectionsService();
-      directionsService.route(
-        {
-          origin: mechanicLocation,
-          destination: customerLocation,
-          travelMode: window.google.maps.TravelMode.DRIVING,
-        },
-        (result, status) => {
-          if (status === 'OK') {
-            setDirections(result);
-            const leg = result.routes[0].legs[0];
-            setDistance(leg.distance.text);
-            setDuration(leg.duration.text);
-          } else {
-            console.error('Directions request failed:', status);
-          }
+    if (!mechanicLocation || !customerLocation || !isLoaded) return;
+
+    const service = new window.google.maps.DirectionsService();
+
+    service.route(
+      {
+        origin: mechanicLocation,
+        destination: customerLocation,
+        travelMode: window.google.maps.TravelMode.DRIVING,
+      },
+      (result, status) => {
+        if (status === 'OK') {
+          const leg = result.routes[0].legs[0];
+          setEta(leg.duration.text);
+          setDistance(leg.distance.text);
+        } else {
+          console.error('Directions request failed:', status);
         }
-      );
-    }
-  }, [mechanicLocation, customerLocation]);
+      }
+    );
+  }, [mechanicLocation, customerLocation, isLoaded]);
 
-  return isLoaded ? (
-    <div
-      style={{
-        maxWidth: '960px',
-        margin: '30px auto',
-        padding: '20px',
-        borderRadius: '12px',
-        backgroundColor: '#1e1e1e',
-        boxShadow: '0 0 15px rgba(0,0,0,0.3)',
-        color: '#fff',
-        fontFamily: 'Arial, sans-serif',
-        position: 'relative',
-      }}
-    >
-      <h2 style={{ textAlign: 'center', marginBottom: '20px' }}>Live Mechanic Tracking</h2>
+  const path = mechanicLocation && customerLocation
+    ? [mechanicLocation, customerLocation]
+    : [];
 
-      <GoogleMap
-        mapContainerStyle={containerStyle}
-        center={customerLocation || mechanicLocation || defaultCenter}
-        zoom={14}
-      >
-        {customerLocation && (
-          <Marker
-            position={customerLocation}
-            label="Customer"
-            icon={{
-              url: 'https://img.icons8.com/emoji/48/house-emoji.png',
-              scaledSize: new window.google.maps.Size(40, 40),
-            }}
-          />
-        )}
-        {mechanicLocation && (
-          <Marker
-            position={mechanicLocation}
-            label="Mechanic"
-            icon={{
-              url: 'https://img.icons8.com/emoji/48/motorcycle-emoji.png',
-              scaledSize: new window.google.maps.Size(40, 40),
-            }}
-          />
-        )}
-        {directions && <DirectionsRenderer directions={directions} />}
-      </GoogleMap>
+  const vanIcon = {
+    url: 'https://cdn-icons-png.flaticon.com/512/296/296216.png',
+    scaledSize: { width: 40, height: 40 },
+  };
 
-      <div
-        style={{
-          marginTop: '20px',
-          fontSize: '18px',
-          textAlign: 'center',
-          backgroundColor: '#2b2b2b',
-          padding: '12px',
-          borderRadius: '10px',
-        }}
-      >
-        {duration && distance ? (
-          <>
-            <strong>ETA:</strong> {duration} &nbsp;&nbsp;|&nbsp;&nbsp; <strong>Distance:</strong> {distance}
-          </>
-        ) : (
-          <p>Calculating route...</p>
-        )}
+  if (loading || !isLoaded) return <p>Loading tracking info...</p>;
+  if (!customerLocation || !mechanicLocation) return <p>Waiting for live location...</p>;
+
+  return (
+    <div>
+      <div style={{ padding: '1rem', background: '#f0f0f0' }}>
+        <strong>📍 Distance:</strong> {distance || '...'} |
+        <strong> 🚗 ETA:</strong> {eta || '...'}
       </div>
-    </div>
-  ) : (
-    <div style={{ color: 'white', textAlign: 'center', padding: '100px' }}>
-      Loading Map...
+
+      <GoogleMap mapContainerStyle={containerStyle} center={customerLocation} zoom={14}>
+        <MarkerF position={customerLocation} label="You" />
+        <MarkerF position={mechanicLocation} icon={vanIcon} />
+        <PolylineF
+          path={path}
+          options={{
+            strokeColor: '#FF0000',
+            strokeOpacity: 0.8,
+            strokeWeight: 3,
+          }}
+        />
+      </GoogleMap>
     </div>
   );
-}
+};
 
 export default MechanicTracker;
