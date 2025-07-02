@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { io } from 'socket.io-client';
 
-const socket = io('http://localhost:5000'); // update if hosted
+const socket = io(import.meta.env.VITE_BACKEND_URL); // update if hosted
 
 const MechanicLocationSender = () => {
   const mechanicId = localStorage.getItem('mechanicId');

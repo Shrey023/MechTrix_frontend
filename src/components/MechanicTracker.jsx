@@ -4,7 +4,7 @@ import { GoogleMap, MarkerF, PolylineF, useJsApiLoader } from '@react-google-map
 import { io } from 'socket.io-client';
 import axios from '../api/axios';
 
-const socket = io('http://localhost:5000');
+const socket = io(import.meta.env.VITE_BACKEND_URL);
 
 const containerStyle = {
   width: '100%',
