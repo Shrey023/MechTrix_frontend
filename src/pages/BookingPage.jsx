@@ -14,15 +14,15 @@ const BookingPage = () => {
     scheduledTime: ''
   });
   const [message, setMessage] = useState('');
+  const [userLocation, setUserLocation] = useState({ lat: null, lng: null });
 
-  const customerId = localStorage.getItem('customerId'); // or use token decoding if needed
+  const customerId = localStorage.getItem('customerId');
 
+  // Fetch mechanic details
   useEffect(() => {
     const fetchMechanic = async () => {
       try {
-        console.log("📡 Fetching mechanic ID:", id);
         const res = await axios.get(`/mechanics/${id}`);
-        console.log("✅ Mechanic fetched:", res.data);
         setMechanic(res.data);
       } catch (err) {
         console.error("❌ Mechanic fetch failed:", err.response?.data || err.message);
@@ -35,6 +35,26 @@ const BookingPage = () => {
     fetchMechanic();
   }, [id]);
 
+  // Get user's current location
+  useEffect(() => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          setUserLocation({
+            lat: position.coords.latitude,
+            lng: position.coords.longitude,
+          });
+        },
+        (err) => {
+          console.error("❌ Geolocation error:", err.message);
+          setMessage('❌ Could not get your location. Please allow location access.');
+        }
+      );
+    } else {
+      setMessage('❌ Geolocation not supported by this browser.');
+    }
+  }, []);
+
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
@@ -42,42 +62,37 @@ const BookingPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!navigator.geolocation) {
-      return setMessage('❌ Geolocation not supported by this browser.');
+    if (!userLocation.lat || !userLocation.lng) {
+      return setMessage('❌ Location not available. Please allow location access.');
     }
 
-    navigator.geolocation.getCurrentPosition(async (position) => {
-      try {
-        const coords = [position.coords.longitude, position.coords.latitude];
+    try {
+      const coords = [userLocation.lng, userLocation.lat]; // GeoJSON format: [lng, lat]
 
-        const bookingData = {
-          customerId,
-          mechanicId: mechanic._id,
-          vehicleType: form.vehicleType,
-          issueDescription: form.issueDescription,
-          serviceRequired: form.serviceRequired,
-          scheduledTime: form.scheduledTime,
-          location: {
-            type: 'Point',
-            coordinates: coords
-          },
-          payment: {
-            mode: 'cash',
-            status: 'pending',
-            amount: 0
-          }
-        };
+      const bookingData = {
+        customerId,
+        mechanicId: mechanic._id,
+        vehicleType: form.vehicleType,
+        problemDescription: form.issueDescription, // ✅ Updated field name
+        serviceType: form.serviceRequired,         // ✅ Updated field name
+        scheduledTime: form.scheduledTime,
+        location: {
+          type: 'Point',
+          coordinates: coords,
+        },
+        payment: {
+          mode: 'cash',
+          status: 'pending',
+          amount: 0,
+        }
+      };
 
-        await axios.post('/bookings', bookingData);
-        setMessage('✅ Booking successful!');
-      } catch (err) {
-        console.error('❌ Booking failed:', err.response?.data || err.message);
-        setMessage('❌ Booking failed. Please try again.');
-      }
-    }, (err) => {
-      console.error("❌ Geolocation error:", err.message);
-      setMessage('❌ Could not get your location. Please allow location access.');
-    });
+      await axios.post('/bookings', bookingData);
+      setMessage('✅ Booking successful!');
+    } catch (err) {
+      console.error('❌ Booking failed:', err.response?.data || err.message);
+      setMessage('❌ Booking failed. Please try again.');
+    }
   };
 
   if (loading) return <p className="loading-text">⏳ Loading mechanic info...</p>;
