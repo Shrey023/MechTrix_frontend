@@ -1,14 +1,21 @@
 :root {
-  --primary: #0057A0;
-  --accent: #F9A825;
-  --secondary: #212121;
-  --background: #F5F7FA;
-  --success: #388E3C;
-  --error: #D32F2F;
+  --primary: #A64B0A; /* Warm brown */
+  --primary-700: #8F4108;
+  --primary-200: #F1D3C2;
+  --text-900: #111827;
+  --text-700: #374151;
+  --muted-600: #6B7280;
+  --border: #E5E7EB;
+  --surface: #FFFFFF;
+  --bg-0: #FAFAF9;
+  --bg-1: #F3F4F6;
+  --success: #16A34A;
+  --error: #DC2626;
 }
 
 body {
   margin: 0;
-  font-family: sans-serif;
-  background-color: var(--background);
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  color: var(--text-900);
+  background-color: var(--bg-0);
 }

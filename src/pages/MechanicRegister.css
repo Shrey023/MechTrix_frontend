@@ -1,20 +1,23 @@
 
+
 .mechanic-register {
-  font-family: 'Arial', sans-serif;
-  background-color: #F7F8FA; /* Off White */
-  color: #2D2D2D; /* Gunmetal Gray */
-  max-width: 600px;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  background-color: #FAFAF9;
+  color: #111827;
+  max-width: 720px;
   margin: 2rem auto;
   padding: 2rem;
-  border-radius: 0.5rem;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 1rem;
+  box-shadow: 0 12px 30px rgba(17, 24, 39, 0.08);
+  border: 1px solid #E5E7EB;
 }
 
 .mechanic-register h2 {
-  color: #1E2A78; /* Deep Indigo Blue */
-  font-size: 2rem;
+  color: #111827;
+  font-size: clamp(1.5rem, 4.5vw, 2rem);
   text-align: center;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.25rem;
+  font-weight: 700;
 }
 
 .mechanic-register form {
@@ -24,32 +27,32 @@
 }
 
 .mechanic-register label {
-  color: #2D2D2D; /* Gunmetal Gray */
-  font-size: 1rem;
-  font-weight: bold;
-  margin-bottom: 0.25rem;
+  color: #374151;
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin-bottom: 0.35rem;
 }
 
 .mechanic-register input,
 .mechanic-register select {
-  padding: 0.75rem;
-  border: 1px solid #2D2D2D; /* Gunmetal Gray */
-  border-radius: 0.5rem;
+  padding: 0.8rem 0.9rem;
+  border: 1px solid #D1D5DB;
+  border-radius: 0.625rem;
   font-size: 1rem;
-  background-color: #F7F8FA; /* Off White */
-  color: #2D2D2D; /* Gunmetal Gray */
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  background-color: #FFFFFF;
+  color: #111827;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 .mechanic-register input:focus,
 .mechanic-register select:focus {
   outline: none;
-  border-color: #FF6B35; /* Safety Orange */
-  box-shadow: 0 0 5px rgba(255, 107, 53, 0.3);
+  border-color: #A64B0A;
+  box-shadow: 0 0 0 3px rgba(166, 75, 10, 0.25);
 }
 
 .mechanic-register select {
-  height: 100px; /* Allow multiple selections to be visible */
+  height: 110px;
 }
 
 .mechanic-register input[type="file"] {
@@ -57,20 +60,26 @@
 }
 
 .mechanic-register button {
-  background-color: #FF6B35; /* Safety Orange */
-  color: #F7F8FA; /* Off White */
+  background-color: #A64B0A;
+  color: #FFFFFF;
   border: none;
-  padding: 0.75rem 1.5rem;
+  padding: 0.85rem 1.25rem;
   font-size: 1rem;
-  border-radius: 0.5rem;
+  border-radius: 0.625rem;
   cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.2s ease;
+  transition: background-color 0.15s ease, transform 0.15s ease, box-shadow 0.2s ease;
   margin-top: 1rem;
 }
 
 .mechanic-register button:hover {
-  background-color: #FFD23F; /* Warm Yellow */
-  transform: scale(1.05);
+  background-color: #8F4108;
+  transform: translateY(-1px);
+  box-shadow: 0 8px 20px rgba(166, 75, 10, 0.25);
+}
+
+.mechanic-register button:focus-visible {
+  outline: 3px solid rgba(166, 75, 10, 0.35);
+  outline-offset: 2px;
 }
 
 .mechanic-register .message {
@@ -89,9 +98,9 @@
 }
 
 .mechanic-register .message[class*="✅"] {
-  color: #4CAF50; /* Lime Green */
+  color: #166534;
 }
 
 .mechanic-register .message[class*="❌"] {
-  color: #FF6B35; /* Safety Orange */
+  color: #B91C1C;
 }

@@ -6,9 +6,12 @@
 }
 
 .dashboard {
-  font-family: 'Arial', sans-serif;
-  background: linear-gradient(180deg, #F7F8FA 60%, #4CAF50 100%); /* Off White to Lime Green */
-  color: #2D2D2D; /* Gunmetal Gray */
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  background:
+    radial-gradient(80rem 40rem at -20% -10%, rgba(166, 75, 10, 0.05), transparent 60%),
+    radial-gradient(70rem 35rem at 120% 110%, rgba(166, 75, 10, 0.04), transparent 60%),
+    linear-gradient(180deg, #FAFAF9 0%, #F3F4F6 100%);
+  color: #111827;
   min-height: 100vh;
   padding: 2rem clamp(1rem, 5vw, 2rem);
   width: 100%;
@@ -17,21 +20,21 @@
 
 .loading-text {
   text-align: center;
-  font-size: clamp(1rem, 3.5vw, 1.2rem);
-  color: #2D2D2D; /* Gunmetal Gray */
+  font-size: clamp(1rem, 3.5vw, 1.1rem);
+  color: #374151;
   padding: 2rem;
 }
 
 /* Profile Card */
 .profile-card {
-  background-color: #F7F8FA; /* Off White */
-  border: 2px solid #2D2D2D; /* Gunmetal Gray */
+  background-color: #FFFFFF;
+  border: 1px solid #E5E7EB;
   border-radius: 1rem;
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 12px 30px rgba(17, 24, 39, 0.08);
   padding: 1.5rem;
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 1.25rem;
   max-width: 1200px;
   margin: 0 auto 2rem;
 }
@@ -41,89 +44,96 @@
   height: 80px;
   border-radius: 50%;
   object-fit: cover;
-  border: 3px solid #FF6B35; /* Safety Orange */
+  border: 3px solid #E5E7EB;
 }
 
 .profile-details h2 {
-  color: #1E2A78; /* Deep Indigo Blue */
-  font-size: clamp(1.5rem, 5vw, 1.8rem);
-  font-weight: bold;
-  margin-bottom: 0.5rem;
+  color: #111827;
+  font-size: clamp(1.35rem, 4.5vw, 1.65rem);
+  font-weight: 700;
+  margin-bottom: 0.25rem;
 }
 
 .profile-details p {
-  font-size: clamp(0.85rem, 3vw, 0.95rem);
-  margin: 0.3rem 0;
+  font-size: clamp(0.9rem, 3vw, 1rem);
+  margin: 0.25rem 0;
+  color: #374151;
 }
 
 .status-text {
-  font-weight: bold;
+  font-weight: 600;
 }
 
 .status-available {
-  color: #4CAF50; /* Lime Green */
+  color: #16A34A;
 }
 
 .status-busy {
-  color: #FFD23F; /* Warm Yellow */
+  color: #F59E0B;
 }
 
 .status-offline {
-  color: #2D2D2D; /* Gunmetal Gray */
+  color: #6B7280;
 }
 
 .profile-actions {
   display: flex;
   flex-direction: column;
-  gap: 0.8rem;
+  gap: 0.75rem;
   align-items: stretch;
 }
 
 .status-select {
-  padding: 0.6rem;
-  border: 2px solid #2D2D2D; /* Gunmetal Gray */
-  border-radius: 0.5rem;
-  font-size: clamp(0.85rem, 3vw, 0.95rem);
-  background-color: #F7F8FA; /* Off White */
-  color: #2D2D2D; /* Gunmetal Gray */
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  padding: 0.65rem 0.8rem;
+  border: 1px solid #D1D5DB;
+  border-radius: 0.625rem;
+  font-size: clamp(0.9rem, 3vw, 1rem);
+  background-color: #FFFFFF;
+  color: #111827;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 .status-select:focus {
   outline: none;
-  border-color: #FF6B35; /* Safety Orange */
-  box-shadow: 0 0 8px rgba(255, 107, 53, 0.4);
+  border-color: #A64B0A;
+  box-shadow: 0 0 0 3px rgba(166, 75, 10, 0.25);
 }
 
 .location-button {
-  background: linear-gradient(90deg, #FF6B35, #FFD23F); /* Safety Orange to Warm Yellow */
-  color: #2D2D2D; /* Gunmetal Gray */
+  background-color: #A64B0A;
+  color: #FFFFFF;
   border: none;
-  padding: 0.6rem;
-  border-radius: 0.5rem;
-  font-size: clamp(0.85rem, 3vw, 0.95rem);
-  font-weight: bold;
+  padding: 0.65rem 0.9rem;
+  border-radius: 0.625rem;
+  font-size: clamp(0.9rem, 3vw, 1rem);
+  font-weight: 600;
   cursor: pointer;
-  transition: transform 0.2s ease, box-shadow 0.3s ease;
+  transition: background-color 0.15s ease, transform 0.15s ease, box-shadow 0.2s ease;
 }
 
 .location-button:hover {
-  transform: scale(1.05);
-  box-shadow: 0 4px 12px rgba(255, 107, 53, 0.4);
+  background-color: #8F4108;
+  transform: translateY(-1px);
+  box-shadow: 0 8px 20px rgba(166, 75, 10, 0.25);
+}
+
+.location-button:focus-visible {
+  outline: 3px solid rgba(166, 75, 10, 0.35);
+  outline-offset: 2px;
 }
 
 .logout-button {
-  color: #FF6B35; /* Safety Orange */
-  font-size: clamp(0.8rem, 3vw, 0.9rem);
+  color: #6B7280;
+  font-size: clamp(0.85rem, 3vw, 0.95rem);
   text-decoration: underline;
   background: none;
   border: none;
   cursor: pointer;
-  transition: color 0.3s ease;
+  transition: color 0.2s ease;
 }
 
 .logout-button:hover {
-  color: #FFD23F; /* Warm Yellow */
+  color: #374151;
 }
 
 /* Bookings Section */
@@ -137,15 +147,15 @@
 }
 
 .booking-section h3 {
-  color: #1E2A78; /* Deep Indigo Blue */
-  font-size: clamp(1.2rem, 4vw, 1.5rem);
-  font-weight: bold;
-  margin-bottom: 1rem;
+  color: #111827;
+  font-size: clamp(1.1rem, 4vw, 1.35rem);
+  font-weight: 700;
+  margin-bottom: 0.85rem;
 }
 
 .no-bookings {
-  color: #2D2D2D; /* Gunmetal Gray */
-  font-size: clamp(0.9rem, 3.5vw, 1rem);
+  color: #6B7280;
+  font-size: clamp(0.95rem, 3.5vw, 1rem);
   font-style: italic;
 }
 
@@ -156,64 +166,69 @@
 }
 
 .booking-card {
-  background-color: #F7F8FA; /* Off White */
-  border: 2px solid #2D2D2D; /* Gunmetal Gray */
-  border-radius: 0.8rem;
-  padding: 1.2rem;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  background-color: #FFFFFF;
+  border: 1px solid #E5E7EB;
+  border-radius: 0.875rem;
+  padding: 1.1rem;
+  box-shadow: 0 10px 24px rgba(17, 24, 39, 0.06);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .booking-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  transform: translateY(-2px);
+  box-shadow: 0 14px 28px rgba(17, 24, 39, 0.09);
 }
 
 .booking-card p {
-  font-size: clamp(0.85rem, 3vw, 0.95rem);
-  margin: 0.3rem 0;
+  font-size: clamp(0.95rem, 3vw, 1rem);
+  margin: 0.25rem 0;
+  color: #374151;
 }
 
 .booking-actions {
   margin-top: 0.8rem;
   display: flex;
-  gap: 0.8rem;
+  gap: 0.6rem;
   flex-wrap: wrap;
 }
 
 .action-button {
-  padding: 0.5rem 1rem;
-  border: none;
-  border-radius: 0.5rem;
-  font-size: clamp(0.8rem, 3vw, 0.9rem);
-  font-weight: bold;
+  padding: 0.5rem 0.9rem;
+  border: 1px solid #E5E7EB;
+  border-radius: 0.625rem;
+  font-size: clamp(0.85rem, 3vw, 0.95rem);
+  font-weight: 600;
   cursor: pointer;
-  transition: transform 0.2s ease, box-shadow 0.3s ease;
+  transition: background-color 0.15s ease, transform 0.15s ease, box-shadow 0.2s ease;
 }
 
 .action-button:hover {
-  transform: scale(1.05);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transform: translateY(-1px);
+  box-shadow: 0 8px 16px rgba(17, 24, 39, 0.08);
 }
 
 .action-button.accept {
-  background-color: #4CAF50; /* Lime Green */
-  color: #F7F8FA; /* Off White */
+  background-color: #16A34A;
+  color: #FFFFFF;
+  border-color: transparent;
 }
 
 .action-button.reject {
-  background-color: #FF6B35; /* Safety Orange */
-  color: #F7F8FA; /* Off White */
+  background-color: #DC2626;
+  color: #FFFFFF;
+  border-color: transparent;
 }
 
 .action-button.complete {
-  background-color: #1E2A78; /* Deep Indigo Blue */
-  color: #F7F8FA; /* Off White */
+  background-color: #A64B0A;
+  color: #FFFFFF;
+  border-color: transparent;
 }
 
 .action-button.navigate {
-  background-color: #FFD23F; /* Warm Yellow */
-  color: #2D2D2D; /* Gunmetal Gray */
+  background-color: #111827;
+  color: #FFFFFF;
+  border-color: transparent;
 }
 
 /* Responsive Design */
@@ -289,7 +304,7 @@
   .status-select,
   .location-button,
   .action-button {
-    font-size: clamp(0.8rem, 3vw, 0.9rem);
+    font-size: clamp(0.85rem, 3vw, 0.95rem);
   }
 
   .booking-section h3 {

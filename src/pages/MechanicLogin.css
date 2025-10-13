@@ -6,9 +6,12 @@
 }
 
 .mechanic-login {
-  font-family: 'Arial', sans-serif;
-  background: linear-gradient(135deg, #F7F8FA 60%, #4CAF50 100%); /* Off White to Lime Green */
-  color: #2D2D2D; /* Gunmetal Gray */
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  background:
+    radial-gradient(80rem 40rem at -20% -10%, rgba(166, 75, 10, 0.06), transparent 60%),
+    radial-gradient(70rem 35rem at 120% 110%, rgba(166, 75, 10, 0.05), transparent 60%),
+    linear-gradient(180deg, #FAFAF9 0%, #F3F4F6 100%);
+  color: #111827;
   min-height: 100vh;
   display: flex;
   align-items: center;
@@ -16,72 +19,131 @@
   padding: clamp(1rem, 5vw, 2rem);
   width: 100%;
   overflow-x: hidden;
+  position: relative;
+  z-index: 0; /* establish stacking context */
+}
+
+/* Soft wave divider background behind the card */
+.mechanic-login::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 42%;
+  background: #EDE9E3; /* warm neutral */
+  border-top-left-radius: 55% 18%;
+  border-top-right-radius: 55% 18%;
+  box-shadow: inset 0 10px 20px rgba(17, 24, 39, 0.03);
+  pointer-events: none;
+  z-index: -1; /* keep behind the content */
 }
 
 .login-form {
-  background-color: #F7F8FA; /* Off White */
-  padding: clamp(1.5rem, 6vw, 2.5rem);
+  background-color: #FFFFFF;
+  padding: clamp(1.5rem, 6vw, 2.25rem);
   border-radius: 1rem;
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-  border: 2px solid #2D2D2D; /* Gunmetal Gray */
+  box-shadow: 0 12px 30px rgba(17, 24, 39, 0.08);
+  border: 1px solid #E5E7EB;
   width: 100%;
-  max-width: clamp(300px, 80vw, 450px);
+  max-width: clamp(320px, 80vw, 440px);
+  position: relative;
+  z-index: 1; /* keep form in front of background */
+}
+
+/* Centered MECHZE logo pill above the card */
+.login-form::before {
+  content: "MECHZE";
+  position: absolute;
+  top: -42px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #111827;
+  color: #FFFFFF;
+  padding: 0.5rem 0.9rem;
+  border-radius: 9999px;
+  font-size: 0.875rem;
+  letter-spacing: 0.12em;
+  font-weight: 800;
+  box-shadow: 0 6px 16px rgba(17, 24, 39, 0.2);
 }
 
 .login-form h2 {
-  color: #1E2A78; /* Deep Indigo Blue */
-  font-size: clamp(1.5rem, 6vw, 2rem);
-  font-weight: bold;
+  color: #111827;
+  font-size: clamp(1.5rem, 5.5vw, 1.875rem);
+  font-weight: 700;
   text-align: center;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.25rem;
+}
+
+.logo-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 0.75rem;
+}
+
+.logo-text {
+  letter-spacing: 0.1em;
+  font-weight: 700;
+  color: #111827;
 }
 
 .input-field {
   width: 100%;
-  padding: clamp(0.6rem, 2.5vw, 0.8rem);
-  border: 2px solid #2D2D2D; /* Gunmetal Gray */
-  border-radius: 0.5rem;
-  font-size: clamp(0.9rem, 3vw, 1rem);
-  background-color: #F7F8FA; /* Off White */
-  color: #2D2D2D; /* Gunmetal Gray */
-  margin-bottom: 1rem;
-  transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
+  padding: clamp(0.65rem, 2.5vw, 0.9rem);
+  border: 1px solid #D1D5DB;
+  border-radius: 0.625rem;
+  font-size: clamp(0.95rem, 3vw, 1rem);
+  background-color: #FFFFFF;
+  color: #111827;
+  margin-bottom: 0.9rem;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.input-field::placeholder {
+  color: #9CA3AF;
 }
 
 .input-field:focus {
   outline: none;
-  border-color: #FF6B35; /* Safety Orange */
-  box-shadow: 0 0 8px rgba(255, 107, 53, 0.4);
-  transform: translateY(-2px);
+  border-color: #A64B0A;
+  box-shadow: 0 0 0 3px rgba(166, 75, 10, 0.25);
 }
 
 .error-message {
-  color: #FF6B35; /* Safety Orange */
-  font-size: clamp(0.8rem, 3vw, 0.9rem);
+  color: #B45309;
+  font-size: clamp(0.85rem, 3vw, 0.95rem);
   text-align: center;
-  margin-bottom: 1rem;
-  padding: 0.5rem;
+  margin-bottom: 0.75rem;
+  padding: 0.5rem 0.75rem;
   border-radius: 0.5rem;
-  background-color: rgba(255, 107, 53, 0.1);
-  border: 1px solid #FF6B35;
+  background-color: #FFF7ED;
+  border: 1px solid #FED7AA;
 }
 
 .login-button {
   width: 100%;
-  background: linear-gradient(90deg, #FF6B35, #FFD23F); /* Safety Orange to Warm Yellow */
-  color: #2D2D2D; /* Gunmetal Gray */
+  background-color: #A64B0A;
+  color: #FFFFFF;
   border: none;
-  padding: clamp(0.8rem, 2.5vw, 1rem);
-  font-size: clamp(0.9rem, 3vw, 1.1rem);
-  font-weight: bold;
-  border-radius: 0.5rem;
+  padding: clamp(0.85rem, 2.5vw, 1rem);
+  font-size: clamp(0.95rem, 3vw, 1.05rem);
+  font-weight: 600;
+  border-radius: 0.625rem;
   cursor: pointer;
-  transition: transform 0.2s ease, box-shadow 0.3s ease;
+  transition: background-color 0.15s ease, transform 0.15s ease, box-shadow 0.2s ease;
 }
 
 .login-button:hover {
-  transform: scale(1.05);
-  box-shadow: 0 4px 12px rgba(255, 107, 53, 0.4);
+  background-color: #8F4108;
+  transform: translateY(-1px);
+  box-shadow: 0 8px 20px rgba(166, 75, 10, 0.25);
+}
+
+.login-button:focus-visible {
+  outline: 3px solid rgba(166, 75, 10, 0.35);
+  outline-offset: 2px;
 }
 
 /* Responsive Design */
@@ -91,46 +153,31 @@
   }
 
   .login-form {
-    padding: 1.5rem;
-    max-width: 90vw;
+    padding: 1.25rem;
+    max-width: 92vw;
   }
 
   .login-form h2 {
-    font-size: clamp(1.3rem, 5vw, 1.8rem);
-  }
-
-  .input-field {
-    padding: 0.6rem;
-    font-size: clamp(0.85rem, 3vw, 0.95rem);
+    font-size: clamp(1.35rem, 5vw, 1.6rem);
   }
 
   .login-button {
-    padding: 0.8rem;
-    font-size: clamp(0.85rem, 3vw, 1rem);
+    padding: 0.9rem;
   }
 }
 
 @media (max-width: 480px) {
   .login-form {
     padding: 1rem;
-    max-width: 95vw;
+    max-width: 96vw;
   }
 
-  .login-form h2 {
-    font-size: clamp(1.2rem, 5vw, 1.5rem);
+  .logo-text {
+    font-size: 0.9rem;
   }
+}
 
-  .input-field {
-    padding: 0.5rem;
-    font-size: clamp(0.8rem, 3vw, 0.9rem);
-  }
-
-  .error-message {
-    font-size: clamp(0.75rem, 3vw, 0.85rem);
-  }
-
-  .login-button {
-    padding: 0.7rem;
-    font-size: clamp(0.8rem, 3vw, 0.9rem);
-  }
+/* Hide the global navbar only on the mechanic login page */
+body:has(.mechanic-login) .navbar {
+  display: none !important;
 }
