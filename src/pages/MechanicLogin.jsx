@@ -17,6 +17,7 @@ const MechanicLogin = () => {
       localStorage.setItem('mechanicToken', res.data.token);
       localStorage.setItem('mechanicId', res.data._id);
       localStorage.setItem('token', res.data.token);
+      
       localStorage.setItem('userType', res.data.userType);
 
       navigate('/mechanic/dashboard'); // ✅ dashboard, not profile
