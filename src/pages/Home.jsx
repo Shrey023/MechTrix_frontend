@@ -55,6 +55,67 @@ const Home = () => {
         >Book a Mechanic</button>
       </Link>
 
+      {/* Auth Buttons */}
+      <div style={{
+        display: 'flex',
+        gap: '0.85rem',
+        marginTop: '1.25rem',
+        flexWrap: 'wrap',
+        justifyContent: 'center'
+      }}>
+        <Link to="/login" style={{ textDecoration: 'none' }}>
+          <button style={{
+            backgroundColor: '#FFFFFF',
+            color: 'rgb(166, 75, 10)',
+            padding: '0.8rem 1.25rem',
+            border: '1px solid rgb(166, 75, 10)',
+            borderRadius: '9999px',
+            fontSize: '0.98rem',
+            fontWeight: 700,
+            letterSpacing: '0.02em',
+            cursor: 'pointer',
+            transition: 'background-color 150ms ease, transform 150ms ease, box-shadow 200ms ease, opacity 150ms ease',
+            boxShadow: '0 10px 24px rgba(166, 75, 10, 0.14)'
+          }}
+          onMouseOver={(e) => {
+            e.target.style.backgroundColor = 'rgba(166, 75, 10, 0.08)';
+            e.target.style.transform = 'translateY(-1px)';
+            e.target.style.opacity = '1';
+          }}
+          onMouseOut={(e) => {
+            e.target.style.backgroundColor = '#FFFFFF';
+            e.target.style.transform = 'translateY(0)';
+            e.target.style.opacity = '1';
+          }}
+          >Log In</button>
+        </Link>
+
+        <Link to="/Userregister" style={{ textDecoration: 'none' }}>
+          <button style={{
+            backgroundColor: 'rgb(166, 75, 10)',
+            color: '#FFFFFF',
+            padding: '0.8rem 1.25rem',
+            border: '1px solid rgb(166, 75, 10)',
+            borderRadius: '9999px',
+            fontSize: '0.98rem',
+            fontWeight: 700,
+            letterSpacing: '0.02em',
+            cursor: 'pointer',
+            transition: 'background-color 150ms ease, transform 150ms ease, box-shadow 200ms ease',
+            boxShadow: '0 10px 24px rgba(166, 75, 10, 0.22)'
+          }}
+          onMouseOver={(e) => {
+            e.target.style.backgroundColor = 'rgb(143, 65, 8)';
+            e.target.style.transform = 'translateY(-1px)';
+          }}
+          onMouseOut={(e) => {
+            e.target.style.backgroundColor = 'rgb(166, 75, 10)';
+            e.target.style.transform = 'translateY(0)';
+          }}
+          >Create Account</button>
+        </Link>
+      </div>
+
       <style jsx>{`
         @media (max-width: 768px) {
           h1 {
