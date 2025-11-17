@@ -16,6 +16,7 @@ import BookingPage from './pages/BookingPage';
 import CustomerProfile from './pages/CustomerProfile';
 import MechanicDashboard from './pages/MechanicDashboard';
 import MechanicNavigator from './pages/MechanicNavigator'; // ✅ fixed
+import PrivacyPolicy from './pages/PrivacyPolicy';
 
 import MechanicTracker from './components/MechanicTracker'; // ✅ required for /track/:bookingId
 
@@ -40,6 +41,7 @@ const App = () => {
         <Route path="/profile" element={<CustomerProfile />} />
         <Route path="/mechanic/dashboard" element={<MechanicDashboard />} />
         <Route path="/mechanic/navigate/:bookingId" element={<MechanicNavigator />} /> {/* ✅ Navigator */}
+        <Route path="/privacy-policy" element={<PrivacyPolicy />} /> {/* Privacy Policy */}
       </Routes>
     </Router>
   );

@@ -1,0 +1,564 @@
+/* ==========================================
+   Privacy Policy Page Styles
+   ========================================== */
+
+/* Skip link for accessibility */
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  background: #000;
+  color: #fff;
+  padding: 8px 16px;
+  text-decoration: none;
+  z-index: 100;
+  border-radius: 0 0 4px 0;
+}
+
+.skip-link:focus {
+  top: 0;
+}
+
+/* Main container */
+.privacy-policy-page {
+  min-height: 100vh;
+  background: #f9fafb;
+  padding: 2rem 1rem;
+}
+
+.privacy-container {
+  max-width: 900px;
+  margin: 0 auto;
+  background: white;
+  padding: 3rem 2.5rem;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  line-height: 1.7;
+  color: #1f2937;
+}
+
+/* Header */
+.privacy-header {
+  border-bottom: 2px solid #e5e7eb;
+  padding-bottom: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.privacy-header h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #111827;
+  margin: 0 0 0.5rem 0;
+}
+
+.effective-date,
+.last-updated {
+  font-size: 0.95rem;
+  color: #6b7280;
+  margin: 0.25rem 0;
+}
+
+.effective-date strong {
+  color: #374151;
+}
+
+/* Introduction section */
+.intro-section {
+  margin-bottom: 2.5rem;
+}
+
+.intro-section p {
+  margin: 1rem 0;
+}
+
+.intro-section a {
+  color: #2563eb;
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.2s;
+}
+
+.intro-section a:hover,
+.intro-section a:focus {
+  border-bottom-color: #2563eb;
+}
+
+/* User type cards */
+.user-types {
+  display: flex;
+  gap: 1.5rem;
+  margin: 1.5rem 0;
+  flex-wrap: wrap;
+}
+
+.user-card {
+  flex: 1;
+  min-width: 250px;
+  padding: 1.5rem;
+  border-radius: 8px;
+  background: #f3f4f6;
+  border-left: 4px solid;
+}
+
+.user-card.customer-card {
+  border-left-color: #3b82f6;
+}
+
+.user-card.mechanic-card {
+  border-left-color: #10b981;
+}
+
+.user-card h3 {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.25rem;
+  color: #111827;
+}
+
+.user-card p {
+  margin: 0;
+  color: #4b5563;
+  font-size: 0.95rem;
+}
+
+/* Table of Contents */
+.table-of-contents {
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 1.5rem 2rem;
+  margin: 2rem 0 3rem 0;
+}
+
+.table-of-contents h2 {
+  margin: 0 0 1rem 0;
+  font-size: 1.5rem;
+  color: #111827;
+}
+
+.table-of-contents ol {
+  margin: 0;
+  padding-left: 1.5rem;
+  line-height: 2;
+}
+
+.table-of-contents li {
+  margin: 0.5rem 0;
+}
+
+.table-of-contents a {
+  color: #2563eb;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.table-of-contents a:hover,
+.table-of-contents a:focus {
+  color: #1d4ed8;
+  text-decoration: underline;
+}
+
+/* Policy sections */
+.policy-section {
+  margin: 3rem 0;
+  scroll-margin-top: 2rem;
+}
+
+.policy-section h2 {
+  font-size: 1.75rem;
+  font-weight: 600;
+  color: #111827;
+  margin: 0 0 1rem 0;
+  padding-top: 1rem;
+  border-top: 1px solid #e5e7eb;
+}
+
+.policy-section h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #374151;
+  margin: 1.5rem 0 0.75rem 0;
+}
+
+.policy-section p {
+  margin: 1rem 0;
+}
+
+.policy-section ul,
+.policy-section ol {
+  margin: 1rem 0;
+  padding-left: 2rem;
+}
+
+.policy-section li {
+  margin: 0.75rem 0;
+}
+
+.policy-section strong {
+  color: #111827;
+  font-weight: 600;
+}
+
+.policy-section a {
+  color: #2563eb;
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.2s;
+}
+
+.policy-section a:hover,
+.policy-section a:focus {
+  border-bottom-color: #2563eb;
+}
+
+/* Data category split */
+.user-data-split {
+  display: flex;
+  gap: 2rem;
+  margin: 1.5rem 0;
+  flex-wrap: wrap;
+}
+
+.data-category {
+  flex: 1;
+  min-width: 300px;
+  padding: 1.5rem;
+  border-radius: 8px;
+  border: 1px solid #e5e7eb;
+}
+
+.data-category.customer-data {
+  background: #eff6ff;
+  border-left: 4px solid #3b82f6;
+}
+
+.data-category.mechanic-data {
+  background: #f0fdf4;
+  border-left: 4px solid #10b981;
+}
+
+.data-category h3 {
+  margin-top: 0;
+  color: #111827;
+}
+
+.data-category ul {
+  margin: 0;
+  padding-left: 1.5rem;
+}
+
+/* Note boxes */
+.collection-note,
+.usage-note,
+.location-note,
+.payment-note,
+.content-note,
+.deletion-note,
+.security-note,
+.cookies-note,
+.rights-note,
+.changes-note,
+.sharing-note {
+  background: #fef3c7;
+  border-left: 4px solid #f59e0b;
+  padding: 1rem 1.25rem;
+  margin: 1.5rem 0;
+  border-radius: 4px;
+}
+
+.collection-note strong,
+.usage-note strong,
+.location-note strong,
+.payment-note strong,
+.content-note strong,
+.deletion-note strong,
+.security-note strong,
+.cookies-note strong,
+.rights-note strong,
+.changes-note strong,
+.sharing-note strong {
+  color: #92400e;
+}
+
+/* Location usage cards */
+.location-usage {
+  display: flex;
+  gap: 1.5rem;
+  margin: 1.5rem 0;
+  flex-wrap: wrap;
+}
+
+.location-card {
+  flex: 1;
+  min-width: 280px;
+  padding: 1.5rem;
+  background: #f3f4f6;
+  border-radius: 8px;
+  border: 1px solid #d1d5db;
+}
+
+.location-card h3 {
+  margin-top: 0;
+  color: #111827;
+}
+
+.location-card ul {
+  margin: 0.5rem 0 0 0;
+  padding-left: 1.5rem;
+}
+
+/* Tables */
+.permissions-table,
+.cookies-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5rem 0;
+  font-size: 0.95rem;
+}
+
+.permissions-table th,
+.cookies-table th {
+  background: #f3f4f6;
+  padding: 0.75rem 1rem;
+  text-align: left;
+  font-weight: 600;
+  color: #111827;
+  border-bottom: 2px solid #d1d5db;
+}
+
+.permissions-table td,
+.cookies-table td {
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.permissions-table tbody tr:hover,
+.cookies-table tbody tr:hover {
+  background: #f9fafb;
+}
+
+/* Verification cards */
+.verification-split {
+  display: flex;
+  gap: 1.5rem;
+  margin: 1.5rem 0;
+  flex-wrap: wrap;
+}
+
+.verification-card {
+  flex: 1;
+  min-width: 280px;
+  padding: 1.5rem;
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+}
+
+.verification-card h3 {
+  margin-top: 0;
+  color: #111827;
+}
+
+.verification-card ul {
+  margin: 0.5rem 0 0 0;
+  padding-left: 1.5rem;
+}
+
+/* Contact info */
+.contact-info {
+  background: #f3f4f6;
+  padding: 1.5rem;
+  border-radius: 8px;
+  margin: 1.5rem 0;
+}
+
+.contact-info p {
+  margin: 0.5rem 0;
+}
+
+.contact-info a {
+  color: #2563eb;
+  text-decoration: none;
+}
+
+.contact-info a:hover,
+.contact-info a:focus {
+  text-decoration: underline;
+}
+
+/* Footer */
+.policy-footer {
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 2px solid #e5e7eb;
+  text-align: center;
+}
+
+.download-pdf-btn {
+  background: #2563eb;
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.2s;
+  font-weight: 500;
+}
+
+.download-pdf-btn:hover,
+.download-pdf-btn:focus {
+  background: #1d4ed8;
+  outline: 2px solid #2563eb;
+  outline-offset: 2px;
+}
+
+.footer-note {
+  margin-top: 1rem;
+  font-size: 0.9rem;
+  color: #6b7280;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .privacy-container {
+    padding: 2rem 1.5rem;
+  }
+
+  .privacy-header h1 {
+    font-size: 2rem;
+  }
+
+  .user-types,
+  .user-data-split,
+  .location-usage,
+  .verification-split {
+    flex-direction: column;
+  }
+
+  .user-card,
+  .data-category,
+  .location-card,
+  .verification-card {
+    min-width: 100%;
+  }
+
+  .table-of-contents {
+    padding: 1rem 1.25rem;
+  }
+
+  .permissions-table,
+  .cookies-table {
+    font-size: 0.85rem;
+  }
+
+  .permissions-table th,
+  .cookies-table th,
+  .permissions-table td,
+  .cookies-table td {
+    padding: 0.5rem 0.75rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .privacy-policy-page {
+    padding: 1rem 0.5rem;
+  }
+
+  .privacy-container {
+    padding: 1.5rem 1rem;
+  }
+
+  .privacy-header h1 {
+    font-size: 1.75rem;
+  }
+
+  .policy-section h2 {
+    font-size: 1.5rem;
+  }
+
+  .policy-section h3 {
+    font-size: 1.1rem;
+  }
+}
+
+/* Print styles */
+@media print {
+  .privacy-policy-page {
+    background: white;
+    padding: 0;
+  }
+
+  .privacy-container {
+    max-width: 100%;
+    box-shadow: none;
+    padding: 1rem;
+  }
+
+  .skip-link,
+  .download-pdf-btn {
+    display: none;
+  }
+
+  .table-of-contents {
+    page-break-after: always;
+  }
+
+  .policy-section {
+    page-break-inside: avoid;
+  }
+
+  .privacy-header h1 {
+    font-size: 2rem;
+  }
+
+  a {
+    color: #000;
+    text-decoration: underline;
+  }
+
+  .user-card,
+  .data-category,
+  .location-card,
+  .verification-card,
+  .collection-note,
+  .usage-note,
+  .location-note,
+  .payment-note,
+  .content-note,
+  .deletion-note,
+  .security-note,
+  .cookies-note,
+  .rights-note,
+  .changes-note,
+  .sharing-note {
+    border: 1px solid #ddd;
+    background: white;
+  }
+}
+
+/* Accessibility - Focus states */
+a:focus,
+button:focus {
+  outline: 2px solid #2563eb;
+  outline-offset: 2px;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .privacy-container {
+    border: 2px solid #000;
+  }
+
+  .policy-section h2 {
+    border-top-width: 2px;
+    border-top-color: #000;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+  }
+}
