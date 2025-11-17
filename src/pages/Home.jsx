@@ -116,6 +116,29 @@ const Home = () => {
         </Link>
       </div>
 
+      {/* Footer */}
+      <footer style={{
+        marginTop: 'auto',
+        paddingTop: '3rem',
+        textAlign: 'center',
+        fontSize: '0.875rem',
+        color: '#6B7280'
+      }}>
+        <p style={{ margin: '0 0 0.5rem 0' }}>
+          © 2025 Mechze. All rights reserved.
+        </p>
+        <Link to="/privacy-policy" style={{
+          color: '#A64B0A',
+          textDecoration: 'none',
+          fontWeight: 500
+        }}
+        onMouseOver={(e) => e.target.style.textDecoration = 'underline'}
+        onMouseOut={(e) => e.target.style.textDecoration = 'none'}
+        >
+          Privacy Policy
+        </Link>
+      </footer>
+
       <style jsx>{`
         @media (max-width: 768px) {
           h1 {
