@@ -158,7 +158,7 @@ const PrivacyPolicy = () => {
           </section>
 
           {/* Section 2: How We Use Your Information */}
-          <section id="section-2" className="policy-section" aria-labelledby="section-2-heading">
+          <section id="section-2" className="policy-section" aria-labelledby="section-2-hedading">
             <h2 id="section-2-heading">2. How We Use Your Information</h2>
             <p>We process your personal data based on your consent, our need to provide the service, or our legitimate business interests. We use your information to:</p>
             <ul>
