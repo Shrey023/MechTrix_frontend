@@ -1,5 +1,4 @@
-import React, { useRef } from 'react';
-import { Helmet } from 'react-helmet-async';
+import React, { useRef, useEffect } from 'react';
 import './PrivacyPolicy.css';
 
 // Configuration constants - REPLACE THESE WITH YOUR ACTUAL VALUES
@@ -10,6 +9,66 @@ const EFFECTIVE_DATE = '2025-01-01'; // Format: YYYY-MM-DD
 
 const PrivacyPolicy = () => {
   const contentRef = useRef(null);
+
+  // Set document title and meta tags
+  useEffect(() => {
+    document.title = `Privacy Policy — ${COMPANY_NAME}`;
+    
+    // Set meta description
+    let metaDescription = document.querySelector('meta[name="description"]');
+    if (!metaDescription) {
+      metaDescription = document.createElement('meta');
+      metaDescription.name = 'description';
+      document.head.appendChild(metaDescription);
+    }
+    metaDescription.content = `Learn how ${COMPANY_NAME} collects, uses, and protects your personal information. Our privacy policy covers data practices for both customers and mechanics.`;
+
+    // Set robots meta
+    let metaRobots = document.querySelector('meta[name="robots"]');
+    if (!metaRobots) {
+      metaRobots = document.createElement('meta');
+      metaRobots.name = 'robots';
+      document.head.appendChild(metaRobots);
+    }
+    metaRobots.content = 'index, follow';
+
+    // Set canonical link
+    let linkCanonical = document.querySelector('link[rel="canonical"]');
+    if (!linkCanonical) {
+      linkCanonical = document.createElement('link');
+      linkCanonical.rel = 'canonical';
+      document.head.appendChild(linkCanonical);
+    }
+    linkCanonical.href = `${DOMAIN}/privacy-policy`;
+
+    // Add structured data
+    const structuredData = {
+      '@context': 'https://schema.org',
+      '@type': 'WebPage',
+      name: `Privacy Policy — ${COMPANY_NAME}`,
+      description: `Privacy policy for ${COMPANY_NAME} platform covering customers and mechanics`,
+      url: `${DOMAIN}/privacy-policy`,
+      dateModified: EFFECTIVE_DATE,
+      mainEntity: {
+        '@type': 'PrivacyPolicy',
+        name: `${COMPANY_NAME} Privacy Policy`,
+        effectiveDate: EFFECTIVE_DATE,
+      },
+    };
+
+    let script = document.querySelector('script[type="application/ld+json"]');
+    if (!script) {
+      script = document.createElement('script');
+      script.type = 'application/ld+json';
+      document.head.appendChild(script);
+    }
+    script.textContent = JSON.stringify(structuredData);
+
+    // Cleanup function to reset title when component unmounts
+    return () => {
+      document.title = COMPANY_NAME;
+    };
+  }, []);
 
   // Generate PDF from page content
   const handleDownloadPDF = () => {
@@ -26,32 +85,6 @@ const PrivacyPolicy = () => {
 
   return (
     <>
-      <Helmet>
-        <title>Privacy Policy — {COMPANY_NAME}</title>
-        <meta
-          name="description"
-          content={`Learn how ${COMPANY_NAME} collects, uses, and protects your personal information. Our privacy policy covers data practices for both customers and mechanics.`}
-        />
-        <meta name="robots" content="index, follow" />
-        <link rel="canonical" href={`${DOMAIN}/privacy-policy`} />
-        
-        {/* Structured Data */}
-        <script type="application/ld+json">
-          {JSON.stringify({
-            '@context': 'https://schema.org',
-            '@type': 'WebPage',
-            name: `Privacy Policy — ${COMPANY_NAME}`,
-            description: `Privacy policy for ${COMPANY_NAME} platform covering customers and mechanics`,
-            url: `${DOMAIN}/privacy-policy`,
-            dateModified: EFFECTIVE_DATE,
-            mainEntity: {
-              '@type': 'PrivacyPolicy',
-              name: `${COMPANY_NAME} Privacy Policy`,
-              effectiveDate: EFFECTIVE_DATE,
-            },
-          })}
-        </script>
-      </Helmet>
 
       <div className="privacy-policy-page">
         {/* Skip to main content link for accessibility */}

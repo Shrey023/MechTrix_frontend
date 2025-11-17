@@ -1,5 +1,4 @@
 import { render, screen } from '@testing-library/react';
-import { HelmetProvider } from 'react-helmet-async';
 import { BrowserRouter } from 'react-router-dom';
 import PrivacyPolicy from '../src/pages/PrivacyPolicy';
 
@@ -19,11 +18,9 @@ import PrivacyPolicy from '../src/pages/PrivacyPolicy';
 describe('Privacy Policy Page', () => {
   const renderPrivacyPolicy = () => {
     return render(
-      <HelmetProvider>
-        <BrowserRouter>
-          <PrivacyPolicy />
-        </BrowserRouter>
-      </HelmetProvider>
+      <BrowserRouter>
+        <PrivacyPolicy />
+      </BrowserRouter>
     );
   };
 
