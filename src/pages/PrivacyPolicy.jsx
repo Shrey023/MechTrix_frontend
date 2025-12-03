@@ -68,7 +68,7 @@ const PrivacyPolicy = () => {
     return () => {
       document.title = COMPANY_NAME;
     };
-  }, []);
+  }, []); 
 
   // Generate PDF from page content
   const handleDownloadPDF = () => {
