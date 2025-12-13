@@ -28,7 +28,7 @@ const LiveTracking = () => {
   };
 
   const { isLoaded } = useJsApiLoader({
-    googleMapsApiKey: "REMOVED_GOOGLE_MAPS_KEY", // Replace with your key
+    googleMapsApiKey: import.meta.env.VITE_GOOGLE_MAPS_API_KEY,
     libraries: ["places"],
   });
 
