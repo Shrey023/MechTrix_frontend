@@ -55,6 +55,137 @@ const Home = () => {
         >Book a Mechanic</button>
       </Link>
 
+      {/* Services Section */}
+      <section style={{
+        marginTop: '3rem',
+        marginBottom: '2rem',
+        width: '100%',
+        maxWidth: '1000px'
+      }}>
+        <h2 style={{
+          color: '#111827',
+          fontSize: '1.8rem',
+          fontWeight: 700,
+          marginBottom: '1.5rem',
+          textAlign: 'center'
+        }}>Our Services</h2>
+        <div style={{
+          display: 'flex',
+          justifyContent: 'center',
+          gap: '1.5rem',
+          flexWrap: 'wrap',
+          padding: '0 1rem'
+        }}>
+          <div style={{
+            backgroundColor: '#FFFFFF',
+            borderRadius: '12px',
+            padding: '1.25rem',
+            width: '250px',
+            textAlign: 'center',
+            border: '1px solid #E5E7EB',
+            boxShadow: '0 10px 24px rgba(17, 24, 39, 0.08)',
+            transition: 'transform 0.2s ease, box-shadow 0.2s ease'
+          }}
+          onMouseOver={(e) => {
+            e.currentTarget.style.transform = 'translateY(-4px)';
+            e.currentTarget.style.boxShadow = '0 14px 28px rgba(17, 24, 39, 0.12)';
+          }}
+          onMouseOut={(e) => {
+            e.currentTarget.style.transform = 'translateY(0)';
+            e.currentTarget.style.boxShadow = '0 10px 24px rgba(17, 24, 39, 0.08)';
+          }}>
+            <img 
+              src="/images/breakdown.png" 
+              alt="Breakdown Repair" 
+              style={{
+                width: '100%',
+                height: '120px',
+                objectFit: 'contain',
+                borderRadius: '8px',
+                marginBottom: '1rem'
+              }}
+            />
+            <h3 style={{
+              fontSize: '1.1rem',
+              fontWeight: 700,
+              color: '#111827'
+            }}>Breakdown Repair</h3>
+          </div>
+
+          <div style={{
+            backgroundColor: '#FFFFFF',
+            borderRadius: '12px',
+            padding: '1.25rem',
+            width: '250px',
+            textAlign: 'center',
+            border: '1px solid #E5E7EB',
+            boxShadow: '0 10px 24px rgba(17, 24, 39, 0.08)',
+            transition: 'transform 0.2s ease, box-shadow 0.2s ease'
+          }}
+          onMouseOver={(e) => {
+            e.currentTarget.style.transform = 'translateY(-4px)';
+            e.currentTarget.style.boxShadow = '0 14px 28px rgba(17, 24, 39, 0.12)';
+          }}
+          onMouseOut={(e) => {
+            e.currentTarget.style.transform = 'translateY(0)';
+            e.currentTarget.style.boxShadow = '0 10px 24px rgba(17, 24, 39, 0.08)';
+          }}>
+            <img 
+              src="/images/schedule.png" 
+              alt="Scheduled Service" 
+              style={{
+                width: '100%',
+                height: '120px',
+                objectFit: 'contain',
+                borderRadius: '8px',
+                marginBottom: '1rem'
+              }}
+            />
+            <h3 style={{
+              fontSize: '1.1rem',
+              fontWeight: 700,
+              color: '#111827'
+            }}>Scheduled Service</h3>
+          </div>
+
+          <div style={{
+            backgroundColor: '#FFFFFF',
+            borderRadius: '12px',
+            padding: '1.25rem',
+            width: '250px',
+            textAlign: 'center',
+            border: '1px solid #E5E7EB',
+            boxShadow: '0 10px 24px rgba(17, 24, 39, 0.08)',
+            transition: 'transform 0.2s ease, box-shadow 0.2s ease'
+          }}
+          onMouseOver={(e) => {
+            e.currentTarget.style.transform = 'translateY(-4px)';
+            e.currentTarget.style.boxShadow = '0 14px 28px rgba(17, 24, 39, 0.12)';
+          }}
+          onMouseOut={(e) => {
+            e.currentTarget.style.transform = 'translateY(0)';
+            e.currentTarget.style.boxShadow = '0 10px 24px rgba(17, 24, 39, 0.08)';
+          }}>
+            <img 
+              src="/images/emergency.png" 
+              alt="Emergency Pickup" 
+              style={{
+                width: '100%',
+                height: '120px',
+                objectFit: 'contain',
+                borderRadius: '8px',
+                marginBottom: '1rem'
+              }}
+            />
+            <h3 style={{
+              fontSize: '1.1rem',
+              fontWeight: 700,
+              color: '#111827'
+            }}>Emergency Pickup</h3>
+          </div>
+        </div>
+      </section>
+
       {/* Auth Buttons */}
       <div style={{
         display: 'flex',

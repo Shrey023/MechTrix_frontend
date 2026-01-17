@@ -13,7 +13,7 @@ const MechanicLogin = () => {
     e.preventDefault();
     try {
       const res = await axios.post('/auth/mechanic/login', { email, password });
-
+      
       localStorage.setItem('mechanicToken', res.data.token);
       localStorage.setItem('mechanicId', res.data._id);
       localStorage.setItem('token', res.data.token);
