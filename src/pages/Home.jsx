@@ -79,8 +79,8 @@ const Home = () => {
           <div style={{
             backgroundColor: '#FFFFFF',
             borderRadius: '12px',
-            padding: '1.25rem',
-            width: '250px',
+            padding: '2.5rem',
+            width: '380px',
             textAlign: 'center',
             border: '1px solid #E5E7EB',
             boxShadow: '0 10px 24px rgba(17, 24, 39, 0.08)',
@@ -99,14 +99,16 @@ const Home = () => {
               alt="Breakdown Repair" 
               style={{
                 width: '100%',
-                height: '120px',
+                height: '200px',
                 objectFit: 'contain',
-                borderRadius: '8px',
-                marginBottom: '1rem'
+                borderRadius: '20px',
+                marginBottom: '1.5rem',
+                border: '3px solid rgba(166, 75, 10, 0.1)',
+                boxShadow: '0 0 20px rgba(166, 75, 10, 0.15)'
               }}
             />
             <h3 style={{
-              fontSize: '1.1rem',
+              fontSize: '1.4rem',
               fontWeight: 700,
               color: '#111827'
             }}>Breakdown Repair</h3>
@@ -115,8 +117,8 @@ const Home = () => {
           <div style={{
             backgroundColor: '#FFFFFF',
             borderRadius: '12px',
-            padding: '1.25rem',
-            width: '250px',
+            padding: '2.5rem',
+            width: '380px',
             textAlign: 'center',
             border: '1px solid #E5E7EB',
             boxShadow: '0 10px 24px rgba(17, 24, 39, 0.08)',
@@ -135,14 +137,16 @@ const Home = () => {
               alt="Scheduled Service" 
               style={{
                 width: '100%',
-                height: '120px',
+                height: '200px',
                 objectFit: 'contain',
-                borderRadius: '8px',
-                marginBottom: '1rem'
+                borderRadius: '20px',
+                marginBottom: '1.5rem',
+                border: '3px solid rgba(166, 75, 10, 0.1)',
+                boxShadow: '0 0 20px rgba(166, 75, 10, 0.15)'
               }}
             />
             <h3 style={{
-              fontSize: '1.1rem',
+              fontSize: '1.4rem',
               fontWeight: 700,
               color: '#111827'
             }}>Scheduled Service</h3>
@@ -151,8 +155,8 @@ const Home = () => {
           <div style={{
             backgroundColor: '#FFFFFF',
             borderRadius: '12px',
-            padding: '1.25rem',
-            width: '250px',
+            padding: '2.5rem',
+            width: '380px',
             textAlign: 'center',
             border: '1px solid #E5E7EB',
             boxShadow: '0 10px 24px rgba(17, 24, 39, 0.08)',
@@ -171,14 +175,16 @@ const Home = () => {
               alt="Emergency Pickup" 
               style={{
                 width: '100%',
-                height: '120px',
+                height: '200px',
                 objectFit: 'contain',
-                borderRadius: '8px',
-                marginBottom: '1rem'
+                borderRadius: '20px',
+                marginBottom: '1.5rem',
+                border: '3px solid rgba(166, 75, 10, 0.1)',
+                boxShadow: '0 0 20px rgba(166, 75, 10, 0.15)'
               }}
             />
             <h3 style={{
-              fontSize: '1.1rem',
+              fontSize: '1.4rem',
               fontWeight: 700,
               color: '#111827'
             }}>Emergency Pickup</h3>

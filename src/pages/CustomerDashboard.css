@@ -238,8 +238,8 @@
   background-color: #FFFFFF;
   color: #111827;
   border-radius: 0.875rem;
-  padding: 1rem;
-  width: clamp(180px, 30vw, 200px);
+  padding: 2.5rem;
+  width: clamp(300px, 35vw, 380px);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
   border: 1px solid #E5E7EB;
   box-shadow: 0 10px 24px rgba(17, 24, 39, 0.06);
@@ -252,14 +252,16 @@
 
 .service-cards img {
   width: 100%;
-  height: clamp(100px, 20vw, 120px);
-  object-fit: cover;
-  border-radius: 0.5rem;
-  margin-bottom: 0.8rem;
+  height: clamp(160px, 25vw, 200px);
+  object-fit: contain;
+  border-radius: 20px;
+  margin-bottom: 1.5rem;
+  border: 3px solid rgba(166, 75, 10, 0.1);
+  box-shadow: 0 0 20px rgba(166, 75, 10, 0.15);
 }
 
 .service-cards h3 {
-  font-size: clamp(1rem, 3.5vw, 1.2rem);
+  font-size: clamp(1.1rem, 4vw, 1.4rem);
   font-weight: 700;
 }
 
@@ -503,11 +505,12 @@
   }
 
   .service-cards .card {
-    width: clamp(160px, 45vw, 180px);
+    width: clamp(260px, 45vw, 320px);
+    padding: 2rem;
   }
 
   .service-cards img {
-    height: clamp(90px, 25vw, 100px);
+    height: clamp(140px, 30vw, 180px);
   }
 
   .bookings { padding: 1rem; }
