@@ -104,6 +104,46 @@
   box-shadow: 0 8px 20px rgba(166, 75, 10, 0.25);
 }
 
+/* ✅ Pricing Section Styles */
+.mechanic-pricing {
+  background-color: #FFF7ED;
+  border: 1px solid #FEDBA8;
+  border-radius: 0.625rem;
+  padding: clamp(0.8rem, 3vw, 1rem);
+  margin: clamp(0.8rem, 3vw, 1rem) 0;
+}
+
+.pricing-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+  font-size: clamp(0.9rem, 3vw, 1rem);
+}
+
+.pricing-item:last-of-type {
+  margin-bottom: 0;
+}
+
+.pricing-label {
+  color: #7C2D12;
+  font-weight: 600;
+}
+
+.pricing-value {
+  color: #B45309;
+  font-weight: 700;
+  font-size: clamp(0.95rem, 3.5vw, 1.1rem);
+}
+
+.pricing-note {
+  font-size: clamp(0.8rem, 2.5vw, 0.85rem);
+  color: #92400E;
+  font-style: italic;
+  margin-top: 0.6rem;
+  text-align: center;
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
   .nearby-mechanics {
