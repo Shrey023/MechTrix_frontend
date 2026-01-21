@@ -43,7 +43,7 @@ const NearbyMechanics = () => {
       const fareRequests = mechanicsWithDistance.map(async (mech) => {
         try {
           const res = await axios.post(
-            `/mechanic/${mech._id}/calculate-fare`,
+            `/mechanics/${mech._id}/calculate-fare`,
             { distanceKm: mech.distance }
           );
           return {
