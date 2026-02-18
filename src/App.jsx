@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 
 import Navbar from './components/Navbar';
 import Home from './pages/Home';
@@ -17,8 +17,16 @@ import CustomerProfile from './pages/CustomerProfile';
 import MechanicDashboard from './pages/MechanicDashboard';
 import MechanicNavigator from './pages/MechanicNavigator'; // ✅ fixed
 import PrivacyPolicy from './pages/PrivacyPolicy';
+import AdminLogin from './pages/AdminLogin';
+import AdminRegister from './pages/AdminRegister';
+import AdminDashboard from './pages/AdminDashboard';
 
 import MechanicTracker from './components/MechanicTracker'; // ✅ required for /track/:bookingId
+
+const AdminProtectedRoute = ({ children }) => {
+  const token = localStorage.getItem('adminToken');
+  return token ? children : <Navigate to="/admin/login" replace />;
+};
 
 const App = () => {
   return (
@@ -42,6 +50,16 @@ const App = () => {
         <Route path="/mechanic/dashboard" element={<MechanicDashboard />} />
         <Route path="/mechanic/navigate/:bookingId" element={<MechanicNavigator />} /> {/* ✅ Navigator */}
         <Route path="/privacy-policy" element={<PrivacyPolicy />} /> {/* Privacy Policy */}
+        <Route path="/admin/login" element={<AdminLogin />} />
+        <Route path="/admin/register" element={<AdminRegister />} />
+        <Route
+          path="/admin/dashboard"
+          element={
+            <AdminProtectedRoute>
+              <AdminDashboard />
+            </AdminProtectedRoute>
+          }
+        />
       </Routes>
     </Router>
   );
