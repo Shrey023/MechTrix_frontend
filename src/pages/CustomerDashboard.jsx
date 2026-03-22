@@ -51,18 +51,6 @@ const CustomerDashboard = () => {
 
   return (
     <div className="dashboard">
-      {/* 🧭 NAVBAR */}
-      <nav className="navbar">
-        <div className="logo">🔧 MechTrix</div>
-        <div className="nav-links">
-          <Link to="/">Home</Link>
-          <Link to="/booking">Book Mechanic</Link>
-          <Link to="/track">Track Mechanic</Link>
-          <Link to="/profile">Profile</Link>
-          <Link to="/logout">Logout</Link>
-        </div>
-      </nav>
-
       {/* 🏠 HERO SECTION */}
       <header className="hero">
         <h1>Fast, Reliable Mechanic Services</h1>
@@ -176,11 +164,6 @@ const CustomerDashboard = () => {
           <strong>– Himanshu Sharma</strong>
         </div>
       </section>
-
-      {/* ⚙️ FOOTER */}
-      <footer className="footer">
-        <p>© 2025 MechTrix | <Link to="/about">About</Link> | <Link to="/contact">Contact</Link></p>
-      </footer>
     </div>
   );
 };

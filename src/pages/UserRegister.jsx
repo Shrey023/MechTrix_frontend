@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import axios from '../api/axios';
+import './auth.css';
 
 const UserRegister = () => {
   const [formData, setFormData] = useState({
@@ -55,221 +57,75 @@ const UserRegister = () => {
   };
 
   return (
-    <div style={{
-      backgroundColor: '#F7F8FA',
-      minHeight: '100vh',
-      display: 'flex',
-      justifyContent: 'center',
-      alignItems: 'center',
-      padding: '1rem',
-      fontFamily: "'Arial', sans-serif",
-    }}>
-      <form onSubmit={handleSubmit} style={{
-        backgroundColor: '#FFFFFF',
-        padding: '2rem',
-        borderRadius: '12px',
-        boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)',
-        width: '100%',
-        maxWidth: '400px',
-      }}>
-        <h2 style={{
-          color: '#1E2A78',
-          fontSize: '1.8rem',
-          fontWeight: '700',
-          textAlign: 'center',
-          marginBottom: '1.5rem',
-        }}>User Registration</h2>
+    <div className="auth-container">
+      <form onSubmit={handleSubmit} className="auth-form">
+        <h2 className="auth-title">User Registration</h2>
 
+        <label className="auth-label" htmlFor="name">Full Name</label>
         <input
+          id="name"
           type="text"
           name="name"
-          placeholder="Full Name"
+          placeholder="Enter full name"
           value={formData.name}
           onChange={handleChange}
           required
-          style={{
-            width: '100%',
-            padding: '0.75rem',
-            marginBottom: '1rem',
-            border: '1px solid #2D2D2D',
-            borderRadius: '8px',
-            fontSize: '1rem',
-            color: '#2D2D2D',
-            backgroundColor: '#F7F8FA',
-            outline: 'none',
-            transition: 'border-color 0.3s ease',
-          }}
-          onFocus={(e) => e.target.style.borderColor = '#4CAF50'}
-          onBlur={(e) => e.target.style.borderColor = '#2D2D2D'}
         />
+
+        <label className="auth-label" htmlFor="email">Email</label>
         <input
+          id="email"
           type="email"
           name="email"
-          placeholder="Email"
+          placeholder="Enter email"
           value={formData.email}
           onChange={handleChange}
           required
-          style={{
-            width: '100%',
-            padding: '0.75rem',
-            marginBottom: '1rem',
-            border: '1px solid #2D2D2D',
-            borderRadius: '8px',
-            fontSize: '1rem',
-            color: '#2D2D2D',
-            backgroundColor: '#F7F8FA',
-            outline: 'none',
-            transition: 'border-color 0.3s ease',
-          }}
-          onFocus={(e) => e.target.style.borderColor = '#4CAF50'}
-          onBlur={(e) => e.target.style.borderColor = '#2D2D2D'}
         />
+
+        <label className="auth-label" htmlFor="phone">Phone Number</label>
         <input
+          id="phone"
           type="text"
           name="phone"
-          placeholder="Phone Number"
+          placeholder="Enter phone number"
           value={formData.phone}
           onChange={handleChange}
           required
-          style={{
-            width: '100%',
-            padding: '0.75rem',
-            marginBottom: '1rem',
-            border: '1px solid #2D2D2D',
-            borderRadius: '8px',
-            fontSize: '1rem',
-            color: '#2D2D2D',
-            backgroundColor: '#F7F8FA',
-            outline: 'none',
-            transition: 'border-color 0.3s ease',
-          }}
-          onFocus={(e) => e.target.style.borderColor = '#4CAF50'}
-          onBlur={(e) => e.target.style.borderColor = '#2D2D2D'}
         />
+
+        <label className="auth-label" htmlFor="password">Password</label>
         <input
+          id="password"
           type="password"
           name="password"
-          placeholder="Password"
+          placeholder="Create password"
           value={formData.password}
           onChange={handleChange}
           required
-          style={{
-            width: '100%',
-            padding: '0.75rem',
-            marginBottom: '1rem',
-            border: '1px solid #2D2D2D',
-            borderRadius: '8px',
-            fontSize: '1rem',
-            color: '#2D2D2D',
-            backgroundColor: '#F7F8FA',
-            outline: 'none',
-            transition: 'border-color 0.3s ease',
-          }}
-          onFocus={(e) => e.target.style.borderColor = '#4CAF50'}
-          onBlur={(e) => e.target.style.borderColor = '#2D2D2D'}
         />
+
+        <label className="auth-label" htmlFor="confirmPassword">Confirm Password</label>
         <input
+          id="confirmPassword"
           type="password"
           name="confirmPassword"
-          placeholder="Confirm Password"
+          placeholder="Re-enter password"
           value={formData.confirmPassword}
           onChange={handleChange}
           required
-          style={{
-            width: '100%',
-            padding: '0.75rem',
-            marginBottom: '1.5rem',
-            border: '1px solid #2D2D2D',
-            borderRadius: '8px',
-            fontSize: '1rem',
-            color: '#2D2D2D',
-            backgroundColor: '#F7F8FA',
-            outline: 'none',
-            transition: 'border-color 0.3s ease',
-          }}
-          onFocus={(e) => e.target.style.borderColor = '#4CAF50'}
-          onBlur={(e) => e.target.style.borderColor = '#2D2D2D'}
         />
 
-        {error && <p style={{
-          color: '#FF6B35',
-          fontSize: '0.9rem',
-          textAlign: 'center',
-          marginBottom: '1rem',
-        }}>{error}</p>}
-        {success && <p style={{
-          color: '#4CAF50',
-          fontSize: '0.9rem',
-          textAlign: 'center',
-          marginBottom: '1rem',
-        }}>{success}</p>}
+        {error && <p className="auth-error">{error}</p>}
+        {success && <p className="auth-success">{success}</p>}
 
-        <button
-          type="submit"
-          style={{
-            width: '100%',
-            padding: '0.75rem',
-            backgroundColor: '#FF6B35',
-            color: '#F7F8FA',
-            border: 'none',
-            borderRadius: '8px',
-            fontSize: '1.1rem',
-            fontWeight: '600',
-            cursor: 'pointer',
-            transition: 'background-color 0.3s ease, transform 0.2s ease',
-            boxShadow: '0 2px 6px rgba(0, 0, 0, 0.1)',
-          }}
-          onMouseOver={(e) => {
-            e.target.style.backgroundColor = '#FFD23F';
-            e.target.style.transform = 'scale(1.02)';
-          }}
-          onMouseOut={(e) => {
-            e.target.style.backgroundColor = '#FF6B35';
-            e.target.style.transform = 'scale(1)';
-          }}
-        >Register</button>
+        <button type="submit" className="auth-button">Register</button>
+
+        <p style={{ marginTop: '1rem', textAlign: 'center', color: 'var(--color-warm-gray)' }}>
+          Already registered?{' '}
+          <Link to="/login" style={{ color: 'var(--color-brown-light)' }}>Log In</Link>
+        </p>
       </form>
-
-      <style jsx>{`
-        @media (max-width: 768px) {
-          form[style*="maxWidth: 400px"] {
-            padding: 1.5rem;
-          }
-          h2 {
-            font-size: 1.5rem;
-          }
-          input {
-            padding: 0.6rem;
-            font-size: 0.9rem;
-          }
-          button {
-            padding: 0.6rem;
-            font-size: 1rem;
-          }
-          p {
-            font-size: 0.85rem;
-          }
-        }
-        @media (max-width: 480px) {
-          form[style*="maxWidth: 400px"] {
-            padding: 1rem;
-          }
-          h2 {
-            font-size: 1.3rem;
-          }
-          input {
-            padding: 0.5rem;
-            font-size: 0.85rem;
-          }
-          button {
-            padding: 0.5rem;
-            font-size: 0.9rem;
-          }
-          p {
-            font-size: 0.8rem;
-          }
-        }
-      `}</style>
     </div>
   );
 };

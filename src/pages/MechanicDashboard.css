@@ -1,42 +1,51 @@
-/* Reset and base styles */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+/* =========================================
+   MECHZE — MECHANIC DASHBOARD CSS
+   Dark Industrial Design System
+   ========================================= */
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
 
 .dashboard {
-  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-  background:
-    radial-gradient(80rem 40rem at -20% -10%, rgba(166, 75, 10, 0.05), transparent 60%),
-    radial-gradient(70rem 35rem at 120% 110%, rgba(166, 75, 10, 0.04), transparent 60%),
-    linear-gradient(180deg, #FAFAF9 0%, #F3F4F6 100%);
-  color: #111827;
+  font-family: var(--font-body, 'Barlow', sans-serif);
+  background: var(--color-bg, #0E0C0A);
+  color: var(--color-off-white, #F6F6F7);
   min-height: 100vh;
-  padding: 2rem clamp(1rem, 5vw, 2rem);
+  padding: calc(64px + 2rem) clamp(1rem, 5vw, 2rem) 3rem;
   width: 100%;
   overflow-x: hidden;
 }
 
 .loading-text {
   text-align: center;
-  font-size: clamp(1rem, 3.5vw, 1.1rem);
-  color: #374151;
-  padding: 2rem;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 16px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--color-steel-light);
+  padding: 4rem 2rem;
 }
 
-/* Profile Card */
+/* ── Profile Card ── */
 .profile-card {
-  background-color: #FFFFFF;
-  border: 1px solid #E5E7EB;
-  border-radius: 1rem;
-  box-shadow: 0 12px 30px rgba(17, 24, 39, 0.08);
-  padding: 1.5rem;
+  background: var(--color-bg3, #1C1916);
+  border: 1px solid rgba(131, 68, 23, 0.15);
+  border-radius: 2px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+  padding: 1.5rem 2rem;
   display: flex;
   flex-direction: column;
   gap: 1.25rem;
-  max-width: 1200px;
+  max-width: 1100px;
   margin: 0 auto 2rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.profile-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, transparent, #834417, transparent);
 }
 
 .profile-image {
@@ -44,275 +53,241 @@
   height: 80px;
   border-radius: 50%;
   object-fit: cover;
-  border: 3px solid #E5E7EB;
+  border: 2px solid rgba(131, 68, 23, 0.4);
 }
 
 .profile-details h2 {
-  color: #111827;
-  font-size: clamp(1.35rem, 4.5vw, 1.65rem);
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: clamp(1.35rem, 4.5vw, 1.75rem);
   font-weight: 700;
-  margin-bottom: 0.25rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--color-off-white);
+  margin-bottom: 0.35rem;
 }
 
 .profile-details p {
-  font-size: clamp(0.9rem, 3vw, 1rem);
-  margin: 0.25rem 0;
-  color: #374151;
+  font-size: clamp(0.85rem, 3vw, 0.95rem);
+  margin: 0.3rem 0;
+  color: var(--color-warm-gray);
 }
 
-.status-text {
-  font-weight: 600;
-}
+/* ── Status Badges ── */
+.status-text { font-weight: 600; }
+.status-available { color: #6DBF7E; }
+.status-busy      { color: #D4874A; }
+.status-offline   { color: var(--color-steel); }
 
-.status-available {
-  color: #16A34A;
-}
-
-.status-busy {
-  color: #F59E0B;
-}
-
-.status-offline {
-  color: #6B7280;
-}
-
+/* ── Profile Actions ── */
 .profile-actions {
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
-  align-items: stretch;
 }
 
 .status-select {
-  padding: 0.65rem 0.8rem;
-  border: 1px solid #D1D5DB;
-  border-radius: 0.625rem;
-  font-size: clamp(0.9rem, 3vw, 1rem);
-  background-color: #FFFFFF;
-  color: #111827;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  padding: 10px 40px 10px 16px;
+  border: 1px solid rgba(115, 121, 134, 0.3);
+  border-radius: 2px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 13px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  background: var(--color-bg3);
+  color: var(--color-off-white);
+  transition: border-color 0.2s, box-shadow 0.2s;
+  appearance: none;
+  -webkit-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23737986' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
 }
 
 .status-select:focus {
   outline: none;
-  border-color: #A64B0A;
-  box-shadow: 0 0 0 3px rgba(166, 75, 10, 0.25);
+  border-color: var(--color-brown);
+  box-shadow: 0 0 0 3px rgba(131, 68, 23, 0.15);
 }
 
+.status-select option { background: var(--color-bg3); }
+
 .location-button {
-  background-color: #A64B0A;
-  color: #FFFFFF;
-  border: none;
-  padding: 0.65rem 0.9rem;
-  border-radius: 0.625rem;
-  font-size: clamp(0.9rem, 3vw, 1rem);
+  display: inline-block;
+  background: var(--color-brown);
+  color: var(--color-off-white);
+  clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+  font-family: 'Barlow Condensed', sans-serif;
   font-weight: 600;
-  cursor: pointer;
-  transition: background-color 0.15s ease, transform 0.15s ease, box-shadow 0.2s ease;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  padding: 10px 24px;
+  border: none;
+  transition: background 0.2s ease, transform 0.15s ease;
 }
 
 .location-button:hover {
-  background-color: #8F4108;
+  background: var(--color-brown-light);
   transform: translateY(-1px);
-  box-shadow: 0 8px 20px rgba(166, 75, 10, 0.25);
-}
-
-.location-button:focus-visible {
-  outline: 3px solid rgba(166, 75, 10, 0.35);
-  outline-offset: 2px;
+  box-shadow: 0 4px 18px rgba(131, 68, 23, 0.3);
 }
 
 .logout-button {
-  color: #6B7280;
-  font-size: clamp(0.85rem, 3vw, 0.95rem);
-  text-decoration: underline;
+  color: var(--color-steel-light);
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 12px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  text-decoration: none;
   background: none;
   border: none;
-  cursor: pointer;
-  transition: color 0.2s ease;
+  transition: color 0.2s;
+  padding: 4px 0;
 }
 
 .logout-button:hover {
-  color: #374151;
+  color: var(--color-off-white);
 }
 
-/* Bookings Section */
+/* ── Bookings Section ── */
 .bookings-section {
-  max-width: 1200px;
+  max-width: 1100px;
   margin: 0 auto;
 }
 
 .booking-section {
-  margin-bottom: 2rem;
+  margin-bottom: 2.5rem;
 }
 
 .booking-section h3 {
-  color: #111827;
-  font-size: clamp(1.1rem, 4vw, 1.35rem);
-  font-weight: 700;
-  margin-bottom: 0.85rem;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: clamp(1.1rem, 4vw, 1.4rem);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--color-off-white);
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid rgba(131, 68, 23, 0.2);
 }
 
 .no-bookings {
-  color: #6B7280;
-  font-size: clamp(0.95rem, 3.5vw, 1rem);
+  color: var(--color-steel);
+  font-size: 13px;
+  font-family: 'Barlow Condensed', sans-serif;
+  letter-spacing: 1px;
+  text-transform: uppercase;
   font-style: italic;
 }
 
 .bookings-list {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   gap: 1rem;
 }
 
+/* ── Booking Card ── */
 .booking-card {
-  background-color: #FFFFFF;
-  border: 1px solid #E5E7EB;
-  border-radius: 0.875rem;
-  padding: 1.1rem;
-  box-shadow: 0 10px 24px rgba(17, 24, 39, 0.06);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  background: var(--color-bg3, #1C1916);
+  border: 1px solid rgba(131, 68, 23, 0.12);
+  border-radius: 2px;
+  padding: 1.1rem 1.25rem;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
 }
 
+.booking-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, transparent, #834417, transparent);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.booking-card:hover::before { opacity: 1; }
+
 .booking-card:hover {
+  background: var(--color-bg4);
+  border-color: rgba(131, 68, 23, 0.3);
   transform: translateY(-2px);
-  box-shadow: 0 14px 28px rgba(17, 24, 39, 0.09);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.4);
 }
 
 .booking-card p {
-  font-size: clamp(0.95rem, 3vw, 1rem);
-  margin: 0.25rem 0;
-  color: #374151;
+  font-size: clamp(0.85rem, 3vw, 0.95rem);
+  margin: 0.3rem 0;
+  color: var(--color-warm-gray);
 }
 
+.booking-card p strong {
+  color: var(--color-steel-light);
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 11px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+
+/* ── Booking Action Buttons ── */
 .booking-actions {
-  margin-top: 0.8rem;
+  margin-top: 1rem;
   display: flex;
   gap: 0.6rem;
   flex-wrap: wrap;
 }
 
 .action-button {
-  padding: 0.5rem 0.9rem;
-  border: 1px solid #E5E7EB;
-  border-radius: 0.625rem;
-  font-size: clamp(0.85rem, 3vw, 0.95rem);
+  display: inline-block;
+  clip-path: polygon(6px 0%, 100% 0%, calc(100% - 6px) 100%, 0% 100%);
+  font-family: 'Barlow Condensed', sans-serif;
   font-weight: 600;
-  cursor: pointer;
-  transition: background-color 0.15s ease, transform 0.15s ease, box-shadow 0.2s ease;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  padding: 8px 18px;
+  border: none;
+  transition: background 0.2s ease, transform 0.15s ease;
 }
 
 .action-button:hover {
   transform: translateY(-1px);
-  box-shadow: 0 8px 16px rgba(17, 24, 39, 0.08);
+  filter: brightness(1.1);
 }
 
 .action-button.accept {
-  background-color: #16A34A;
-  color: #FFFFFF;
-  border-color: transparent;
+  background: rgba(40, 100, 50, 0.75);
+  color: #6DBF7E;
 }
 
 .action-button.reject {
-  background-color: #DC2626;
-  color: #FFFFFF;
-  border-color: transparent;
+  background: rgba(150, 30, 30, 0.6);
+  color: #E06060;
 }
 
 .action-button.complete {
-  background-color: #A64B0A;
-  color: #FFFFFF;
-  border-color: transparent;
+  background: var(--color-brown);
+  color: var(--color-off-white);
 }
 
 .action-button.navigate {
-  background-color: #111827;
-  color: #FFFFFF;
-  border-color: transparent;
+  background: var(--color-bg4);
+  color: var(--color-steel-light);
+  border: 1px solid rgba(115, 121, 134, 0.3);
 }
 
-/* Responsive Design */
+/* ── Responsive ── */
 @media (min-width: 640px) {
   .profile-card {
     flex-direction: row;
     align-items: center;
     gap: 2rem;
   }
-
-  .profile-image {
-    width: 100px;
-    height: 100px;
-  }
-
-  .profile-details {
-    flex: 1;
-  }
-
-  .profile-actions {
-    align-items: flex-start;
-  }
+  .profile-details { flex: 1; }
+  .profile-actions { align-items: flex-start; }
 }
 
 @media (max-width: 768px) {
-  .dashboard {
-    padding: 1.5rem 1rem;
-  }
-
-  .profile-card {
-    padding: 1.2rem;
-  }
-
-  .profile-image {
-    width: 60px;
-    height: 60px;
-  }
-
-  .profile-details h2 {
-    font-size: clamp(1.3rem, 5vw, 1.6rem);
-  }
-
-  .booking-section h3 {
-    font-size: clamp(1.1rem, 4vw, 1.3rem);
-  }
-
-  .booking-card {
-    padding: 1rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .dashboard {
-    padding: 1rem 0.8rem;
-  }
-
-  .profile-card {
-    padding: 1rem;
-  }
-
-  .profile-image {
-    width: 50px;
-    height: 50px;
-  }
-
-  .profile-details h2 {
-    font-size: clamp(1.2rem, 4.5vw, 1.4rem);
-  }
-
-  .profile-details p,
-  .booking-card p,
-  .no-bookings,
-  .status-select,
-  .location-button,
-  .action-button {
-    font-size: clamp(0.85rem, 3vw, 0.95rem);
-  }
-
-  .booking-section h3 {
-    font-size: clamp(1rem, 4vw, 1.2rem);
-  }
-
-  .booking-actions {
-    flex-direction: column;
-    gap: 0.5rem;
-  }
+  .dashboard { padding-top: calc(56px + 1.5rem); }
+  .bookings-list { grid-template-columns: 1fr; }
 }

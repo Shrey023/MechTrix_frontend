@@ -1,6 +1,7 @@
 
 import React, { useState } from 'react';
 import axios from '../api/axios';
+import './auth.css';
 import './MechanicRegister.css';
 
 const MechanicRegister = () => {
@@ -51,7 +52,7 @@ const MechanicRegister = () => {
       (position) => {
         const lng = parseFloat(position.coords.longitude);
         const lat = parseFloat(position.coords.latitude);
-        
+
         if (isNaN(lng) || isNaN(lat)) {
           setMessage('❌ Failed to fetch valid coordinates');
           setFetchingLocation(false);
@@ -157,133 +158,131 @@ const MechanicRegister = () => {
 
   return (
     <div className="mechanic-register">
-      <h2>Mechanic Registration</h2>
-      <form onSubmit={handleSubmit} encType="multipart/form-data">
-        {/* Basic Information */}
-        <input name="name" value={formData.name} onChange={handleChange} placeholder="Full Name" required /><br />
-        <input name="email" type="email" value={formData.email} onChange={handleChange} placeholder="Email" required /><br />
-        <input name="password" type="password" value={formData.password} onChange={handleChange} placeholder="Password" required /><br />
-        <input name="phone" value={formData.phone} onChange={handleChange} placeholder="Phone Number" required /><br />
-        <input name="experienceYears" type="number" value={formData.experienceYears} onChange={handleChange} placeholder="Experience (years)" required /><br />
+      <form onSubmit={handleSubmit} encType="multipart/form-data" className="auth-form mechanic-register-card">
+        <h2 className="auth-title">Mechanic Registration</h2>
 
-        {/* Vehicle & Services */}
-        <label>Vehicle Types:</label><br />
-        <select name="vehicleTypes" multiple onChange={handleChange} required>
+        <label className="auth-label" htmlFor="name">Full Name</label>
+        <input id="name" name="name" value={formData.name} onChange={handleChange} placeholder="Full Name" required />
+
+        <label className="auth-label" htmlFor="email">Email</label>
+        <input id="email" name="email" type="email" value={formData.email} onChange={handleChange} placeholder="Email" required />
+
+        <label className="auth-label" htmlFor="password">Password</label>
+        <input id="password" name="password" type="password" value={formData.password} onChange={handleChange} placeholder="Password" required />
+
+        <label className="auth-label" htmlFor="phone">Phone Number</label>
+        <input id="phone" name="phone" value={formData.phone} onChange={handleChange} placeholder="Phone Number" required />
+
+        <label className="auth-label" htmlFor="experienceYears">Experience (Years)</label>
+        <input id="experienceYears" name="experienceYears" type="number" value={formData.experienceYears} onChange={handleChange} placeholder="Experience (years)" required />
+
+        <label className="auth-label" htmlFor="vehicleTypes">Vehicle Types</label>
+        <select id="vehicleTypes" name="vehicleTypes" multiple onChange={handleChange} required>
           <option value="bike">Bike</option>
           <option value="car">Car</option>
           <option value="truck">Truck</option>
-        </select><br />
+        </select>
 
-        <label>Services Offered:</label><br />
-        <select name="servicesOffered" multiple onChange={handleChange} required>
+        <label className="auth-label" htmlFor="servicesOffered">Services Offered</label>
+        <select id="servicesOffered" name="servicesOffered" multiple onChange={handleChange} required>
           <option value="engine repair">Engine Repair</option>
           <option value="oil change">Oil Change</option>
           <option value="brake repair">Brake Repair</option>
           <option value="battery jumpstart">Battery Jumpstart</option>
-        </select><br />
+        </select>
 
-        <input name="serviceRadius" type="number" placeholder="Service Radius (km)" value={formData.serviceRadius} onChange={handleChange} required /><br />
+        <label className="auth-label" htmlFor="serviceRadius">Service Radius (KM)</label>
+        <input id="serviceRadius" name="serviceRadius" type="number" placeholder="Service Radius (km)" value={formData.serviceRadius} onChange={handleChange} required />
 
-        {/* ✅ Pricing Information */}
-        <fieldset style={{ marginTop: '20px', padding: '15px', border: '1px solid #ddd', borderRadius: '8px' }}>
-          <legend style={{ fontWeight: 'bold', fontSize: '16px' }}>💰 Pricing Configuration</legend>
-          
-          <label htmlFor="baseVisitingCharge">Base Visiting Charge (₹)</label><br />
-          <input 
+        <fieldset className="mechanic-section-fieldset">
+          <legend>Pricing Configuration</legend>
+
+          <label className="auth-label" htmlFor="baseVisitingCharge">Base Visiting Charge</label>
+          <input
             id="baseVisitingCharge"
-            name="baseVisitingCharge" 
-            type="number" 
+            name="baseVisitingCharge"
+            type="number"
             step="10"
             min="50"
             max="5000"
-            value={formData.baseVisitingCharge} 
-            onChange={handleChange} 
-            placeholder="50 - 5000" 
-            required 
-          /><br />
+            value={formData.baseVisitingCharge}
+            onChange={handleChange}
+            placeholder="50 - 5000"
+            required
+          />
 
-          <label htmlFor="includedDistanceKm">Included Distance (km)</label><br />
-          <input 
+          <label className="auth-label" htmlFor="includedDistanceKm">Included Distance (KM)</label>
+          <input
             id="includedDistanceKm"
-            name="includedDistanceKm" 
-            type="number" 
+            name="includedDistanceKm"
+            type="number"
             step="1"
             min="0"
             max="100"
-            value={formData.includedDistanceKm} 
-            onChange={handleChange} 
-            placeholder="0 - 100" 
-            required 
-          /><br />
+            value={formData.includedDistanceKm}
+            onChange={handleChange}
+            placeholder="0 - 100"
+            required
+          />
 
-          <label htmlFor="extraChargePerKm">Extra Charge Per Km (₹)</label><br />
-          <input 
+          <label className="auth-label" htmlFor="extraChargePerKm">Extra Charge Per KM</label>
+          <input
             id="extraChargePerKm"
-            name="extraChargePerKm" 
-            type="number" 
+            name="extraChargePerKm"
+            type="number"
             step="5"
             min="5"
             max="500"
-            value={formData.extraChargePerKm} 
-            onChange={handleChange} 
-            placeholder="5 - 500" 
-            required 
-          /><br />
+            value={formData.extraChargePerKm}
+            onChange={handleChange}
+            placeholder="5 - 500"
+            required
+          />
         </fieldset>
 
-        {/* ✅ Location */}
-        <fieldset style={{ marginTop: '20px', padding: '15px', border: '1px solid #ddd', borderRadius: '8px' }}>
-          <legend style={{ fontWeight: 'bold', fontSize: '16px' }}>📍 Service Location</legend>
-          
-          <button 
-            type="button" 
+        <fieldset className="mechanic-section-fieldset">
+          <legend>Service Location</legend>
+
+          <button
+            type="button"
             onClick={getLocation}
             disabled={fetchingLocation}
-            style={{
-              padding: '10px 20px',
-              backgroundColor: location ? '#4CAF50' : '#2196F3',
-              color: 'white',
-              border: 'none',
-              borderRadius: '6px',
-              cursor: fetchingLocation ? 'not-allowed' : 'pointer',
-              opacity: fetchingLocation ? 0.6 : 1
-            }}
+            className="mechanic-location-btn"
           >
-            {fetchingLocation ? '⏳ Fetching Location...' : (location ? '✅ Location Fetched' : '📍 Get Current Location')}
-          </button><br /><br />
+            {fetchingLocation ? 'Fetching location...' : (location ? 'Location fetched' : 'Get current location')}
+          </button>
 
           {location && (
-            <div style={{ padding: '10px', backgroundColor: '#f0f0f0', borderRadius: '6px', marginBottom: '10px' }}>
-              <strong>Location:</strong><br />
-              Latitude: {location.coordinates[1].toFixed(6)}<br />
-              Longitude: {location.coordinates[0].toFixed(6)}
+            <div className="mechanic-location-preview">
+              <strong>Location</strong>
+              <p>Latitude: {location.coordinates[1].toFixed(6)}</p>
+              <p>Longitude: {location.coordinates[0].toFixed(6)}</p>
             </div>
           )}
         </fieldset>
 
-        {/* Files */}
-        <label htmlFor="profileImage" style={{ marginTop: '20px', display: 'block', fontWeight: 'bold' }}>Profile Image:</label><br />
-        <input 
+        <label className="auth-label" htmlFor="profileImage">Profile Image</label>
+        <input
           id="profileImage"
-          type="file" 
-          accept="image/*" 
-          onChange={(e) => setProfileImage(e.target.files[0])} 
-          required 
-        /><br />
+          type="file"
+          accept="image/*"
+          onChange={(e) => setProfileImage(e.target.files[0])}
+          required
+        />
 
-        <label htmlFor="documents" style={{ marginTop: '15px', display: 'block', fontWeight: 'bold' }}>ID + License Documents:</label><br />
-        <input 
+        <label className="auth-label" htmlFor="documents">ID and License Documents</label>
+        <input
           id="documents"
-          type="file" 
-          accept=".jpg,.jpeg,.png,.pdf" 
-          multiple 
-          onChange={(e) => handleFileChange(e, setDocuments)} 
-          required 
-        /><br />
+          type="file"
+          accept=".jpg,.jpeg,.png,.pdf"
+          multiple
+          onChange={(e) => handleFileChange(e, setDocuments)}
+          required
+        />
 
-        <button type="submit" style={{ marginTop: '20px', padding: '12px 30px', fontSize: '16px' }}>Register Mechanic</button>
+        <button type="submit" className="auth-button">Register Mechanic</button>
+        {message && <p className={message.startsWith('✅') ? 'auth-success' : 'auth-error'}>{message}</p>}
       </form>
-      {message && <p className="message" style={{ marginTop: '15px', padding: '10px', textAlign: 'center' }}>{message}</p>}
     </div>
   );
 };

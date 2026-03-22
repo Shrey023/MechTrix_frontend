@@ -1,10 +1,13 @@
+/* Global.css — basic resets; variables.css handles real theming */
 body {
   margin: 0;
-  font-family: Arial, sans-serif;
+  font-family: 'Barlow', 'Arial', sans-serif;
+  background: var(--color-bg, #0E0C0A);
+  color: var(--color-off-white, #F6F6F7);
 }
 
 a {
   text-decoration: none;
-  color: #333;
-  padding: 0 10px;
+  color: inherit;
+  padding: 0;
 }

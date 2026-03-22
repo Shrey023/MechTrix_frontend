@@ -1,13 +1,25 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import axios from '../api/axios';
 import './NearbyMechanics.css';
 
 const NearbyMechanics = () => {
+  const navigate = useNavigate();
   const [mechanics, setMechanics] = useState([]);
   const [loading, setLoading] = useState(true);
   const [customerLocation, setCustomerLocation] = useState(null);
   const [fareCache, setFareCache] = useState({});
+
+  const handleBookingIntent = (mechanicId) => {
+    const isCustomerLoggedIn = Boolean(localStorage.getItem('customerId') && localStorage.getItem('token'));
+    if (!isCustomerLoggedIn) {
+      const wantsLogin = window.confirm('Please login or register first to book a mechanic. Click OK for login, Cancel for register.');
+      navigate(wantsLogin ? '/login' : '/Userregister');
+      return;
+    }
+
+    navigate(`/book/${mechanicId}`);
+  };
 
   // ✅ Haversine formula to calculate distance between two coordinates
   const calculateDistance = (lat1, lon1, lat2, lon2) => {
@@ -160,9 +172,9 @@ const NearbyMechanics = () => {
               <div className="pricing-note">Paid after repair</div>
             </div>
 
-            <Link to={`/book/${mech._id}`}>
-              <button className="book-button">Book This Mechanic</button>
-            </Link>
+            <button className="book-button" onClick={() => handleBookingIntent(mech._id)}>
+              Book This Mechanic
+            </button>
           </li>
         ))}
       </ul>

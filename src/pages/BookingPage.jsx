@@ -17,6 +17,7 @@ const BookingPage = () => {
   const [userLocation, setUserLocation] = useState({ lat: null, lng: null });
 
   const customerId = localStorage.getItem('customerId');
+  const isCustomerLoggedIn = Boolean(customerId && localStorage.getItem('token'));
 
   // Fetch mechanic details
   useEffect(() => {
@@ -62,6 +63,11 @@ const BookingPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    if (!isCustomerLoggedIn) {
+      setMessage('Please login or register first to make a booking.');
+      return;
+    }
+
     if (!userLocation.lat || !userLocation.lng) {
       return setMessage('❌ Location not available. Please allow location access.');
     }
@@ -106,12 +112,19 @@ const BookingPage = () => {
       <p className="mechanic-info"><strong>Vehicle Types:</strong> {mechanic.vehicleTypes?.join(', ')}</p>
 
       <form onSubmit={handleSubmit} className="booking-form" style={{ marginTop: '1rem' }}>
+        {!isCustomerLoggedIn && (
+          <div className="message error">
+            Please login or register first. Booking is disabled until you sign in.
+          </div>
+        )}
+
         <input
           name="vehicleType"
           value={form.vehicleType}
           onChange={handleChange}
           placeholder="Vehicle Type"
           className="input-field"
+          disabled={!isCustomerLoggedIn}
           required
         />
         <textarea
@@ -120,6 +133,7 @@ const BookingPage = () => {
           onChange={handleChange}
           placeholder="Issue Description"
           className="input-field textarea"
+          disabled={!isCustomerLoggedIn}
           required
         />
         <input
@@ -128,6 +142,7 @@ const BookingPage = () => {
           onChange={handleChange}
           placeholder="Service Required"
           className="input-field"
+          disabled={!isCustomerLoggedIn}
           required
         />
         <input
@@ -136,9 +151,19 @@ const BookingPage = () => {
           value={form.scheduledTime}
           onChange={handleChange}
           className="input-field"
+          disabled={!isCustomerLoggedIn}
           required
         />
-        <button type="submit" className="submit-button">Confirm Booking</button>
+        <button type="submit" className="submit-button" disabled={!isCustomerLoggedIn}>
+          {isCustomerLoggedIn ? 'Confirm Booking' : 'Login Required'}
+        </button>
+
+        {!isCustomerLoggedIn && (
+          <div className="booking-auth-actions">
+            <Link to="/login" className="dashboard-button">Login</Link>
+            <Link to="/Userregister" className="dashboard-button">Register</Link>
+          </div>
+        )}
       </form>
 
       {message && <p className={`message ${message.includes('✅') ? 'success' : 'error'}`}>{message}</p>}

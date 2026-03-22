@@ -1,116 +1,129 @@
-/* Reset and base styles */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+/* =========================================
+   MECHZE — NEARBY MECHANICS CSS
+   Dark Industrial Design System
+   ========================================= */
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
 
 .nearby-mechanics {
-  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-  background:
-    radial-gradient(80rem 40rem at -20% -10%, rgba(166, 75, 10, 0.05), transparent 60%),
-    radial-gradient(70rem 35rem at 120% 110%, rgba(166, 75, 10, 0.04), transparent 60%),
-    linear-gradient(180deg, #FAFAF9 0%, #F3F4F6 100%);
-  color: #111827;
+  font-family: var(--font-body, 'Barlow', sans-serif);
+  background: var(--color-bg, #0E0C0A);
+  color: var(--color-off-white, #F6F6F7);
   min-height: 100vh;
-  padding: clamp(2rem, 8vw, 3rem) clamp(1rem, 5vw, 2rem);
+  padding: clamp(5rem, 10vw, 7rem) clamp(1rem, 5vw, 2rem) clamp(2rem, 5vw, 3rem);
   width: 100%;
   overflow-x: hidden;
 }
 
 .nearby-mechanics h2 {
-  color: #111827;
-  font-size: clamp(1.6rem, 5vw, 2rem);
-  font-weight: 800;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: clamp(1.8rem, 5vw, 2.4rem);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--color-off-white);
   text-align: center;
-  margin-bottom: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+/* ── Section kicker above h2 ── */
+.nearby-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.nearby-header .section-kicker {
+  justify-content: center;
 }
 
 .loading-text {
   text-align: center;
-  font-size: clamp(1rem, 3.5vw, 1.1rem);
-  color: #374151;
-  padding: 1.5rem;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: clamp(14px, 3.5vw, 16px);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--color-steel-light);
+  padding: 2rem;
 }
 
 .no-mechanics {
   text-align: center;
-  font-size: clamp(0.95rem, 3.5vw, 1rem);
-  color: #B45309;
+  font-size: clamp(0.9rem, 3.5vw, 1rem);
+  color: var(--color-warm-gray);
   font-style: italic;
-  padding: 1rem;
-  background-color: #FFF7ED;
-  border: 1px solid #FED7AA;
-  border-radius: 0.625rem;
+  padding: 1rem 1.5rem;
+  background: var(--color-bg3);
+  border: 1px solid rgba(131, 68, 23, 0.2);
+  border-radius: 2px;
   margin: 0 auto;
-  max-width: 600px;
+  max-width: 560px;
 }
 
+/* ── Mechanics Grid ── */
 .mechanics-list {
   list-style: none;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(clamp(250px, 45vw, 300px), 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(clamp(260px, 42vw, 300px), 1fr));
   gap: clamp(1rem, 3vw, 1.5rem);
   max-width: 1200px;
   margin: 0 auto;
+  padding: 0;
 }
 
+/* ── Card ── */
 .mechanic-card {
-  background-color: #FFFFFF;
-  border: 1px solid #E5E7EB;
-  border-radius: 1rem;
-  padding: clamp(1rem, 4vw, 1.25rem);
-  box-shadow: 0 10px 24px rgba(17, 24, 39, 0.06);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  background: var(--color-bg3, #1C1916);
+  border: 1px solid rgba(131, 68, 23, 0.12);
+  border-radius: 2px;
+  padding: clamp(1rem, 4vw, 1.4rem);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
 }
+
+.mechanic-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, transparent, #834417, transparent);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.mechanic-card:hover::before { opacity: 1; }
 
 .mechanic-card:hover {
+  background: var(--color-bg4, #252018);
+  border-color: rgba(131, 68, 23, 0.3);
   transform: translateY(-2px);
-  box-shadow: 0 14px 28px rgba(17, 24, 39, 0.09);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.4);
 }
 
 .mechanic-name {
-  color: #111827;
-  font-size: clamp(1.15rem, 4vw, 1.35rem);
-  font-weight: 700;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: clamp(1.1rem, 4vw, 1.35rem);
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  color: var(--color-off-white);
   display: block;
-  margin-bottom: 0.4rem;
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
 }
 
 .mechanic-services {
-  font-size: clamp(0.9rem, 3vw, 1rem);
-  color: #374151;
-  margin-bottom: 0.9rem;
-  line-height: 1.45;
+  font-size: clamp(0.85rem, 3vw, 0.95rem);
+  color: var(--color-warm-gray);
+  margin-bottom: 1rem;
+  line-height: 1.5;
 }
 
-.book-button {
-  background: #A64B0A;
-  color: #FFFFFF;
-  border: none;
-  padding: clamp(0.6rem, 2vw, 0.8rem) clamp(1rem, 3vw, 1.25rem);
-  font-size: clamp(0.95rem, 3vw, 1rem);
-  font-weight: 600;
-  border-radius: 0.625rem;
-  cursor: pointer;
-  width: 100%;
-  text-align: center;
-  transition: background-color 0.15s ease, transform 0.15s ease, box-shadow 0.2s ease;
-}
-
-.book-button:hover {
-  transform: translateY(-1px);
-  background: #8F4108;
-  box-shadow: 0 8px 20px rgba(166, 75, 10, 0.25);
-}
-
-/* ✅ Pricing Section Styles */
+/* ── Pricing Box ── */
 .mechanic-pricing {
-  background-color: #FFF7ED;
-  border: 1px solid #FEDBA8;
-  border-radius: 0.625rem;
-  padding: clamp(0.8rem, 3vw, 1rem);
-  margin: clamp(0.8rem, 3vw, 1rem) 0;
+  background: var(--color-bg4, #252018);
+  border: 1px solid rgba(131, 68, 23, 0.2);
+  border-radius: 2px;
+  padding: 12px 14px;
+  margin: 1rem 0;
 }
 
 .pricing-item {
@@ -118,93 +131,64 @@
   justify-content: space-between;
   align-items: center;
   margin-bottom: 0.5rem;
-  font-size: clamp(0.9rem, 3vw, 1rem);
+  font-size: clamp(0.85rem, 3vw, 0.95rem);
 }
 
-.pricing-item:last-of-type {
-  margin-bottom: 0;
-}
+.pricing-item:last-of-type { margin-bottom: 0; }
 
 .pricing-label {
-  color: #7C2D12;
-  font-weight: 600;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--color-steel-light);
 }
 
 .pricing-value {
-  color: #B45309;
-  font-weight: 700;
-  font-size: clamp(0.95rem, 3.5vw, 1.1rem);
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: clamp(1rem, 3.5vw, 1.2rem);
+  font-weight: 600;
+  color: var(--color-brown-light, #A0561E);
 }
 
 .pricing-note {
-  font-size: clamp(0.8rem, 2.5vw, 0.85rem);
-  color: #92400E;
+  font-size: clamp(0.75rem, 2.5vw, 0.8rem);
+  color: var(--color-steel);
   font-style: italic;
   margin-top: 0.6rem;
   text-align: center;
 }
 
-/* Responsive Design */
+/* ── Book Button ── */
+.book-button {
+  display: block;
+  width: 100%;
+  background: var(--color-brown, #834417);
+  color: var(--color-off-white, #F6F6F7);
+  clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 600;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  padding: 12px 24px;
+  border: none;
+  text-align: center;
+  transition: background 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
+}
+
+.book-button:hover {
+  background: var(--color-brown-light, #A0561E);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 18px rgba(131, 68, 23, 0.35);
+}
+
+/* ── Responsive ── */
 @media (max-width: 768px) {
-  .nearby-mechanics {
-    padding: 1.5rem 1rem;
-  }
-
-  .nearby-mechanics h2 {
-    font-size: clamp(1.5rem, 5vw, 1.8rem);
-  }
-
-  .mechanics-list {
-    grid-template-columns: 1fr;
-  }
-
-  .mechanic-card {
-    padding: 1rem;
-  }
-
-  .mechanic-name {
-    font-size: clamp(1.1rem, 4vw, 1.3rem);
-  }
-
-  .mechanic-services {
-    font-size: clamp(0.8rem, 3vw, 0.9rem);
-  }
-
-  .book-button {
-    padding: 0.6rem 1rem;
-    font-size: clamp(0.85rem, 3vw, 0.95rem);
-  }
+  .nearby-mechanics { padding-top: 5rem; }
+  .mechanics-list { grid-template-columns: 1fr; }
 }
 
 @media (max-width: 480px) {
-  .nearby-mechanics {
-    padding: 1rem 0.8rem;
-  }
-
-  .nearby-mechanics h2 {
-    font-size: clamp(1.3rem, 5vw, 1.6rem);
-  }
-
-  .loading-text,
-  .no-mechanics {
-    font-size: clamp(0.85rem, 3.5vw, 1rem);
-    padding: 1rem;
-  }
-
-  .mechanic-card {
-    padding: 0.8rem;
-  }
-
-  .mechanic-name {
-    font-size: clamp(1rem, 4vw, 1.2rem);
-  }
-
-  .mechanic-services {
-    font-size: clamp(0.75rem, 3vw, 0.85rem);
-  }
-
-  .book-button {
-    padding: 0.5rem 1rem;
-    font-size: clamp(0.8rem, 3vw, 0.9rem);
-  }
+  .nearby-mechanics h2 { font-size: clamp(1.4rem, 6vw, 1.8rem); }
 }

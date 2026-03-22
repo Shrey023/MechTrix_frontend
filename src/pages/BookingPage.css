@@ -1,209 +1,198 @@
-/* Reset and base styles */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+/* =========================================
+   MECHZE — BOOKINGPAGE CSS
+   Dark Industrial Design System
+   ========================================= */
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
 
 .booking-page {
-  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-  background:
-    radial-gradient(80rem 40rem at -20% -10%, rgba(166, 75, 10, 0.05), transparent 60%),
-    radial-gradient(70rem 35rem at 120% 110%, rgba(166, 75, 10, 0.04), transparent 60%),
-    linear-gradient(180deg, #FAFAF9 0%, #F3F4F6 100%);
-  color: #111827;
+  font-family: var(--font-body, 'Barlow', sans-serif);
+  background: var(--color-bg, #0E0C0A);
+  color: var(--color-off-white, #F6F6F7);
   min-height: 100vh;
   width: 100%;
   overflow-x: hidden;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 2rem 1rem;
+  padding: clamp(5rem, 10vw, 7rem) clamp(1rem, 5vw, 2rem) 3rem;
 }
 
 .loading-text {
   text-align: center;
-  font-size: clamp(1rem, 3.5vw, 1.1rem);
-  color: #374151;
-  padding: 1.5rem;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 14px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--color-steel-light);
+  padding: 2rem;
 }
 
 .error-text {
   text-align: center;
-  font-size: clamp(0.9rem, 3.5vw, 1.1rem);
-  color: #B45309;
-  background-color: #FFF7ED;
-  border: 1px solid #FED7AA;
-  border-radius: 0.625rem;
-  padding: 0.9rem;
+  font-size: 14px;
+  color: #E06060;
+  background: rgba(150, 30, 30, 0.1);
+  border: 1px solid rgba(150, 30, 30, 0.25);
+  border-radius: 2px;
+  padding: 0.9rem 1.25rem;
   margin: 2rem auto;
-  max-width: 600px;
+  max-width: 560px;
+  font-family: 'Barlow Condensed', sans-serif;
+  letter-spacing: 1px;
 }
 
 .mechanic-title {
-  color: #111827;
-  font-size: clamp(1.6rem, 5vw, 2rem);
-  font-weight: 800;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: clamp(1.6rem, 5vw, 2.2rem);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--color-off-white);
   text-align: center;
-  margin-bottom: 0.75rem;
+  margin-bottom: 0.5rem;
 }
 
 .mechanic-info {
-  font-size: clamp(0.95rem, 3vw, 1rem);
-  color: #374151;
-  margin: 0.25rem 0;
+  font-size: clamp(0.9rem, 3vw, 1rem);
+  color: var(--color-warm-gray);
+  margin: 0.3rem 0;
   text-align: center;
 }
 
+/* ── Booking Form ── */
 .booking-form {
-  background-color: #FFFFFF;
-  border: 1px solid #E5E7EB;
-  border-radius: 1rem;
-  box-shadow: 0 12px 30px rgba(17, 24, 39, 0.08);
-  padding: clamp(1rem, 4vw, 1.5rem);
+  background: var(--color-bg3, #1C1916);
+  border: 1px solid rgba(131, 68, 23, 0.15);
+  border-radius: 2px;
+  padding: clamp(1.25rem, 4vw, 2rem);
   max-width: clamp(320px, 80vw, 560px);
   width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 0.9rem;
+  gap: 1rem;
+  margin-top: 1.5rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.booking-form::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, transparent, #834417, transparent);
 }
 
 .input-field {
   width: 100%;
-  padding: clamp(0.65rem, 2.5vw, 0.9rem);
-  border: 1px solid #D1D5DB;
-  border-radius: 0.625rem;
-  font-size: clamp(0.95rem, 3vw, 1rem);
-  background-color: #FFFFFF;
-  color: #111827;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  background: var(--color-bg, #0E0C0A);
+  border: 1px solid rgba(115, 121, 134, 0.3);
+  border-radius: 2px;
+  color: var(--color-off-white);
+  padding: 12px 16px;
+  font-family: 'Barlow', sans-serif;
+  font-size: clamp(14px, 3vw, 15px);
+  font-weight: 400;
+  transition: border-color 0.2s, box-shadow 0.2s;
 }
+
+.input-field::placeholder { color: var(--color-steel); }
 
 .input-field:focus {
   outline: none;
-  border-color: #A64B0A;
-  box-shadow: 0 0 0 3px rgba(166, 75, 10, 0.25);
+  border-color: var(--color-brown);
+  box-shadow: 0 0 0 3px rgba(131, 68, 23, 0.15);
 }
 
 .textarea {
   resize: vertical;
-  min-height: 80px;
-  max-height: 200px;
+  min-height: 90px;
+  max-height: 220px;
 }
 
 .submit-button {
-  background: #A64B0A;
-  color: #FFFFFF;
-  border: none;
-  padding: clamp(0.85rem, 2.5vw, 1rem);
-  font-size: clamp(0.95rem, 3vw, 1.05rem);
+  display: block;
+  width: 100%;
+  background: var(--color-brown, #834417);
+  color: var(--color-off-white);
+  clip-path: polygon(10px 0%, 100% 0%, calc(100% - 10px) 100%, 0% 100%);
+  font-family: 'Barlow Condensed', sans-serif;
   font-weight: 600;
-  border-radius: 0.625rem;
-  cursor: pointer;
-  transition: background-color 0.15s ease, transform 0.15s ease, box-shadow 0.2s ease;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  padding: 14px 32px;
+  border: none;
+  transition: background 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
+  text-align: center;
 }
 
 .submit-button:hover {
-  transform: translateY(-1px);
-  background: #8F4108;
-  box-shadow: 0 8px 20px rgba(166, 75, 10, 0.25);
+  background: var(--color-brown-light);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 24px rgba(131, 68, 23, 0.35);
+}
+
+.submit-button:disabled {
+  opacity: 0.55;
+  transform: none;
+  box-shadow: none;
 }
 
 .message {
   text-align: center;
-  font-size: clamp(0.9rem, 3.5vw, 1rem);
-  margin: 1rem 0;
-  padding: 0.5rem;
-  border-radius: 0.5rem;
-  max-width: 600px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 13px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin: 0.75rem 0;
+  padding: 10px 16px;
+  border-radius: 2px;
+  max-width: 560px;
 }
 
 .message.success {
-  color: #166534;
-  background-color: #ECFDF5;
-  border: 1px solid #A7F3D0;
+  color: #6DBF7E;
+  background: rgba(40, 100, 50, 0.15);
+  border: 1px solid rgba(40, 100, 50, 0.3);
 }
 
 .message.error {
-  color: #B45309;
-  background-color: #FFF7ED;
-  border: 1px solid #FED7AA;
+  color: #E06060;
+  background: rgba(150, 30, 30, 0.15);
+  border: 1px solid rgba(150, 30, 30, 0.25);
 }
 
 .dashboard-button {
-  background: #111827;
-  color: #FFFFFF;
-  border: none;
-  padding: clamp(0.6rem, 2vw, 0.8rem) clamp(1rem, 3vw, 1.25rem);
-  font-size: clamp(0.9rem, 3vw, 1rem);
+  display: inline-block;
+  background: var(--color-bg4);
+  color: var(--color-steel-light);
+  border: 1px solid rgba(131, 68, 23, 0.3);
+  clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+  font-family: 'Barlow Condensed', sans-serif;
   font-weight: 600;
-  border-radius: 0.625rem;
-  cursor: pointer;
-  transition: background-color 0.15s ease, transform 0.15s ease, box-shadow 0.2s ease;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  padding: 10px 28px;
+  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
 }
 
 .dashboard-button:hover {
+  background: var(--color-brown);
+  color: var(--color-off-white);
+  border-color: transparent;
   transform: translateY(-1px);
-  background: #0B1220;
-  box-shadow: 0 10px 24px rgba(17, 24, 39, 0.18);
 }
 
-/* Responsive Design */
+.booking-auth-actions {
+  display: flex;
+  gap: 0.75rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
 @media (max-width: 768px) {
-  .booking-page {
-    padding: 1rem;
-  }
-
-  .mechanic-title {
-    font-size: clamp(1.5rem, 5vw, 1.8rem);
-  }
-
-  .booking-form {
-    padding: 1rem;
-    max-width: 90vw;
-  }
-
-  .input-field {
-    padding: 0.6rem;
-    font-size: clamp(0.85rem, 3vw, 0.95rem);
-  }
-
-  .submit-button,
-  .dashboard-button {
-    padding: 0.7rem;
-    font-size: clamp(0.85rem, 3vw, 1rem);
-  }
-}
-
-@media (max-width: 480px) {
-  .mechanic-title {
-    font-size: clamp(1.3rem, 5vw, 1.6rem);
-  }
-
-  .mechanic-info {
-    font-size: clamp(0.8rem, 3vw, 0.9rem);
-  }
-
-  .booking-form {
-    padding: 0.8rem;
-    max-width: 95vw;
-  }
-
-  .input-field {
-    padding: 0.5rem;
-    font-size: clamp(0.8rem, 3vw, 0.9rem);
-  }
-
-  .submit-button,
-  .dashboard-button {
-    padding: 0.6rem;
-    font-size: clamp(0.8rem, 3vw, 0.9rem);
-  }
-
-  .message,
-  .loading-text,
-  .error-text {
-    font-size: clamp(0.8rem, 3.5vw, 0.9rem);
-    padding: 0.8rem;
-  }
+  .booking-page { padding-top: 5rem; }
+  .booking-form { max-width: 95vw; }
 }

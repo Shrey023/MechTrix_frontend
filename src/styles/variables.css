@@ -1,21 +1,69 @@
+/* =========================================
+   MECHZE — DESIGN SYSTEM TOKENS
+   Dark Industrial · Premium Automotive
+   ========================================= */
+
 :root {
-  --primary: #A64B0A; /* Warm brown */
-  --primary-700: #8F4108;
-  --primary-200: #F1D3C2;
-  --text-900: #111827;
-  --text-700: #374151;
-  --muted-600: #6B7280;
-  --border: #E5E7EB;
-  --surface: #FFFFFF;
-  --bg-0: #FAFAF9;
-  --bg-1: #F3F4F6;
-  --success: #16A34A;
-  --error: #DC2626;
+  /* ── Brand Colors ── */
+  --color-brown:       #834417;
+  --color-brown-light: #A0561E;
+  --color-brown-dark:  #5C2F0F;
+  --color-steel:       #737986;
+  --color-steel-light: #AFB3B9;
+  --color-warm-gray:   #ABA19C;
+  --color-off-white:   #F6F6F7;
+
+  /* ── Background Surfaces ── */
+  --color-bg:  #0E0C0A;
+  --color-bg2: #141210;
+  --color-bg3: #1C1916;
+  --color-bg4: #252018;
+
+  /* ── Legacy compat aliases ── */
+  --primary:       var(--color-brown);
+  --primary-700:   var(--color-brown-dark);
+  --primary-200:   #C8916A;
+  --text-900:      var(--color-off-white);
+  --text-700:      var(--color-warm-gray);
+  --muted-600:     var(--color-steel);
+  --border:        rgba(131, 68, 23, 0.2);
+  --surface:       var(--color-bg3);
+  --bg-0:          var(--color-bg);
+  --bg-1:          var(--color-bg2);
+  --success:       #6DBF7E;
+  --error:         #E06060;
+
+  /* ── Typography ── */
+  --font-display: 'Barlow Condensed', 'Arial Narrow', sans-serif;
+  --font-body:    'Barlow', 'Arial', sans-serif;
+
+  /* ── Radius (industrial = sharp) ── */
+  --radius-sm: 2px;
+  --radius-md: 4px;
+
+  /* ── Transitions ── */
+  --transition-base: all 0.3s ease;
+  --transition-fast: all 0.15s ease;
+}
+
+/* ── Global Base ── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  margin: 0;
-  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-  color: var(--text-900);
-  background-color: var(--bg-0);
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.75;
+  background: var(--color-bg);
+  color: var(--color-off-white);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }

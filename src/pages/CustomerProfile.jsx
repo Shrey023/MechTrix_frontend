@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from '../api/axios';
+import './CustomerProfile.css';
 
 const CustomerProfile = () => {
   const [profile, setProfile] = useState(null);
@@ -36,40 +37,45 @@ const CustomerProfile = () => {
     }
   };
 
-  if (!profile) return <p>Loading profile...</p>;
+  if (!profile) return <p className="loading-text">Loading profile...</p>;
 
   return (
-    <div style={{ padding: '2rem' }}>
-      <h2>My Profile</h2>
-      <div style={{ marginTop: '1rem' }}>
-        <label>Name:</label>
+    <div className="customer-profile">
+      <div className="profile-card">
+        <h2>My Profile</h2>
+        <p><strong>Avatar:</strong></p>
+        <div className="customer-avatar" aria-hidden="true" style={{ marginBottom: '1rem' }}>
+          {profile.name?.charAt(0)?.toUpperCase() || 'U'}
+        </div>
+
+        <label className="profile-label">Name</label>
         <input
           name="name"
           value={form.name}
           onChange={handleChange}
           disabled={!editMode}
-        /><br />
+        />
 
-        <label>Email:</label>
+        <label className="profile-label">Email</label>
         <input
           name="email"
           value={form.email}
           onChange={handleChange}
           disabled
-        /><br />
+        />
 
-        <label>Phone:</label>
+        <label className="profile-label">Phone</label>
         <input
           name="phone"
           value={form.phone}
           onChange={handleChange}
           disabled={!editMode}
-        /><br />
+        />
 
         {editMode ? (
-          <button onClick={handleSave} style={{ marginTop: '1rem' }}>Save</button>
+          <button onClick={handleSave} className="profile-save-btn">Save</button>
         ) : (
-          <button onClick={() => setEditMode(true)} style={{ marginTop: '1rem' }}>Edit</button>
+          <button onClick={() => setEditMode(true)} className="profile-save-btn">Edit</button>
         )}
       </div>
     </div>

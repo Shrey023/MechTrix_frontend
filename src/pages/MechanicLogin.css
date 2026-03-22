@@ -1,183 +1,107 @@
-/* Reset and base styles */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+/* =========================================
+   MECHZE — MECHANIC LOGIN CSS
+   Dark Industrial Design System
+   ========================================= */
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
 
 .mechanic-login {
-  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-  background:
-    radial-gradient(80rem 40rem at -20% -10%, rgba(166, 75, 10, 0.06), transparent 60%),
-    radial-gradient(70rem 35rem at 120% 110%, rgba(166, 75, 10, 0.05), transparent 60%),
-    linear-gradient(180deg, #FAFAF9 0%, #F3F4F6 100%);
-  color: #111827;
+  background: var(--color-bg, #0E0C0A);
   min-height: 100vh;
   display: flex;
-  align-items: center;
   justify-content: center;
-  padding: clamp(1rem, 5vw, 2rem);
+  align-items: center;
+  padding: clamp(5rem, 10vw, 7rem) 1rem 3rem;
+  font-family: var(--font-body, 'Barlow', sans-serif);
+}
+
+.mechanic-login-card {
+  background: var(--color-bg3, #1C1916);
+  border: 1px solid rgba(131, 68, 23, 0.15);
+  border-radius: 2px;
+  padding: clamp(1.5rem, 5vw, 2.5rem);
   width: 100%;
-  overflow-x: hidden;
+  max-width: 440px;
   position: relative;
-  z-index: 0; /* establish stacking context */
+  overflow: hidden;
 }
 
-/* Soft wave divider background behind the card */
-.mechanic-login::after {
-  content: "";
+.mechanic-login-card::before {
+  content: '';
   position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  height: 42%;
-  background: #EDE9E3; /* warm neutral */
-  border-top-left-radius: 55% 18%;
-  border-top-right-radius: 55% 18%;
-  box-shadow: inset 0 10px 20px rgba(17, 24, 39, 0.03);
-  pointer-events: none;
-  z-index: -1; /* keep behind the content */
+  top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, transparent, #834417, transparent);
 }
 
-.login-form {
-  background-color: #FFFFFF;
-  padding: clamp(1.5rem, 6vw, 2.25rem);
-  border-radius: 1rem;
-  box-shadow: 0 12px 30px rgba(17, 24, 39, 0.08);
-  border: 1px solid #E5E7EB;
-  width: 100%;
-  max-width: clamp(320px, 80vw, 440px);
-  position: relative;
-  z-index: 1; /* keep form in front of background */
-}
-
-/* Centered MECHZE logo pill above the card */
-.login-form::before {
-  content: "MECHZE";
-  position: absolute;
-  top: -42px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: #111827;
-  color: #FFFFFF;
-  padding: 0.5rem 0.9rem;
-  border-radius: 9999px;
-  font-size: 0.875rem;
-  letter-spacing: 0.12em;
-  font-weight: 800;
-  box-shadow: 0 6px 16px rgba(17, 24, 39, 0.2);
-}
-
-.login-form h2 {
-  color: #111827;
-  font-size: clamp(1.5rem, 5.5vw, 1.875rem);
+.mechanic-login-card h2 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: clamp(1.5rem, 5vw, 2rem);
   font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--color-off-white);
+  margin-bottom: 1.5rem;
   text-align: center;
-  margin-bottom: 1.25rem;
 }
 
-.logo-wrap {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 0.75rem;
-}
-
-.logo-text {
-  letter-spacing: 0.1em;
-  font-weight: 700;
-  color: #111827;
-}
-
-.input-field {
+.mechanic-login-card input {
+  display: block;
   width: 100%;
-  padding: clamp(0.65rem, 2.5vw, 0.9rem);
-  border: 1px solid #D1D5DB;
-  border-radius: 0.625rem;
-  font-size: clamp(0.95rem, 3vw, 1rem);
-  background-color: #FFFFFF;
-  color: #111827;
-  margin-bottom: 0.9rem;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  padding: 12px 16px;
+  margin-bottom: 1rem;
+  border: 1px solid rgba(115, 121, 134, 0.3);
+  border-radius: 2px;
+  background: var(--color-bg);
+  color: var(--color-off-white);
+  font-family: 'Barlow', sans-serif;
+  font-size: 15px;
+  transition: border-color 0.2s, box-shadow 0.2s;
 }
 
-.input-field::placeholder {
-  color: #9CA3AF;
-}
+.mechanic-login-card input::placeholder { color: var(--color-steel); }
 
-.input-field:focus {
+.mechanic-login-card input:focus {
   outline: none;
-  border-color: #A64B0A;
-  box-shadow: 0 0 0 3px rgba(166, 75, 10, 0.25);
+  border-color: var(--color-brown);
+  box-shadow: 0 0 0 3px rgba(131, 68, 23, 0.15);
 }
 
-.error-message {
-  color: #B45309;
-  font-size: clamp(0.85rem, 3vw, 0.95rem);
-  text-align: center;
-  margin-bottom: 0.75rem;
-  padding: 0.5rem 0.75rem;
-  border-radius: 0.5rem;
-  background-color: #FFF7ED;
-  border: 1px solid #FED7AA;
-}
-
-.login-button {
+.mechanic-login-card button[type="submit"],
+.mechanic-login-submit {
+  display: block;
   width: 100%;
-  background-color: #A64B0A;
-  color: #FFFFFF;
-  border: none;
-  padding: clamp(0.85rem, 2.5vw, 1rem);
-  font-size: clamp(0.95rem, 3vw, 1.05rem);
+  background: var(--color-brown);
+  color: var(--color-off-white);
+  clip-path: polygon(10px 0%, 100% 0%, calc(100% - 10px) 100%, 0% 100%);
+  font-family: 'Barlow Condensed', sans-serif;
   font-weight: 600;
-  border-radius: 0.625rem;
-  cursor: pointer;
-  transition: background-color 0.15s ease, transform 0.15s ease, box-shadow 0.2s ease;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  padding: 14px 24px;
+  border: none;
+  transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+  text-align: center;
 }
 
-.login-button:hover {
-  background-color: #8F4108;
-  transform: translateY(-1px);
-  box-shadow: 0 8px 20px rgba(166, 75, 10, 0.25);
+.mechanic-login-card button[type="submit"]:hover,
+.mechanic-login-submit:hover {
+  background: var(--color-brown-light);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 24px rgba(131, 68, 23, 0.35);
 }
 
-.login-button:focus-visible {
-  outline: 3px solid rgba(166, 75, 10, 0.35);
-  outline-offset: 2px;
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
-  .mechanic-login {
-    padding: 1rem;
-  }
-
-  .login-form {
-    padding: 1.25rem;
-    max-width: 92vw;
-  }
-
-  .login-form h2 {
-    font-size: clamp(1.35rem, 5vw, 1.6rem);
-  }
-
-  .login-button {
-    padding: 0.9rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .login-form {
-    padding: 1rem;
-    max-width: 96vw;
-  }
-
-  .logo-text {
-    font-size: 0.9rem;
-  }
-}
-
-/* Hide the global navbar only on the mechanic login page */
-body:has(.mechanic-login) .navbar {
-  display: none !important;
+.mechanic-login-error,
+.login-error {
+  color: #E06060;
+  font-size: 12px;
+  font-family: 'Barlow Condensed', sans-serif;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  text-align: center;
+  background: rgba(150, 30, 30, 0.12);
+  border: 1px solid rgba(150, 30, 30, 0.25);
+  padding: 8px 14px;
+  border-radius: 2px;
+  margin-top: 0.75rem;
 }

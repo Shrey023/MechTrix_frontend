@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from '../api/axios';
-import './MechanicLogin.css';
+import './auth.css';
 
 const MechanicLogin = () => {
   const [email, setEmail] = useState('');
@@ -13,11 +13,11 @@ const MechanicLogin = () => {
     e.preventDefault();
     try {
       const res = await axios.post('/auth/mechanic/login', { email, password });
-      
+
       localStorage.setItem('mechanicToken', res.data.token);
       localStorage.setItem('mechanicId', res.data._id);
       localStorage.setItem('token', res.data.token);
-      
+
       localStorage.setItem('userType', res.data.userType);
 
       navigate('/mechanic/dashboard'); // ✅ dashboard, not profile
@@ -27,14 +27,13 @@ const MechanicLogin = () => {
   };
 
   return (
-    <div className="mechanic-login">
-      <form onSubmit={handleLogin} className="login-form">
-        <h2>Mechanic Login</h2>
+    <div className="auth-container">
+      <form onSubmit={handleLogin} className="auth-form">
+        <h2 className="auth-title">Mechanic Login</h2>
 
         <input
           type="email"
           placeholder="Email"
-          className="input-field"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           required
@@ -43,15 +42,14 @@ const MechanicLogin = () => {
         <input
           type="password"
           placeholder="Password"
-          className="input-field"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           required
         />
 
-        {error && <p className="error-message">{error}</p>}
+        {error && <p className="auth-error">{error}</p>}
 
-        <button type="submit" className="login-button">
+        <button type="submit" className="auth-button">
           Login
         </button>
       </form>

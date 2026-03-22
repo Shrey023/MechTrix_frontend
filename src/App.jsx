@@ -2,6 +2,8 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 
 import Navbar from './components/Navbar';
+import Footer from './components/Footer';
+
 import Home from './pages/Home';
 import Login from './pages/Login';
 import UserRegister from './pages/UserRegister';
@@ -17,6 +19,8 @@ import CustomerProfile from './pages/CustomerProfile';
 import MechanicDashboard from './pages/MechanicDashboard';
 import MechanicNavigator from './pages/MechanicNavigator'; // ✅ fixed
 import PrivacyPolicy from './pages/PrivacyPolicy';
+import About from './pages/About';
+import Contact from './pages/Contact';
 import AdminLogin from './pages/AdminLogin';
 import AdminRegister from './pages/AdminRegister';
 import AdminDashboard from './pages/AdminDashboard';
@@ -28,11 +32,17 @@ const AdminProtectedRoute = ({ children }) => {
   return token ? children : <Navigate to="/admin/login" replace />;
 };
 
+const CustomerProtectedRoute = ({ children }) => {
+  const isCustomerLoggedIn = Boolean(localStorage.getItem('customerId') && localStorage.getItem('token'));
+  return isCustomerLoggedIn ? children : <Navigate to="/login" replace />;
+};
+
 const App = () => {
   return (
-    <Router>
-      <Navbar />
-      <Routes>
+    <>
+      <Router>
+        <Navbar />
+        <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/Userregister" element={<UserRegister />} />
@@ -40,15 +50,38 @@ const App = () => {
         <Route path="/mechanic/login" element={<MechanicLogin />} />
         <Route path="/mechanic/register" element={<MechanicRegister />} />
         <Route path="/mechanic/profile" element={<MechanicProfile />} />
-        <Route path="/dashboard" element={<CustomerDashboard />} />
+        <Route
+          path="/dashboard"
+          element={
+            <CustomerProtectedRoute>
+              <CustomerDashboard />
+            </CustomerProtectedRoute>
+          }
+        />
         <Route path="/track" element={<LiveTracking />} />
         <Route path="/track/:bookingId" element={<MechanicTracker />} /> {/* ✅ Track Mechanic */}
-        <Route path="/booking" element={<Booking />} />
+        <Route
+          path="/booking"
+          element={
+            <CustomerProtectedRoute>
+              <Booking />
+            </CustomerProtectedRoute>
+          }
+        />
         <Route path="/nearby" element={<NearbyMechanics />} />
         <Route path="/book/:id" element={<BookingPage />} />
-        <Route path="/profile" element={<CustomerProfile />} />
+        <Route
+          path="/profile"
+          element={
+            <CustomerProtectedRoute>
+              <CustomerProfile />
+            </CustomerProtectedRoute>
+          }
+        />
         <Route path="/mechanic/dashboard" element={<MechanicDashboard />} />
         <Route path="/mechanic/navigate/:bookingId" element={<MechanicNavigator />} /> {/* ✅ Navigator */}
+        <Route path="/about" element={<About />} />
+        <Route path="/contact" element={<Contact />} />
         <Route path="/privacy-policy" element={<PrivacyPolicy />} /> {/* Privacy Policy */}
         <Route path="/admin/login" element={<AdminLogin />} />
         <Route path="/admin/register" element={<AdminRegister />} />
@@ -61,7 +94,9 @@ const App = () => {
           }
         />
       </Routes>
-    </Router>
+      <Footer />
+      </Router>
+    </>
   );
 };
 

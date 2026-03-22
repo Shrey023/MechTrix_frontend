@@ -1,0 +1,339 @@
+/* =========================================
+   MECHZE — GLOBAL INLINE STYLE OVERRIDES
+   Covers pages that use inline React styles:
+   Login, AdminDashboard, UserRegister, etc.
+   These selectors are intentionally broad to
+   override inline styles where possible.
+   ========================================= */
+
+/* ── Force dark background on ALL page wrappers ── */
+body, #root, #root > div {
+  background: var(--color-bg, #0E0C0A) !important;
+  color: var(--color-off-white, #F6F6F7) !important;
+}
+
+/* ── Override legacy BLUE headings (#1E2A78) used in Login/Admin ── */
+h1[style], h2[style], h3[style] {
+  color: var(--color-off-white) !important;
+  font-family: 'Barlow Condensed', sans-serif !important;
+  text-transform: uppercase !important;
+  letter-spacing: 2px !important;
+}
+
+/* ── Page wrappers ── */
+/* Login page outer container */
+div[style*="backgroundColor: '#F7F8FA'"],
+div[style*="background-color: rgb(247, 248, 250)"] {
+  background: var(--color-bg) !important;
+}
+
+/* White card panels */
+div[style*="backgroundColor: '#FFFFFF'"],
+div[style*="background-color: rgb(255, 255, 255)"] {
+  background: var(--color-bg3) !important;
+  border: 1px solid rgba(131, 68, 23, 0.15) !important;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.3) !important;
+}
+
+/* ==========================================
+   BROAD OVERRIDES — body-level dark mode
+   Catch any page that white-washes itself
+   ========================================== */
+
+/* Override any page that sets a white background on the body or root div */
+#root > div {
+  background: var(--color-bg);
+}
+
+/* ── Login / Auth page override ── */
+.login-page-outer,
+.login-outer {
+  background: var(--color-bg) !important;
+  min-height: 100vh;
+}
+
+/* headings inside inline-styled pages */
+h2[style*="color: '#1E2A78'"],
+h1[style*="color: '#1E2A78'"] {
+  color: var(--color-off-white) !important;
+  font-family: 'Barlow Condensed', sans-serif !important;
+  font-size: clamp(1.4rem, 4vw, 2rem) !important;
+  font-weight: 700 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 2px !important;
+}
+
+/* text within inline-styled containers */
+p[style*="color: '#2D2D2D'"],
+p[style*="color: rgb(45, 45, 45)"] {
+  color: var(--color-warm-gray) !important;
+}
+
+/* ── Submit buttons in inline-styled pages ── */
+button[style*="backgroundColor: '#FF6B35'"],
+button[style*="background-color: rgb(255, 107, 53)"] {
+  background: var(--color-brown) !important;
+  clip-path: polygon(10px 0%, 100% 0%, calc(100% - 10px) 100%, 0% 100%) !important;
+  border-radius: 0 !important;
+  font-family: 'Barlow Condensed', sans-serif !important;
+  font-weight: 600 !important;
+  font-size: 14px !important;
+  text-transform: uppercase !important;
+  letter-spacing: 2px !important;
+}
+
+/* logout / secondary buttons in Admin */
+button[style*="backgroundColor: '#FF6B35'"]:hover,
+button[style*="background-color: rgb(255, 107, 53)"]:hover {
+  background: var(--color-brown-light) !important;
+}
+
+/* ── Inline inputs on login/admin ── */
+input[style*="backgroundColor: '#F7F8FA'"],
+input[style*="background-color: rgb(247, 248, 250)"] {
+  background: var(--color-bg) !important;
+  border: 1px solid rgba(115, 121, 134, 0.3) !important;
+  border-radius: 2px !important;
+  color: var(--color-off-white) !important;
+  font-family: 'Barlow', sans-serif !important;
+}
+
+input[style*="backgroundColor: '#F7F8FA'"]:focus,
+input[style*="background-color: rgb(247, 248, 250)"]:focus {
+  border-color: var(--color-brown) !important;
+  box-shadow: 0 0 0 3px rgba(131, 68, 23, 0.15) !important;
+}
+
+/* ==========================================
+   ADMIN DASHBOARD OVERRIDES
+   ========================================== */
+
+/* Admin stat cards */
+div[style*="backgroundColor: '#FFFFFF'"][style*="borderRadius: '8px'"] {
+  background: var(--color-bg3) !important;
+  border: 1px solid rgba(131, 68, 23, 0.12) !important;
+  border-left: 3px solid var(--color-brown) !important;
+  border-radius: 2px !important;
+  box-shadow: none !important;
+}
+
+/* Big numbers in stat cards */
+p[style*="color: '#FF6B35'"][style*="fontSize: '2rem'"] {
+  color: var(--color-off-white) !important;
+  font-family: 'Barlow Condensed', sans-serif !important;
+  font-size: 36px !important;
+  font-weight: 700 !important;
+}
+
+/* Stat labels */
+p[style*="color: '#2D2D2D'"][style*="fontSize: '0.9rem'"] {
+  font-family: 'Barlow Condensed', sans-serif !important;
+  font-size: 12px !important;
+  text-transform: uppercase !important;
+  letter-spacing: 2px !important;
+  color: var(--color-steel-light) !important;
+}
+
+/* Table header rows in admin */
+tr[style*="borderBottom: '2px solid #F7F8FA'"] {
+  border-bottom: 1px solid rgba(131, 68, 23, 0.3) !important;
+}
+
+th[style*="color: '#2D2D2D'"] {
+  background: var(--color-bg3) !important;
+  color: var(--color-steel-light) !important;
+  font-family: 'Barlow Condensed', sans-serif !important;
+  font-size: 11px !important;
+  text-transform: uppercase !important;
+  letter-spacing: 2px !important;
+}
+
+td[style*="color: '#2D2D2D'"],
+td[style*="color: rgb(45, 45, 45)"] {
+  color: var(--color-warm-gray) !important;
+}
+
+tr[style*="borderBottom: '1px solid #F7F8FA'"] {
+  border-bottom: 1px solid rgba(255,255,255,0.04) !important;
+}
+
+/* Error banner in admin */
+div[style*="backgroundColor: '#FFE5E5'"] {
+  background: rgba(150, 30, 30, 0.15) !important;
+  border: 1px solid rgba(150, 30, 30, 0.3) !important;
+  border-radius: 2px !important;
+  color: #E06060 !important;
+}
+
+/* ==========================================
+   PRIVACY POLICY PAGE OVERRIDES
+   ========================================== */
+
+.privacy-policy-page {
+  background: var(--color-bg, #0E0C0A) !important;
+  padding-top: clamp(5rem, 10vw, 7rem) !important;
+}
+
+.privacy-container {
+  background: var(--color-bg3, #1C1916) !important;
+  color: var(--color-warm-gray, #ABA19C) !important;
+  border: 1px solid rgba(131, 68, 23, 0.15) !important;
+  border-radius: 2px !important;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.3) !important;
+}
+
+.privacy-header {
+  border-bottom-color: rgba(131, 68, 23, 0.2) !important;
+}
+
+.privacy-header h1 {
+  color: var(--color-off-white) !important;
+  font-family: 'Barlow Condensed', sans-serif !important;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.effective-date, .last-updated {
+  color: var(--color-steel-light) !important;
+}
+
+.table-of-contents {
+  background: var(--color-bg4) !important;
+  border-color: rgba(131, 68, 23, 0.2) !important;
+  border-radius: 2px !important;
+}
+
+.table-of-contents h2 {
+  color: var(--color-off-white) !important;
+}
+
+.table-of-contents a {
+  color: var(--color-brown-light) !important;
+}
+
+.policy-section h2 {
+  color: var(--color-off-white) !important;
+  border-top-color: rgba(131, 68, 23, 0.2) !important;
+  font-family: 'Barlow Condensed', sans-serif !important;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.policy-section h3 {
+  color: var(--color-steel-light) !important;
+  font-family: 'Barlow Condensed', sans-serif !important;
+}
+
+.policy-section p, .policy-section li {
+  color: var(--color-warm-gray) !important;
+}
+
+.policy-section strong {
+  color: var(--color-off-white) !important;
+}
+
+.policy-section a, .intro-section a {
+  color: var(--color-brown-light) !important;
+}
+
+.user-card {
+  background: var(--color-bg4) !important;
+  border-radius: 2px !important;
+}
+
+.user-card.customer-card { border-left-color: var(--color-brown) !important; }
+.user-card.mechanic-card { border-left-color: #6DBF7E !important; }
+.user-card h3 { color: var(--color-off-white) !important; }
+.user-card p  { color: var(--color-warm-gray) !important; }
+
+.data-category {
+  background: var(--color-bg4) !important;
+  border-radius: 2px !important;
+  border-color: rgba(131,68,23,0.2) !important;
+}
+
+.data-category.customer-data { border-left-color: var(--color-brown) !important; }
+.data-category.mechanic-data { border-left-color: #6DBF7E !important; }
+.data-category h3 { color: var(--color-off-white) !important; }
+
+.collection-note, .usage-note, .location-note, .payment-note, .content-note,
+.deletion-note, .security-note, .cookies-note, .rights-note, .changes-note, .sharing-note {
+  background: rgba(131, 68, 23, 0.1) !important;
+  border-left-color: var(--color-brown) !important;
+  border-radius: 2px !important;
+}
+
+.collection-note strong, .usage-note strong, .location-note strong,
+.payment-note strong, .content-note strong, .deletion-note strong,
+.security-note strong, .cookies-note strong, .rights-note strong,
+.changes-note strong, .sharing-note strong {
+  color: var(--color-brown-light) !important;
+}
+
+.location-card {
+  background: var(--color-bg4) !important;
+  border-color: rgba(131,68,23,0.2) !important;
+  border-radius: 2px !important;
+}
+
+.location-card h3 { color: var(--color-off-white) !important; }
+
+.permissions-table th, .cookies-table th {
+  background: var(--color-bg4) !important;
+  color: var(--color-steel-light) !important;
+  border-bottom-color: rgba(131,68,23,0.3) !important;
+  font-family: 'Barlow Condensed', sans-serif !important;
+  font-size: 11px !important;
+  text-transform: uppercase !important;
+  letter-spacing: 2px !important;
+}
+
+.permissions-table td, .cookies-table td {
+  color: var(--color-warm-gray) !important;
+  border-bottom-color: rgba(255,255,255,0.04) !important;
+}
+
+.permissions-table tbody tr:hover, .cookies-table tbody tr:hover {
+  background: var(--color-bg4) !important;
+}
+
+.verification-card {
+  background: var(--color-bg4) !important;
+  border-color: rgba(131,68,23,0.2) !important;
+  border-radius: 2px !important;
+}
+
+.verification-card h3 { color: var(--color-off-white) !important; }
+
+.contact-info {
+  background: var(--color-bg4) !important;
+  border-radius: 2px !important;
+}
+
+.contact-info p  { color: var(--color-warm-gray) !important; }
+.contact-info a  { color: var(--color-brown-light) !important; }
+
+.policy-footer {
+  border-top-color: rgba(131,68,23,0.2) !important;
+}
+
+.download-pdf-btn {
+  background: var(--color-brown) !important;
+  clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%) !important;
+  border-radius: 0 !important;
+  font-family: 'Barlow Condensed', sans-serif !important;
+  font-weight: 600 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 2px !important;
+}
+
+.download-pdf-btn:hover {
+  background: var(--color-brown-light) !important;
+}
+
+.footer-note { color: var(--color-steel) !important; }
+
+/* ── Booking page status ── */
+.status-available { color: #6DBF7E !important; }
+.status-busy      { color: #D4874A !important; }
+.status-offline   { color: var(--color-steel) !important; }

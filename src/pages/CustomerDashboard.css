@@ -1,111 +1,36 @@
+/* =========================================
+   MECHZE — CUSTOMER DASHBOARD CSS
+   Dark Industrial Design System
+   ========================================= */
 
-/* Reset and base styles */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+/* Reset */
+* { margin: 0; padding: 0; box-sizing: border-box; }
 
 .dashboard {
-  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-  background:
-    radial-gradient(80rem 40rem at -20% -10%, rgba(166, 75, 10, 0.05), transparent 60%),
-    radial-gradient(70rem 35rem at 120% 110%, rgba(166, 75, 10, 0.04), transparent 60%),
-    linear-gradient(180deg, #FAFAF9 0%, #F3F4F6 100%);
-  color: #111827;
+  font-family: var(--font-body, 'Barlow', sans-serif);
+  background: var(--color-bg, #0E0C0A);
+  color: var(--color-off-white, #F6F6F7);
   min-height: 100vh;
   width: 100%;
   overflow-x: hidden;
+  padding-top: 64px; /* navbar height */
 }
 
-/* Page navbar (professional style) */
-.navbar { display: none !important; }
-.dashboard > .navbar { display: flex !important; }
-.dashboard > .navbar * { display: initial; }
-.navbar {
-  background: rgba(255, 255, 255, 0.85);
-  -webkit-backdrop-filter: saturate(180%) blur(10px);
-  backdrop-filter: saturate(180%) blur(10px);
-  padding: 0.75rem 1.25rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-  border-bottom: 1px solid #E5E7EB;
-}
+/* ── Inner Navbar (when rendered inside dashboard) ── */
+.dashboard > .navbar { display: none !important; }
 
-.navbar .nav-inner {
-  width: 100%;
-  max-width: 1200px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.navbar .logo {
-  position: relative;
-  color: transparent; /* hide original text */
-  font-size: 0; /* prevent layout from original text */
-}
-
-.navbar .logo::after {
-  content: "MECHZE";
-  display: inline-block;
-  background: #111827;
-  color: #FFFFFF;
-  padding: 0.35rem 0.7rem;
-  border-radius: 9999px;
-  font-size: clamp(0.9rem, 3.5vw, 1rem);
-  font-weight: 800;
-  letter-spacing: 0.12em;
-  box-shadow: 0 6px 16px rgba(17, 24, 39, 0.15);
-}
-
-.nav-links {
-  display: flex;
-  gap: clamp(1rem, 3vw, 1.5rem);
-  flex-wrap: wrap;
-}
-
-.nav-links a {
-  color: #374151;
-  text-decoration: none;
-  font-size: clamp(0.9rem, 3vw, 1rem);
-  font-weight: 600;
-  transition: color 0.2s ease, transform 0.15s ease;
-}
-
-.nav-links a:hover {
-  color: #111827;
-  transform: translateY(-1px);
-}
-
-/* Make inner container structure work even if not present in DOM */
-.navbar > .logo, .navbar > .nav-links { display: none; }
-.navbar > .nav-inner { display: flex; }
-.navbar:not(:has(.nav-inner)) {
-  justify-content: space-between;
-}
-.navbar:not(:has(.nav-inner)) > .logo,
-.navbar:not(:has(.nav-inner)) > .nav-links { display: flex; }
-
-/* Hero Section */
+/* ── Hero Section ── */
 .hero {
   position: relative;
-  background: linear-gradient(180deg, rgba(17,24,39,0.35), rgba(17,24,39,0.35)), url('/images/garage-hero.jpg');
-  background-size: cover;
-  background-position: center;
-  color: #FFFFFF;
+  background:
+    linear-gradient(180deg, rgba(14,12,10,0.55) 0%, rgba(14,12,10,0.80) 100%),
+    url('/images/garage-hero.jpg') center/cover no-repeat;
+  color: var(--color-off-white);
   text-align: center;
-  padding: clamp(2.25rem, 8vw, 4rem) clamp(1rem, 5vw, 2rem);
-  border-radius: 1rem;
-  box-shadow: 0 12px 30px rgba(17, 24, 39, 0.18);
-  border: 1px solid #E5E7EB;
-  max-width: 1200px;
-  margin: 1.25rem auto 1.5rem;
-  min-height: clamp(320px, 45vw, 520px);
+  padding: clamp(3rem, 10vw, 6rem) clamp(1rem, 5vw, 2rem);
+  border-top: 1px solid rgba(131, 68, 23, 0.2);
+  border-bottom: 1px solid rgba(131, 68, 23, 0.2);
+  min-height: clamp(340px, 48vw, 540px);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -116,115 +41,145 @@
   content: '';
   position: absolute;
   inset: 0;
-  border-radius: inherit;
-  background: radial-gradient(80% 60% at 50% 20%, rgba(17,24,39,0.25), transparent 60%);
+  background: radial-gradient(80% 60% at 50% 20%, rgba(131,68,23,0.12), transparent 70%);
   pointer-events: none;
 }
 
 .hero h1 {
-  font-size: clamp(1.9rem, 5.5vw, 2.6rem);
-  margin-bottom: 0.6rem;
-  font-weight: 800;
-  color: #FFFFFF;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: clamp(2rem, 5.5vw, 3.5rem);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  color: var(--color-off-white);
+  margin-bottom: 0.75rem;
+  position: relative;
 }
 
 .hero p {
-  font-size: clamp(1rem, 3.5vw, 1.15rem);
-  margin-bottom: 1.25rem;
-  color: #F3F4F6;
+  font-size: clamp(1rem, 3vw, 1.2rem);
+  margin-bottom: 1.75rem;
+  color: var(--color-warm-gray);
+  position: relative;
 }
 
+/* ── CTA Button ── */
 .cta-btn {
-  background: #A64B0A;
-  color: #FFFFFF;
-  border: none;
-  padding: clamp(0.8rem, 2vw, 1rem) clamp(1.25rem, 3vw, 1.75rem);
-  font-size: clamp(0.95rem, 3vw, 1.05rem);
+  display: inline-block;
+  background: var(--color-brown, #834417);
+  color: var(--color-off-white, #F6F6F7);
+  clip-path: polygon(10px 0%, 100% 0%, calc(100% - 10px) 100%, 0% 100%);
+  font-family: 'Barlow Condensed', sans-serif;
   font-weight: 600;
-  border-radius: 0.625rem;
-  cursor: pointer;
-  transition: background-color 0.15s ease, transform 0.15s ease, box-shadow 0.2s ease;
+  font-size: clamp(13px, 2.5vw, 15px);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  padding: clamp(10px, 2vw, 14px) clamp(24px, 4vw, 36px);
+  border: none;
+  transition: background 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
+  position: relative;
 }
 
 .cta-btn:hover {
-  transform: translateY(-1px);
-  background: #8F4108;
-  box-shadow: 0 10px 24px rgba(166, 75, 10, 0.25);
+  background: var(--color-brown-light, #A0561E);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 24px rgba(131, 68, 23, 0.35);
 }
 
 .cta-btn.small {
-  padding: clamp(0.5rem, 2vw, 0.6rem) clamp(1rem, 2vw, 1.2rem);
-  font-size: clamp(0.8rem, 2.5vw, 0.9rem);
+  padding: 8px 20px;
+  font-size: 12px;
 }
 
-/* Available Mechanics */
+/* ── Available Mechanics ── */
 .all-mechanics {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 2rem clamp(1rem, 5vw, 2rem);
+  padding: 3rem clamp(1rem, 5vw, 2rem);
 }
 
 .all-mechanics h2 {
-  color: #111827;
-  font-size: clamp(1.4rem, 4.5vw, 1.75rem);
-  margin-bottom: 1.1rem;
-  font-weight: 800;
-  display: flex;
-  align-items: center;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: clamp(1.4rem, 4vw, 2rem);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--color-off-white);
+  margin-bottom: 0.5rem;
 }
 
 .all-mechanics-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(clamp(220px, 45vw, 260px), 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(clamp(240px, 42vw, 280px), 1fr));
   gap: clamp(1rem, 3vw, 1.5rem);
+  margin-top: 1.5rem;
 }
 
+/* ── Mechanic Card ── */
 .mechanic-card {
-  background-color: #FFFFFF;
-  border: 1px solid #E5E7EB;
-  border-radius: 1rem;
-  padding: 1.25rem;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-  box-shadow: 0 10px 24px rgba(17, 24, 39, 0.06);
+  background: var(--color-bg3, #1C1916);
+  border: 1px solid rgba(131, 68, 23, 0.12);
+  border-radius: 2px;
+  padding: 20px 24px;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
 }
+
+.mechanic-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, transparent, #834417, transparent);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.mechanic-card:hover::before { opacity: 1; }
 
 .mechanic-card:hover {
+  background: var(--color-bg4, #252018);
+  border-color: rgba(131, 68, 23, 0.3);
   transform: translateY(-2px);
-  box-shadow: 0 14px 28px rgba(17, 24, 39, 0.09);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.4);
 }
 
 .mechanic-card h3 {
-  color: #111827;
-  font-size: clamp(1.1rem, 4vw, 1.35rem);
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: clamp(1.1rem, 4vw, 1.3rem);
+  font-weight: 600;
+  color: var(--color-off-white);
   margin-bottom: 0.5rem;
-  font-weight: 700;
 }
 
 .mechanic-card p {
-  margin: 0.35rem 0;
-  font-size: clamp(0.9rem, 3vw, 1rem);
-  color: #374151;
+  margin: 0.3rem 0;
+  font-size: clamp(0.85rem, 2.8vw, 0.95rem);
+  color: var(--color-warm-gray);
 }
 
 .mechanic-card .text-green-600 {
-  color: #16A34A;
-  font-weight: 700;
+  color: #6DBF7E;
+  font-weight: 600;
 }
 
-/* Services Section */
+/* ── Services Section ── */
 .services {
-  background-color: #FFFFFF;
-  color: #111827;
-  padding: clamp(2rem, 8vw, 3rem) clamp(1rem, 5vw, 2rem);
+  background: var(--color-bg2, #141210);
+  border-top: 1px solid rgba(131, 68, 23, 0.2);
+  border-bottom: 1px solid rgba(131, 68, 23, 0.2);
+  padding: clamp(2rem, 8vw, 4rem) clamp(1rem, 5vw, 2rem);
   text-align: center;
-  border-top: 1px solid #E5E7EB;
-  border-bottom: 1px solid #E5E7EB;
 }
 
 .services h2 {
-  font-size: clamp(1.5rem, 5vw, 2rem);
-  margin-bottom: 1.5rem;
-  font-weight: bold;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: clamp(1.5rem, 5vw, 2.2rem);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--color-off-white);
+  margin-bottom: 2rem;
 }
 
 .service-cards {
@@ -232,57 +187,80 @@
   justify-content: center;
   gap: clamp(1rem, 3vw, 1.5rem);
   flex-wrap: wrap;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .service-cards .card {
-  background-color: #FFFFFF;
-  color: #111827;
-  border-radius: 0.875rem;
-  padding: 2.5rem;
-  width: clamp(300px, 35vw, 380px);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-  border: 1px solid #E5E7EB;
-  box-shadow: 0 10px 24px rgba(17, 24, 39, 0.06);
+  background: var(--color-bg3, #1C1916);
+  border: 1px solid rgba(131, 68, 23, 0.12);
+  border-radius: 2px;
+  padding: 2rem;
+  width: clamp(260px, 32vw, 340px);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
 }
 
+.service-cards .card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, transparent, #834417, transparent);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.service-cards .card:hover::before { opacity: 1; }
+
 .service-cards .card:hover {
+  background: var(--color-bg4);
+  border-color: rgba(131, 68, 23, 0.3);
   transform: translateY(-2px);
-  box-shadow: 0 14px 28px rgba(17, 24, 39, 0.09);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.4);
 }
 
 .service-cards img {
   width: 100%;
   height: clamp(160px, 25vw, 200px);
   object-fit: contain;
-  border-radius: 20px;
-  margin-bottom: 1.5rem;
-  border: 3px solid rgba(166, 75, 10, 0.1);
-  box-shadow: 0 0 20px rgba(166, 75, 10, 0.15);
+  border-radius: 2px;
+  margin-bottom: 1.25rem;
+  border: 1px solid rgba(131, 68, 23, 0.15);
 }
 
 .service-cards h3 {
-  font-size: clamp(1.1rem, 4vw, 1.4rem);
-  font-weight: 700;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: clamp(1.1rem, 4vw, 1.35rem);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--color-off-white);
 }
 
-/* How It Works */
+/* ── How It Works ── */
 .how-it-works {
-  padding: clamp(2rem, 8vw, 3rem) clamp(1rem, 5vw, 2rem);
+  padding: clamp(2rem, 8vw, 4rem) clamp(1rem, 5vw, 2rem);
   text-align: center;
-  background-color: #FAFAF9;
+  background: var(--color-bg, #0E0C0A);
 }
 
 .how-it-works h2 {
-  color: #111827;
-  font-size: clamp(1.4rem, 4.5vw, 1.75rem);
-  margin-bottom: 1.25rem;
-  font-weight: 800;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: clamp(1.4rem, 4.5vw, 2rem);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--color-off-white);
+  margin-bottom: 1.5rem;
 }
 
 .how-it-works ol {
   list-style-position: inside;
   font-size: clamp(1rem, 3.5vw, 1.1rem);
-  color: #374151;
+  color: var(--color-warm-gray);
+  max-width: 600px;
+  margin: 0 auto;
 }
 
 .how-it-works li {
@@ -290,46 +268,50 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  font-family: 'Barlow', sans-serif;
+  color: var(--color-warm-gray);
 }
 
-.how-it-works li::before {
-  content: '🔧';
-  margin-right: 0.5rem;
-}
-
-/* Bookings Section */
+/* ── Bookings Section ── */
 .bookings {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0.75rem clamp(1rem, 5vw, 2rem);
-  display: grid;
-  grid-template-columns: repeat(12, minmax(0, 1fr));
-  column-gap: 1.25rem;
-  row-gap: 0.9rem;
+  padding: 2rem clamp(1rem, 5vw, 2rem);
 }
 
-.bookings h2,
+.bookings h2, .bookings h3 {
+  font-family: 'Barlow Condensed', sans-serif;
+  color: var(--color-off-white);
+  margin-bottom: 1rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.bookings h2 {
+  font-size: clamp(1.5rem, 5vw, 2rem);
+  margin-bottom: 1.5rem;
+}
+
 .bookings h3 {
-  color: #111827;
-  margin-bottom: 0.85rem;
-  font-weight: 800;
-  grid-column: 1 / -1;
+  font-size: clamp(1.1rem, 4vw, 1.4rem);
+  margin-top: 1.5rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid rgba(131, 68, 23, 0.2);
 }
 
-/* Layout two booking columns side by side with narrower width */
 .booking-columns {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 1.25rem;
+  gap: 1.5rem;
   align-items: start;
 }
 
 .booking-column {
-  background: #FFFFFF;
-  border: 1px solid #E5E7EB;
-  border-radius: 1rem;
-  padding: 1rem 1.1rem;
-  box-shadow: 0 10px 24px rgba(17, 24, 39, 0.06);
+  background: var(--color-bg3);
+  border: 1px solid rgba(131, 68, 23, 0.12);
+  border-radius: 2px;
+  padding: 1.25rem;
 }
 
 .booking-column h3 { margin-top: 0; }
@@ -338,235 +320,197 @@
   .booking-columns { grid-template-columns: 1fr; }
 }
 
-.bookings h2 {
-  font-size: clamp(1.5rem, 5vw, 2rem);
-}
-
-.bookings h3 {
-  font-size: clamp(1.3rem, 4vw, 1.6rem);
-}
-
 .booking-card {
-  background-color: #FFFFFF;
-  border: 1px solid #E5E7EB;
-  border-radius: 0.75rem;
-  padding: 0.85rem 0.95rem;
-  margin: 0;
-  transition: box-shadow 0.2s ease, transform 0.2s ease;
-  box-shadow: 0 6px 16px rgba(17, 24, 39, 0.05);
-  grid-column: span 6;
+  background: var(--color-bg3, #1C1916);
+  border: 1px solid rgba(131, 68, 23, 0.12);
+  border-radius: 2px;
+  padding: 16px 20px;
+  margin: 0.75rem 0;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.booking-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, transparent, #834417, transparent);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.booking-card:hover::before { opacity: 1; }
+
+.booking-card:hover {
+  background: var(--color-bg4);
+  border-color: rgba(131, 68, 23, 0.3);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.4);
 }
 
 .booking-card.active {
-  border-left: 5px solid #16A34A;
+  border-left: 3px solid #6DBF7E;
 }
 
 .booking-card.past {
-  border-left: 5px solid #DC2626;
-}
-
-.booking-card:hover {
-  box-shadow: 0 10px 20px rgba(17, 24, 39, 0.08);
-  transform: translateY(-1px);
+  border-left: 3px solid rgba(131, 68, 23, 0.5);
 }
 
 .booking-card p {
-  margin: 0.2rem 0;
-  font-size: clamp(0.9rem, 2.6vw, 0.95rem);
-  color: #374151;
-  line-height: 1.35;
+  margin: 0.25rem 0;
+  font-size: clamp(0.85rem, 2.5vw, 0.95rem);
+  color: var(--color-warm-gray);
+  line-height: 1.5;
+}
+
+.booking-card p strong {
+  color: var(--color-steel-light);
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 11px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  margin-right: 4px;
 }
 
 .booking-card button {
-  background: #A64B0A;
-  color: #FFFFFF;
-  border: none;
-  padding: 0.55rem 0.85rem;
-  border-radius: 0.6rem;
-  cursor: pointer;
-  font-size: 0.9rem;
+  display: inline-block;
+  background: var(--color-brown);
+  color: var(--color-off-white);
+  clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+  font-family: 'Barlow Condensed', sans-serif;
   font-weight: 600;
-  transition: background-color 0.15s ease, transform 0.15s ease, box-shadow 0.2s ease;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  padding: 8px 20px;
+  border: none;
+  margin-top: 10px;
+  transition: background 0.2s ease, transform 0.15s ease;
 }
 
 .booking-card button:hover {
+  background: var(--color-brown-light);
   transform: translateY(-1px);
-  background: #8F4108;
-  box-shadow: 0 8px 20px rgba(166, 75, 10, 0.25);
+  box-shadow: 0 4px 16px rgba(131, 68, 23, 0.3);
 }
 
-/* Limit Past Bookings to first 4 by default (no markup changes) */
-.bookings h3 + .booking-card.past + .booking-card.past + .booking-card.past + .booking-card.past ~ .booking-card.past {
-  display: none;
-}
-
-/* Optional: style for a Show More link if added later */
-.show-more-btn {
-  appearance: none;
-  background: #F3F4F6;
-  color: #374151;
-  border: 1px solid #E5E7EB;
-  padding: 0.55rem 0.9rem;
-  border-radius: 0.625rem;
-  font-weight: 600;
-  cursor: pointer;
-}
-.show-more-btn:hover { background: #E5E7EB; }
-
-/* Reviews Section */
+/* ── Reviews Section ── */
 .reviews {
-  background-color: #FFFFFF;
-  color: #111827;
-  padding: clamp(2rem, 8vw, 3rem) clamp(1rem, 5vw, 2rem);
-  text-align: left;
-  border-top: 1px solid #E5E7EB;
+  background: var(--color-bg2, #141210);
+  border-top: 1px solid rgba(131, 68, 23, 0.2);
+  padding: clamp(2rem, 8vw, 4rem) clamp(1rem, 5vw, 2rem);
 }
 
 .reviews h2 {
+  font-family: 'Barlow Condensed', sans-serif;
   font-size: clamp(1.5rem, 5vw, 2rem);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--color-off-white);
   margin-bottom: 1.5rem;
-  font-weight: bold;
 }
 
 .testimonial {
-  background-color: #FFFFFF;
-  border-radius: 1rem;
-  padding: 1.25rem;
-  max-width: clamp(300px, 80vw, 800px);
-  margin: 0 auto;
-  box-shadow: 0 12px 30px rgba(17, 24, 39, 0.08);
-  border: 1px solid #E5E7EB;
+  background: var(--color-bg3);
+  border: 1px solid rgba(131, 68, 23, 0.15);
+  border-radius: 2px;
+  padding: 1.5rem 2rem;
+  max-width: 680px;
+  position: relative;
+  overflow: hidden;
+}
+
+.testimonial::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, transparent, #834417, transparent);
 }
 
 .testimonial p {
   font-style: italic;
-  font-size: clamp(0.9rem, 3.5vw, 1.1rem);
-  margin-bottom: 1rem;
+  font-size: clamp(0.95rem, 3.5vw, 1.1rem);
+  margin-bottom: 0.75rem;
+  color: var(--color-warm-gray);
+  line-height: 1.7;
 }
 
 .testimonial strong {
-  color: #111827;
-  font-size: clamp(0.9rem, 3.5vw, 1.1rem);
+  font-family: 'Barlow Condensed', sans-serif;
+  color: var(--color-brown-light);
+  font-size: 13px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
 }
 
-/* Footer */
+/* ── Footer ── */
 .footer {
-  background-color: #FFFFFF;
-  color: #374151;
+  background: var(--color-bg2, #141210);
+  color: var(--color-steel-light);
   text-align: center;
-  padding: clamp(1rem, 3vw, 1.5rem);
-  border-top: 1px solid #E5E7EB;
+  padding: clamp(1rem, 3vw, 1.5rem) clamp(1rem, 5vw, 3rem);
+  border-top: 1px solid rgba(131, 68, 23, 0.15);
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 12px;
+  letter-spacing: 1px;
 }
 
 .footer a {
-  color: #374151;
+  color: var(--color-steel-light);
   text-decoration: none;
   margin: 0 0.5rem;
-  font-weight: 600;
+  transition: color 0.2s;
 }
 
 .footer a:hover {
-  color: #111827;
-  text-decoration: underline;
+  color: var(--color-brown-light);
 }
 
-/* Responsive Design */
+/* ── Navbar override for dashboard inner nav ── */
+.navbar {
+  background: rgba(14, 12, 10, 0.92) !important;
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(131, 68, 23, 0.25) !important;
+}
+
+.navbar .logo  {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 800;
+  font-size: 1.25rem;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  color: var(--color-off-white);
+}
+
+.navbar .logo::after {
+  content: none !important;
+}
+
+.nav-links a {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--color-steel-light) !important;
+  transition: color 0.2s;
+}
+
+.nav-links a:hover {
+  color: var(--color-off-white) !important;
+  transform: none;
+}
+
+/* ── Responsive ── */
 @media (max-width: 768px) {
-  .bookings { grid-template-columns: 1fr; }
-  .navbar {
-    flex-direction: column;
-    gap: 1rem;
-    padding: 1rem;
-  }
-
-  .nav-links {
-    justify-content: center;
-    gap: 0.8rem;
-  }
-
-  .hero {
-    padding: 2rem 1rem;
-  }
-
-  .hero h1 {
-    font-size: clamp(1.5rem, 6vw, 2rem);
-  }
-
-  .hero p {
-    font-size: clamp(0.9rem, 4vw, 1rem);
-  }
-
-  .all-mechanics-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .mechanic-card {
-    padding: 1rem;
-  }
-
-  .service-cards .card {
-    width: clamp(260px, 45vw, 320px);
-    padding: 2rem;
-  }
-
-  .service-cards img {
-    height: clamp(140px, 30vw, 180px);
-  }
-
-  .bookings { padding: 1rem; }
-  .booking-card { padding: 0.85rem; grid-column: 1 / -1; }
-
-  .reviews {
-    padding: 2rem 1rem;
-  }
-
-  .testimonial {
-    padding: 1rem;
-  }
+  .dashboard { padding-top: 56px; }
+  .booking-columns { grid-template-columns: 1fr; }
+  .all-mechanics-grid { grid-template-columns: 1fr; }
+  .service-cards .card { width: clamp(240px, 90vw, 360px); }
 }
 
 @media (max-width: 480px) {
-  .navbar .logo {
-    font-size: clamp(1.2rem, 5vw, 1.5rem);
-  }
-
-  .nav-links a {
-    font-size: clamp(0.8rem, 3.5vw, 0.9rem);
-  }
-
-  .hero {
-    padding: 1.5rem 0.8rem;
-  }
-
-  .hero h1 {
-    font-size: clamp(1.3rem, 6vw, 1.8rem);
-  }
-
-  .cta-btn {
-    padding: clamp(0.6rem, 2vw, 0.8rem) clamp(1rem, 3vw, 1.5rem);
-    font-size: clamp(0.8rem, 3vw, 0.9rem);
-  }
-
-  .all-mechanics h2,
-  .services h2,
-  .how-it-works h2,
-  .bookings h2 {
-    font-size: clamp(1.2rem, 5vw, 1.5rem);
-  }
-
-  .bookings h3 {
-    font-size: clamp(1.1rem, 4vw, 1.3rem);
-  }
-
-  .mechanic-card h3,
-  .service-cards h3 {
-    font-size: clamp(1rem, 4vw, 1.2rem);
-  }
-
-  .mechanic-card p,
-  .booking-card p,
-  .how-it-works li,
-  .testimonial p {
-    font-size: clamp(0.8rem, 3vw, 0.9rem);
-  }
+  .hero h1 { font-size: clamp(1.5rem, 7vw, 2rem); }
 }
