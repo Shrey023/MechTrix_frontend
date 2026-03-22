@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 
+import { CustomCursor } from './components/CustomCursorDemo';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 
@@ -40,6 +41,7 @@ const CustomerProtectedRoute = ({ children }) => {
 const App = () => {
   return (
     <>
+      <CustomCursor />
       <Router>
         <Navbar />
         <Routes>
