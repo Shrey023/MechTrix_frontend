@@ -20,6 +20,7 @@ import CustomerProfile from './pages/CustomerProfile';
 import MechanicDashboard from './pages/MechanicDashboard';
 import MechanicNavigator from './pages/MechanicNavigator'; // ✅ fixed
 import PrivacyPolicy from './pages/PrivacyPolicy';
+import DeleteAccount from './pages/DeleteAccount';
 import About from './pages/About';
 import Contact from './pages/Contact';
 import AdminLogin from './pages/AdminLogin';
@@ -85,6 +86,7 @@ const App = () => {
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/privacy-policy" element={<PrivacyPolicy />} /> {/* Privacy Policy */}
+        <Route path="/delete-account" element={<DeleteAccount />} /> {/* Account Deletion */}
         <Route path="/admin/login" element={<AdminLogin />} />
         <Route path="/admin/register" element={<AdminRegister />} />
         <Route
