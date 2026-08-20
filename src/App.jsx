@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import { CustomCursor } from './components/CustomCursorDemo';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
+import AdminLayout from './components/AdminLayout';
 
 import Home from './pages/Home';
 import Login from './pages/Login';
@@ -93,7 +94,9 @@ const App = () => {
           path="/admin/dashboard"
           element={
             <AdminProtectedRoute>
-              <AdminDashboard />
+              <AdminLayout>
+                <AdminDashboard />
+              </AdminLayout>
             </AdminProtectedRoute>
           }
         />
