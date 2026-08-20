@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from '../api/axios';
 import './AdminSettings.css';
 
 const AdminSettings = () => {
@@ -10,15 +11,42 @@ const AdminSettings = () => {
   const [isChangingPassword, setIsChangingPassword] = useState(false);
   const [profileMessage, setProfileMessage] = useState('');
   const [passwordMessage, setPasswordMessage] = useState('');
-  const [notifications, setNotifications] = useState({
-    email: true,
-    bookings: true,
-    registrations: false,
-  });
+  const [notifications, setNotifications] = useState({ email: true, bookings: true, registrations: false });
   const [preferences, setPreferences] = useState({
     density: 'comfortable',
     dateFormat: 'local',
   });
+  const [settingsLoading, setSettingsLoading] = useState(true);
+  const [savingSetting, setSavingSetting] = useState('');
+  const [settingsMessage, setSettingsMessage] = useState('');
+  const [settingsError, setSettingsError] = useState('');
+
+  const authConfig = () => ({
+    headers: { Authorization: `Bearer ${localStorage.getItem('adminToken')}` },
+  });
+
+  useEffect(() => {
+    const loadSettings = async () => {
+      try {
+        const response = await axios.get('/admin/settings', authConfig());
+        setNotifications(response.data.settings.notifications);
+        setPreferences(response.data.settings.preferences);
+      } catch (err) {
+        const status = err.response?.status;
+        if (status === 401 || status === 403) {
+          localStorage.removeItem('adminToken');
+          localStorage.removeItem('adminEmail');
+          localStorage.removeItem('adminName');
+          navigate('/admin/login');
+        } else {
+          setSettingsError(err.response?.data?.message || 'Failed to load settings');
+        }
+      } finally {
+        setSettingsLoading(false);
+      }
+    };
+    loadSettings();
+  }, [navigate]);
 
   const handleLogout = () => {
     localStorage.removeItem('adminToken');
@@ -27,8 +55,23 @@ const AdminSettings = () => {
     navigate('/admin/login');
   };
 
-  const toggleNotification = (name) => {
-    setNotifications((current) => ({ ...current, [name]: !current[name] }));
+  const toggleNotification = async (name) => {
+    if (savingSetting || settingsLoading) return;
+    const nextValue = !notifications[name];
+    setSavingSetting(name);
+    setSettingsMessage('');
+    setSettingsError('');
+    try {
+      const response = await axios.patch('/admin/settings', {
+        notifications: { [name]: nextValue },
+      }, authConfig());
+      setNotifications(response.data.settings.notifications);
+      setSettingsMessage('Settings saved.');
+    } catch (err) {
+      setSettingsError(err.response?.data?.message || 'Failed to save setting');
+    } finally {
+      setSavingSetting('');
+    }
   };
 
   const handleProfileSubmit = (event) => {
@@ -52,6 +95,9 @@ const AdminSettings = () => {
       </header>
 
       <div className="settings-grid">
+        {settingsLoading && <div className="settings-feedback settings-feedback-loading">Loading saved settings...</div>}
+        {settingsError && <div className="settings-feedback settings-feedback-error">{settingsError}</div>}
+        {settingsMessage && <div className="settings-feedback settings-feedback-success">{settingsMessage}</div>}
         <section className="settings-panel settings-profile-panel">
           <div className="settings-panel-heading">
             <div>
@@ -124,18 +170,18 @@ const AdminSettings = () => {
           <div className="settings-toggle-list">
             <label className="settings-toggle-row">
               <span><strong>Email notifications</strong><small>Receive important admin updates by email.</small></span>
-              <input type="checkbox" checked={notifications.email} onChange={() => toggleNotification('email')} />
+              <input type="checkbox" checked={notifications.email} disabled={Boolean(savingSetting) || settingsLoading} onChange={() => toggleNotification('email')} />
             </label>
             <label className="settings-toggle-row">
               <span><strong>Booking notifications</strong><small>Show booking activity in your workspace.</small></span>
-              <input type="checkbox" checked={notifications.bookings} onChange={() => toggleNotification('bookings')} />
+              <input type="checkbox" checked={notifications.bookings} disabled={Boolean(savingSetting) || settingsLoading} onChange={() => toggleNotification('bookings')} />
             </label>
             <label className="settings-toggle-row">
               <span><strong>New customer registrations</strong><small>Alert when a customer joins the platform.</small></span>
-              <input type="checkbox" checked={notifications.registrations} onChange={() => toggleNotification('registrations')} />
+              <input type="checkbox" checked={notifications.registrations} disabled={Boolean(savingSetting) || settingsLoading} onChange={() => toggleNotification('registrations')} />
             </label>
           </div>
-          <p className="settings-ui-note">Notification preferences are saved for this session only.</p>
+          <p className="settings-ui-note">{savingSetting ? `Saving ${savingSetting}...` : 'Notification preferences are saved to your admin account.'}</p>
         </section>
 
         <section className="settings-panel">
@@ -172,7 +218,7 @@ const AdminSettings = () => {
             </div>
           </div>
           <dl className="settings-system-list">
-            <div><dt>Application</dt><dd>MechTrix</dd></div>
+            <div><dt>Application</dt><dd>Mechze</dd></div>
             <div><dt>Admin Dashboard</dt><dd>v1.0</dd></div>
             <div><dt>Backend / API</dt><dd><span className="settings-status-dot" />Not checked</dd></div>
           </dl>
