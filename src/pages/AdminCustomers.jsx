@@ -233,7 +233,11 @@ const AdminCustomers = () => {
               </thead>
               <tbody>
                 {customers.map((customer) => (
-                  <tr key={customer._id}>
+                  <tr
+                    key={customer._id}
+                    onClick={() => navigate(`/admin/customers/${customer._id}`)}
+                    style={{ cursor: 'pointer' }}
+                  >
                     <td className="customer-avatar-cell">{getAvatar(customer)}</td>
                     <td className="customer-name">{customer.name}</td>
                     <td className="customer-email">{customer.email}</td>
