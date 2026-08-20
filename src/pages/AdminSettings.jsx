@@ -219,8 +219,8 @@ const AdminSettings = () => {
           </div>
           <dl className="settings-system-list">
             <div><dt>Application</dt><dd>Mechze</dd></div>
-            <div><dt>Admin Dashboard</dt><dd>v1.0</dd></div>
-            <div><dt>Backend / API</dt><dd><span className="settings-status-dot" />Not checked</dd></div>
+            {/* <div><dt>Admin Dashboard</dt><dd>v1.0</dd></div>
+            <div><dt>Backend / API</dt><dd><span className="settings-status-dot" />Not checked</dd></div> */}
           </dl>
           <p className="settings-ui-note">API status is informational until a health endpoint is available.</p>
         </section>
