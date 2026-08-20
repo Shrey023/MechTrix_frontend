@@ -27,6 +27,7 @@ import Contact from './pages/Contact';
 import AdminLogin from './pages/AdminLogin';
 import AdminRegister from './pages/AdminRegister';
 import AdminDashboard from './pages/AdminDashboard';
+import AdminCustomers from './pages/AdminCustomers';
 
 import MechanicTracker from './components/MechanicTracker'; // ✅ required for /track/:bookingId
 
@@ -96,6 +97,16 @@ const App = () => {
             <AdminProtectedRoute>
               <AdminLayout>
                 <AdminDashboard />
+              </AdminLayout>
+            </AdminProtectedRoute>
+          }
+        />
+        <Route
+          path="/admin/customers"
+          element={
+            <AdminProtectedRoute>
+              <AdminLayout>
+                <AdminCustomers />
               </AdminLayout>
             </AdminProtectedRoute>
           }
