@@ -31,6 +31,8 @@ import AdminCustomers from './pages/AdminCustomers';
 import AdminCustomerDetail from './pages/AdminCustomerDetail';
 import AdminMechanics from './pages/AdminMechanics';
 import AdminMechanicDetail from './pages/AdminMechanicDetail';
+import AdminBookings from './pages/AdminBookings';
+import AdminBookingDetail from './pages/AdminBookingDetail';
 
 import MechanicTracker from './components/MechanicTracker'; // ✅ required for /track/:bookingId
 
@@ -140,6 +142,26 @@ const App = () => {
             <AdminProtectedRoute>
               <AdminLayout>
                 <AdminMechanicDetail />
+              </AdminLayout>
+            </AdminProtectedRoute>
+          }
+        />
+        <Route
+          path="/admin/bookings"
+          element={
+            <AdminProtectedRoute>
+              <AdminLayout>
+                <AdminBookings />
+              </AdminLayout>
+            </AdminProtectedRoute>
+          }
+        />
+        <Route
+          path="/admin/bookings/:id"
+          element={
+            <AdminProtectedRoute>
+              <AdminLayout>
+                <AdminBookingDetail />
               </AdminLayout>
             </AdminProtectedRoute>
           }
