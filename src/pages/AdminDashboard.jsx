@@ -37,7 +37,7 @@ const AdminDashboard = () => {
         setLoading(true);
         setError('');
 
-        const res = await axios.get('/api/admin/dashboard', {
+        const res = await axios.get('/admin/dashboard', {
           headers: {
             Authorization: `Bearer ${token}`,
           },
