@@ -13,13 +13,6 @@ const AdminCustomerDetail = () => {
   const [bookingCount, setBookingCount] = useState(0);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
-  const [isEditing, setIsEditing] = useState(false);
-  const [editForm, setEditForm] = useState({ name: '', email: '', phone: '', address: '' });
-  const [editError, setEditError] = useState('');
-  const [isSaving, setIsSaving] = useState(false);
-  const [statusMessage, setStatusMessage] = useState('');
-  const [statusError, setStatusError] = useState('');
-  const [isStatusSaving, setIsStatusSaving] = useState(false);
 
   useEffect(() => {
     const fetchCustomerDetail = async () => {
@@ -93,100 +86,6 @@ const AdminCustomerDetail = () => {
     return map[status] || '';
   };
 
-  const startEditing = () => {
-    setEditForm({
-      name: customer.name || '',
-      email: customer.email || '',
-      phone: customer.phone || '',
-      address: customer.address || '',
-    });
-    setEditError('');
-    setStatusError('');
-    setStatusMessage('');
-    setIsEditing(true);
-  };
-
-  const cancelEditing = () => {
-    setEditError('');
-    setIsEditing(false);
-  };
-
-  const handleEditChange = (event) => {
-    const { name, value } = event.target;
-    setEditForm((current) => ({ ...current, [name]: value }));
-  };
-
-  const saveCustomer = async (event) => {
-    event.preventDefault();
-    const name = editForm.name.trim();
-    const email = editForm.email.trim();
-    const phone = editForm.phone.trim();
-    const address = editForm.address.trim();
-
-    if (!name) return setEditError('Name is required');
-    if (email && !/^\S+@\S+\.\S+$/.test(email)) return setEditError('Enter a valid email address');
-    if (phone && !/^\d{10}$/.test(phone)) return setEditError('Phone number must be exactly 10 digits');
-
-    const payload = { name, address };
-    if (email) payload.email = email;
-    if (phone) payload.phone = phone;
-
-    try {
-      setIsSaving(true);
-      setEditError('');
-      const response = await axios.patch(`/admin/customers/${id}`, payload, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
-      setCustomer(response.data.customer);
-      setIsEditing(false);
-      setStatusMessage('Customer details updated successfully.');
-    } catch (err) {
-      setEditError(err.response?.data?.message || 'Failed to update customer');
-    } finally {
-      setIsSaving(false);
-    }
-  };
-
-  const updateCustomerStatus = async () => {
-    const nextIsDeleted = !customer.isDeleted;
-    const confirmationMessage = nextIsDeleted
-      ? 'This will deactivate the customer account. They will not be able to use their customer account. Existing bookings will not be cancelled.'
-      : 'This will reactivate the customer account. They may be able to use their customer account again if their credentials are still valid.';
-
-    if (!window.confirm(confirmationMessage)) return;
-
-    try {
-      setIsStatusSaving(true);
-      setStatusError('');
-      setStatusMessage('');
-
-      const response = await axios.patch(
-        `/admin/customers/${id}/status`,
-        { isDeleted: nextIsDeleted },
-        { headers: { Authorization: `Bearer ${token}` } }
-      );
-
-      setCustomer(response.data.customer);
-      setIsEditing(false);
-      setStatusMessage(nextIsDeleted
-        ? 'Customer account deactivated successfully.'
-        : 'Customer account reactivated successfully.');
-    } catch (err) {
-      const status = err.response?.status;
-      const message = err.response?.data?.message || 'Failed to update customer status';
-
-      if (status === 401 || status === 403) {
-        localStorage.removeItem('adminToken');
-        localStorage.removeItem('adminEmail');
-        navigate('/admin/login');
-      } else {
-        setStatusError(message);
-      }
-    } finally {
-      setIsStatusSaving(false);
-    }
-  };
-
   // ── Loading ──
   if (loading) {
     return (
@@ -257,55 +156,7 @@ const AdminCustomerDetail = () => {
             )}
           </div>
         </div>
-        {!isEditing && (
-          <div className="detail-profile-actions">
-            <button type="button" className="detail-edit-btn" onClick={startEditing}>Edit</button>
-            <button
-              type="button"
-              className={`detail-status-action-btn ${customer.isDeleted ? 'reactivate' : 'deactivate'}`}
-              onClick={updateCustomerStatus}
-              disabled={isStatusSaving}
-            >
-              {isStatusSaving
-                ? 'Saving...'
-                : customer.isDeleted ? 'Reactivate' : 'Deactivate'}
-            </button>
-          </div>
-        )}
       </div>
-
-      {(statusMessage || statusError) && (
-        <div className={statusError ? 'detail-status-error' : 'detail-status-success'}>
-          {statusError || statusMessage}
-        </div>
-      )}
-
-      {isEditing && (
-        <form className="detail-edit-panel" onSubmit={saveCustomer}>
-          <h2 className="detail-section-title">Edit Customer</h2>
-          {editError && <div className="detail-edit-error">{editError}</div>}
-          <div className="detail-edit-form">
-            {['name', 'email', 'phone', 'address'].map((field) => (
-              <label key={field} className="detail-edit-field">
-                <span>{field.charAt(0).toUpperCase() + field.slice(1)}</span>
-                <input
-                  name={field}
-                  type={field === 'email' ? 'email' : 'text'}
-                  value={editForm[field]}
-                  onChange={handleEditChange}
-                  disabled={isSaving}
-                />
-              </label>
-            ))}
-          </div>
-          <div className="detail-edit-actions">
-            <button type="submit" className="detail-edit-save" disabled={isSaving}>
-              {isSaving ? 'Saving...' : 'Save'}
-            </button>
-            <button type="button" className="detail-edit-cancel" onClick={cancelEditing} disabled={isSaving}>Cancel</button>
-          </div>
-        </form>
-      )}
 
       {/* ── Contact Information ── */}
       <div className="detail-section">
