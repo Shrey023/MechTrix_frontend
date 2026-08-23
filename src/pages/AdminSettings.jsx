@@ -5,12 +5,25 @@ import './AdminSettings.css';
 
 const AdminSettings = () => {
   const navigate = useNavigate();
-  const adminEmail = localStorage.getItem('adminEmail') || 'Not available';
-  const adminName = localStorage.getItem('adminName') || 'Administrator';
+  const [adminEmail, setAdminEmail] = useState(localStorage.getItem('adminEmail') || '');
+  const [adminName, setAdminName] = useState(localStorage.getItem('adminName') || '');
+  const [adminPhone, setAdminPhone] = useState('');
+  
+  // Profile edit state
   const [isEditingProfile, setIsEditingProfile] = useState(false);
-  const [isChangingPassword, setIsChangingPassword] = useState(false);
+  const [profileData, setProfileData] = useState({ name: '', email: '', phone: '' });
+  const [profileLoading, setProfileLoading] = useState(false);
   const [profileMessage, setProfileMessage] = useState('');
+  const [profileError, setProfileError] = useState('');
+  
+  // Password change state
+  const [isChangingPassword, setIsChangingPassword] = useState(false);
+  const [passwordData, setPasswordData] = useState({ currentPassword: '', newPassword: '', confirmPassword: '' });
+  const [passwordLoading, setPasswordLoading] = useState(false);
   const [passwordMessage, setPasswordMessage] = useState('');
+  const [passwordError, setPasswordError] = useState('');
+  
+  // Notification settings state
   const [notifications, setNotifications] = useState({ email: true, bookings: true, registrations: false });
   const [preferences, setPreferences] = useState({
     density: 'comfortable',
@@ -46,7 +59,14 @@ const AdminSettings = () => {
       }
     };
     loadSettings();
-  }, [navigate]);
+    
+    // Initialize profile form with current data
+    setProfileData({
+      name: adminName || '',
+      email: adminEmail || '',
+      phone: adminPhone || ''
+    });
+  }, [navigate, adminName, adminEmail, adminPhone]);
 
   const handleLogout = () => {
     localStorage.removeItem('adminToken');
@@ -74,14 +94,101 @@ const AdminSettings = () => {
     }
   };
 
-  const handleProfileSubmit = (event) => {
-    event.preventDefault();
-    setProfileMessage('Profile saving is not connected yet.');
+  const handlePreferenceChange = async (field, value) => {
+    if (savingSetting || settingsLoading) return;
+    setSavingSetting(field);
+    setSettingsMessage('');
+    setSettingsError('');
+    
+    // Update local state immediately
+    setPreferences((current) => ({ ...current, [field]: value }));
+    
+    try {
+      const response = await axios.patch('/admin/settings', {
+        preferences: { [field]: value },
+      }, authConfig());
+      setPreferences(response.data.settings.preferences);
+      setSettingsMessage('Preference saved.');
+    } catch (err) {
+      setSettingsError(err.response?.data?.message || 'Failed to save preference');
+      // Revert on error
+      setPreferences((current) => ({ ...current, [field]: preferences[field] }));
+    } finally {
+      setSavingSetting('');
+    }
   };
 
-  const handlePasswordSubmit = (event) => {
+  const handleProfileSubmit = async (event) => {
     event.preventDefault();
-    setPasswordMessage('Password changes are not connected yet.');
+    if (profileLoading) return;
+    
+    setProfileLoading(true);
+    setProfileMessage('');
+    setProfileError('');
+    
+    try {
+      const response = await axios.patch('/admin/profile', profileData, authConfig());
+      
+      // Update localStorage with new values
+      if (response.data.name) {
+        localStorage.setItem('adminName', response.data.name);
+        setAdminName(response.data.name);
+      }
+      if (response.data.email) {
+        localStorage.setItem('adminEmail', response.data.email);
+        setAdminEmail(response.data.email);
+      }
+      if (response.data.phone) {
+        setAdminPhone(response.data.phone);
+      }
+      
+      setProfileMessage(response.data.message || 'Profile updated successfully.');
+      setTimeout(() => setIsEditingProfile(false), 2000);
+    } catch (err) {
+      setProfileError(err.response?.data?.message || 'Failed to update profile');
+    } finally {
+      setProfileLoading(false);
+    }
+  };
+
+  const handlePasswordSubmit = async (event) => {
+    event.preventDefault();
+    if (passwordLoading) return;
+    
+    // Frontend validation
+    if (!passwordData.currentPassword || !passwordData.newPassword || !passwordData.confirmPassword) {
+      setPasswordError('All fields are required');
+      return;
+    }
+    
+    if (passwordData.newPassword !== passwordData.confirmPassword) {
+      setPasswordError('New passwords do not match');
+      return;
+    }
+    
+    if (passwordData.newPassword.length < 6) {
+      setPasswordError('New password must be at least 6 characters');
+      return;
+    }
+    
+    setPasswordLoading(true);
+    setPasswordMessage('');
+    setPasswordError('');
+    
+    try {
+      const response = await axios.post('/admin/change-password', {
+        currentPassword: passwordData.currentPassword,
+        newPassword: passwordData.newPassword
+      }, authConfig());
+      
+      setPasswordMessage(response.data.message || 'Password changed successfully.');
+      setPasswordData({ currentPassword: '', newPassword: '', confirmPassword: '' });
+      setTimeout(() => setIsChangingPassword(false), 2000);
+    } catch (err) {
+      setPasswordError(err.response?.data?.message || 'Failed to change password');
+    } finally {
+      setPasswordLoading(false);
+    }
   };
 
   return (
@@ -104,7 +211,7 @@ const AdminSettings = () => {
               <p className="settings-panel-kicker">Identity</p>
               <h2>Admin Profile</h2>
             </div>
-            <button type="button" className="settings-secondary-btn" onClick={() => { setIsEditingProfile((current) => !current); setProfileMessage(''); }}>
+            <button type="button" className="settings-secondary-btn" onClick={() => { setIsEditingProfile((current) => !current); setProfileMessage(''); setProfileError(''); }}>
               {isEditingProfile ? 'Close' : 'Edit Profile'}
             </button>
           </div>
@@ -121,15 +228,40 @@ const AdminSettings = () => {
             <form className="settings-form" onSubmit={handleProfileSubmit}>
               <label>
                 <span>Admin Name</span>
-                <input type="text" value={adminName} readOnly />
+                <input 
+                  type="text" 
+                  value={profileData.name} 
+                  onChange={(e) => setProfileData({ ...profileData, name: e.target.value })}
+                  disabled={profileLoading}
+                  required
+                />
               </label>
               <label>
                 <span>Email</span>
-                <input type="email" value={adminEmail} readOnly />
+                <input 
+                  type="email" 
+                  value={profileData.email} 
+                  onChange={(e) => setProfileData({ ...profileData, email: e.target.value })}
+                  disabled={profileLoading}
+                  required
+                />
+              </label>
+              <label>
+                <span>Phone (optional)</span>
+                <input 
+                  type="text" 
+                  value={profileData.phone} 
+                  onChange={(e) => setProfileData({ ...profileData, phone: e.target.value })}
+                  disabled={profileLoading}
+                  placeholder="Enter phone number"
+                />
               </label>
               <div className="settings-form-actions">
-                <button type="submit" className="settings-primary-btn">Save Profile</button>
-                <span className="settings-form-note">{profileMessage || 'Profile editing will be available when an API is added.'}</span>
+                <button type="submit" className="settings-primary-btn" disabled={profileLoading}>
+                  {profileLoading ? 'Saving...' : 'Save Profile'}
+                </button>
+                {profileMessage && <span className="settings-form-success">{profileMessage}</span>}
+                {profileError && <span className="settings-form-error">{profileError}</span>}
               </div>
             </form>
           )}
@@ -143,17 +275,52 @@ const AdminSettings = () => {
             </div>
           </div>
           <p className="settings-panel-description">Keep account security controls together for quick access.</p>
-          <button type="button" className="settings-secondary-btn settings-wide-btn" onClick={() => { setIsChangingPassword((current) => !current); setPasswordMessage(''); }}>
+          <button type="button" className="settings-secondary-btn settings-wide-btn" onClick={() => { setIsChangingPassword((current) => !current); setPasswordMessage(''); setPasswordError(''); }}>
             {isChangingPassword ? 'Close Password Form' : 'Change Password'}
           </button>
           {isChangingPassword && (
             <form className="settings-form" onSubmit={handlePasswordSubmit}>
-              <label><span>Current Password</span><input type="password" placeholder="Enter current password" /></label>
-              <label><span>New Password</span><input type="password" placeholder="Enter new password" /></label>
-              <label><span>Confirm Password</span><input type="password" placeholder="Confirm new password" /></label>
+              <label>
+                <span>Current Password</span>
+                <input 
+                  type="password" 
+                  placeholder="Enter current password" 
+                  value={passwordData.currentPassword}
+                  onChange={(e) => setPasswordData({ ...passwordData, currentPassword: e.target.value })}
+                  disabled={passwordLoading}
+                  required
+                />
+              </label>
+              <label>
+                <span>New Password</span>
+                <input 
+                  type="password" 
+                  placeholder="Enter new password (min 6 characters)" 
+                  value={passwordData.newPassword}
+                  onChange={(e) => setPasswordData({ ...passwordData, newPassword: e.target.value })}
+                  disabled={passwordLoading}
+                  required
+                  minLength={6}
+                />
+              </label>
+              <label>
+                <span>Confirm Password</span>
+                <input 
+                  type="password" 
+                  placeholder="Confirm new password" 
+                  value={passwordData.confirmPassword}
+                  onChange={(e) => setPasswordData({ ...passwordData, confirmPassword: e.target.value })}
+                  disabled={passwordLoading}
+                  required
+                  minLength={6}
+                />
+              </label>
               <div className="settings-form-actions">
-                <button type="submit" className="settings-primary-btn">Update Password</button>
-                <span className="settings-form-note">{passwordMessage || 'Password updates are UI-only for now.'}</span>
+                <button type="submit" className="settings-primary-btn" disabled={passwordLoading}>
+                  {passwordLoading ? 'Updating...' : 'Update Password'}
+                </button>
+                {passwordMessage && <span className="settings-form-success">{passwordMessage}</span>}
+                {passwordError && <span className="settings-form-error">{passwordError}</span>}
               </div>
             </form>
           )}
@@ -194,20 +361,28 @@ const AdminSettings = () => {
           <div className="settings-form">
             <label>
               <span>Table density</span>
-              <select value={preferences.density} onChange={(event) => setPreferences((current) => ({ ...current, density: event.target.value }))}>
+              <select 
+                value={preferences.density} 
+                onChange={(event) => handlePreferenceChange('density', event.target.value)}
+                disabled={Boolean(savingSetting) || settingsLoading}
+              >
                 <option value="comfortable">Comfortable</option>
                 <option value="compact">Compact</option>
               </select>
             </label>
             <label>
               <span>Date display</span>
-              <select value={preferences.dateFormat} onChange={(event) => setPreferences((current) => ({ ...current, dateFormat: event.target.value }))}>
+              <select 
+                value={preferences.dateFormat} 
+                onChange={(event) => handlePreferenceChange('dateFormat', event.target.value)}
+                disabled={Boolean(savingSetting) || settingsLoading}
+              >
                 <option value="local">Local format</option>
                 <option value="relative">Relative time</option>
               </select>
             </label>
           </div>
-          <p className="settings-ui-note">Preferences are UI-only until persistence is available.</p>
+          <p className="settings-ui-note">{savingSetting && savingSetting !== 'email' && savingSetting !== 'bookings' && savingSetting !== 'registrations' ? `Saving ${savingSetting}...` : 'Preferences are saved to your admin account.'}</p>
         </section>
 
         <section className="settings-panel settings-system-panel">
@@ -219,10 +394,8 @@ const AdminSettings = () => {
           </div>
           <dl className="settings-system-list">
             <div><dt>Application</dt><dd>Mechze</dd></div>
-            {/* <div><dt>Admin Dashboard</dt><dd>v1.0</dd></div>
-            <div><dt>Backend / API</dt><dd><span className="settings-status-dot" />Not checked</dd></div> */}
           </dl>
-          <p className="settings-ui-note">API status is informational until a health endpoint is available.</p>
+          <p className="settings-ui-note">System information is read-only.</p>
         </section>
       </div>
     </div>

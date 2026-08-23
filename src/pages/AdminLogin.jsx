@@ -19,6 +19,9 @@ const AdminLogin = () => {
         if (res.data.email) {
           localStorage.setItem('adminEmail', res.data.email);
         }
+        if (res.data.name) {
+          localStorage.setItem('adminName', res.data.name);
+        }
         navigate('/admin/dashboard');
       } else {
         setError('Login failed.');
