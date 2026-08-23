@@ -25,7 +25,7 @@ import DeleteAccount from './pages/DeleteAccount';
 import About from './pages/About';
 import Contact from './pages/Contact';
 import AdminLogin from './pages/AdminLogin';
-import AdminRegister from './pages/AdminRegister';
+// AdminRegister removed - registration restricted for security
 import AdminDashboard from './pages/AdminDashboard';
 import AdminCustomers from './pages/AdminCustomers';
 import AdminCustomerDetail from './pages/AdminCustomerDetail';
@@ -96,7 +96,7 @@ const App = () => {
         <Route path="/privacy-policy" element={<PrivacyPolicy />} /> {/* Privacy Policy */}
         <Route path="/delete-account" element={<DeleteAccount />} /> {/* Account Deletion */}
         <Route path="/admin/login" element={<AdminLogin />} />
-        <Route path="/admin/register" element={<AdminRegister />} />
+        {/* Admin registration route removed - restricted for security */}
         <Route
           path="/admin/dashboard"
           element={

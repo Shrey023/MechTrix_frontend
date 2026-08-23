@@ -118,7 +118,7 @@ const AdminLogin = () => {
         )}
 
         <p style={{ textAlign: 'center', marginTop: '1rem', color: '#2D2D2D' }}>
-          No admin account? <Link to="/admin/register">Register</Link>
+          {/* Admin registration is restricted for security */}
         </p>
       </div>
     </div>
