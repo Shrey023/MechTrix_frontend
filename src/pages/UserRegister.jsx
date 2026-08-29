@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import axios from '../api/axios';
-import './auth.css';
 
 const UserRegister = () => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -14,6 +14,7 @@ const UserRegister = () => {
 
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -29,6 +30,7 @@ const UserRegister = () => {
       return;
     }
 
+    setLoading(true);
     try {
       const { data } = await axios.post('/auth/customer/register', {
         name: formData.name,
@@ -37,96 +39,119 @@ const UserRegister = () => {
         phone: formData.phone,
       });
 
-      setSuccess('Registered successfully!');
+      setSuccess('Registered successfully! Redirecting to login...');
       setError('');
-      console.log('User Registered:', data);
-
-      // Optionally clear form
-      setFormData({
-        name: '',
-        email: '',
-        password: '',
-        confirmPassword: '',
-        phone: '',
-      });
+      setTimeout(() => {
+        navigate('/login');
+      }, 2000);
     } catch (err) {
       const msg = err.response?.data?.message || 'Registration failed.';
       console.error(msg);
       setError(msg);
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
-    <div className="auth-container">
-      <form onSubmit={handleSubmit} className="auth-form">
-        <h2 className="auth-title">User Registration</h2>
+    <main className="section section-alt" style={{ paddingTop: 'calc(var(--nav-height) + 2rem)', minHeight: '85vh', display: 'flex', alignItems: 'center' }}>
+      <div className="container">
+        <div className="modal-card" style={{ maxWidth: '480px', margin: '0 auto', boxShadow: 'var(--shadow-lg)' }}>
+          <h2 className="modal-title" style={{ textAlign: 'center', fontSize: '1.75rem', marginBottom: '0.5rem' }}>Create Account</h2>
+          <p className="modal-subtitle" style={{ textAlign: 'center', marginBottom: '1.5rem' }}>Join Mechze for fast & transparent vehicle service.</p>
 
-        <label className="auth-label" htmlFor="name">Full Name</label>
-        <input
-          id="name"
-          type="text"
-          name="name"
-          placeholder="Enter full name"
-          value={formData.name}
-          onChange={handleChange}
-          required
-        />
+          <form onSubmit={handleSubmit}>
+            <div className="form-group">
+              <label className="form-label">Full Name</label>
+              <input
+                type="text"
+                name="name"
+                className="form-control"
+                placeholder="Enter full name"
+                value={formData.name}
+                onChange={handleChange}
+                required
+              />
+            </div>
 
-        <label className="auth-label" htmlFor="email">Email</label>
-        <input
-          id="email"
-          type="email"
-          name="email"
-          placeholder="Enter email"
-          value={formData.email}
-          onChange={handleChange}
-          required
-        />
+            <div className="form-group">
+              <label className="form-label">Email Address</label>
+              <input
+                type="email"
+                name="email"
+                className="form-control"
+                placeholder="Enter email address"
+                value={formData.email}
+                onChange={handleChange}
+                required
+              />
+            </div>
 
-        <label className="auth-label" htmlFor="phone">Phone Number</label>
-        <input
-          id="phone"
-          type="text"
-          name="phone"
-          placeholder="Enter phone number"
-          value={formData.phone}
-          onChange={handleChange}
-          required
-        />
+            <div className="form-group">
+              <label className="form-label">Phone Number</label>
+              <input
+                type="tel"
+                name="phone"
+                className="form-control"
+                placeholder="Enter 10-digit mobile number"
+                value={formData.phone}
+                onChange={handleChange}
+                required
+              />
+            </div>
 
-        <label className="auth-label" htmlFor="password">Password</label>
-        <input
-          id="password"
-          type="password"
-          name="password"
-          placeholder="Create password"
-          value={formData.password}
-          onChange={handleChange}
-          required
-        />
+            <div className="form-group">
+              <label className="form-label">Password</label>
+              <input
+                type="password"
+                name="password"
+                className="form-control"
+                placeholder="Create password"
+                value={formData.password}
+                onChange={handleChange}
+                required
+              />
+            </div>
 
-        <label className="auth-label" htmlFor="confirmPassword">Confirm Password</label>
-        <input
-          id="confirmPassword"
-          type="password"
-          name="confirmPassword"
-          placeholder="Re-enter password"
-          value={formData.confirmPassword}
-          onChange={handleChange}
-          required
-        />
+            <div className="form-group">
+              <label className="form-label">Confirm Password</label>
+              <input
+                type="password"
+                name="confirmPassword"
+                className="form-control"
+                placeholder="Re-enter password"
+                value={formData.confirmPassword}
+                onChange={handleChange}
+                required
+              />
+            </div>
 
-        {error && <p className="auth-error">{error}</p>}
-        {success && <p className="auth-success">{success}</p>}
+            {error && (
+              <div style={{ color: 'var(--error)', backgroundColor: '#fef2f2', border: '1px solid #fecaca', padding: '0.75rem', borderRadius: 'var(--radius-sm)', fontSize: '0.9rem', marginBottom: '1rem', textAlign: 'center' }}>
+                {error}
+              </div>
+            )}
 
-        <button type="submit" className="auth-button">Register</button>
+            {success && (
+              <div className="form-success-msg" style={{ display: 'block', marginBottom: '1rem' }}>
+                {success}
+              </div>
+            )}
 
-        <p style={{ marginTop: '1rem', textAlign: 'center', color: 'var(--color-warm-gray)' }}>
-          Already registered?{' '}
-          <Link to="/login" style={{ color: 'var(--color-brown-light)' }}>Log In</Link>
-        </p>
-      </form>
-    </div>
+            <button type="submit" className="btn btn-primary" style={{ width: '100%', marginTop: '0.5rem' }} disabled={loading}>
+              {loading ? 'Creating Account...' : 'Register'}
+            </button>
+          </form>
+
+          <div style={{ marginTop: '1.5rem', textAlign: 'center', fontSize: '0.9rem', color: 'var(--text-muted)' }}>
+            Already registered?{' '}
+            <Link to="/login" style={{ color: 'var(--primary)', fontWeight: '600', textDecoration: 'none' }}>
+              Log In
+            </Link>
+          </div>
+        </div>
+      </div>
+    </main>
   );
 };
 

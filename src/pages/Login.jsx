@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import axios from '../api/axios';
 
 const Login = () => {
@@ -7,10 +7,12 @@ const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
+    setLoading(true);
 
     try {
       const res = await axios.post('/auth/customer/login', {
@@ -22,156 +24,71 @@ const Login = () => {
 
       if (res.data.token) {
         localStorage.setItem('token', res.data.token);
-        localStorage.setItem('userType', res.data.userType);
+        localStorage.setItem('userType', res.data.userType || 'customer');
         navigate('/dashboard');
       } else {
-        setError('Login failed.');
+        setError('Login failed. Please check credentials.');
       }
     } catch (err) {
       console.error(err);
-      setError('Invalid email or password');
+      setError(err.response?.data?.message || 'Invalid email or password');
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
-    <div style={{
-      backgroundColor: '#F7F8FA',
-      minHeight: '100vh',
-      display: 'flex',
-      justifyContent: 'center',
-      alignItems: 'center',
-      padding: '1rem',
-      fontFamily: "'Arial', sans-serif",
-    }}>
-      <div style={{
-        backgroundColor: '#FFFFFF',
-        padding: '2rem',
-        borderRadius: '12px',
-        boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)',
-        width: '100%',
-        maxWidth: '400px',
-      }}>
-        <h2 style={{
-          color: '#1E2A78',
-          fontSize: '1.8rem',
-          fontWeight: '700',
-          textAlign: 'center',
-          marginBottom: '1.5rem',
-        }}>Customer Login</h2>
-        <form onSubmit={handleSubmit}>
-          <input
-            type="email"
-            placeholder="Email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-            style={{
-              width: '100%',
-              padding: '0.75rem',
-              marginBottom: '1rem',
-              border: '1px solid #2D2D2D',
-              borderRadius: '8px',
-              fontSize: '1rem',
-              color: '#2D2D2D',
-              backgroundColor: '#F7F8FA',
-              outline: 'none',
-              transition: 'border-color 0.3s ease',
-            }}
-            onFocus={(e) => e.target.style.borderColor = '#4CAF50'}
-            onBlur={(e) => e.target.style.borderColor = '#2D2D2D'}
-          />
-          <input
-            type="password"
-            placeholder="Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-            style={{
-              width: '100%',
-              padding: '0.75rem',
-              marginBottom: '1.5rem',
-              border: '1px solid #2D2D2D',
-              borderRadius: '8px',
-              fontSize: '1rem',
-              color: '#2D2D2D',
-              backgroundColor: '#F7F8FA',
-              outline: 'none',
-              transition: 'border-color 0.3s ease',
-            }}
-            onFocus={(e) => e.target.style.borderColor = '#4CAF50'}
-            onBlur={(e) => e.target.style.borderColor = '#2D2D2D'}
-          />
-          <button
-            type="submit"
-            style={{
-              width: '100%',
-              padding: '0.75rem',
-              backgroundColor: '#FF6B35',
-              color: '#F7F8FA',
-              border: 'none',
-              borderRadius: '8px',
-              fontSize: '1.1rem',
-              fontWeight: '600',
-              cursor: 'pointer',
-              transition: 'background-color 0.3s ease, transform 0.2s ease',
-              boxShadow: '0 2px 6px rgba(0, 0, 0, 0.1)',
-            }}
-            onMouseOver={(e) => {
-              e.target.style.backgroundColor = '#FFD23F';
-              e.target.style.transform = 'scale(1.02)';
-            }}
-            onMouseOut={(e) => {
-              e.target.style.backgroundColor = '#FF6B35';
-              e.target.style.transform = 'scale(1)';
-            }}
-          >Login</button>
-        </form>
-        {error && <p style={{
-          color: '#FF6B35',
-          fontSize: '0.9rem',
-          textAlign: 'center',
-          marginTop: '1rem',
-        }}>{error}</p>}
-      </div>
+    <main className="section section-alt" style={{ paddingTop: 'calc(var(--nav-height) + 3rem)', minHeight: '85vh', display: 'flex', alignItems: 'center' }}>
+      <div className="container">
+        <div className="modal-card" style={{ maxWidth: '440px', margin: '0 auto', boxShadow: 'var(--shadow-lg)' }}>
+          <h2 className="modal-title" style={{ textAlign: 'center', fontSize: '1.75rem', marginBottom: '0.5rem' }}>Customer Login</h2>
+          <p className="modal-subtitle" style={{ textAlign: 'center', marginBottom: '1.75rem' }}>Sign in to manage your bookings and profile.</p>
 
-      <style jsx>{`
-        @media (max-width: 768px) {
-          div[style*="maxWidth: 400px"] {
-            padding: 1.5rem;
-          }
-          h2 {
-            font-size: 1.5rem;
-          }
-          input {
-            padding: 0.6rem;
-            font-size: 0.9rem;
-          }
-          button {
-            padding: 0.6rem;
-            font-size: 1rem;
-          }
-        }
-        @media (max-width: 480px) {
-          div[style*="maxWidth: 400px"] {
-            padding: 1rem;
-          }
-          h2 {
-            font-size: 1.3rem;
-          }
-          input {
-            padding: 0.5rem;
-            font-size: 0.85rem;
-          }
-          button {
-            padding: 0.5rem;
-            font-size: 0.9rem;
-          }
-          p {
-            font-size: 0.8rem;
-          }
-        }
-      `}</style>
-    </div>
+          <form onSubmit={handleSubmit}>
+            <div className="form-group">
+              <label className="form-label">Email Address</label>
+              <input
+                type="email"
+                className="form-control"
+                placeholder="enter your email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+              />
+            </div>
+
+            <div className="form-group">
+              <label className="form-label">Password</label>
+              <input
+                type="password"
+                className="form-control"
+                placeholder="enter your password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+              />
+            </div>
+
+            {error && (
+              <div style={{ color: 'var(--error)', backgroundColor: '#fef2f2', border: '1px solid #fecaca', padding: '0.75rem', borderRadius: 'var(--radius-sm)', fontSize: '0.9rem', marginBottom: '1rem', textAlign: 'center' }}>
+                {error}
+              </div>
+            )}
+
+            <button type="submit" className="btn btn-primary" style={{ width: '100%', marginTop: '0.5rem' }} disabled={loading}>
+              {loading ? 'Signing in...' : 'Sign In'}
+            </button>
+          </form>
+
+          <div style={{ marginTop: '1.5rem', textAlign: 'center', fontSize: '0.9rem', color: 'var(--text-muted)' }}>
+            Don't have an account?{' '}
+            <Link to="/Userregister" style={{ color: 'var(--primary)', fontWeight: '600', textDecoration: 'none' }}>
+              Register Here
+            </Link>
+          </div>
+        </div>
+      </div>
+    </main>
   );
 };
 

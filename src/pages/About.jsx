@@ -2,54 +2,56 @@ import React from 'react';
 
 const About = () => {
   return (
-    <main style={{
-      minHeight: '100vh',
-      background: 'var(--color-bg)',
-      color: 'var(--color-off-white)',
-      padding: 'clamp(5rem, 10vw, 7rem) clamp(1rem, 5vw, 2rem) 3rem',
-      fontFamily: 'var(--font-body)',
-    }}>
-      <section style={{
-        maxWidth: '980px',
-        margin: '0 auto',
-        background: 'var(--color-bg3)',
-        border: '1px solid rgba(131, 68, 23, 0.15)',
-        padding: 'clamp(1.25rem, 4vw, 2rem)',
-      }}>
-        <h1 style={{ marginBottom: '1rem' }}>About Us</h1>
+    <main className="section section-alt" style={{ paddingTop: 'calc(var(--nav-height) + 2rem)', minHeight: '85vh' }}>
+      <div className="container">
+        <div className="about-card" style={{ display: 'block', maxWidth: '900px', margin: '0 auto', padding: '2.5rem' }}>
+          <span className="section-tag">About Mechze</span>
+          <h1 className="section-title" style={{ marginBottom: '1.5rem' }}>Making Vehicle Repair Simple & Convenient</h1>
 
-        <p style={{ marginBottom: '1rem' }}>
-          At Mechze, we are building a smarter and faster way to connect vehicle owners with trusted mechanics.
-        </p>
+          <p style={{ fontSize: '1.1rem', color: 'var(--text-muted)', lineHeight: '1.8', marginBottom: '1.2rem' }}>
+            At Mechze, we are building a smarter and faster way to connect vehicle owners with trusted mechanics.
+          </p>
 
-        <p style={{ marginBottom: '1rem' }}>
-          Breakdowns and vehicle issues can happen anytime, anywhere and finding a reliable mechanic quickly is often stressful.
-          Our mission is to remove that uncertainty by creating a platform where customers can easily discover, connect, and
-          book verified mechanics nearby.
-        </p>
+          <p style={{ fontSize: '1.05rem', color: 'var(--text-muted)', lineHeight: '1.8', marginBottom: '1.2rem' }}>
+            Breakdowns and vehicle issues can happen anytime, anywhere, and finding a reliable mechanic quickly is often stressful.
+            Our mission is to remove that uncertainty by creating a platform where customers can easily discover, connect, and
+            book verified mechanics nearby.
+          </p>
 
-        <p style={{ marginBottom: '1rem' }}>
-          We empower local mechanics by giving them digital visibility, helping them grow their business, reach more customers,
-          and manage bookings efficiently.
-        </p>
+          <p style={{ fontSize: '1.05rem', color: 'var(--text-muted)', lineHeight: '1.8', marginBottom: '1.5rem' }}>
+            We empower local mechanics by giving them digital visibility, helping them grow their business, reach more customers,
+            and manage bookings efficiently.
+          </p>
 
-        <h2 style={{ margin: '1.4rem 0 0.9rem' }}>Our Focus</h2>
-        <ul style={{ margin: 0, paddingLeft: '1.2rem', color: 'var(--color-warm-gray)', lineHeight: 1.9 }}>
-          <li>Reliability</li>
-          <li>Transparency</li>
-          <li>Ease of use</li>
-          <li>Real-time accessibility</li>
-        </ul>
-
-        <p style={{ marginTop: '1.2rem' }}>
-          Whether you are a customer in need of quick assistance or a mechanic looking to expand your reach,
-          MechTrix is built to serve both sides seamlessly.
-        </p>
-
-        <p style={{ marginTop: '1rem' }}>
-          We are just getting started, and our goal is to transform how vehicle services are accessed across Jabalpur and beyond.
-        </p>
-      </section>
+          <h2 style={{ fontSize: '1.4rem', fontWeight: '700', color: 'var(--text-main)', margin: '2rem 0 1rem' }}>Our Core Values</h2>
+          <div className="about-highlights" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '1rem' }}>
+            <div className="highlight-item">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+              Reliability & Safety
+            </div>
+            <div className="highlight-item">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+              Full Transparency
+            </div>
+            <div className="highlight-item">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+              Ease of Use
+            </div>
+            <div className="highlight-item">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+              Real-time Access
+            </div>
+          </div>
+        </div>
+      </div>
     </main>
   );
 };
