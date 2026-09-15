@@ -65,20 +65,6 @@ const AdminGuftagu = () => {
       const response = await axios.get('/admin/guftagu/messages', authConfig());
       console.log('✅ Messages response:', response.data);
       setMessages(response.data.messages || []);
-      
-      // Fetch profile images for message senders
-      const adminIds = new Set();
-      response.data.messages?.forEach(msg => {
-        if (msg.sender?._id) adminIds.add(msg.sender._id);
-        if (msg.receiver?._id) adminIds.add(msg.receiver._id);
-      });
-      
-      adminIds.forEach(adminId => {
-        if (msg.sender?.profileImage) {
-          // For now, we'll just note that profileImage exists
-          // A proper implementation would need a public endpoint to fetch other admin's images
-        }
-      });
     } catch (err) {
       console.error('❌ Failed to fetch messages:', err);
       console.error('Response:', err.response);
