@@ -295,3 +295,257 @@
     grid-template-columns: 1fr;
   }
 }
+/* Document Section Styles */
+.mechanic-detail-documents-wrapper {
+  overflow-x: auto;
+}
+
+.mechanic-detail-documents {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 16px;
+}
+
+.mechanic-detail-documents th,
+.mechanic-detail-documents td {
+  padding: 12px 16px;
+  text-align: left;
+  border-bottom: 1px solid rgba(131, 68, 23, 0.1);
+}
+
+.mechanic-detail-documents th {
+  background: rgba(131, 68, 23, 0.05);
+  font-weight: 600;
+  color: var(--color-steel-dark);
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.mechanic-detail-document-name {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.mechanic-detail-document-icon {
+  font-size: 16px;
+}
+
+.mechanic-detail-doc-status {
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.mechanic-detail-doc-status-pending {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.mechanic-detail-doc-status-verified {
+  background: #d1fae5;
+  color: #065f46;
+}
+
+.mechanic-detail-doc-status-rejected {
+  background: #fecaca;
+  color: #991b1b;
+}
+
+.mechanic-detail-view-btn {
+  padding: 6px 12px;
+  background: var(--color-brown);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.mechanic-detail-view-btn:hover {
+  background: var(--color-brown-dark);
+}
+
+.mechanic-detail-loading-small {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 16px;
+  color: var(--color-steel-light);
+  font-size: 14px;
+}
+
+.mechanic-detail-spinner-small {
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(131, 68, 23, 0.2);
+  border-left: 2px solid var(--color-brown);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+.mechanic-detail-error-small {
+  padding: 16px;
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  border-radius: 4px;
+  color: #991b1b;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.mechanic-detail-retry-btn {
+  padding: 4px 8px;
+  background: #dc2626;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.mechanic-detail-retry-btn:hover {
+  background: #b91c1c;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+/* Document Action Buttons */
+.mechanic-detail-document-actions {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.mechanic-detail-verify-btn,
+.mechanic-detail-reject-btn {
+  padding: 4px 8px;
+  border: none;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  min-width: 60px;
+}
+
+.mechanic-detail-verify-btn {
+  background: #059669;
+  color: white;
+}
+
+.mechanic-detail-verify-btn:hover:not(:disabled) {
+  background: #047857;
+}
+
+.mechanic-detail-reject-btn {
+  background: #dc2626;
+  color: white;
+}
+
+.mechanic-detail-reject-btn:hover:not(:disabled) {
+  background: #b91c1c;
+}
+
+.mechanic-detail-verify-btn:disabled,
+.mechanic-detail-reject-btn:disabled,
+.mechanic-detail-view-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.mechanic-detail-document-type {
+  font-weight: 500;
+  color: var(--color-steel-dark);
+}
+
+/* Confirmation Dialog */
+.mechanic-detail-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.mechanic-detail-confirmation-dialog {
+  background: white;
+  padding: 24px;
+  border-radius: 8px;
+  min-width: 400px;
+  max-width: 90vw;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+.mechanic-detail-confirmation-dialog h3 {
+  margin: 0 0 12px 0;
+  color: var(--color-steel-dark);
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.mechanic-detail-confirmation-dialog p {
+  margin: 0 0 20px 0;
+  color: var(--color-steel);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.mechanic-detail-dialog-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+}
+
+.mechanic-detail-cancel-btn,
+.mechanic-detail-confirm-btn {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.mechanic-detail-cancel-btn {
+  background: #f3f4f6;
+  color: var(--color-steel-dark);
+}
+
+.mechanic-detail-cancel-btn:hover {
+  background: #e5e7eb;
+}
+
+.mechanic-detail-confirm-verified {
+  background: #059669;
+  color: white;
+}
+
+.mechanic-detail-confirm-verified:hover {
+  background: #047857;
+}
+
+.mechanic-detail-confirm-rejected {
+  background: #dc2626;
+  color: white;
+}
+
+.mechanic-detail-confirm-rejected:hover {
+  background: #b91c1c;
+}
