@@ -728,3 +728,137 @@
   background: rgba(131, 68, 23, 0.08);
   cursor: pointer;
 }
+
+
+/* Document Preview Modal */
+.mechanic-detail-preview-modal {
+  background: white;
+  border-radius: 8px;
+  max-width: 90vw;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+}
+
+.mechanic-detail-preview-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  border-bottom: 1px solid rgba(131, 68, 23, 0.15);
+  background: var(--color-bg3);
+}
+
+.mechanic-detail-preview-header h3 {
+  margin: 0;
+  color: var(--color-off-white);
+  font-family: var(--font-display);
+  font-size: 14px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.mechanic-detail-preview-close {
+  width: 36px;
+  height: 36px;
+  background: transparent;
+  border: 1px solid rgba(131, 68, 23, 0.3);
+  border-radius: 50%;
+  color: var(--color-steel-light);
+  font-size: 24px;
+  line-height: 1;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+  margin-left: 16px;
+}
+
+.mechanic-detail-preview-close:hover {
+  background: rgba(131, 68, 23, 0.1);
+  border-color: var(--color-brown);
+  color: var(--color-brown);
+}
+
+.mechanic-detail-preview-content {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: var(--color-bg4);
+}
+
+.mechanic-detail-preview-image {
+  max-width: 100%;
+  max-height: 70vh;
+  object-fit: contain;
+  border-radius: 4px;
+}
+
+.mechanic-detail-preview-pdf {
+  width: 100%;
+  height: 70vh;
+  border: none;
+  border-radius: 4px;
+}
+
+.mechanic-detail-preview-unsupported {
+  text-align: center;
+  padding: 40px;
+}
+
+.mechanic-detail-preview-unsupported p {
+  color: var(--color-steel-light);
+  font-family: var(--font-body);
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
+.mechanic-detail-download-btn {
+  display: inline-block;
+  padding: 10px 20px;
+  background: var(--color-brown);
+  color: white;
+  text-decoration: none;
+  border-radius: 4px;
+  font-family: var(--font-display);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  transition: all 0.2s ease;
+}
+
+.mechanic-detail-download-btn:hover {
+  background: var(--color-brown-dark);
+  transform: translateY(-1px);
+}
+
+@media (max-width: 768px) {
+  .mechanic-detail-preview-modal {
+    max-width: 95vw;
+    max-height: 95vh;
+  }
+  
+  .mechanic-detail-preview-image {
+    max-height: 60vh;
+  }
+  
+  .mechanic-detail-preview-pdf {
+    height: 60vh;
+  }
+  
+  .mechanic-detail-preview-header {
+    padding: 12px 16px;
+  }
+  
+  .mechanic-detail-preview-content {
+    padding: 12px;
+  }
+}

@@ -22,6 +22,8 @@ const AdminMechanicDetail = () => {
   const [editData, setEditData] = useState({});
   const [editLoading, setEditLoading] = useState(false);
   const [editError, setEditError] = useState('');
+  const [previewDocument, setPreviewDocument] = useState(null);
+  const [profileImageUrl, setProfileImageUrl] = useState(null);
 
   useEffect(() => {
     const fetchMechanic = async () => {
@@ -41,6 +43,11 @@ const AdminMechanicDetail = () => {
           fetchDocuments();
         } else {
           setDocuments([]); // Clear any existing documents
+        }
+
+        // Fetch profile image if available
+        if (response.data.mechanic && response.data.mechanic.profileImage) {
+          fetchProfileImage();
         }
       } catch (err) {
         const status = err.response?.status;
@@ -82,64 +89,62 @@ const AdminMechanicDetail = () => {
     }
   };
 
-  const viewDocument = async (documentId, filename) => {
+  const fetchProfileImage = async () => {
     try {
+      const response = await axios.get(`/admin/mechanics/${id}/profile-image`, {
+        headers: { Authorization: `Bearer ${token}` },
+        responseType: 'blob',
+      });
+      const imageUrl = URL.createObjectURL(response.data);
+      setProfileImageUrl(imageUrl);
+    } catch (err) {
+      // Profile image is optional, silently fail
+      console.log('Profile image not available');
+    }
+  };
+
+  const viewDocument = async (documentId, filename, mimeType) => {
+    try {
+      setDocumentsError('');
       const response = await axios.get(`/admin/mechanics/${id}/documents/${documentId}`, {
         headers: { Authorization: `Bearer ${token}` },
-        responseType: 'blob', // Important for binary data
+        responseType: 'blob',
       });
       
-      // Get content type from response headers
-      const contentType = response.headers['content-type'] || 'application/octet-stream';
+      const contentType = response.headers['content-type'] || mimeType || 'application/octet-stream';
       
-      // Check if response is actually JSON error (server error with blob responseType)
+      // Check if response is JSON error
       if (contentType.includes('application/json')) {
-        // Response is JSON error, not a file
         const text = await response.data.text();
         const errorData = JSON.parse(text);
         setDocumentsError(errorData.message || 'Failed to load document');
         return;
       }
       
-      // Create blob with proper content type
+      // Create blob URL for preview
       const blob = new Blob([response.data], { type: contentType });
       const url = window.URL.createObjectURL(blob);
       
-      // Open in new tab/window for viewing
-      const newWindow = window.open(url, '_blank', 'noopener,noreferrer');
+      // Show in modal instead of new window
+      setPreviewDocument({
+        url,
+        filename,
+        contentType,
+        documentId
+      });
       
-      // If popup was blocked, provide fallback download
-      if (!newWindow) {
-        const link = document.createElement('a');
-        link.href = url;
-        link.download = filename || `document-${documentId}`;
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-      }
-      
-      // Clean up the blob URL after a delay (to allow the new window to load)
-      setTimeout(() => {
-        window.URL.revokeObjectURL(url);
-      }, 100);
     } catch (err) {
       console.error('Error viewing document:', err);
-      
-      // Try to extract error message from blob response
-      if (err.response?.data instanceof Blob) {
-        try {
-          const text = await err.response.data.text();
-          const errorData = JSON.parse(text);
-          setDocumentsError(errorData.message || 'Failed to load document');
-          return;
-        } catch (parseErr) {
-          // If parsing fails, use generic message
-        }
-      }
-      
       const message = err.response?.data?.message || err.message || 'Failed to load document';
       setDocumentsError(message);
     }
+  };
+
+  const closePreview = () => {
+    if (previewDocument?.url) {
+      URL.revokeObjectURL(previewDocument.url);
+    }
+    setPreviewDocument(null);
   };
 
   const updateDocumentStatus = async (documentId, newStatus) => {
@@ -294,8 +299,8 @@ const AdminMechanicDetail = () => {
   };
 
   const getAvatar = () => {
-    if (mechanic?.profileImage) {
-      return <img src={mechanic.profileImage} alt={mechanic.name} className="mechanic-detail-avatar-img" />;
+    if (profileImageUrl) {
+      return <img src={profileImageUrl} alt={mechanic.name} className="mechanic-detail-avatar-img" />;
     }
     return <div className="mechanic-detail-avatar-fallback">{mechanic?.name?.charAt(0).toUpperCase() || '?'}</div>;
   };
@@ -615,7 +620,7 @@ const AdminMechanicDetail = () => {
                       <button
                         type="button"
                         className="mechanic-detail-view-btn"
-                        onClick={() => viewDocument(doc.documentId, doc.filename)}
+                        onClick={() => viewDocument(doc.documentId, doc.filename, doc.mimeType)}
                         title="View document"
                         disabled={statusUpdating[doc.documentId]}
                       >
@@ -673,6 +678,51 @@ const AdminMechanicDetail = () => {
               >
                 {showConfirmDialog.newStatus === 'verified' ? 'Verify' : 'Reject'}
               </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Document Preview Modal */}
+      {previewDocument && (
+        <div className="mechanic-detail-modal-overlay" onClick={closePreview}>
+          <div className="mechanic-detail-preview-modal" onClick={(e) => e.stopPropagation()}>
+            <div className="mechanic-detail-preview-header">
+              <h3>{previewDocument.filename}</h3>
+              <button
+                type="button"
+                className="mechanic-detail-preview-close"
+                onClick={closePreview}
+                title="Close preview"
+              >
+                ×
+              </button>
+            </div>
+            <div className="mechanic-detail-preview-content">
+              {previewDocument.contentType.startsWith('image/') ? (
+                <img 
+                  src={previewDocument.url} 
+                  alt={previewDocument.filename}
+                  className="mechanic-detail-preview-image"
+                />
+              ) : previewDocument.contentType === 'application/pdf' ? (
+                <iframe
+                  src={previewDocument.url}
+                  title={previewDocument.filename}
+                  className="mechanic-detail-preview-pdf"
+                />
+              ) : (
+                <div className="mechanic-detail-preview-unsupported">
+                  <p>Preview not available for this file type.</p>
+                  <a 
+                    href={previewDocument.url} 
+                    download={previewDocument.filename}
+                    className="mechanic-detail-download-btn"
+                  >
+                    Download File
+                  </a>
+                </div>
+              )}
             </div>
           </div>
         </div>
