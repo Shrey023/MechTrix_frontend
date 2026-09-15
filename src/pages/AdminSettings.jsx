@@ -24,7 +24,7 @@ const AdminSettings = () => {
   const [passwordError, setPasswordError] = useState('');
   
   // Notification settings state
-  const [notifications, setNotifications] = useState({ email: true, bookings: true, registrations: false });
+  const [notifications, setNotifications] = useState({ email: true, bookings: true, registrations: false, mechanicRegistrations: false });
   const [preferences, setPreferences] = useState({
     density: 'comfortable',
     dateFormat: 'local',
@@ -347,6 +347,10 @@ const AdminSettings = () => {
               <span><strong>New customer registrations</strong><small>Alert when a customer joins the platform.</small></span>
               <input type="checkbox" checked={notifications.registrations} disabled={Boolean(savingSetting) || settingsLoading} onChange={() => toggleNotification('registrations')} />
             </label>
+            <label className="settings-toggle-row">
+              <span><strong>New mechanic registrations</strong><small>Alert when a mechanic joins the platform.</small></span>
+              <input type="checkbox" checked={notifications.mechanicRegistrations} disabled={Boolean(savingSetting) || settingsLoading} onChange={() => toggleNotification('mechanicRegistrations')} />
+            </label>
           </div>
           <p className="settings-ui-note">{savingSetting ? `Saving ${savingSetting}...` : 'Notification preferences are saved to your admin account.'}</p>
         </section>
@@ -382,7 +386,7 @@ const AdminSettings = () => {
               </select>
             </label>
           </div>
-          <p className="settings-ui-note">{savingSetting && savingSetting !== 'email' && savingSetting !== 'bookings' && savingSetting !== 'registrations' ? `Saving ${savingSetting}...` : 'Preferences are saved to your admin account.'}</p>
+          <p className="settings-ui-note">{savingSetting && savingSetting !== 'email' && savingSetting !== 'bookings' && savingSetting !== 'registrations' && savingSetting !== 'mechanicRegistrations' ? `Saving ${savingSetting}...` : 'Preferences are saved to your admin account.'}</p>
         </section>
 
         <section className="settings-panel settings-system-panel">
