@@ -13,6 +13,10 @@ const AdminCustomerDetail = () => {
   const [bookingCount, setBookingCount] = useState(0);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
+  const [isEditing, setIsEditing] = useState(false);
+  const [editData, setEditData] = useState({});
+  const [editLoading, setEditLoading] = useState(false);
+  const [editError, setEditError] = useState('');
 
   useEffect(() => {
     const fetchCustomerDetail = async () => {
@@ -45,6 +49,48 @@ const AdminCustomerDetail = () => {
 
     fetchCustomerDetail();
   }, [id, token, navigate]);
+
+  const startEdit = () => {
+    setEditData({
+      name: customer.name || '',
+      email: customer.email || '',
+      phone: customer.phone || '',
+      address: customer.address || ''
+    });
+    setIsEditing(true);
+    setEditError('');
+  };
+
+  const cancelEdit = () => {
+    setIsEditing(false);
+    setEditData({});
+    setEditError('');
+  };
+
+  const handleEditChange = (field, value) => {
+    setEditData(prev => ({ ...prev, [field]: value }));
+  };
+
+  const saveEdit = async () => {
+    try {
+      setEditLoading(true);
+      setEditError('');
+
+      const response = await axios.patch(`/admin/customers/${id}`, editData, {
+        headers: { Authorization: `Bearer ${token}` }
+      });
+
+      // Update the customer data with the response
+      setCustomer(response.data.customer);
+      setIsEditing(false);
+      setEditData({});
+    } catch (err) {
+      const message = err.response?.data?.message || 'Failed to update customer';
+      setEditError(message);
+    } finally {
+      setEditLoading(false);
+    }
+  };
 
   const formatDate = (dateString) => {
     if (!dateString) return null;
@@ -156,40 +202,126 @@ const AdminCustomerDetail = () => {
             )}
           </div>
         </div>
+
+        <div className="detail-actions">
+          {!customer.isDeleted && (
+            <button
+              className="detail-edit-btn"
+              onClick={startEdit}
+              disabled={isEditing}
+            >
+              Edit Customer
+            </button>
+          )}
+        </div>
       </div>
 
       {/* ── Contact Information ── */}
       <div className="detail-section">
         <h2 className="detail-section-title">Contact Information</h2>
-        <div className="detail-info-grid">
-
-          <div className="detail-info-item">
-            <span className="detail-info-label">Email</span>
-            <span className={`detail-info-value${!customer.email ? ' empty' : ''}`}>
-              {customer.email || 'Not provided'}
-            </span>
+        
+        {editError && (
+          <div className="detail-edit-error">
+            {editError}
           </div>
+        )}
 
-          <div className="detail-info-item">
-            <span className="detail-info-label">Phone</span>
-            <span className={`detail-info-value mono${!customer.phone ? ' empty' : ''}`}>
-              {customer.phone || 'Not provided'}
-            </span>
+        {isEditing ? (
+          <div className="detail-edit-form">
+            <div className="detail-edit-grid">
+              <div className="detail-edit-field">
+                <label className="detail-edit-label">Name</label>
+                <input
+                  type="text"
+                  className="detail-edit-input"
+                  value={editData.name}
+                  onChange={(e) => handleEditChange('name', e.target.value)}
+                  placeholder="Enter customer name"
+                />
+              </div>
+
+              <div className="detail-edit-field">
+                <label className="detail-edit-label">Email</label>
+                <input
+                  type="email"
+                  className="detail-edit-input"
+                  value={editData.email}
+                  onChange={(e) => handleEditChange('email', e.target.value)}
+                  placeholder="Enter email address"
+                />
+              </div>
+
+              <div className="detail-edit-field">
+                <label className="detail-edit-label">Phone</label>
+                <input
+                  type="tel"
+                  className="detail-edit-input"
+                  value={editData.phone}
+                  onChange={(e) => handleEditChange('phone', e.target.value)}
+                  placeholder="Enter phone number"
+                />
+              </div>
+
+              <div className="detail-edit-field detail-edit-field-full">
+                <label className="detail-edit-label">Address</label>
+                <textarea
+                  className="detail-edit-textarea"
+                  value={editData.address}
+                  onChange={(e) => handleEditChange('address', e.target.value)}
+                  placeholder="Enter customer address"
+                  rows="3"
+                />
+              </div>
+            </div>
+
+            <div className="detail-edit-actions">
+              <button
+                type="button"
+                className="detail-edit-cancel-btn"
+                onClick={cancelEdit}
+                disabled={editLoading}
+              >
+                Cancel
+              </button>
+              <button
+                type="button"
+                className="detail-edit-save-btn"
+                onClick={saveEdit}
+                disabled={editLoading}
+              >
+                {editLoading ? 'Saving...' : 'Save Changes'}
+              </button>
+            </div>
           </div>
+        ) : (
+          <div className="detail-info-grid">
+            <div className="detail-info-item">
+              <span className="detail-info-label">Email</span>
+              <span className={`detail-info-value${!customer.email ? ' empty' : ''}`}>
+                {customer.email || 'Not provided'}
+              </span>
+            </div>
 
-          <div className="detail-info-item">
-            <span className="detail-info-label">Address</span>
-            <span className={`detail-info-value${!customer.address ? ' empty' : ''}`}>
-              {customer.address || 'Not provided'}
-            </span>
+            <div className="detail-info-item">
+              <span className="detail-info-label">Phone</span>
+              <span className={`detail-info-value mono${!customer.phone ? ' empty' : ''}`}>
+                {customer.phone || 'Not provided'}
+              </span>
+            </div>
+
+            <div className="detail-info-item">
+              <span className="detail-info-label">Address</span>
+              <span className={`detail-info-value${!customer.address ? ' empty' : ''}`}>
+                {customer.address || 'Not provided'}
+              </span>
+            </div>
+
+            <div className="detail-info-item">
+              <span className="detail-info-label">Customer ID</span>
+              <span className="detail-info-value mono">{customer._id}</span>
+            </div>
           </div>
-
-          <div className="detail-info-item">
-            <span className="detail-info-label">Customer ID</span>
-            <span className="detail-info-value mono">{customer._id}</span>
-          </div>
-
-        </div>
+        )}
       </div>
 
       {/* ── Account Status ── */}
@@ -282,13 +414,31 @@ const AdminCustomerDetail = () => {
             </thead>
             <tbody>
               {bookings.map((booking) => (
-                <tr key={booking._id}>
+                <tr 
+                  key={booking._id} 
+                  onClick={() => navigate(`/admin/bookings/${booking._id}`)}
+                  style={{ cursor: 'pointer' }}
+                >
                   <td className="booking-id-cell">
                     ...{String(booking._id).slice(-8)}
                   </td>
                   <td>{booking.vehicleType || '—'}</td>
                   <td>{booking.serviceType || booking.problemDescription || '—'}</td>
-                  <td>{booking.mechanic?.name || <span style={{ color: 'var(--color-steel)', fontStyle: 'italic' }}>Unassigned</span>}</td>
+                  <td>
+                    {booking.mechanic?._id ? (
+                      <button 
+                        className="detail-link-btn"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          navigate(`/admin/mechanics/${booking.mechanic._id}`);
+                        }}
+                      >
+                        {booking.mechanic.name}
+                      </button>
+                    ) : (
+                      <span style={{ color: 'var(--color-steel)', fontStyle: 'italic' }}>Unassigned</span>
+                    )}
+                  </td>
                   <td>
                     <span className={`booking-status ${getBookingStatusClass(booking.status)}`}>
                       {booking.status}

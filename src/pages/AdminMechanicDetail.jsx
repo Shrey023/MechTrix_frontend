@@ -18,6 +18,10 @@ const AdminMechanicDetail = () => {
   const [documentsError, setDocumentsError] = useState('');
   const [statusUpdating, setStatusUpdating] = useState({});
   const [showConfirmDialog, setShowConfirmDialog] = useState(null);
+  const [isEditing, setIsEditing] = useState(false);
+  const [editData, setEditData] = useState({});
+  const [editLoading, setEditLoading] = useState(false);
+  const [editError, setEditError] = useState('');
 
   useEffect(() => {
     const fetchMechanic = async () => {
@@ -85,26 +89,55 @@ const AdminMechanicDetail = () => {
         responseType: 'blob', // Important for binary data
       });
       
-      // Create blob URL and open in new tab
-      const blob = new Blob([response.data]);
+      // Get content type from response headers
+      const contentType = response.headers['content-type'] || 'application/octet-stream';
+      
+      // Check if response is actually JSON error (server error with blob responseType)
+      if (contentType.includes('application/json')) {
+        // Response is JSON error, not a file
+        const text = await response.data.text();
+        const errorData = JSON.parse(text);
+        setDocumentsError(errorData.message || 'Failed to load document');
+        return;
+      }
+      
+      // Create blob with proper content type
+      const blob = new Blob([response.data], { type: contentType });
       const url = window.URL.createObjectURL(blob);
-      const link = document.createElement('a');
-      link.href = url;
-      link.target = '_blank';
-      link.rel = 'noopener noreferrer';
       
-      // Set filename for download if needed
-      link.download = filename || `document-${documentId}`;
+      // Open in new tab/window for viewing
+      const newWindow = window.open(url, '_blank', 'noopener,noreferrer');
       
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
+      // If popup was blocked, provide fallback download
+      if (!newWindow) {
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = filename || `document-${documentId}`;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      }
       
-      // Clean up the blob URL
-      window.URL.revokeObjectURL(url);
+      // Clean up the blob URL after a delay (to allow the new window to load)
+      setTimeout(() => {
+        window.URL.revokeObjectURL(url);
+      }, 100);
     } catch (err) {
       console.error('Error viewing document:', err);
-      const message = err.response?.data?.message || 'Failed to load document';
+      
+      // Try to extract error message from blob response
+      if (err.response?.data instanceof Blob) {
+        try {
+          const text = await err.response.data.text();
+          const errorData = JSON.parse(text);
+          setDocumentsError(errorData.message || 'Failed to load document');
+          return;
+        } catch (parseErr) {
+          // If parsing fails, use generic message
+        }
+      }
+      
+      const message = err.response?.data?.message || err.message || 'Failed to load document';
       setDocumentsError(message);
     }
   };
@@ -122,6 +155,9 @@ const AdminMechanicDetail = () => {
 
       // Refresh documents list
       await fetchDocuments();
+      
+      // Refresh mechanic details to get updated verification status
+      await fetchMechanic();
       
       // Show success message temporarily
       const successMessage = `Document ${newStatus} successfully`;
@@ -157,6 +193,84 @@ const AdminMechanicDetail = () => {
 
   const cancelStatusChange = () => {
     setShowConfirmDialog(null);
+  };
+
+  const startEdit = () => {
+    setEditData({
+      name: mechanic.name || '',
+      email: mechanic.email || '',
+      phone: mechanic.phone || '',
+      experienceYears: mechanic.experienceYears || 0,
+      serviceRadius: mechanic.serviceRadius || 5,
+      vehicleTypes: mechanic.vehicleTypes || [],
+      servicesOffered: mechanic.servicesOffered || [],
+      isVerified: mechanic.isVerified || false,
+      verificationStatus: mechanic.verificationStatus || 'pending',
+      currentStatus: mechanic.currentStatus || 'offline',
+      // Pricing fields if they exist
+      baseVisitingCharge: mechanic.pricing?.baseVisitingCharge || 100,
+      includedDistanceKm: mechanic.pricing?.includedDistanceKm || 5,
+      extraChargePerKm: mechanic.pricing?.extraChargePerKm || 10
+    });
+    setIsEditing(true);
+    setEditError('');
+  };
+
+  const cancelEdit = () => {
+    setIsEditing(false);
+    setEditData({});
+    setEditError('');
+  };
+
+  const handleEditChange = (field, value) => {
+    setEditData(prev => ({ ...prev, [field]: value }));
+  };
+
+  const handleArrayChange = (field, value) => {
+    // Convert comma-separated string to array
+    const arrayValue = value.split(',').map(item => item.trim()).filter(item => item);
+    setEditData(prev => ({ ...prev, [field]: arrayValue }));
+  };
+
+  const saveEdit = async () => {
+    try {
+      setEditLoading(true);
+      setEditError('');
+
+      // Prepare the data to match the backend expectations
+      const updateData = {
+        name: editData.name,
+        email: editData.email,
+        phone: editData.phone,
+        experienceYears: Number(editData.experienceYears),
+        serviceRadius: Number(editData.serviceRadius),
+        vehicleTypes: editData.vehicleTypes,
+        servicesOffered: editData.servicesOffered,
+        isVerified: editData.isVerified,
+        verificationStatus: editData.verificationStatus,
+        currentStatus: editData.currentStatus,
+        // Include pricing as nested object
+        pricing: {
+          baseVisitingCharge: Number(editData.baseVisitingCharge),
+          includedDistanceKm: Number(editData.includedDistanceKm),
+          extraChargePerKm: Number(editData.extraChargePerKm)
+        }
+      };
+
+      const response = await axios.patch(`/admin/mechanics/${id}`, updateData, {
+        headers: { Authorization: `Bearer ${token}` }
+      });
+
+      // Update the mechanic data with the response
+      setMechanic(response.data.mechanic);
+      setIsEditing(false);
+      setEditData({});
+    } catch (err) {
+      const message = err.response?.data?.message || 'Failed to update mechanic';
+      setEditError(message);
+    } finally {
+      setEditLoading(false);
+    }
   };
 
   const formatDate = (dateString) => {
@@ -217,20 +331,225 @@ const AdminMechanicDetail = () => {
           <span className={statusClass(mechanic.verificationStatus)}>{mechanic.verificationStatus || 'Unknown'}</span>
           <span className={statusClass(mechanic.currentStatus)}>{mechanic.currentStatus || 'Unknown'}</span>
         </div>
+        <div className="mechanic-detail-actions">
+          <button
+            className="mechanic-detail-edit-btn"
+            onClick={startEdit}
+            disabled={isEditing}
+          >
+            Edit Mechanic
+          </button>
+        </div>
       </section>
 
       <section className="mechanic-detail-section">
         <h2>Profile Information</h2>
-        <div className="mechanic-detail-grid">
-          <div><span>Email</span><strong>{mechanic.email || 'Not provided'}</strong></div>
-          <div><span>Phone</span><strong>{mechanic.phone || 'Not provided'}</strong></div>
-          <div><span>Experience</span><strong>{mechanic.experienceYears ?? 0} years</strong></div>
-          <div><span>Service Radius</span><strong>{mechanic.serviceRadius ?? 0} km</strong></div>
-          <div><span>Vehicles</span><strong>{mechanic.vehicleTypes?.join(', ') || 'Not provided'}</strong></div>
-          <div><span>Services</span><strong>{mechanic.servicesOffered?.join(', ') || 'Not provided'}</strong></div>
-          <div><span>Verified Flag</span><strong>{mechanic.isVerified ? 'Yes' : 'No'}</strong></div>
-          <div><span>Registered</span><strong>{formatDate(mechanic.createdAt)}</strong></div>
-        </div>
+        
+        {editError && (
+          <div className="mechanic-detail-edit-error">
+            {editError}
+          </div>
+        )}
+
+        {isEditing ? (
+          <div className="mechanic-detail-edit-form">
+            <div className="mechanic-detail-edit-grid">
+              <div className="mechanic-detail-edit-field">
+                <label className="mechanic-detail-edit-label">Name</label>
+                <input
+                  type="text"
+                  className="mechanic-detail-edit-input"
+                  value={editData.name}
+                  onChange={(e) => handleEditChange('name', e.target.value)}
+                  placeholder="Enter mechanic name"
+                />
+              </div>
+
+              <div className="mechanic-detail-edit-field">
+                <label className="mechanic-detail-edit-label">Email</label>
+                <input
+                  type="email"
+                  className="mechanic-detail-edit-input"
+                  value={editData.email}
+                  onChange={(e) => handleEditChange('email', e.target.value)}
+                  placeholder="Enter email address"
+                />
+              </div>
+
+              <div className="mechanic-detail-edit-field">
+                <label className="mechanic-detail-edit-label">Phone</label>
+                <input
+                  type="tel"
+                  className="mechanic-detail-edit-input"
+                  value={editData.phone}
+                  onChange={(e) => handleEditChange('phone', e.target.value)}
+                  placeholder="Enter phone number"
+                />
+              </div>
+
+              <div className="mechanic-detail-edit-field">
+                <label className="mechanic-detail-edit-label">Experience (Years)</label>
+                <input
+                  type="number"
+                  className="mechanic-detail-edit-input"
+                  value={editData.experienceYears}
+                  onChange={(e) => handleEditChange('experienceYears', e.target.value)}
+                  placeholder="Years of experience"
+                  min="0"
+                />
+              </div>
+
+              <div className="mechanic-detail-edit-field">
+                <label className="mechanic-detail-edit-label">Service Radius (km)</label>
+                <input
+                  type="number"
+                  className="mechanic-detail-edit-input"
+                  value={editData.serviceRadius}
+                  onChange={(e) => handleEditChange('serviceRadius', e.target.value)}
+                  placeholder="Service radius in km"
+                  min="1"
+                />
+              </div>
+
+              <div className="mechanic-detail-edit-field">
+                <label className="mechanic-detail-edit-label">Verification Status</label>
+                <select
+                  className="mechanic-detail-edit-input"
+                  value={editData.verificationStatus}
+                  onChange={(e) => handleEditChange('verificationStatus', e.target.value)}
+                >
+                  <option value="pending">Pending</option>
+                  <option value="approved">Approved</option>
+                  <option value="rejected">Rejected</option>
+                </select>
+              </div>
+
+              <div className="mechanic-detail-edit-field">
+                <label className="mechanic-detail-edit-label">Current Status</label>
+                <select
+                  className="mechanic-detail-edit-input"
+                  value={editData.currentStatus}
+                  onChange={(e) => handleEditChange('currentStatus', e.target.value)}
+                >
+                  <option value="available">Available</option>
+                  <option value="busy">Busy</option>
+                  <option value="offline">Offline</option>
+                </select>
+              </div>
+
+              <div className="mechanic-detail-edit-field">
+                <label className="mechanic-detail-edit-label">Verified</label>
+                <select
+                  className="mechanic-detail-edit-input"
+                  value={editData.isVerified}
+                  onChange={(e) => handleEditChange('isVerified', e.target.value === 'true')}
+                >
+                  <option value="false">No</option>
+                  <option value="true">Yes</option>
+                </select>
+              </div>
+
+              <div className="mechanic-detail-edit-field mechanic-detail-edit-field-full">
+                <label className="mechanic-detail-edit-label">Vehicle Types (comma separated)</label>
+                <input
+                  type="text"
+                  className="mechanic-detail-edit-input"
+                  value={editData.vehicleTypes?.join(', ') || ''}
+                  onChange={(e) => handleArrayChange('vehicleTypes', e.target.value)}
+                  placeholder="e.g. bike, car, truck"
+                />
+              </div>
+
+              <div className="mechanic-detail-edit-field mechanic-detail-edit-field-full">
+                <label className="mechanic-detail-edit-label">Services Offered (comma separated)</label>
+                <input
+                  type="text"
+                  className="mechanic-detail-edit-input"
+                  value={editData.servicesOffered?.join(', ') || ''}
+                  onChange={(e) => handleArrayChange('servicesOffered', e.target.value)}
+                  placeholder="e.g. towing, puncture repair, battery replacement"
+                />
+              </div>
+
+              {/* Pricing Section */}
+              <div className="mechanic-detail-edit-field">
+                <label className="mechanic-detail-edit-label">Base Visiting Charge (₹)</label>
+                <input
+                  type="number"
+                  className="mechanic-detail-edit-input"
+                  value={editData.baseVisitingCharge}
+                  onChange={(e) => handleEditChange('baseVisitingCharge', e.target.value)}
+                  placeholder="Base charge"
+                  min="50"
+                  max="5000"
+                />
+              </div>
+
+              <div className="mechanic-detail-edit-field">
+                <label className="mechanic-detail-edit-label">Included Distance (km)</label>
+                <input
+                  type="number"
+                  className="mechanic-detail-edit-input"
+                  value={editData.includedDistanceKm}
+                  onChange={(e) => handleEditChange('includedDistanceKm', e.target.value)}
+                  placeholder="Included distance"
+                  min="0"
+                  max="100"
+                />
+              </div>
+
+              <div className="mechanic-detail-edit-field">
+                <label className="mechanic-detail-edit-label">Extra Charge per km (₹)</label>
+                <input
+                  type="number"
+                  className="mechanic-detail-edit-input"
+                  value={editData.extraChargePerKm}
+                  onChange={(e) => handleEditChange('extraChargePerKm', e.target.value)}
+                  placeholder="Extra charge per km"
+                  min="5"
+                  max="500"
+                />
+              </div>
+            </div>
+
+            <div className="mechanic-detail-edit-actions">
+              <button
+                type="button"
+                className="mechanic-detail-edit-cancel-btn"
+                onClick={cancelEdit}
+                disabled={editLoading}
+              >
+                Cancel
+              </button>
+              <button
+                type="button"
+                className="mechanic-detail-edit-save-btn"
+                onClick={saveEdit}
+                disabled={editLoading}
+              >
+                {editLoading ? 'Saving...' : 'Save Changes'}
+              </button>
+            </div>
+          </div>
+        ) : (
+          <div className="mechanic-detail-grid">
+            <div><span>Email</span><strong>{mechanic.email || 'Not provided'}</strong></div>
+            <div><span>Phone</span><strong>{mechanic.phone || 'Not provided'}</strong></div>
+            <div><span>Experience</span><strong>{mechanic.experienceYears ?? 0} years</strong></div>
+            <div><span>Service Radius</span><strong>{mechanic.serviceRadius ?? 0} km</strong></div>
+            <div><span>Vehicles</span><strong>{mechanic.vehicleTypes?.join(', ') || 'Not provided'}</strong></div>
+            <div><span>Services</span><strong>{mechanic.servicesOffered?.join(', ') || 'Not provided'}</strong></div>
+            <div><span>Verified Flag</span><strong>{mechanic.isVerified ? 'Yes' : 'No'}</strong></div>
+            <div><span>Registered</span><strong>{formatDate(mechanic.createdAt)}</strong></div>
+            {mechanic.pricing && (
+              <>
+                <div><span>Base Charge</span><strong>₹{mechanic.pricing.baseVisitingCharge}</strong></div>
+                <div><span>Included Distance</span><strong>{mechanic.pricing.includedDistanceKm} km</strong></div>
+                <div><span>Extra Charge/km</span><strong>₹{mechanic.pricing.extraChargePerKm}</strong></div>
+              </>
+            )}
+          </div>
+        )}
       </section>
 
       <section className="mechanic-detail-stats">
@@ -369,7 +688,11 @@ const AdminMechanicDetail = () => {
               <thead><tr><th>Status</th><th>Vehicle</th><th>Service</th><th>Scheduled</th><th>Created</th></tr></thead>
               <tbody>
                 {bookings.map((booking) => (
-                  <tr key={booking._id}>
+                  <tr 
+                    key={booking._id}
+                    onClick={() => navigate(`/admin/bookings/${booking._id}`)}
+                    style={{ cursor: 'pointer' }}
+                  >
                     <td><span className={statusClass(booking.status)}>{booking.status}</span></td>
                     <td>{booking.vehicleType || '—'}</td>
                     <td>{booking.serviceType || booking.problemDescription || '—'}</td>

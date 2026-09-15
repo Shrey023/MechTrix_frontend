@@ -549,3 +549,182 @@
 .mechanic-detail-confirm-rejected:hover {
   background: #b91c1c;
 }
+/* Mechanic Edit Functionality */
+.mechanic-detail-actions {
+  margin-left: auto;
+  flex-shrink: 0;
+}
+
+.mechanic-detail-edit-btn {
+  padding: 10px 20px;
+  background: var(--color-brown);
+  color: white;
+  border: none;
+  border-radius: 2px;
+  font-family: var(--font-display);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.mechanic-detail-edit-btn:hover:not(:disabled) {
+  background: var(--color-brown-dark);
+  transform: translateY(-1px);
+}
+
+.mechanic-detail-edit-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.mechanic-detail-edit-error {
+  padding: 16px 20px;
+  background: rgba(224, 96, 96, 0.1);
+  border: 1px solid var(--error);
+  border-left: 4px solid var(--error);
+  border-radius: 2px;
+  color: var(--error);
+  font-family: var(--font-body);
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
+.mechanic-detail-edit-form {
+  background: var(--color-bg4);
+  border: 1px solid rgba(131, 68, 23, 0.15);
+  border-radius: 2px;
+  padding: 28px 32px;
+}
+
+.mechanic-detail-edit-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 24px;
+  margin-bottom: 28px;
+}
+
+.mechanic-detail-edit-field-full {
+  grid-column: 1 / -1;
+}
+
+.mechanic-detail-edit-label {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--color-steel-light);
+  margin-bottom: 8px;
+}
+
+.mechanic-detail-edit-input,
+.mechanic-detail-edit-textarea {
+  width: 100%;
+  padding: 12px 16px;
+  border: 1px solid rgba(131, 68, 23, 0.2);
+  border-radius: 2px;
+  font-size: 14px;
+  font-family: var(--font-body);
+  background: var(--color-bg3);
+  color: var(--color-off-white);
+  transition: all 0.2s ease;
+}
+
+.mechanic-detail-edit-input:focus,
+.mechanic-detail-edit-textarea:focus {
+  outline: none;
+  border-color: var(--color-brown);
+  box-shadow: 0 0 0 3px rgba(131, 68, 23, 0.15);
+}
+
+.mechanic-detail-edit-textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.mechanic-detail-edit-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+}
+
+.mechanic-detail-edit-cancel-btn,
+.mechanic-detail-edit-save-btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 2px;
+  font-family: var(--font-display);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.mechanic-detail-edit-cancel-btn {
+  background: transparent;
+  color: var(--color-steel-light);
+  border: 1px solid rgba(131, 68, 23, 0.3);
+}
+
+.mechanic-detail-edit-cancel-btn:hover:not(:disabled) {
+  background: rgba(131, 68, 23, 0.1);
+  border-color: rgba(131, 68, 23, 0.5);
+}
+
+.mechanic-detail-edit-save-btn {
+  background: var(--color-brown);
+  color: white;
+}
+
+.mechanic-detail-edit-save-btn:hover:not(:disabled) {
+  background: var(--color-brown-dark);
+  transform: translateY(-1px);
+}
+
+.mechanic-detail-edit-cancel-btn:disabled,
+.mechanic-detail-edit-save-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Responsive for mechanic edit */
+@media (max-width: 1024px) {
+  .mechanic-detail-edit-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .mechanic-detail-edit-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  
+  .mechanic-detail-profile-card {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+  
+  .mechanic-detail-actions {
+    margin-left: 0;
+    margin-top: 8px;
+  }
+  
+  .mechanic-detail-edit-form {
+    padding: 20px 16px;
+  }
+}
+
+/* Make booking rows hoverable */
+.mechanic-detail-bookings tbody tr:hover {
+  background: rgba(131, 68, 23, 0.08);
+  cursor: pointer;
+}

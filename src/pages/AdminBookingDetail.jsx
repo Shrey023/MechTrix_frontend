@@ -13,6 +13,10 @@ const AdminBookingDetail = () => {
   const [timeline, setTimeline] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
+  const [isEditing, setIsEditing] = useState(false);
+  const [editData, setEditData] = useState({});
+  const [editLoading, setEditLoading] = useState(false);
+  const [editError, setEditError] = useState('');
 
   useEffect(() => {
     const fetchBooking = async () => {
@@ -42,6 +46,56 @@ const AdminBookingDetail = () => {
     };
     fetchBooking();
   }, [id, navigate, token]);
+
+  const startEdit = () => {
+    setEditData({
+      status: booking.status || '',
+      scheduledTime: booking.scheduledTime ? new Date(booking.scheduledTime).toISOString().slice(0, 16) : '',
+      problemDescription: booking.problemDescription || '',
+      serviceType: booking.serviceType || '',
+      vehicleType: booking.vehicleType || ''
+    });
+    setIsEditing(true);
+    setEditError('');
+  };
+
+  const cancelEdit = () => {
+    setIsEditing(false);
+    setEditData({});
+    setEditError('');
+  };
+
+  const handleEditChange = (field, value) => {
+    setEditData(prev => ({ ...prev, [field]: value }));
+  };
+
+  const saveEdit = async () => {
+    try {
+      setEditLoading(true);
+      setEditError('');
+
+      const updateData = {
+        status: editData.status,
+        scheduledTime: editData.scheduledTime,
+        problemDescription: editData.problemDescription,
+        serviceType: editData.serviceType,
+        vehicleType: editData.vehicleType
+      };
+
+      const response = await axios.patch(`/admin/bookings/${id}`, updateData, {
+        headers: { Authorization: `Bearer ${token}` }
+      });
+
+      setBooking(response.data.booking);
+      setIsEditing(false);
+      setEditData({});
+    } catch (err) {
+      const message = err.response?.data?.message || 'Failed to update booking';
+      setEditError(message);
+    } finally {
+      setEditLoading(false);
+    }
+  };
 
   const formatDate = (dateString) => {
     if (!dateString) return '—';
@@ -81,26 +135,142 @@ const AdminBookingDetail = () => {
           <h1>{booking.serviceType || 'Service request'}</h1>
           <p>Created {formatDate(booking.createdAt)}</p>
         </div>
-        <span className={statusClass(booking.status)}>{booking.status || 'Unknown'}</span>
+        <div className="booking-detail-hero-actions">
+          <span className={statusClass(booking.status)}>{booking.status || 'Unknown'}</span>
+          <button
+            className="booking-detail-edit-btn"
+            onClick={startEdit}
+            disabled={isEditing}
+          >
+            Edit Booking
+          </button>
+        </div>
       </section>
 
       <section className="booking-detail-section">
         <h2>Booking Summary</h2>
-        <div className="booking-detail-grid">
-          <div><span>Booking ID</span><strong className="booking-detail-mono">{booking._id}</strong></div>
-          <div><span>Status</span><strong><span className={statusClass(booking.status)}>{booking.status || 'Unknown'}</span></strong></div>
-          <div><span>Service</span><strong>{booking.serviceType || 'Not provided'}</strong></div>
-          <div><span>Vehicle</span><strong>{booking.vehicleType || 'Not provided'}</strong></div>
-          <div><span>Scheduled Time</span><strong>{formatDate(booking.scheduledTime)}</strong></div>
-          <div><span>Completed Time</span><strong>{formatDate(booking.completedAt)}</strong></div>
-        </div>
+        
+        {editError && (
+          <div className="booking-detail-edit-error">
+            {editError}
+          </div>
+        )}
+
+        {isEditing ? (
+          <div className="booking-detail-edit-form">
+            <div className="booking-detail-edit-grid">
+              <div className="booking-detail-edit-field">
+                <label className="booking-detail-edit-label">Status</label>
+                <select
+                  className="booking-detail-edit-input"
+                  value={editData.status}
+                  onChange={(e) => handleEditChange('status', e.target.value)}
+                >
+                  <option value="pending">Pending</option>
+                  <option value="accepted">Accepted</option>
+                  <option value="rejected">Rejected</option>
+                  <option value="completed">Completed</option>
+                  <option value="cancelled">Cancelled</option>
+                </select>
+              </div>
+
+              <div className="booking-detail-edit-field">
+                <label className="booking-detail-edit-label">Vehicle Type</label>
+                <input
+                  type="text"
+                  className="booking-detail-edit-input"
+                  value={editData.vehicleType}
+                  onChange={(e) => handleEditChange('vehicleType', e.target.value)}
+                  placeholder="Enter vehicle type"
+                />
+              </div>
+
+              <div className="booking-detail-edit-field">
+                <label className="booking-detail-edit-label">Service Type</label>
+                <input
+                  type="text"
+                  className="booking-detail-edit-input"
+                  value={editData.serviceType}
+                  onChange={(e) => handleEditChange('serviceType', e.target.value)}
+                  placeholder="Enter service type"
+                />
+              </div>
+
+              <div className="booking-detail-edit-field">
+                <label className="booking-detail-edit-label">Scheduled Time</label>
+                <input
+                  type="datetime-local"
+                  className="booking-detail-edit-input"
+                  value={editData.scheduledTime}
+                  onChange={(e) => handleEditChange('scheduledTime', e.target.value)}
+                />
+              </div>
+
+              <div className="booking-detail-edit-field booking-detail-edit-field-full">
+                <label className="booking-detail-edit-label">Problem Description</label>
+                <textarea
+                  className="booking-detail-edit-textarea"
+                  value={editData.problemDescription}
+                  onChange={(e) => handleEditChange('problemDescription', e.target.value)}
+                  placeholder="Enter problem description"
+                  rows="4"
+                />
+              </div>
+            </div>
+
+            <div className="booking-detail-edit-actions">
+              <button
+                type="button"
+                className="booking-detail-edit-cancel-btn"
+                onClick={cancelEdit}
+                disabled={editLoading}
+              >
+                Cancel
+              </button>
+              <button
+                type="button"
+                className="booking-detail-edit-save-btn"
+                onClick={saveEdit}
+                disabled={editLoading}
+              >
+                {editLoading ? 'Saving...' : 'Save Changes'}
+              </button>
+            </div>
+          </div>
+        ) : (
+          <div className="booking-detail-grid">
+            <div><span>Booking ID</span><strong className="booking-detail-mono">{booking._id}</strong></div>
+            <div><span>Status</span><strong><span className={statusClass(booking.status)}>{booking.status || 'Unknown'}</span></strong></div>
+            <div><span>Service</span><strong>{booking.serviceType || 'Not provided'}</strong></div>
+            <div><span>Vehicle</span><strong>{booking.vehicleType || 'Not provided'}</strong></div>
+            <div><span>Scheduled Time</span><strong>{formatDate(booking.scheduledTime)}</strong></div>
+            <div><span>Completed Time</span><strong>{formatDate(booking.completedAt)}</strong></div>
+            {booking.problemDescription && (
+              <div className="booking-detail-field-full"><span>Problem Description</span><strong>{booking.problemDescription}</strong></div>
+            )}
+          </div>
+        )}
       </section>
 
       <div className="booking-detail-two-column">
         <section className="booking-detail-section">
           <h2>Customer</h2>
           <div className="booking-detail-grid booking-detail-single-column">
-            <div><span>Name</span><strong>{customer?.name || 'Unknown customer'}</strong></div>
+            <div>
+              <span>Name</span>
+              <strong>
+                {customer?._id ? (
+                  <button 
+                    className="booking-detail-link-btn" 
+                    onClick={() => navigate(`/admin/customers/${customer._id}`)}
+                  >
+                    {customer.name}
+                  </button>
+                ) : (
+                  customer?.name || 'Unknown customer'
+                )}
+              </strong>
+            </div>
             <div><span>Email</span><strong>{customer?.email || 'Not provided'}</strong></div>
             <div><span>Phone</span><strong>{customer?.phone || 'Not provided'}</strong></div>
           </div>
@@ -109,7 +279,21 @@ const AdminBookingDetail = () => {
         <section className="booking-detail-section">
           <h2>Mechanic</h2>
           <div className="booking-detail-grid booking-detail-single-column">
-            <div><span>Name</span><strong>{mechanic?.name || 'Unassigned'}</strong></div>
+            <div>
+              <span>Name</span>
+              <strong>
+                {mechanic?._id ? (
+                  <button 
+                    className="booking-detail-link-btn" 
+                    onClick={() => navigate(`/admin/mechanics/${mechanic._id}`)}
+                  >
+                    {mechanic.name}
+                  </button>
+                ) : (
+                  mechanic?.name || 'Unassigned'
+                )}
+              </strong>
+            </div>
             <div><span>Email</span><strong>{mechanic?.email || 'Not provided'}</strong></div>
             <div><span>Phone</span><strong>{mechanic?.phone || 'Not provided'}</strong></div>
           </div>
