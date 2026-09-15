@@ -97,6 +97,12 @@
   margin-bottom: 8px;
 }
 
+.guftagu-message-sender {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
 .guftagu-message-header strong {
   color: var(--color-off-white);
   font-family: var(--font-display);
@@ -104,6 +110,21 @@
   font-weight: 700;
   letter-spacing: 1px;
   text-transform: uppercase;
+}
+
+.guftagu-avatar-fallback {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--color-brown);
+  color: var(--color-bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 700;
+  flex-shrink: 0;
 }
 
 .guftagu-message-time {
@@ -390,6 +411,19 @@
   font-size: 12px;
   color: var(--color-steel);
   margin-bottom: 16px;
+  align-items: center;
+}
+
+.guftagu-suggestion-author {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.guftagu-suggestion-author .guftagu-avatar-fallback {
+  width: 24px;
+  height: 24px;
+  font-size: 11px;
 }
 
 .guftagu-suggestion-actions {
@@ -464,15 +498,27 @@
   border-left: 2px solid rgba(131, 68, 23, 0.3);
 }
 
+.guftagu-comment-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+
+.guftagu-comment-header .guftagu-avatar-fallback {
+  width: 24px;
+  height: 24px;
+  font-size: 11px;
+}
+
 .guftagu-comment strong {
-  display: block;
+  display: inline;
   color: var(--color-off-white);
   font-family: var(--font-display);
   font-size: 11px;
   font-weight: 700;
   letter-spacing: 1px;
   text-transform: uppercase;
-  margin-bottom: 6px;
 }
 
 .guftagu-comment p {

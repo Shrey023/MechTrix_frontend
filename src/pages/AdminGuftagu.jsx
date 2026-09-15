@@ -14,6 +14,7 @@ const AdminGuftagu = () => {
   const [sendingMessage, setSendingMessage] = useState(false);
   const [chatError, setChatError] = useState('');
   const [chatLoading, setChatLoading] = useState(false);
+  const [profileImages, setProfileImages] = useState({}); // Store admin profile images
 
   // Suggestions state
   const [suggestions, setSuggestions] = useState([]);
@@ -37,6 +38,25 @@ const AdminGuftagu = () => {
     }
   }, [activeTab, filterStatus]);
 
+  const fetchProfileImage = async (adminId) => {
+    // Skip if already fetched or no adminId
+    if (!adminId || profileImages[adminId]) return;
+
+    try {
+      // For the current logged-in admin, use their own endpoint
+      // For other admins, we'd need a different endpoint (to be added if needed)
+      const response = await axios.get(`/admin/profile-picture`, {
+        headers: { Authorization: `Bearer ${token}` },
+        responseType: 'blob',
+      });
+      const imageUrl = URL.createObjectURL(response.data);
+      setProfileImages(prev => ({ ...prev, [adminId]: imageUrl }));
+    } catch (err) {
+      // Profile image is optional, silently fail
+      console.log(`Profile image not available for admin ${adminId}`);
+    }
+  };
+
   const fetchMessages = async () => {
     try {
       setChatLoading(true);
@@ -45,6 +65,20 @@ const AdminGuftagu = () => {
       const response = await axios.get('/admin/guftagu/messages', authConfig());
       console.log('✅ Messages response:', response.data);
       setMessages(response.data.messages || []);
+      
+      // Fetch profile images for message senders
+      const adminIds = new Set();
+      response.data.messages?.forEach(msg => {
+        if (msg.sender?._id) adminIds.add(msg.sender._id);
+        if (msg.receiver?._id) adminIds.add(msg.receiver._id);
+      });
+      
+      adminIds.forEach(adminId => {
+        if (msg.sender?.profileImage) {
+          // For now, we'll just note that profileImage exists
+          // A proper implementation would need a public endpoint to fetch other admin's images
+        }
+      });
     } catch (err) {
       console.error('❌ Failed to fetch messages:', err);
       console.error('Response:', err.response);
@@ -155,6 +189,17 @@ const AdminGuftagu = () => {
     }
   };
 
+  const getAvatar = (admin) => {
+    if (!admin) return <div className="guftagu-avatar-fallback">?</div>;
+    
+    // For now, just show initials - profile image URLs would need proper endpoint
+    return (
+      <div className="guftagu-avatar-fallback">
+        {admin.name?.charAt(0).toUpperCase() || '?'}
+      </div>
+    );
+  };
+
   const formatDateTime = (dateString) => {
     if (!dateString) return '—';
     const date = new Date(dateString);
@@ -243,7 +288,10 @@ const AdminGuftagu = () => {
                   messages.map((msg) => (
                     <div key={msg._id} className="guftagu-message">
                       <div className="guftagu-message-header">
-                        <strong>{msg.sender?.name || 'Admin'}</strong>
+                        <div className="guftagu-message-sender">
+                          {getAvatar(msg.sender)}
+                          <strong>{msg.sender?.name || 'Admin'}</strong>
+                        </div>
                         <span className="guftagu-message-time">{formatDateTime(msg.createdAt)}</span>
                       </div>
                       <div className="guftagu-message-body">{msg.message}</div>
@@ -347,7 +395,10 @@ const AdminGuftagu = () => {
                   <p className="guftagu-suggestion-description">{suggestion.description}</p>
                   
                   <div className="guftagu-suggestion-meta">
-                    <span>By {suggestion.createdBy?.name || 'Admin'}</span>
+                    <span className="guftagu-suggestion-author">
+                      {getAvatar(suggestion.createdBy)}
+                      <span>By {suggestion.createdBy?.name || 'Admin'}</span>
+                    </span>
                     <span>{formatDateTime(suggestion.createdAt)}</span>
                   </div>
 
@@ -388,7 +439,10 @@ const AdminGuftagu = () => {
                         {suggestion.comments && suggestion.comments.length > 0 ? (
                           suggestion.comments.map((comment, index) => (
                             <div key={index} className="guftagu-comment">
-                              <strong>{comment.author?.name || 'Admin'}</strong>
+                              <div className="guftagu-comment-header">
+                                {getAvatar(comment.author)}
+                                <strong>{comment.author?.name || 'Admin'}</strong>
+                              </div>
                               <p>{comment.text}</p>
                               <span className="guftagu-comment-time">{formatDateTime(comment.createdAt)}</span>
                             </div>
