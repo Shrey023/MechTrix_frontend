@@ -127,6 +127,14 @@
   flex-shrink: 0;
 }
 
+.guftagu-avatar-img {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
 .guftagu-message-time {
   font-family: var(--font-body);
   font-size: 11px;
@@ -426,6 +434,13 @@
   font-size: 11px;
 }
 
+.guftagu-suggestion-author .guftagu-avatar-img {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
 .guftagu-suggestion-actions {
   display: flex;
   gap: 12px;
@@ -509,6 +524,13 @@
   width: 24px;
   height: 24px;
   font-size: 11px;
+}
+
+.guftagu-comment-header .guftagu-avatar-img {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  object-fit: cover;
 }
 
 .guftagu-comment strong {

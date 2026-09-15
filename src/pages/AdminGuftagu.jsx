@@ -15,6 +15,7 @@ const AdminGuftagu = () => {
   const [chatError, setChatError] = useState('');
   const [chatLoading, setChatLoading] = useState(false);
   const [profileImages, setProfileImages] = useState({}); // Store admin profile images
+  const [loadingImages, setLoadingImages] = useState(new Set()); // Track which images are being loaded
 
   // Suggestions state
   const [suggestions, setSuggestions] = useState([]);
@@ -38,14 +39,24 @@ const AdminGuftagu = () => {
     }
   }, [activeTab, filterStatus]);
 
+  // Cleanup blob URLs on unmount
+  useEffect(() => {
+    return () => {
+      Object.values(profileImages).forEach(url => {
+        if (url) URL.revokeObjectURL(url);
+      });
+    };
+  }, []);
+
   const fetchProfileImage = async (adminId) => {
-    // Skip if already fetched or no adminId
-    if (!adminId || profileImages[adminId]) return;
+    // Skip if already fetched/loading or no adminId
+    if (!adminId || profileImages[adminId] || loadingImages.has(adminId)) return;
+
+    // Mark as loading
+    setLoadingImages(prev => new Set([...prev, adminId]));
 
     try {
-      // For the current logged-in admin, use their own endpoint
-      // For other admins, we'd need a different endpoint (to be added if needed)
-      const response = await axios.get(`/admin/profile-picture`, {
+      const response = await axios.get(`/admin/profile-picture/${adminId}`, {
         headers: { Authorization: `Bearer ${token}` },
         responseType: 'blob',
       });
@@ -54,6 +65,13 @@ const AdminGuftagu = () => {
     } catch (err) {
       // Profile image is optional, silently fail
       console.log(`Profile image not available for admin ${adminId}`);
+    } finally {
+      // Remove from loading set
+      setLoadingImages(prev => {
+        const newSet = new Set([...prev]);
+        newSet.delete(adminId);
+        return newSet;
+      });
     }
   };
 
@@ -65,6 +83,20 @@ const AdminGuftagu = () => {
       const response = await axios.get('/admin/guftagu/messages', authConfig());
       console.log('✅ Messages response:', response.data);
       setMessages(response.data.messages || []);
+      
+      // Fetch profile images for all admins in messages
+      const adminIds = new Set();
+      response.data.messages?.forEach(msg => {
+        if (msg.sender?._id && msg.sender?.profileImage) {
+          adminIds.add(msg.sender._id);
+        }
+        if (msg.receiver?._id && msg.receiver?.profileImage) {
+          adminIds.add(msg.receiver._id);
+        }
+      });
+      
+      // Fetch all profile images
+      adminIds.forEach(adminId => fetchProfileImage(adminId));
     } catch (err) {
       console.error('❌ Failed to fetch messages:', err);
       console.error('Response:', err.response);
@@ -110,6 +142,22 @@ const AdminGuftagu = () => {
       const params = filterStatus ? `?status=${filterStatus}` : '';
       const response = await axios.get(`/admin/guftagu/suggestions${params}`, authConfig());
       setSuggestions(response.data.suggestions);
+      
+      // Fetch profile images for all admins in suggestions
+      const adminIds = new Set();
+      response.data.suggestions?.forEach(suggestion => {
+        if (suggestion.createdBy?._id && suggestion.createdBy?.profileImage) {
+          adminIds.add(suggestion.createdBy._id);
+        }
+        suggestion.comments?.forEach(comment => {
+          if (comment.author?._id && comment.author?.profileImage) {
+            adminIds.add(comment.author._id);
+          }
+        });
+      });
+      
+      // Fetch all profile images
+      adminIds.forEach(adminId => fetchProfileImage(adminId));
     } catch (err) {
       const status = err.response?.status;
       if (status === 401 || status === 403) {
@@ -178,7 +226,18 @@ const AdminGuftagu = () => {
   const getAvatar = (admin) => {
     if (!admin) return <div className="guftagu-avatar-fallback">?</div>;
     
-    // For now, just show initials - profile image URLs would need proper endpoint
+    // Check if we have loaded this admin's profile image
+    if (admin._id && profileImages[admin._id]) {
+      return (
+        <img 
+          src={profileImages[admin._id]} 
+          alt={admin.name} 
+          className="guftagu-avatar-img"
+        />
+      );
+    }
+    
+    // Fallback to initials
     return (
       <div className="guftagu-avatar-fallback">
         {admin.name?.charAt(0).toUpperCase() || '?'}
