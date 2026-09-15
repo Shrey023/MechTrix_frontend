@@ -34,6 +34,7 @@ import AdminMechanicDetail from './pages/AdminMechanicDetail';
 import AdminBookings from './pages/AdminBookings';
 import AdminBookingDetail from './pages/AdminBookingDetail';
 import AdminSettings from './pages/AdminSettings';
+import AdminGuftagu from './pages/AdminGuftagu';
 
 import MechanicTracker from './components/MechanicTracker'; // ✅ required for /track/:bookingId
 
@@ -163,6 +164,16 @@ const App = () => {
             <AdminProtectedRoute>
               <AdminLayout>
                 <AdminBookingDetail />
+              </AdminLayout>
+            </AdminProtectedRoute>
+          }
+        />
+        <Route
+          path="/admin/guftagu"
+          element={
+            <AdminProtectedRoute>
+              <AdminLayout>
+                <AdminGuftagu />
               </AdminLayout>
             </AdminProtectedRoute>
           }

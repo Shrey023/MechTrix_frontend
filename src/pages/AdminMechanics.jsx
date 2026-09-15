@@ -30,6 +30,7 @@ const AdminMechanics = () => {
   });
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
+  const [profileImages, setProfileImages] = useState({});
 
   const fetchMechanics = useCallback(async () => {
     try {
@@ -45,6 +46,12 @@ const AdminMechanics = () => {
       });
       setMechanics(response.data.mechanics);
       setPagination(response.data.pagination);
+      
+      // Fetch profile images for mechanics that have them
+      const mechanicsWithImages = response.data.mechanics.filter(m => m.profileImage);
+      mechanicsWithImages.forEach(mechanic => {
+        fetchProfileImage(mechanic._id);
+      });
     } catch (err) {
       const status = err.response?.status;
       const message = err.response?.data?.message || 'Failed to load mechanics';
@@ -60,8 +67,44 @@ const AdminMechanics = () => {
     }
   }, [filters, navigate, token]);
 
+  const fetchProfileImage = async (mechanicId) => {
+    try {
+      const response = await axios.get(`/admin/mechanics/${mechanicId}/profile-image`, {
+        headers: { Authorization: `Bearer ${token}` },
+        responseType: 'blob',
+      });
+      const imageUrl = URL.createObjectURL(response.data);
+      setProfileImages(prev => ({ ...prev, [mechanicId]: imageUrl }));
+    } catch (err) {
+      // Profile image is optional, silently fail
+      console.log(`Profile image not available for mechanic ${mechanicId}`);
+    }
+  };
+
   useEffect(() => {
     fetchMechanics();
+  }, [fetchMechanics]);
+
+  // Cleanup blob URLs when component unmounts
+  useEffect(() => {
+    return () => {
+      Object.values(profileImages).forEach(url => {
+        if (url) URL.revokeObjectURL(url);
+      });
+    };
+  }, [profileImages]);
+
+  // Force refetch when navigating back to this page
+  useEffect(() => {
+    const handleFocus = () => {
+      fetchMechanics();
+    };
+
+    window.addEventListener('focus', handleFocus);
+
+    return () => {
+      window.removeEventListener('focus', handleFocus);
+    };
   }, [fetchMechanics]);
 
   useEffect(() => {
@@ -102,8 +145,9 @@ const AdminMechanics = () => {
   };
 
   const getAvatar = (mechanic) => {
-    if (mechanic.profileImage) {
-      return <img src={mechanic.profileImage} alt={mechanic.name} className="mechanic-avatar-img" />;
+    const imageUrl = profileImages[mechanic._id];
+    if (imageUrl) {
+      return <img src={imageUrl} alt={mechanic.name} className="mechanic-avatar-img" />;
     }
     return <div className="mechanic-avatar-fallback">{mechanic.name?.charAt(0).toUpperCase() || '?'}</div>;
   };

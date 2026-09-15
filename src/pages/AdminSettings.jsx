@@ -9,6 +9,12 @@ const AdminSettings = () => {
   const [adminName, setAdminName] = useState(localStorage.getItem('adminName') || '');
   const [adminPhone, setAdminPhone] = useState('');
   
+  // Profile picture state
+  const [profileImageUrl, setProfileImageUrl] = useState(null);
+  const [uploadingPicture, setUploadingPicture] = useState(false);
+  const [pictureMessage, setPictureMessage] = useState('');
+  const [pictureError, setPictureError] = useState('');
+  
   // Profile edit state
   const [isEditingProfile, setIsEditingProfile] = useState(false);
   const [profileData, setProfileData] = useState({ name: '', email: '', phone: '' });
@@ -44,6 +50,9 @@ const AdminSettings = () => {
         const response = await axios.get('/admin/settings', authConfig());
         setNotifications(response.data.settings.notifications);
         setPreferences(response.data.settings.preferences);
+        
+        // Fetch profile picture if available
+        fetchProfilePicture();
       } catch (err) {
         const status = err.response?.status;
         if (status === 401 || status === 403) {
@@ -67,6 +76,67 @@ const AdminSettings = () => {
       phone: adminPhone || ''
     });
   }, [navigate, adminName, adminEmail, adminPhone]);
+
+  const fetchProfilePicture = async () => {
+    try {
+      const response = await axios.get('/admin/profile-picture', {
+        ...authConfig(),
+        responseType: 'blob',
+      });
+      const imageUrl = URL.createObjectURL(response.data);
+      setProfileImageUrl(imageUrl);
+    } catch (err) {
+      // Profile picture is optional, silently fail
+      console.log('No profile picture available');
+    }
+  };
+
+  const handleProfilePictureChange = async (event) => {
+    const file = event.target.files?.[0];
+    if (!file) return;
+
+    // Validate file type
+    if (!file.type.startsWith('image/')) {
+      setPictureError('Please select an image file');
+      return;
+    }
+
+    // Validate file size (5MB)
+    if (file.size > 5 * 1024 * 1024) {
+      setPictureError('Image size must be less than 5MB');
+      return;
+    }
+
+    setUploadingPicture(true);
+    setPictureMessage('');
+    setPictureError('');
+
+    try {
+      const formData = new FormData();
+      formData.append('profilePicture', file);
+
+      await axios.post('/admin/profile-picture', formData, {
+        headers: {
+          ...authConfig().headers,
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+
+      setPictureMessage('Profile picture updated successfully');
+      
+      // Refresh profile picture
+      if (profileImageUrl) {
+        URL.revokeObjectURL(profileImageUrl);
+      }
+      await fetchProfilePicture();
+    } catch (err) {
+      setPictureError(err.response?.data?.message || 'Failed to upload profile picture');
+    } finally {
+      setUploadingPicture(false);
+      // Clear file input
+      event.target.value = '';
+    }
+  };
 
   const handleLogout = () => {
     localStorage.removeItem('adminToken');
@@ -217,11 +287,40 @@ const AdminSettings = () => {
           </div>
 
           <div className="settings-profile-summary">
-            <div className="settings-avatar">{adminName.charAt(0).toUpperCase()}</div>
+            <div className="settings-avatar">
+              {profileImageUrl ? (
+                <img src={profileImageUrl} alt={adminName} style={{ width: '100%', height: '100%', borderRadius: '50%', objectFit: 'cover' }} />
+              ) : (
+                adminName.charAt(0).toUpperCase()
+              )}
+            </div>
             <div>
               <strong>{adminName}</strong>
               <span>{adminEmail}</span>
             </div>
+          </div>
+
+          {/* Profile Picture Upload */}
+          <div style={{ marginTop: '1rem' }}>
+            <label style={{ display: 'inline-block', cursor: 'pointer' }}>
+              <input
+                type="file"
+                accept="image/*"
+                onChange={handleProfilePictureChange}
+                disabled={uploadingPicture}
+                style={{ display: 'none' }}
+              />
+              <button
+                type="button"
+                className="settings-secondary-btn"
+                disabled={uploadingPicture}
+                onClick={(e) => e.preventDefault() || e.currentTarget.previousElementSibling.click()}
+              >
+                {uploadingPicture ? 'Uploading...' : 'Change Picture'}
+              </button>
+            </label>
+            {pictureMessage && <div style={{ marginTop: '0.5rem', color: '#10b981', fontSize: '0.875rem' }}>{pictureMessage}</div>}
+            {pictureError && <div style={{ marginTop: '0.5rem', color: '#ef4444', fontSize: '0.875rem' }}>{pictureError}</div>}
           </div>
 
           {isEditingProfile && (

@@ -111,19 +111,40 @@ const AdminMechanicDetail = () => {
         responseType: 'blob',
       });
       
-      const contentType = response.headers['content-type'] || mimeType || 'application/octet-stream';
+      // Get content type - prioritize mimeType from database, then response header
+      let contentType = mimeType || response.headers['content-type'] || 'application/octet-stream';
+      
+      console.log('Document preview:', { filename, mimeType, headerContentType: response.headers['content-type'], finalContentType: contentType });
+      
+      // If content-type is still generic, infer from filename extension
+      if (!contentType || contentType === 'application/octet-stream') {
+        if (filename) {
+          const ext = filename.toLowerCase().split('.').pop();
+          const mimeMap = {
+            'jpg': 'image/jpeg',
+            'jpeg': 'image/jpeg',
+            'png': 'image/png',
+            'gif': 'image/gif',
+            'webp': 'image/webp',
+            'pdf': 'application/pdf',
+          };
+          contentType = mimeMap[ext] || contentType;
+        }
+      }
       
       // Check if response is JSON error
-      if (contentType.includes('application/json')) {
+      if (contentType && contentType.includes('application/json')) {
         const text = await response.data.text();
         const errorData = JSON.parse(text);
         setDocumentsError(errorData.message || 'Failed to load document');
         return;
       }
       
-      // Create blob URL for preview
+      // Create blob URL for preview with correct content type
       const blob = new Blob([response.data], { type: contentType });
       const url = window.URL.createObjectURL(blob);
+      
+      console.log('Preview created:', { contentType, blobType: blob.type, url });
       
       // Show in modal instead of new window
       setPreviewDocument({

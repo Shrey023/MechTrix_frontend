@@ -1,0 +1,632 @@
+/* =========================================
+   ADMIN GUFTAGU PAGE
+   Follows Admin Dashboard Design System
+   ========================================= */
+
+.admin-guftagu-page {
+  width: 100%;
+}
+
+/* ── Header ── */
+.guftagu-header {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 32px;
+}
+
+.guftagu-title {
+  font-family: var(--font-display);
+  font-size: 32px;
+  font-weight: 700;
+  letter-spacing: 4px;
+  color: var(--color-off-white);
+  margin: 0;
+}
+
+.guftagu-subtitle {
+  font-family: var(--font-body);
+  font-size: 14px;
+  color: var(--color-steel-light);
+  margin: 0;
+}
+
+/* ── Tabs ── */
+.guftagu-tabs {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 24px;
+  border-bottom: 2px solid rgba(131, 68, 23, 0.15);
+}
+
+.guftagu-tab {
+  padding: 12px 24px;
+  background: none;
+  border: none;
+  border-bottom: 3px solid transparent;
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  color: var(--color-steel);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-bottom: -2px;
+}
+
+.guftagu-tab:hover {
+  color: var(--color-brown-light);
+  background: rgba(131, 68, 23, 0.05);
+}
+
+.guftagu-tab.active {
+  color: var(--color-brown);
+  border-bottom-color: var(--color-brown);
+}
+
+/* ── Chat Container ── */
+.guftagu-chat-container {
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 280px);
+  background: var(--color-bg2);
+  border: 1px solid rgba(131, 68, 23, 0.15);
+  border-radius: 2px;
+}
+
+.guftagu-messages {
+  flex: 1;
+  overflow-y: auto;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.guftagu-message {
+  padding: 16px;
+  background: var(--color-bg3);
+  border-radius: 2px;
+  border-left: 3px solid var(--color-brown);
+}
+
+.guftagu-message-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.guftagu-message-header strong {
+  color: var(--color-off-white);
+  font-family: var(--font-display);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.guftagu-message-time {
+  font-family: var(--font-body);
+  font-size: 11px;
+  color: var(--color-steel);
+}
+
+.guftagu-message-body {
+  color: var(--color-steel-light);
+  font-family: var(--font-body);
+  font-size: 14px;
+  line-height: 1.6;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+.guftagu-message-form {
+  display: flex;
+  gap: 12px;
+  padding: 20px;
+  border-top: 1px solid rgba(131, 68, 23, 0.15);
+  background: var(--color-bg3);
+}
+
+.guftagu-message-input {
+  flex: 1;
+  padding: 12px 16px;
+  background: var(--color-bg);
+  border: 1px solid rgba(115, 121, 134, 0.3);
+  border-radius: 2px;
+  color: var(--color-off-white);
+  font-family: var(--font-body);
+  font-size: 14px;
+  transition: all 0.2s ease;
+}
+
+.guftagu-message-input::placeholder {
+  color: var(--color-steel);
+}
+
+.guftagu-message-input:focus {
+  outline: none;
+  border-color: var(--color-brown);
+  box-shadow: 0 0 0 3px rgba(131, 68, 23, 0.15);
+}
+
+.guftagu-send-btn {
+  padding: 12px 24px;
+  background: var(--color-brown);
+  color: var(--color-bg);
+  border: none;
+  border-radius: 2px;
+  font-family: var(--font-display);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.guftagu-send-btn:hover:not(:disabled) {
+  background: var(--color-brown-light);
+}
+
+.guftagu-send-btn:disabled {
+  background: rgba(131, 68, 23, 0.3);
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+/* ── Suggestions Container ── */
+.guftagu-suggestions-container {
+  background: var(--color-bg2);
+  border: 1px solid rgba(131, 68, 23, 0.15);
+  border-radius: 2px;
+  padding: 20px;
+}
+
+.guftagu-suggestions-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.guftagu-new-btn {
+  padding: 12px 24px;
+  background: var(--color-brown);
+  color: var(--color-bg);
+  border: none;
+  border-radius: 2px;
+  font-family: var(--font-display);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.guftagu-new-btn:hover {
+  background: var(--color-brown-light);
+}
+
+.guftagu-filter {
+  padding: 10px 16px;
+  background: var(--color-bg);
+  border: 1px solid rgba(115, 121, 134, 0.3);
+  border-radius: 2px;
+  color: var(--color-off-white);
+  font-family: var(--font-body);
+  font-size: 13px;
+  cursor: pointer;
+  transition: border-color 0.2s ease;
+}
+
+.guftagu-filter:focus {
+  outline: none;
+  border-color: var(--color-brown);
+}
+
+/* ── New Suggestion Form ── */
+.guftagu-new-suggestion-form {
+  background: var(--color-bg3);
+  padding: 20px;
+  border: 1px solid rgba(131, 68, 23, 0.15);
+  border-radius: 2px;
+  margin-bottom: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.guftagu-input,
+.guftagu-textarea {
+  width: 100%;
+  padding: 12px 16px;
+  background: var(--color-bg);
+  border: 1px solid rgba(115, 121, 134, 0.3);
+  border-radius: 2px;
+  color: var(--color-off-white);
+  font-family: var(--font-body);
+  font-size: 14px;
+  transition: all 0.2s ease;
+}
+
+.guftagu-input::placeholder,
+.guftagu-textarea::placeholder {
+  color: var(--color-steel);
+}
+
+.guftagu-input:focus,
+.guftagu-textarea:focus {
+  outline: none;
+  border-color: var(--color-brown);
+  box-shadow: 0 0 0 3px rgba(131, 68, 23, 0.15);
+}
+
+.guftagu-textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.guftagu-save-btn {
+  align-self: flex-start;
+  padding: 12px 24px;
+  background: var(--color-brown);
+  color: var(--color-bg);
+  border: none;
+  border-radius: 2px;
+  font-family: var(--font-display);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.guftagu-save-btn:hover:not(:disabled) {
+  background: var(--color-brown-light);
+}
+
+.guftagu-save-btn:disabled {
+  background: rgba(131, 68, 23, 0.3);
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+/* ── Suggestions List ── */
+.guftagu-suggestions-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.guftagu-suggestion-card {
+  border: 1px solid rgba(131, 68, 23, 0.15);
+  border-radius: 2px;
+  padding: 20px;
+  background: var(--color-bg3);
+  transition: border-color 0.2s ease;
+}
+
+.guftagu-suggestion-card:hover {
+  border-color: rgba(131, 68, 23, 0.3);
+}
+
+.guftagu-suggestion-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+  margin-bottom: 12px;
+}
+
+.guftagu-suggestion-header h3 {
+  flex: 1;
+  font-family: var(--font-display);
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: var(--color-off-white);
+  margin: 0;
+}
+
+.guftagu-status-badge {
+  padding: 4px 10px;
+  border-radius: 10px;
+  font-family: var(--font-display);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.guftagu-status-new {
+  background: rgba(83, 143, 255, 0.15);
+  color: #5a8fff;
+}
+
+.guftagu-status-review {
+  background: rgba(255, 183, 77, 0.15);
+  color: #ffb74d;
+}
+
+.guftagu-status-planned {
+  background: rgba(171, 130, 255, 0.15);
+  color: #ab82ff;
+}
+
+.guftagu-status-progress {
+  background: rgba(255, 138, 184, 0.15);
+  color: #ff8ab8;
+}
+
+.guftagu-status-completed {
+  background: rgba(76, 175, 80, 0.15);
+  color: #4caf50;
+}
+
+.guftagu-status-rejected {
+  background: rgba(224, 96, 96, 0.15);
+  color: var(--error);
+}
+
+.guftagu-suggestion-description {
+  color: var(--color-steel-light);
+  font-family: var(--font-body);
+  font-size: 14px;
+  line-height: 1.6;
+  margin-bottom: 16px;
+  white-space: pre-wrap;
+}
+
+.guftagu-suggestion-meta {
+  display: flex;
+  gap: 20px;
+  font-family: var(--font-body);
+  font-size: 12px;
+  color: var(--color-steel);
+  margin-bottom: 16px;
+}
+
+.guftagu-suggestion-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.guftagu-status-select {
+  padding: 8px 12px;
+  background: var(--color-bg);
+  border: 1px solid rgba(115, 121, 134, 0.3);
+  border-radius: 2px;
+  color: var(--color-off-white);
+  font-family: var(--font-body);
+  font-size: 12px;
+  cursor: pointer;
+  transition: border-color 0.2s ease;
+}
+
+.guftagu-status-select:focus {
+  outline: none;
+  border-color: var(--color-brown);
+}
+
+.guftagu-expand-btn,
+.guftagu-delete-btn {
+  padding: 8px 16px;
+  border: 1px solid rgba(115, 121, 134, 0.3);
+  border-radius: 2px;
+  font-family: var(--font-display);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background: var(--color-bg);
+  color: var(--color-steel-light);
+}
+
+.guftagu-expand-btn:hover {
+  border-color: var(--color-brown);
+  color: var(--color-brown);
+}
+
+.guftagu-delete-btn {
+  color: var(--error);
+  border-color: rgba(224, 96, 96, 0.3);
+}
+
+.guftagu-delete-btn:hover {
+  background: rgba(224, 96, 96, 0.1);
+  border-color: var(--error);
+}
+
+/* ── Comments Section ── */
+.guftagu-comments-section {
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid rgba(131, 68, 23, 0.15);
+}
+
+.guftagu-comments-list {
+  margin-bottom: 16px;
+}
+
+.guftagu-comment {
+  padding: 12px;
+  background: var(--color-bg);
+  border-radius: 2px;
+  margin-bottom: 12px;
+  border-left: 2px solid rgba(131, 68, 23, 0.3);
+}
+
+.guftagu-comment strong {
+  display: block;
+  color: var(--color-off-white);
+  font-family: var(--font-display);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+
+.guftagu-comment p {
+  color: var(--color-steel-light);
+  font-family: var(--font-body);
+  font-size: 13px;
+  margin: 0 0 4px 0;
+  line-height: 1.5;
+}
+
+.guftagu-comment-time {
+  font-family: var(--font-body);
+  font-size: 11px;
+  color: var(--color-steel);
+}
+
+.guftagu-no-comments {
+  text-align: center;
+  color: var(--color-steel);
+  font-family: var(--font-body);
+  font-size: 13px;
+  padding: 16px;
+}
+
+.guftagu-comment-form {
+  display: flex;
+  gap: 8px;
+}
+
+.guftagu-comment-input {
+  flex: 1;
+  padding: 10px 12px;
+  background: var(--color-bg);
+  border: 1px solid rgba(115, 121, 134, 0.3);
+  border-radius: 2px;
+  color: var(--color-off-white);
+  font-family: var(--font-body);
+  font-size: 13px;
+  transition: border-color 0.2s ease;
+}
+
+.guftagu-comment-input::placeholder {
+  color: var(--color-steel);
+}
+
+.guftagu-comment-input:focus {
+  outline: none;
+  border-color: var(--color-brown);
+}
+
+.guftagu-comment-btn {
+  padding: 10px 16px;
+  background: var(--color-brown);
+  color: var(--color-bg);
+  border: none;
+  border-radius: 2px;
+  font-family: var(--font-display);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.guftagu-comment-btn:hover:not(:disabled) {
+  background: var(--color-brown-light);
+}
+
+.guftagu-comment-btn:disabled {
+  background: rgba(131, 68, 23, 0.3);
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+/* ── Empty State ── */
+.guftagu-empty {
+  text-align: center;
+  padding: 60px 20px;
+  color: var(--color-steel);
+}
+
+.guftagu-empty p {
+  font-family: var(--font-body);
+  font-size: 14px;
+  margin: 0;
+}
+
+/* ── Error ── */
+.guftagu-error {
+  background: rgba(224, 96, 96, 0.1);
+  border: 1px solid var(--error);
+  border-left: 4px solid var(--error);
+  color: var(--error);
+  padding: 16px 20px;
+  border-radius: 2px;
+  margin-bottom: 16px;
+  font-family: var(--font-body);
+  font-size: 14px;
+}
+
+/* ── Loading State ── */
+.guftagu-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 20px;
+}
+
+.guftagu-spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid rgba(131, 68, 23, 0.15);
+  border-top-color: var(--color-brown);
+  border-radius: 50%;
+  animation: guftagu-spin 0.8s linear infinite;
+  margin-bottom: 16px;
+}
+
+@keyframes guftagu-spin {
+  to { transform: rotate(360deg); }
+}
+
+.guftagu-loading p {
+  font-family: var(--font-display);
+  font-size: 13px;
+  letter-spacing: 1px;
+  color: var(--color-steel);
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  .guftagu-title {
+    font-size: 24px;
+    letter-spacing: 2px;
+  }
+
+  .guftagu-chat-container {
+    height: calc(100vh - 220px);
+  }
+
+  .guftagu-suggestions-header {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .guftagu-suggestion-actions {
+    flex-direction: column;
+  }
+
+  .guftagu-status-select,
+  .guftagu-expand-btn,
+  .guftagu-delete-btn {
+    width: 100%;
+  }
+}
