@@ -1,10 +1,11 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import './AdminLayout.css';
 
 const AdminLayout = ({ children }) => {
   const navigate = useNavigate();
   const emailToShow = localStorage.getItem('adminEmail') || 'Admin';
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
   // Hide public Navbar and Footer when admin layout is mounted
   useEffect(() => {
@@ -28,10 +29,39 @@ const AdminLayout = ({ children }) => {
     navigate('/admin/login');
   };
 
+  const closeSidebar = () => {
+    setSidebarOpen(false);
+  };
+
+  const toggleSidebar = () => {
+    setSidebarOpen(!sidebarOpen);
+  };
+
   return (
     <div className="admin-layout">
+      {/* Mobile Menu Toggle */}
+      <button 
+        className="admin-mobile-toggle" 
+        onClick={toggleSidebar}
+        aria-label="Toggle menu"
+      >
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+          <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+      </button>
+
+      {/* Overlay for mobile */}
+      {sidebarOpen && (
+        <div 
+          className="admin-sidebar-overlay" 
+          onClick={closeSidebar}
+        />
+      )}
+
       {/* Sidebar */}
-      <aside className="admin-sidebar">
+      <aside className={`admin-sidebar ${sidebarOpen ? 'open' : ''}`}>
         <div className="admin-sidebar-header">
           <h2 className="admin-brand">MECHZE</h2>
           <span className="admin-brand-subtitle">Admin Panel</span>
@@ -41,6 +71,7 @@ const AdminLayout = ({ children }) => {
           <NavLink 
             to="/admin/dashboard" 
             className={({ isActive }) => isActive ? 'admin-nav-item active' : 'admin-nav-item'}
+            onClick={closeSidebar}
           >
             <svg className="nav-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               <rect x="3" y="3" width="7" height="7"></rect>
@@ -54,6 +85,7 @@ const AdminLayout = ({ children }) => {
           <NavLink 
             to="/admin/customers" 
             className={({ isActive }) => isActive ? 'admin-nav-item active' : 'admin-nav-item'}
+            onClick={closeSidebar}
           >
             <svg className="nav-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
@@ -67,6 +99,7 @@ const AdminLayout = ({ children }) => {
           <NavLink 
             to="/admin/mechanics" 
             className={({ isActive }) => isActive ? 'admin-nav-item active' : 'admin-nav-item'}
+            onClick={closeSidebar}
           >
             <svg className="nav-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path>
@@ -77,6 +110,7 @@ const AdminLayout = ({ children }) => {
           <NavLink 
             to="/admin/bookings" 
             className={({ isActive }) => isActive ? 'admin-nav-item active' : 'admin-nav-item'}
+            onClick={closeSidebar}
           >
             <svg className="nav-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
@@ -91,6 +125,7 @@ const AdminLayout = ({ children }) => {
           <NavLink 
             to="/admin/guftagu" 
             className={({ isActive }) => isActive ? 'admin-nav-item active' : 'admin-nav-item'}
+            onClick={closeSidebar}
           >
             <svg className="nav-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
@@ -101,6 +136,7 @@ const AdminLayout = ({ children }) => {
           <NavLink 
             to="/admin/settings" 
             className={({ isActive }) => isActive ? 'admin-nav-item active' : 'admin-nav-item'}
+            onClick={closeSidebar}
           >
             <svg className="nav-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               <circle cx="12" cy="12" r="3"></circle>
