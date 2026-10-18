@@ -18,18 +18,26 @@ const Login = () => {
         password
       });
 
-      localStorage.setItem('customerId', res.data._id);
+      // Auth controller returns flat structure: { _id, name, email, userType, token }
+      const customerId = res.data._id;
+      
+      if (!customerId) {
+        setError('Login failed: Invalid response from server');
+        return;
+      }
+
+      localStorage.setItem('customerId', customerId);
 
       if (res.data.token) {
         localStorage.setItem('token', res.data.token);
-        localStorage.setItem('userType', res.data.userType);
+        localStorage.setItem('userType', 'customer');
         navigate('/dashboard');
       } else {
-        setError('Login failed.');
+        setError('Login failed: No token received');
       }
     } catch (err) {
       console.error(err);
-      setError('Invalid email or password');
+      setError(err.response?.data?.message || 'Invalid email or password');
     }
   };
 

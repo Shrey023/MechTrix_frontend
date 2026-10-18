@@ -32,6 +32,7 @@ export function CustomCursor() {
       if (!bigBallRef.current) return;
       if (e.target.closest('[data-hoverable]')) {
         gsap.to(bigBallRef.current, {
+          //  {  NOT IMPRTANT JUST DEVELPOER'S EMOTIONS  }  this is just a shit code. i am not sure why this code is working. i have litterally spent hours to write some of the part of this code most of it is ai but i am just curious and when will we'l get actual users and i will make all this backend compatable to millions of people and the irony is i am writing all this nonsense in frontend file that probably no one is intrested in and like no one want to read.
           duration: 0.3,
           scale: 4,
         });

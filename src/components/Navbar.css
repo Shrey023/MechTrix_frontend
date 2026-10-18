@@ -22,14 +22,34 @@
 
 /* ── Logo ── */
 .navbar .logo {
-  font-family: 'Barlow Condensed', sans-serif;
-  font-weight: 800;
-  font-size: 1.5rem;
-  letter-spacing: 6px;
-  text-transform: uppercase;
-  color: var(--color-off-white);
+  display: flex;
+  align-items: center;
   text-decoration: none;
   position: relative;
+  padding: 8px 12px;
+  border-radius: 6px;
+  background: linear-gradient(135deg, rgba(131, 68, 23, 0.1), rgba(131, 68, 23, 0.05));
+  border: 1px solid rgba(131, 68, 23, 0.25);
+  transition: all 0.3s ease;
+}
+
+.navbar .logo:hover {
+  background: linear-gradient(135deg, rgba(131, 68, 23, 0.18), rgba(131, 68, 23, 0.08));
+  border-color: rgba(131, 68, 23, 0.4);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(131, 68, 23, 0.2);
+}
+
+.navbar .logo-img {
+  height: 48px;
+  width: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+  transition: filter 0.3s ease;
+}
+
+.navbar .logo:hover .logo-img {
+  filter: drop-shadow(0 2px 8px rgba(131, 68, 23, 0.5));
 }
 
 .navbar .logo span.logo-accent {
@@ -112,8 +132,11 @@
   }
 
   .navbar .logo {
-    font-size: 1.25rem;
-    letter-spacing: 4px;
+    padding: 6px 10px;
+  }
+
+  .navbar .logo-img {
+    height: 40px;
   }
 
   .nav-links {

@@ -146,7 +146,7 @@ const CustomerDashboard = () => {
               <p><strong>Mechanic:</strong> {booking.mechanic?.name || 'N/A'}</p>
               <p><strong>Scheduled:</strong> {new Date(booking.scheduledTime).toLocaleString()}</p>
 
-              {booking.status === 'completed' && (
+              {booking.status === 'completed' && booking.mechanic && (
                 <div style={{ marginTop: '1rem' }}>
                   <ReviewForm mechanicId={booking.mechanic._id} bookingId={booking._id} />
                 </div>

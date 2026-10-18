@@ -1,0 +1,445 @@
+/* =========================================
+   MECHZE — MECHANIC TRACKER PAGE
+   Dark Industrial Design System
+   ========================================= */
+
+/* ── Page wrapper ── */
+.tracker-page {
+  font-family: var(--font-body, 'Barlow', sans-serif);
+  background: var(--color-bg, #0E0C0A);
+  color: var(--color-off-white, #F6F6F7);
+  min-height: 100vh;
+  padding-top: 64px; /* navbar height */
+  overflow-x: hidden;
+}
+
+/* ── Inner container ── */
+.tracker-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: clamp(1.5rem, 5vw, 2.5rem) clamp(1rem, 5vw, 2rem);
+}
+
+/* ── Page header ── */
+.tracker-header {
+  margin-bottom: clamp(1.25rem, 3vw, 2rem);
+}
+
+.tracker-kicker {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.tracker-kicker-line {
+  width: 32px;
+  height: 1px;
+  background: var(--color-brown, #834417);
+  flex-shrink: 0;
+}
+
+.tracker-kicker-text {
+  font-family: var(--font-display, 'Barlow Condensed', sans-serif);
+  font-size: 12px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--color-brown-light, #A0561E);
+}
+
+.tracker-title {
+  font-family: var(--font-display, 'Barlow Condensed', sans-serif);
+  font-size: clamp(1.8rem, 5vw, 2.6rem);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--color-off-white, #F6F6F7);
+  line-height: 1;
+  margin-bottom: 0.4rem;
+}
+
+.tracker-subtitle {
+  font-family: var(--font-body, 'Barlow', sans-serif);
+  font-size: clamp(0.85rem, 2.5vw, 0.95rem);
+  color: var(--color-steel-light, #AFB3B9);
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* ── Mechanic info card ── */
+.tracker-info-card {
+  background: var(--color-bg3, #1C1916);
+  border: 1px solid rgba(131, 68, 23, 0.15);
+  border-left: 4px solid var(--color-brown, #834417);
+  border-radius: 2px;
+  padding: 18px 24px;
+  margin-bottom: 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  position: relative;
+  overflow: hidden;
+}
+
+.tracker-info-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, transparent, #834417, transparent);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.tracker-info-left {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex: 1;
+  min-width: 0;
+}
+
+.tracker-mechanic-avatar {
+  width: 44px;
+  height: 44px;
+  background: var(--color-brown, #834417);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display, 'Barlow Condensed', sans-serif);
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--color-off-white, #F6F6F7);
+  flex-shrink: 0;
+}
+
+.tracker-mechanic-details {
+  min-width: 0;
+}
+
+.tracker-mechanic-name {
+  font-family: var(--font-display, 'Barlow Condensed', sans-serif);
+  font-size: clamp(1rem, 3.5vw, 1.2rem);
+  font-weight: 600;
+  color: var(--color-off-white, #F6F6F7);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  line-height: 1.2;
+  margin: 0 0 4px;
+}
+
+.tracker-mechanic-label {
+  font-family: var(--font-display, 'Barlow Condensed', sans-serif);
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--color-steel-light, #AFB3B9);
+  margin: 0;
+}
+
+/* ── Live indicator ── */
+.tracker-live-indicator {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.tracker-live-dot {
+  width: 9px;
+  height: 9px;
+  background: var(--success, #6DBF7E);
+  border-radius: 50%;
+  flex-shrink: 0;
+  animation: tracker-pulse 1.8s ease-in-out infinite;
+}
+
+.tracker-live-dot.connecting {
+  background: #D4874A;
+  animation: tracker-pulse-warning 1.4s ease-in-out infinite;
+}
+
+@keyframes tracker-pulse {
+  0%   { box-shadow: 0 0 0 0 rgba(109, 191, 126, 0.5); }
+  70%  { box-shadow: 0 0 0 7px rgba(109, 191, 126, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(109, 191, 126, 0); }
+}
+
+@keyframes tracker-pulse-warning {
+  0%   { box-shadow: 0 0 0 0 rgba(212, 135, 74, 0.5); }
+  70%  { box-shadow: 0 0 0 7px rgba(212, 135, 74, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(212, 135, 74, 0); }
+}
+
+.tracker-live-text {
+  font-family: var(--font-display, 'Barlow Condensed', sans-serif);
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.tracker-live-text.live {
+  color: var(--success, #6DBF7E);
+}
+
+.tracker-live-text.connecting {
+  color: #D4874A;
+}
+
+/* ── ETA strip ── */
+.tracker-eta-strip {
+  display: flex;
+  align-items: center;
+  gap: clamp(0.75rem, 3vw, 1.5rem);
+  flex-wrap: wrap;
+}
+
+.tracker-eta-item {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 2px;
+}
+
+.tracker-eta-label {
+  font-family: var(--font-display, 'Barlow Condensed', sans-serif);
+  font-size: 10px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--color-steel, #737986);
+  line-height: 1;
+}
+
+.tracker-eta-value {
+  font-family: var(--font-display, 'Barlow Condensed', sans-serif);
+  font-size: clamp(0.95rem, 3vw, 1.1rem);
+  font-weight: 700;
+  color: var(--color-off-white, #F6F6F7);
+  line-height: 1;
+}
+
+.tracker-eta-divider {
+  width: 1px;
+  height: 28px;
+  background: rgba(131, 68, 23, 0.3);
+  flex-shrink: 0;
+}
+
+/* ── Map container ── */
+.tracker-map-wrap {
+  position: relative;
+  border: 1px solid rgba(131, 68, 23, 0.2);
+  border-radius: 2px;
+  overflow: hidden;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+}
+
+.tracker-map-container {
+  width: 100%;
+  height: 60vh;
+  min-height: 320px;
+  max-height: 680px;
+  display: block;
+}
+
+/* ── Full-page state containers ── */
+.tracker-state {
+  min-height: calc(100vh - 64px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(2rem, 8vw, 4rem) clamp(1rem, 5vw, 2rem);
+}
+
+.tracker-state-inner {
+  width: 100%;
+  max-width: 480px;
+  text-align: center;
+}
+
+/* ── Loading state ── */
+.tracker-spinner {
+  width: 44px;
+  height: 44px;
+  border: 4px solid var(--color-bg3, #1C1916);
+  border-top-color: var(--color-brown, #834417);
+  border-radius: 50%;
+  animation: tracker-spin 0.8s linear infinite;
+  margin: 0 auto 1.25rem;
+}
+
+@keyframes tracker-spin {
+  to { transform: rotate(360deg); }
+}
+
+.tracker-loading-title {
+  font-family: var(--font-display, 'Barlow Condensed', sans-serif);
+  font-size: clamp(1.1rem, 4vw, 1.4rem);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--color-off-white, #F6F6F7);
+  margin-bottom: 0.4rem;
+}
+
+.tracker-loading-sub {
+  font-family: var(--font-body, 'Barlow', sans-serif);
+  font-size: 0.9rem;
+  color: var(--color-steel-light, #AFB3B9);
+  margin: 0;
+}
+
+/* ── Waiting state (no mechanic location yet) ── */
+.tracker-waiting-card {
+  background: var(--color-bg3, #1C1916);
+  border: 1px solid rgba(131, 68, 23, 0.15);
+  border-radius: 2px;
+  padding: 2rem;
+  margin-bottom: 1.25rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.tracker-waiting-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, transparent, #834417, transparent);
+}
+
+.tracker-waiting-icon {
+  font-size: 2rem;
+  margin-bottom: 0.75rem;
+  animation: tracker-float 2.4s ease-in-out infinite;
+}
+
+@keyframes tracker-float {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-6px); }
+}
+
+.tracker-waiting-title {
+  font-family: var(--font-display, 'Barlow Condensed', sans-serif);
+  font-size: clamp(1.1rem, 4vw, 1.4rem);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--color-off-white, #F6F6F7);
+  margin-bottom: 0.4rem;
+}
+
+.tracker-waiting-sub {
+  font-family: var(--font-body, 'Barlow', sans-serif);
+  font-size: 0.9rem;
+  color: var(--color-warm-gray, #ABA19C);
+  margin: 0;
+}
+
+/* ── Error / alert state ── */
+.tracker-error-card {
+  background: rgba(150, 30, 30, 0.1);
+  border: 1px solid rgba(224, 96, 96, 0.3);
+  border-left: 4px solid var(--error, #E06060);
+  border-radius: 2px;
+  padding: 1.5rem 1.75rem;
+  margin-bottom: 1.25rem;
+}
+
+.tracker-error-title {
+  font-family: var(--font-display, 'Barlow Condensed', sans-serif);
+  font-size: clamp(1rem, 3.5vw, 1.25rem);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--error, #E06060);
+  margin-bottom: 0.5rem;
+}
+
+.tracker-error-msg {
+  font-family: var(--font-body, 'Barlow', sans-serif);
+  font-size: 0.9rem;
+  color: var(--color-warm-gray, #ABA19C);
+  margin: 0;
+  line-height: 1.6;
+}
+
+/* ── Booking status badge inside info card ── */
+.tracker-booking-status {
+  font-family: var(--font-display, 'Barlow Condensed', sans-serif);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  padding: 4px 10px;
+  border-radius: 2px;
+  font-weight: 600;
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+.tracker-booking-status.accepted {
+  background: rgba(131, 68, 23, 0.2);
+  color: #D4874A;
+  border: 1px solid rgba(131, 68, 23, 0.35);
+}
+
+.tracker-booking-status.in-progress {
+  background: rgba(109, 191, 126, 0.15);
+  color: var(--success, #6DBF7E);
+  border: 1px solid rgba(109, 191, 126, 0.3);
+}
+
+.tracker-booking-status.completed {
+  background: rgba(40, 100, 50, 0.2);
+  color: var(--success, #6DBF7E);
+  border: 1px solid rgba(40, 100, 50, 0.3);
+}
+
+.tracker-booking-status.pending {
+  background: rgba(115, 121, 134, 0.2);
+  color: var(--color-steel-light, #AFB3B9);
+  border: 1px solid rgba(115, 121, 134, 0.3);
+}
+
+/* ── Responsive ── */
+@media (max-width: 600px) {
+  .tracker-page {
+    padding-top: 56px; /* mobile navbar height */
+  }
+
+  .tracker-map-container {
+    height: 45vh;
+    min-height: 260px;
+  }
+
+  .tracker-info-card {
+    padding: 14px 16px;
+  }
+
+  .tracker-eta-strip {
+    gap: 0.5rem;
+  }
+
+  .tracker-eta-item {
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 360px) {
+  .tracker-inner {
+    padding: 1rem 0.75rem;
+  }
+
+  .tracker-info-card {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .tracker-eta-strip {
+    width: 100%;
+    justify-content: flex-start;
+  }
+}

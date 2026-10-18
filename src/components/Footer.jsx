@@ -1,162 +1,432 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import mechzeLogo from '../assets/mechze-logo.jpg';
+import customerQR from '../assets/customer-qr.png';
+import mechanicQR from '../assets/mechanic-qr.png';
 
 const Footer = () => {
+  const [showPrivacyModal, setShowPrivacyModal] = useState(false);
+  const [showTermsModal, setShowTermsModal] = useState(false);
+  const [showDownloadModal, setShowDownloadModal] = useState(false);
+
+  // ESC key handler
+  useEffect(() => {
+    const handleEsc = (e) => {
+      if (e.key === 'Escape') {
+        setShowPrivacyModal(false);
+        setShowTermsModal(false);
+        setShowDownloadModal(false);
+      }
+    };
+    window.addEventListener('keydown', handleEsc);
+    return () => window.removeEventListener('keydown', handleEsc);
+  }, []);
+
   return (
-    <footer style={{
-      background: 'var(--color-bg2)',
-      borderTop: '1px solid rgba(131, 68, 23, 0.15)',
-    }}>
-      {/* Main Footer Content */}
-      <div style={{
-        maxWidth: '1200px',
-        margin: '0 auto',
-        padding: '3rem clamp(1.25rem, 5vw, 3rem)',
-        display: 'grid',
-        gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
-        gap: '2rem',
+    <>
+      <footer style={{
+        background: 'var(--color-bg, #0E0C0A)',
+        borderTop: '1px solid rgba(131,68,23,0.2)',
+        padding: 'clamp(2rem, 6vw, 4rem) clamp(1rem, 5vw, 2rem)',
       }}>
-        {/* Brand Column */}
-        <div>
-          <div style={{ display: 'flex', alignItems: 'center', marginBottom: '0.75rem' }}>
-            <div style={{
-              fontFamily: 'Barlow Condensed, sans-serif',
-              fontWeight: 800,
-              fontSize: '1.5rem',
-              letterSpacing: '6px',
-              textTransform: 'uppercase',
-              color: 'var(--color-off-white)',
-            }}>
-              MECH<span style={{ color: 'var(--color-brown-light)' }}>ZE</span>
+        <div style={{
+          maxWidth: '1200px',
+          margin: '0 auto',
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
+          gap: '2rem',
+          marginBottom: '2rem',
+        }}>
+          
+          {/* Brand */}
+          <div>
+            <div style={{ marginBottom: '1rem' }}>
+              <img src={mechzeLogo} alt="Mechze" style={{ height: '36px', width: 'auto' }} />
             </div>
+            <p style={{ color: 'var(--color-warm-gray)', fontSize: '0.95rem', lineHeight: 1.6 }}>
+              Mechze connects vehicle owners with mechanics through a simple, convenient, and transparent digital platform.
+            </p>
           </div>
-          <p style={{
-            fontSize: '13px',
-            color: 'var(--color-steel-light)',
-            lineHeight: '1.7',
-            maxWidth: '240px',
-          }}>
-            On-demand mechanic service. Fast, reliable, and always nearby.
+
+          {/* Company */}
+          <div>
+            <h4 style={{
+              fontFamily: "'Barlow Condensed', sans-serif",
+              fontSize: '1.1rem',
+              fontWeight: 600,
+              textTransform: 'uppercase',
+              letterSpacing: '1.5px',
+              marginBottom: '1rem',
+            }}>Company</h4>
+            <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
+              <li style={{ marginBottom: '0.5rem' }}>
+                <Link to="/" style={{ color: 'var(--color-warm-gray)', fontSize: '0.95rem', transition: 'color 0.2s' }}>Home</Link>
+              </li>
+              <li style={{ marginBottom: '0.5rem' }}>
+                <Link to="/about" style={{ color: 'var(--color-warm-gray)', fontSize: '0.95rem', transition: 'color 0.2s' }}>About Us</Link>
+              </li>
+              <li style={{ marginBottom: '0.5rem' }}>
+                <Link to="/nearby" style={{ color: 'var(--color-warm-gray)', fontSize: '0.95rem', transition: 'color 0.2s' }}>Services</Link>
+              </li>
+            </ul>
+          </div>
+
+          {/* Mechanics & Users */}
+          <div>
+            <h4 style={{
+              fontFamily: "'Barlow Condensed', sans-serif",
+              fontSize: '1.1rem',
+              fontWeight: 600,
+              textTransform: 'uppercase',
+              letterSpacing: '1.5px',
+              marginBottom: '1rem',
+            }}>Mechanics & Users</h4>
+            <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
+              <li style={{ marginBottom: '0.5rem' }}>
+                <Link to="/nearby" style={{ color: 'var(--color-warm-gray)', fontSize: '0.95rem' }}>Book Service</Link>
+              </li>
+              <li style={{ marginBottom: '0.5rem' }}>
+                <Link to="/mechanic/login" style={{ color: 'var(--color-warm-gray)', fontSize: '0.95rem' }}>For Mechanics</Link>
+              </li>
+              <li style={{ marginBottom: '0.5rem' }}>
+                <Link to="/login" style={{ color: 'var(--color-warm-gray)', fontSize: '0.95rem' }}>Login</Link>
+              </li>
+              <li style={{ marginBottom: '0.5rem' }}>
+                <button onClick={() => setShowDownloadModal(true)} style={{ background: 'none', border: 'none', color: 'var(--color-warm-gray)', fontSize: '0.95rem', cursor: 'pointer', padding: 0, textAlign: 'left', fontFamily: 'inherit' }}>Download App</button>
+              </li>
+            </ul>
+          </div>
+
+          {/* Legal & Policy */}
+          <div>
+            <h4 style={{
+              fontFamily: "'Barlow Condensed', sans-serif",
+              fontSize: '1.1rem',
+              fontWeight: 600,
+              textTransform: 'uppercase',
+              letterSpacing: '1.5px',
+              marginBottom: '1rem',
+            }}>Legal & Policy</h4>
+            <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
+              <li style={{ marginBottom: '0.5rem' }}>
+                <button onClick={() => setShowPrivacyModal(true)} style={{ background: 'none', border: 'none', color: 'var(--color-warm-gray)', fontSize: '0.95rem', cursor: 'pointer', padding: 0, textAlign: 'left', fontFamily: 'inherit' }}>Privacy Policy</button>
+              </li>
+              <li style={{ marginBottom: '0.5rem' }}>
+                <button onClick={() => setShowTermsModal(true)} style={{ background: 'none', border: 'none', color: 'var(--color-warm-gray)', fontSize: '0.95rem', cursor: 'pointer', padding: 0, textAlign: 'left', fontFamily: 'inherit' }}>Terms & Conditions</button>
+              </li>
+            </ul>
+          </div>
+
+        </div>
+
+        <div style={{
+          borderTop: '1px solid rgba(131,68,23,0.15)',
+          paddingTop: '2rem',
+          textAlign: 'center',
+        }}>
+          <p style={{ color: 'var(--color-warm-gray)', fontSize: '0.9rem' }}>
+            © 2025 Mechze. Your Trusted Mechanic, Just a Few Taps Away.
           </p>
+        </div>
+      </footer>
 
-          {/* Social Links */}
-          <div className="footer-social">
-            <a href="https://www.instagram.com/mechze01/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
-              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z" />
-              </svg>
-            </a>
-            <a href="https://facebook.com/mechze01" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
-              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
-              </svg>
-            </a>
-            <a href="https://twitter.com/mechze" target="_blank" rel="noopener noreferrer" aria-label="Twitter / X">
-              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
-              </svg>
-            </a>
-            <a href="https://linkedin.com/company/mechze" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
-              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
-              </svg>
-            </a>
-            <a href="https://youtube.com/@mechze" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
-              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
-              </svg>
-            </a>
+      {/* Download Modal */}
+      {showDownloadModal && (
+        <div onClick={() => setShowDownloadModal(false)} style={{
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          background: 'rgba(0,0,0,0.85)',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          zIndex: 9999,
+          padding: '1rem',
+        }}>
+          <div onClick={(e) => e.stopPropagation()} style={{
+            background: 'var(--color-bg2)',
+            border: '1px solid rgba(131,68,23,0.3)',
+            borderRadius: '8px',
+            padding: '2rem',
+            maxWidth: '900px',
+            width: '100%',
+            position: 'relative',
+          }}>
+            <button onClick={() => setShowDownloadModal(false)} style={{
+              position: 'absolute',
+              top: '1rem',
+              right: '1rem',
+              background: 'none',
+              border: 'none',
+              color: 'var(--color-warm-gray)',
+              fontSize: '1.5rem',
+              cursor: 'pointer',
+            }}>✕</button>
+
+            <h3 style={{
+              fontFamily: "'Barlow Condensed', sans-serif",
+              fontSize: '1.8rem',
+              fontWeight: 600,
+              textTransform: 'uppercase',
+              marginBottom: '0.5rem',
+              textAlign: 'center',
+            }}>Download Mechze Apps</h3>
+
+            <p style={{ color: 'var(--color-warm-gray)', marginBottom: '2rem', fontSize: '0.95rem', textAlign: 'center' }}>
+              Get the Mechze app on Google Play
+            </p>
+
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '2rem' }}>
+              
+              {/* Customer App */}
+              <div style={{ textAlign: 'center' }}>
+                <div style={{
+                  fontFamily: "'Barlow Condensed', sans-serif",
+                  fontSize: '0.85rem',
+                  letterSpacing: '2px',
+                  textTransform: 'uppercase',
+                  color: 'var(--color-brown-light)',
+                  marginBottom: '1rem',
+                }}>FOR VEHICLE OWNERS</div>
+                
+                <h4 style={{
+                  fontFamily: "'Barlow Condensed', sans-serif",
+                  fontSize: '1.3rem',
+                  fontWeight: 600,
+                  marginBottom: '1rem',
+                }}>Customer App</h4>
+
+                <div style={{ marginBottom: '1.5rem' }}>
+                  <img src={customerQR} alt="Customer App QR" style={{ width: '150px', height: '150px', border: '2px solid rgba(131,68,23,0.2)', borderRadius: '6px' }} />
+                  <p style={{ marginTop: '0.75rem', fontSize: '0.85rem', color: 'var(--color-warm-gray)' }}>Scan QR to download</p>
+                </div>
+
+                <a 
+                  href="https://play.google.com/store/apps/details?id=com.mechze.customer"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: '10px',
+                    background: '#000',
+                    color: '#fff',
+                    padding: '10px 20px',
+                    borderRadius: '6px',
+                    textDecoration: 'none',
+                    fontFamily: "'Barlow', sans-serif",
+                  }}>
+                  <span style={{ fontSize: '1.3rem' }}>▶</span>
+                  <div style={{ textAlign: 'left' }}>
+                    <div style={{ fontSize: '0.65rem' }}>GET IT ON</div>
+                    <div style={{ fontSize: '0.95rem', fontWeight: 600 }}>Google Play</div>
+                  </div>
+                </a>
+              </div>
+
+              {/* Mechanic App */}
+              <div style={{ textAlign: 'center' }}>
+                <div style={{
+                  fontFamily: "'Barlow Condensed', sans-serif",
+                  fontSize: '0.85rem',
+                  letterSpacing: '2px',
+                  textTransform: 'uppercase',
+                  color: 'var(--color-brown-light)',
+                  marginBottom: '1rem',
+                }}>FOR MECHANICS & GARAGES</div>
+                
+                <h4 style={{
+                  fontFamily: "'Barlow Condensed', sans-serif",
+                  fontSize: '1.3rem',
+                  fontWeight: 600,
+                  marginBottom: '1rem',
+                }}>Partner App</h4>
+
+                <div style={{ marginBottom: '1.5rem' }}>
+                  <img src={mechanicQR} alt="Mechanic App QR" style={{ width: '150px', height: '150px', border: '2px solid rgba(131,68,23,0.2)', borderRadius: '6px' }} />
+                  <p style={{ marginTop: '0.75rem', fontSize: '0.85rem', color: 'var(--color-warm-gray)' }}>Scan QR to download</p>
+                </div>
+
+                <a 
+                  href="https://play.google.com/store/apps/details?id=com.shrey_r.mechanicapp"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: '10px',
+                    background: '#000',
+                    color: '#fff',
+                    padding: '10px 20px',
+                    borderRadius: '6px',
+                    textDecoration: 'none',
+                    fontFamily: "'Barlow', sans-serif",
+                  }}>
+                  <span style={{ fontSize: '1.3rem' }}>🔧</span>
+                  <div style={{ textAlign: 'left' }}>
+                    <div style={{ fontSize: '0.65rem' }}>GET IT ON</div>
+                    <div style={{ fontSize: '0.95rem', fontWeight: 600 }}>Google Play</div>
+                  </div>
+                </a>
+              </div>
+
+            </div>
+
+            <p style={{ textAlign: 'center', marginTop: '1.5rem', fontSize: '0.85rem', color: 'var(--color-warm-gray)' }}>
+              Press <kbd style={{ background: 'var(--color-bg3)', padding: '2px 8px', borderRadius: '3px', fontFamily: 'monospace' }}>ESC</kbd> to close
+            </p>
           </div>
         </div>
+      )}
 
-        {/* Links Column */}
-        <div>
-          <h4 style={{
-            fontFamily: 'Barlow Condensed, sans-serif',
-            fontSize: '11px',
-            letterSpacing: '3px',
-            textTransform: 'uppercase',
-            color: 'var(--color-brown-light)',
-            marginBottom: '1rem',
-          }}>Services</h4>
-          <ul style={{ listStyle: 'none', padding: 0, display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
-            {['Book a Mechanic', 'Track Mechanic', 'Emergency Repair', 'Scheduled Service'].map(item => (
-              <li key={item}>
-                <Link to="/nearby" style={{
-                  color: 'var(--color-steel-light)',
-                  fontSize: '13px',
-                  fontFamily: 'Barlow Condensed, sans-serif',
-                  letterSpacing: '1px',
-                  transition: 'color 0.2s',
-                }}
-                  onMouseOver={e => e.target.style.color = 'var(--color-off-white)'}
-                  onMouseOut={e => e.target.style.color = 'var(--color-steel-light)'}
-                >{item}</Link>
-              </li>
-            ))}
-          </ul>
+      {/* Privacy Policy Modal */}
+      {showPrivacyModal && (
+        <div onClick={() => setShowPrivacyModal(false)} style={{
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          background: 'rgba(0,0,0,0.85)',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          zIndex: 9999,
+          padding: '1rem',
+        }}>
+          <div onClick={(e) => e.stopPropagation()} style={{
+            background: 'var(--color-bg2)',
+            border: '1px solid rgba(131,68,23,0.3)',
+            borderRadius: '8px',
+            padding: '2rem',
+            maxWidth: '600px',
+            width: '100%',
+            maxHeight: '90vh',
+            overflowY: 'auto',
+            position: 'relative',
+          }}>
+            <button onClick={() => setShowPrivacyModal(false)} style={{
+              position: 'absolute',
+              top: '1rem',
+              right: '1rem',
+              background: 'none',
+              border: 'none',
+              color: 'var(--color-warm-gray)',
+              fontSize: '1.5rem',
+              cursor: 'pointer',
+            }}>✕</button>
+
+            <h3 style={{
+              fontFamily: "'Barlow Condensed', sans-serif",
+              fontSize: '1.8rem',
+              fontWeight: 600,
+              textTransform: 'uppercase',
+              marginBottom: '1.5rem',
+            }}>Privacy Policy</h3>
+
+            <p style={{ color: 'var(--color-warm-gray)', lineHeight: 1.8, marginBottom: '1.5rem' }}>
+              At Mechze, we value your privacy. This policy outlines how we handle user information on our digital platform:
+            </p>
+
+            <div style={{ color: 'var(--color-warm-gray)', lineHeight: 1.8 }}>
+              <p style={{ marginBottom: '1rem' }}>
+                <strong>1. Information Collection:</strong> We collect essential contact information provided during service
+                booking or contact requests to facilitate mechanic connection.
+              </p>
+
+              <p style={{ marginBottom: '1rem' }}>
+                <strong>2. Data Usage:</strong> Information is strictly used for vehicle servicing connection and platform
+                communication. We do not sell or lease user data to third parties.
+              </p>
+
+              <p>
+                <strong>3. Security:</strong> Standard security protocols are applied to safeguard user information submitted
+                through our website and app.
+              </p>
+            </div>
+
+            <p style={{ textAlign: 'center', marginTop: '1.5rem', fontSize: '0.85rem', color: 'var(--color-warm-gray)' }}>
+              Press <kbd style={{ background: 'var(--color-bg3)', padding: '2px 8px', borderRadius: '3px', fontFamily: 'monospace' }}>ESC</kbd> to close
+            </p>
+          </div>
         </div>
+      )}
 
-        {/* Account Column */}
-        <div>
-          <h4 style={{
-            fontFamily: 'Barlow Condensed, sans-serif',
-            fontSize: '11px',
-            letterSpacing: '3px',
-            textTransform: 'uppercase',
-            color: 'var(--color-brown-light)',
-            marginBottom: '1rem',
-          }}>Account</h4>
-          <ul style={{ listStyle: 'none', padding: 0, display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
-            {[
-              { label: 'Customer Login', to: '/login' },
-              { label: 'Mechanic Login', to: '/mechanic/login' },
-              { label: 'Register', to: '/Userregister' },
-              { label: 'About Us', to: '/about' },
-              { label: 'Contact Us', to: '/contact' },
-              { label: 'Privacy Policy', to: '/privacy-policy' },
-            ].map(({ label, to }) => (
-              <li key={label}>
-                <Link to={to} style={{
-                  color: 'var(--color-steel-light)',
-                  fontSize: '13px',
-                  fontFamily: 'Barlow Condensed, sans-serif',
-                  letterSpacing: '1px',
-                  transition: 'color 0.2s',
-                }}
-                  onMouseOver={e => e.target.style.color = 'var(--color-off-white)'}
-                  onMouseOut={e => e.target.style.color = 'var(--color-steel-light)'}
-                >{label}</Link>
-              </li>
-            ))}
-          </ul>
+      {/* Terms & Conditions Modal */}
+      {showTermsModal && (
+        <div onClick={() => setShowTermsModal(false)} style={{
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          background: 'rgba(0,0,0,0.85)',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          zIndex: 9999,
+          padding: '1rem',
+        }}>
+          <div onClick={(e) => e.stopPropagation()} style={{
+            background: 'var(--color-bg2)',
+            border: '1px solid rgba(131,68,23,0.3)',
+            borderRadius: '8px',
+            padding: '2rem',
+            maxWidth: '600px',
+            width: '100%',
+            maxHeight: '90vh',
+            overflowY: 'auto',
+            position: 'relative',
+          }}>
+            <button onClick={() => setShowTermsModal(false)} style={{
+              position: 'absolute',
+              top: '1rem',
+              right: '1rem',
+              background: 'none',
+              border: 'none',
+              color: 'var(--color-warm-gray)',
+              fontSize: '1.5rem',
+              cursor: 'pointer',
+            }}>✕</button>
+
+            <h3 style={{
+              fontFamily: "'Barlow Condensed', sans-serif",
+              fontSize: '1.8rem',
+              fontWeight: 600,
+              textTransform: 'uppercase',
+              marginBottom: '1.5rem',
+            }}>Terms & Conditions</h3>
+
+            <p style={{ color: 'var(--color-warm-gray)', lineHeight: 1.8, marginBottom: '1.5rem' }}>
+              Welcome to Mechze. By accessing our platform, you agree to the following standard terms:
+            </p>
+
+            <div style={{ color: 'var(--color-warm-gray)', lineHeight: 1.8 }}>
+              <p style={{ marginBottom: '1rem' }}>
+                <strong>1. Platform Role:</strong> Mechze acts as a digital platform connecting vehicle owners with mechanics
+                for vehicle repair and servicing assistance.
+              </p>
+
+              <p style={{ marginBottom: '1rem' }}>
+                <strong>2. User Responsibilities:</strong> Users agree to provide accurate information when booking or
+                submitting inquiries on the platform.
+              </p>
+
+              <p>
+                <strong>3. Service Scope:</strong> Services are delivered according to availability and terms specified
+                during booking requests.
+              </p>
+            </div>
+
+            <p style={{ textAlign: 'center', marginTop: '1.5rem', fontSize: '0.85rem', color: 'var(--color-warm-gray)' }}>
+              Press <kbd style={{ background: 'var(--color-bg3)', padding: '2px 8px', borderRadius: '3px', fontFamily: 'monospace' }}>ESC</kbd> to close
+            </p>
+          </div>
         </div>
-      </div>
-
-      {/* Bottom Bar */}
-      <div style={{
-        borderTop: '1px solid rgba(131, 68, 23, 0.15)',
-        padding: '16px clamp(1.25rem, 5vw, 3rem)',
-        display: 'flex',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        flexWrap: 'wrap',
-        gap: '0.5rem',
-        fontFamily: 'Barlow Condensed, sans-serif',
-        fontSize: '12px',
-        letterSpacing: '1px',
-        color: 'var(--color-steel)',
-      }}>
-        <span>© 2025 MECHZE. ALL RIGHTS RESERVED.</span>
-        <Link to="/privacy-policy" style={{
-          color: 'var(--color-steel)',
-          transition: 'color 0.2s',
-        }}
-          onMouseOver={e => e.target.style.color = 'var(--color-brown-light)'}
-          onMouseOut={e => e.target.style.color = 'var(--color-steel)'}
-        >PRIVACY POLICY</Link>
-      </div>
-    </footer>
+      )}
+    </>
   );
 };
 
