@@ -23,7 +23,7 @@
   padding: clamp(5rem, 10vw, 10rem) clamp(1rem, 5vw, 2rem) clamp(3rem, 8vw, 6rem);
   text-align: center;
   position: relative;
-  background: radial-gradient(ellipse 60rem 30rem at 50% -10%, rgba(131,68,23,0.12), transparent 60%), var(--color-bg, #0E0C0A);
+  background: radial-gradient(ellipse 60rem 30rem at 50% -10%, rgba(131,68,23,0.12), transparent 60%), var(--mz-surface);
   border-bottom: 1px solid rgba(131, 68, 23, 0.15);
   padding-top: env(safe-area-inset-top, 0);
   padding-left: max(1rem, env(safe-area-inset-left));
@@ -348,7 +348,7 @@
    ═══════════════════════════════════════════ */
 
 .download-section {
-  background: var(--color-bg, #0E0C0A);
+  background: var(--mz-surface-low);
   padding: clamp(2.5rem, 6vw, 4rem) clamp(1rem, 5vw, 2rem);
   text-align: center;
 }
@@ -447,7 +447,7 @@
    ═══════════════════════════════════════════ */
 
 .partner-section {
-  background: var(--color-bg2, #141210);
+  background: var(--mz-surface-high);
   padding: clamp(3rem, 8vw, 6rem) clamp(1rem, 5vw, 2rem);
   text-align: center;
 }
