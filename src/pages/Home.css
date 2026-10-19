@@ -398,17 +398,20 @@
    ═══════════════════════════════════════════ */
 
 .download-section {
-  background: var(--color-bg, #0E0C0A);
+  background: var(--mz-surface-low);
   padding: clamp(2.5rem, 6vw, 4rem) clamp(1rem, 5vw, 2rem);
   text-align: center;
+  border-top: 1px solid var(--mz-outline-variant);
+  border-bottom: 1px solid var(--mz-outline-variant);
 }
 
 .download-section h2 {
-  font-family: 'Barlow Condensed', sans-serif;
+  font-family: var(--mz-font-display);
   font-size: clamp(1.6rem, 4vw, 2.5rem);
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 2px;
+  letter-spacing: 0.08em;
+  color: var(--mz-on-surface);
   margin-bottom: 2rem;
 }
 
@@ -460,39 +463,47 @@
 }
 
 .download-label {
-  font-family: 'Barlow Condensed', sans-serif;
-  font-size: 0.85rem;
-  letter-spacing: 2px;
+  font-family: var(--mz-font-display);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--color-brown-light);
+  color: var(--mz-primary);
   margin-bottom: 0.5rem;
 }
 
 .download-title {
-  font-family: 'Barlow Condensed', sans-serif;
-  font-size: clamp(1.1rem, 2vw, 1.2rem);
-  font-weight: 600;
-  margin-bottom: 0.75rem;
+  font-family: var(--mz-font-display);
+  font-size: clamp(1.05rem, 2vw, 1.2rem);
+  font-weight: 700;
+  color: var(--mz-on-surface);
+  margin-bottom: 1rem;
 }
 
 .download-btn {
-  background: var(--color-brown);
-  color: var(--color-off-white);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--mz-primary-container);
+  color: var(--mz-on-primary-container);
   border: none;
-  clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
-  font-family: 'Barlow Condensed', sans-serif;
+  border-radius: var(--mz-r-pill);
+  font-family: var(--mz-font-display);
   font-weight: 600;
-  font-size: 12px;
+  font-size: 13px;
   text-transform: uppercase;
-  letter-spacing: 2px;
-  padding: 10px 24px;
+  letter-spacing: 0.08em;
+  padding: 10px 22px;
   min-height: 44px;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: transform .2s ease, box-shadow .2s ease;
+  white-space: nowrap;
+  pointer-events: none; /* card div handles the click */
 }
 
-.download-btn:hover {
-  background: var(--color-brown-light);
+.download-card:hover .download-btn {
+  transform: scale(.98);
+  box-shadow: var(--mz-shadow-card);
 }
 
 /* ═══════════════════════════════════════════
