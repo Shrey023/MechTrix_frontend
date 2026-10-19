@@ -5,10 +5,10 @@
 
 /* ── Page Container ── */
 .home-page {
-  background: var(--color-bg, #0E0C0A);
+  background: var(--mz-surface);
   min-height: 100vh;
-  color: var(--color-off-white, #F6F6F7);
-  font-family: 'Barlow', sans-serif;
+  color: var(--mz-on-surface);
+  font-family: var(--mz-font-body);
 }
 
 /* ═══════════════════════════════════════════
@@ -140,8 +140,8 @@
 }
 
 .section-bg2 {
-  background: var(--color-bg2, #141210);
-  border-top: 1px solid rgba(131,68,23,0.2);
+  background: var(--mz-surface-low);
+  border-top: 1px solid var(--mz-outline-variant);
 }
 
 .section-center {
@@ -400,35 +400,42 @@
 }
 
 .download-label {
-  font-family: 'Barlow Condensed', sans-serif;
+  font-family: var(--mz-font-display);
   font-size: 0.85rem;
-  letter-spacing: 2px;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--color-brown-light);
+  color: var(--mz-primary);
   margin-bottom: 0.5rem;
 }
 
 .download-title {
-  font-family: 'Barlow Condensed', sans-serif;
+  font-family: var(--mz-font-display);
   font-size: clamp(1.1rem, 2vw, 1.2rem);
   font-weight: 600;
+  color: var(--mz-on-surface);
   margin-bottom: 0.75rem;
 }
 
 .download-btn {
-  background: var(--color-brown);
-  color: var(--color-off-white);
+  background: var(--mz-primary-container);
+  color: var(--mz-on-primary-container);
   border: none;
-  clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
-  font-family: 'Barlow Condensed', sans-serif;
+  border-radius: var(--mz-r-pill);
+  font-family: var(--mz-font-display);
   font-weight: 600;
   font-size: 12px;
   text-transform: uppercase;
-  letter-spacing: 2px;
+  letter-spacing: 0.08em;
   padding: 10px 24px;
   min-height: 44px;
   cursor: pointer;
   transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.download-btn:hover {
+  transform: scale(0.98);
+  box-shadow: var(--mz-shadow-card);
 }
 
 .download-btn:hover {
