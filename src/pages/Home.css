@@ -16,6 +16,8 @@
    ═══════════════════════════════════════════ */
 
 .hero {
+  --hero-glow-a: rgba(133, 83, 36, 0.20);
+  --hero-glow-b: rgba(193, 131, 114, 0.15);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -23,11 +25,39 @@
   padding: clamp(5rem, 10vw, 10rem) clamp(1rem, 5vw, 2rem) clamp(3rem, 8vw, 6rem);
   text-align: center;
   position: relative;
-  background: radial-gradient(ellipse 60rem 30rem at 50% -10%, rgba(131,68,23,0.12), transparent 60%), var(--color-bg, #0E0C0A);
+  isolation: isolate;
+  overflow: hidden;
+  background: var(--mz-inverse-surface);
   border-bottom: 1px solid rgba(131, 68, 23, 0.15);
   padding-top: env(safe-area-inset-top, 0);
   padding-left: max(1rem, env(safe-area-inset-left));
   padding-right: max(1rem, env(safe-area-inset-right));
+}
+
+.hero::before,
+.hero::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(64px);
+  pointer-events: none;
+  z-index: -1;
+}
+
+.hero::before {
+  width: 384px;
+  height: 384px;
+  top: -128px;
+  left: -128px;
+  background: var(--hero-glow-a);
+}
+
+.hero::after {
+  width: 320px;
+  height: 320px;
+  top: 50%;
+  right: -96px;
+  background: var(--hero-glow-b);
 }
 
 .hero-kicker {
