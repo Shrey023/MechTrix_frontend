@@ -1,0 +1,179 @@
+/* ==========================================================================
+   mechze-tokens.css  —  "Warm Industrial Mobility"
+   Import ONCE, before every other stylesheet (e.g. first line of main.jsx / index.css).
+   Values come from the Stitch export (tailwind theme + screens), not just DESIGN.md.
+
+   Add to index.html <head> (fonts):
+   <link rel="preconnect" href="https://fonts.googleapis.com">
+   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
+   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap" rel="stylesheet">
+   ========================================================================== */
+
+:root {
+  /* ---- Surfaces ---- */
+  --mz-surface: #fff8f6;              /* page background */
+  --mz-surface-low: #fff1ec;          /* alt sections, inputs, quiet cards */
+  --mz-surface-container: #ffe9e3;    /* hover / selected tint */
+  --mz-surface-high: #ffe2d9;         /* chips */
+  --mz-surface-highest: #ffdbcf;      /* strong tint, pending dots */
+  --mz-surface-lowest: #ffffff;       /* elevated cards, modals */
+
+  /* ---- Text & lines ---- */
+  --mz-on-surface: #2a1710;           /* Espresso: body text */
+  --mz-on-surface-variant: #51443a;   /* secondary text */
+  --mz-outline: #847469;              /* placeholders, muted icons */
+  --mz-outline-variant: #d6c3b6;
+  --mz-sand: #e4d3be;                 /* hairlines only */
+
+  /* ---- Brand ---- */
+  --mz-primary: #855324;              /* text-safe brand brown: links, icons on light */
+  --mz-primary-container: #c08552;    /* CARAMEL: button / active FILLS only */
+  --mz-on-primary-container: #442200; /* text on Caramel */
+  --mz-primary-fixed: #ffdcc2;
+  --mz-secondary: #845333;
+  --mz-secondary-container: #ffbe97;
+  --mz-secondary-fixed: #ffdbc8;
+  --mz-on-secondary-fixed: #321300;
+  --mz-coffee: #895737;
+  --mz-cream: #f3e9dc;
+
+  /* ---- Dark surfaces (hero, footer, dark cards) ---- */
+  --mz-inverse-surface: #412b23;
+  --mz-inverse-on-surface: #ffede7;
+  --mz-inverse-on-surface-variant: rgba(255, 237, 231, 0.78); /* secondary text on dark */
+  --mz-inverse-primary: #fbb981;      /* accent text on dark */
+  --mz-brownie: #5e3023;              /* dark feature cards */
+
+  /* ---- Feedback ---- */
+  --mz-error: #ba1a1a;
+  --mz-error-container: #ffdad6;
+  --mz-on-error-container: #93000a;
+  --mz-success: #2e8b57;
+  --mz-success-container: #e3f4ea;
+  --mz-on-success-container: #1f6b44;
+  --mz-warning: #c08552;              /* same as primary-container for warm "pending" state */
+  --mz-warning-container: #fff1ec;    /* same as surface-low */
+  --mz-on-warning-container: #442200; /* same as on-primary-container */
+  --mz-info: #847469;                 /* same as outline */
+  --mz-info-container: #fff1ec;       /* same as surface-low */
+  --mz-on-info-container: #51443a;    /* same as on-surface-variant */
+
+  /* ---- Type ---- */
+  --mz-font-display: 'Sora', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --mz-font-body: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+
+  /* ---- Shape ---- */
+  --mz-r-card: 20px;
+  --mz-r-panel: 24px;
+  --mz-r-field: 14px;
+  --mz-r-pill: 9999px;
+
+  /* ---- Elevation (warm brown shadows) ---- */
+  --mz-shadow-sm: 0 1px 8px rgba(42, 23, 16, 0.06);
+  --mz-shadow-card: 0 4px 16px -2px rgba(42, 23, 16, 0.08);
+  --mz-shadow-float: 0 12px 28px -4px rgba(42, 23, 16, 0.10), 0 4px 10px -2px rgba(42, 23, 16, 0.05);
+  --mz-shadow-modal: 0 24px 48px -8px rgba(42, 23, 16, 0.18), 0 8px 16px -4px rgba(42, 23, 16, 0.08);
+  --mz-shadow-bar: 0 -4px 20px rgba(42, 23, 16, 0.12);
+  --mz-ring: 0 0 0 2px var(--mz-primary-container);
+
+  /* ---- Layout ---- */
+  --mz-header-h: 80px;
+  --mz-container: 1280px;
+  --mz-container-wide: 1440px;
+}
+
+/* ==========================================================================
+   LEGACY ALIASES — re-point the old variable names at the new tokens so the
+   existing CSS recolours without being rewritten. Do NOT rename these.
+   NOTE: the old theme was dark, so --color-off-white now means DARK text.
+   ========================================================================== */
+:root {
+  --color-bg: var(--mz-surface);
+  --color-bg2: var(--mz-surface-low);
+  --color-bg3: var(--mz-surface-container);
+  --color-off-white: var(--mz-on-surface);
+  --color-warm-gray: var(--mz-on-surface-variant);
+  --color-brown-light: var(--mz-primary);
+  --font-body: var(--mz-font-body);
+}
+
+/* ==========================================================================
+   DARK CONTEXT — inside dark blocks the legacy variables flip to light text.
+   The selectors below are the confirmed dark-background blocks from the app.
+   Adding them here re-scopes the legacy aliases to dark values so text stays
+   light without touching any JSX.
+
+   Selectors:
+     .hero            — Home.jsx hero section, CustomerDashboard hero
+     .partner-section — Home.jsx "Partner with Mechze" dark CTA block
+     .footer-wrapper  — Footer.jsx <footer> element
+     .footer          — CustomerDashboard footer variant
+     .sidebar-footer  — Navbar.jsx mobile sidebar footer area
+   ========================================================================== */
+.mz-dark,
+.hero,
+.partner-section,
+.footer-wrapper,
+.footer,
+.sidebar-footer {
+  --color-bg: var(--mz-inverse-surface);
+  --color-bg2: var(--mz-brownie);
+  --color-bg3: var(--mz-brownie);
+  --color-off-white: var(--mz-inverse-on-surface);
+  --color-warm-gray: rgba(255, 237, 231, 0.78);
+  --color-brown-light: var(--mz-inverse-primary);
+  background: var(--mz-inverse-surface);
+  color: var(--mz-inverse-on-surface);
+}
+
+/* ==========================================================================
+   BASE
+   ========================================================================== */
+html { scroll-padding-top: var(--mz-header-h); }
+
+body {
+  background: var(--mz-surface);
+  color: var(--mz-on-surface);
+  font-family: var(--mz-font-body);
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--mz-font-display);
+  letter-spacing: -0.02em;
+}
+
+:focus-visible {
+  outline: 2px solid var(--mz-primary);
+  outline-offset: 2px;
+}
+
+/* Metrics, prices, ETAs: align digits */
+.mz-tnum { font-variant-numeric: tabular-nums; font-feature-settings: 'tnum'; }
+
+/* Material Symbols (only used if Tier 2 icon swaps are applied) */
+.material-symbols-outlined {
+  font-family: 'Material Symbols Outlined';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  direction: ltr;
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+  -webkit-font-feature-settings: 'liga';
+  font-feature-settings: 'liga';
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

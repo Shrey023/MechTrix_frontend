@@ -1,0 +1,273 @@
+/* =========================================
+   MECHZE — FOOTER
+   Warm · Industrial · Mobility
+   ========================================= */
+
+.footer-wrapper {
+  background: var(--mz-inverse-surface);
+  color: var(--mz-inverse-on-surface);
+  border-top: 1px solid var(--mz-outline-variant);
+  padding: clamp(2rem, 6vw, 4rem) clamp(1rem, 5vw, 2rem);
+}
+
+.footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+/* Brand Section */
+.footer-brand {
+  display: flex;
+  flex-direction: column;
+}
+
+.footer-logo {
+  height: 36px;
+  width: auto;
+  margin-bottom: 1rem;
+}
+
+.footer-brand p {
+  color: var(--mz-inverse-on-surface-variant);
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+/* Footer Column Headings */
+.footer-column h4 {
+  font-family: var(--mz-font-display);
+  font-size: 1.1rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 1rem;
+  color: var(--mz-inverse-on-surface);
+}
+
+/* Footer Links */
+.footer-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-links li {
+  margin-bottom: 0.5rem;
+}
+
+.footer-links a,
+.footer-links button {
+  color: var(--mz-inverse-on-surface-variant);
+  font-size: 0.95rem;
+  text-decoration: none;
+  transition: color 0.2s ease;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  text-align: left;
+  font-family: inherit;
+}
+
+.footer-links a:hover,
+.footer-links button:hover {
+  color: var(--mz-primary);
+}
+
+/* Footer Bottom */
+.footer-bottom {
+  border-top: 1px solid var(--mz-outline-variant);
+  padding-top: 2rem;
+  text-align: center;
+}
+
+.footer-bottom p {
+  color: var(--mz-inverse-on-surface-variant);
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+/* Modal Overlay */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  padding: 1rem;
+}
+
+/* Modal Container */
+.modal-container {
+  background: var(--mz-surface-container);
+  border: 1px solid var(--mz-outline-variant);
+  border-radius: var(--mz-r-card);
+  padding: 2rem;
+  max-width: 900px;
+  width: 100%;
+  position: relative;
+}
+
+.modal-container-narrow {
+  max-width: 600px;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+/* Modal Close Button */
+.modal-close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: none;
+  border: none;
+  color: var(--mz-on-surface-variant);
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.modal-close:hover {
+  color: var(--mz-on-surface);
+}
+
+/* Modal Title */
+.modal-title {
+  font-family: var(--mz-font-display);
+  font-size: 1.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+  text-align: center;
+  color: var(--mz-on-surface);
+}
+
+.modal-subtitle {
+  color: var(--mz-on-surface-variant);
+  margin-bottom: 2rem;
+  font-size: 0.95rem;
+  text-align: center;
+}
+
+/* Download Modal Grid */
+.download-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+.download-card {
+  text-align: center;
+}
+
+.download-label {
+  font-family: var(--mz-font-display);
+  font-size: 0.85rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--mz-primary);
+  margin-bottom: 1rem;
+}
+
+.download-card h4 {
+  font-family: var(--mz-font-display);
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: var(--mz-on-surface);
+}
+
+.qr-container {
+  margin-bottom: 1.5rem;
+}
+
+.qr-image {
+  width: 150px;
+  height: 150px;
+  border: 2px solid var(--mz-outline-variant);
+  border-radius: var(--mz-r-field);
+}
+
+.qr-text {
+  margin-top: 0.75rem;
+  font-size: 0.85rem;
+  color: var(--mz-on-surface-variant);
+}
+
+/* Google Play Button */
+.play-store-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--mz-inverse-surface);
+  color: var(--mz-inverse-on-surface);
+  padding: 10px 20px;
+  border-radius: var(--mz-r-pill);
+  text-decoration: none;
+  font-family: var(--mz-font-body);
+  transition: opacity 0.2s ease;
+}
+
+.play-store-button:hover {
+  opacity: 0.9;
+}
+
+.play-store-icon {
+  font-size: 1.3rem;
+}
+
+.play-store-text {
+  text-align: left;
+}
+
+.play-store-label {
+  font-size: 0.65rem;
+}
+
+.play-store-name {
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+/* Modal Footer */
+.modal-footer {
+  text-align: center;
+  margin-top: 1.5rem;
+  font-size: 0.85rem;
+  color: var(--mz-on-surface-variant);
+}
+
+.modal-footer kbd {
+  background: var(--mz-surface-highest);
+  color: var(--mz-on-surface);
+  padding: 2px 8px;
+  border-radius: 3px;
+  font-family: monospace;
+}
+
+/* Policy Modal Content */
+.policy-content {
+  color: var(--mz-on-surface-variant);
+  line-height: 1.8;
+}
+
+.policy-content p {
+  margin-bottom: 1rem;
+}
+
+.policy-content strong {
+  color: var(--mz-on-surface);
+}
+
+.policy-intro {
+  margin-bottom: 1.5rem;
+}

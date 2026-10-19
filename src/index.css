@@ -2,37 +2,37 @@
    MECHZE — GLOBAL STYLES
    ========================================= */
 
+@import './styles/mechze-tokens.css';
 @import './styles/variables.css';
 @import './styles/overrides.css';
 
 /* ── Typography Elements ── */
 h1 {
-  font-family: var(--font-display);
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 2px;
+  font-family: var(--mz-font-display);
+  font-weight: 800;
+  letter-spacing: -0.03em;
   color: var(--color-off-white);
-  line-height: 1;
+  line-height: 1.14;
 }
 
 h2 {
-  font-family: var(--font-display);
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  color: var(--color-off-white);
-  line-height: 1.1;
-}
-
-h3 {
-  font-family: var(--font-display);
-  font-weight: 600;
+  font-family: var(--mz-font-display);
+  font-weight: 700;
+  letter-spacing: -0.02em;
   color: var(--color-off-white);
   line-height: 1.2;
 }
 
+h3 {
+  font-family: var(--mz-font-display);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--color-off-white);
+  line-height: 1.3;
+}
+
 p {
-  font-family: var(--font-body);
+  font-family: var(--mz-font-body);
   font-weight: 400;
   line-height: 1.75;
   color: var(--color-warm-gray);
@@ -45,7 +45,7 @@ a {
 }
 
 button {
-  font-family: var(--font-display);
+  font-family: var(--mz-font-body);
 }
 
 /* ── Section Kicker Pattern ── */
@@ -64,7 +64,7 @@ button {
 }
 
 .kicker-text {
-  font-family: var(--font-display);
+  font-family: var(--mz-font-display);
   font-size: 12px;
   letter-spacing: 4px;
   text-transform: uppercase;
@@ -72,7 +72,7 @@ button {
 }
 
 .section-title {
-  font-family: var(--font-display);
+  font-family: var(--mz-font-display);
   font-size: clamp(36px, 5vw, 64px);
   font-weight: 700;
   text-transform: uppercase;
@@ -136,7 +136,7 @@ hr {
   background: var(--color-brown);
   color: var(--color-off-white);
   clip-path: polygon(10px 0%, 100% 0%, calc(100% - 10px) 100%, 0% 100%);
-  font-family: var(--font-display);
+  font-family: var(--mz-font-display);
   font-weight: 600;
   font-size: 14px;
   text-transform: uppercase;
@@ -164,7 +164,7 @@ hr {
   border: 1px solid rgba(131, 68, 23, 0.5);
   color: var(--color-warm-gray);
   clip-path: polygon(10px 0%, 100% 0%, calc(100% - 10px) 100%, 0% 100%);
-  font-family: var(--font-display);
+  font-family: var(--mz-font-display);
   font-weight: 600;
   font-size: 14px;
   text-transform: uppercase;
@@ -182,12 +182,12 @@ hr {
 
 /* ── Status Badges ── */
 .badge {
-  font-family: var(--font-display);
+  font-family: var(--mz-font-display);
   font-size: 11px;
   text-transform: uppercase;
-  letter-spacing: 2px;
+  letter-spacing: 0.1em;
   padding: 3px 10px;
-  border-radius: var(--radius-sm);
+  border-radius: var(--mz-r-pill);
   display: inline-block;
   font-weight: 600;
 }
@@ -195,39 +195,39 @@ hr {
 .badge-active,
 .badge-success,
 .badge-completed {
-  background: rgba(40, 100, 50, 0.2);
-  color: #6DBF7E;
-  border: 1px solid rgba(40, 100, 50, 0.3);
+  background: var(--mz-success-container);
+  color: var(--mz-on-success-container);
+  border: 1px solid var(--mz-success);
 }
 
 .badge-pending,
 .badge-warning,
 .badge-accepted {
-  background: rgba(131, 68, 23, 0.2);
-  color: #D4874A;
-  border: 1px solid rgba(131, 68, 23, 0.35);
+  background: var(--mz-warning-container);
+  color: var(--mz-on-warning-container);
+  border: 1px solid var(--mz-warning);
 }
 
 .badge-cancelled,
 .badge-error,
 .badge-rejected {
-  background: rgba(150, 30, 30, 0.2);
-  color: #E06060;
-  border: 1px solid rgba(150, 30, 30, 0.3);
+  background: var(--mz-error-container);
+  color: var(--mz-on-error-container);
+  border: 1px solid var(--mz-error);
 }
 
 .badge-neutral,
 .badge-info {
-  background: rgba(115, 121, 134, 0.2);
-  color: var(--color-steel-light);
-  border: 1px solid rgba(115, 121, 134, 0.3);
+  background: var(--mz-info-container);
+  color: var(--mz-on-info-container);
+  border: 1px solid var(--mz-info);
 }
 
 /* ── Shared Card Pattern ── */
 .card-dark {
-  background: var(--color-bg3);
-  border: 1px solid rgba(131, 68, 23, 0.12);
-  border-radius: var(--radius-sm);
+  background: var(--mz-surface-low);
+  border: 1px solid var(--mz-outline-variant);
+  border-radius: var(--mz-r-card);
   padding: 20px 24px;
   transition: var(--transition-base);
   position: relative;
@@ -241,16 +241,16 @@ hr {
   left: 0;
   right: 0;
   height: 2px;
-  background: linear-gradient(90deg, transparent, #834417, transparent);
+  background: linear-gradient(90deg, transparent, var(--mz-primary), transparent);
   opacity: 0;
   transition: opacity 0.3s ease;
 }
 
 .card-dark:hover {
-  background: var(--color-bg4);
-  border-color: rgba(131, 68, 23, 0.3);
+  background: var(--mz-surface-container);
+  border-color: var(--mz-outline);
   transform: translateY(-2px);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  box-shadow: var(--mz-shadow-card);
 }
 
 .card-dark:hover::before {
@@ -261,12 +261,12 @@ hr {
 input,
 select,
 textarea {
-  background: var(--color-bg3);
-  border: 1px solid rgba(115, 121, 134, 0.3);
-  border-radius: var(--radius-sm);
-  color: var(--color-off-white);
+  background: var(--mz-surface-low);
+  border: 1px solid var(--mz-outline-variant);
+  border-radius: var(--mz-r-field);
+  color: var(--mz-on-surface);
   padding: 12px 16px;
-  font-family: var(--font-body);
+  font-family: var(--mz-font-body);
   font-size: 15px;
   font-weight: 400;
   width: 100%;
@@ -275,7 +275,7 @@ textarea {
 
 input::placeholder,
 textarea::placeholder {
-  color: var(--color-steel);
+  color: var(--mz-on-surface-variant);
   opacity: 1;
 }
 
@@ -283,30 +283,30 @@ input:focus,
 select:focus,
 textarea:focus {
   outline: none;
-  border-color: var(--color-brown);
-  box-shadow: 0 0 0 3px rgba(131, 68, 23, 0.15);
+  border-color: var(--mz-primary);
+  box-shadow: 0 0 0 3px var(--mz-primary-container);
 }
 
 select {
   appearance: none;
   -webkit-appearance: none;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23737986' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23847469' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
   background-repeat: no-repeat;
   background-position: right 14px center;
   padding-right: 40px;
 }
 
 select option {
-  background: var(--color-bg3);
-  color: var(--color-off-white);
+  background: var(--mz-surface-container);
+  color: var(--mz-on-surface);
 }
 
 label {
-  font-family: var(--font-display);
+  font-family: var(--mz-font-display);
   font-size: 12px;
-  letter-spacing: 2px;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--color-steel-light);
+  color: var(--mz-on-surface-variant);
   margin-bottom: 6px;
   display: block;
 }
@@ -319,7 +319,7 @@ table {
 
 thead th {
   background: var(--color-bg3);
-  font-family: var(--font-display);
+  font-family: var(--mz-font-display);
   font-size: 12px;
   text-transform: uppercase;
   letter-spacing: 2px;
@@ -336,14 +336,14 @@ tbody tr {
 }
 
 tbody tr:hover {
-  background: var(--color-bg4);
+  background: var(--mz-surface-container);
 }
 
 tbody td {
   padding: 14px 16px;
   font-size: 14px;
   color: var(--color-warm-gray);
-  font-family: var(--font-body);
+  font-family: var(--mz-font-body);
 }
 
 /* ── Loading Skeleton Shimmer ── */
@@ -359,20 +359,20 @@ tbody td {
 
 .skeleton {
   background: linear-gradient(90deg,
-      var(--color-bg3) 25%,
-      var(--color-bg4) 50%,
-      var(--color-bg3) 75%);
+      var(--mz-surface-low) 25%,
+      var(--mz-surface-container) 50%,
+      var(--mz-surface-low) 75%);
   background-size: 200% 100%;
   animation: shimmer 1.5s infinite;
-  border-radius: var(--radius-sm);
+  border-radius: var(--mz-r-field);
 }
 
 /* ── Spinner ── */
 .spinner {
   width: 36px;
   height: 36px;
-  border: 3px solid rgba(131, 68, 23, 0.2);
-  border-top-color: var(--color-brown);
+  border: 3px solid var(--mz-primary-container);
+  border-top-color: var(--mz-primary);
   border-radius: 50%;
   animation: spin 0.8s linear infinite;
   margin: 2rem auto;
@@ -386,43 +386,43 @@ tbody td {
 
 /* ── Stat Cards (Admin Dashboard) ── */
 .stat-card {
-  background: var(--color-bg3);
-  border-left: 3px solid var(--color-brown);
+  background: var(--mz-surface-low);
+  border-left: 3px solid var(--mz-primary);
   padding: 20px 24px;
-  border-radius: var(--radius-sm);
+  border-radius: var(--mz-r-field);
 }
 
 .stat-number {
-  font-family: var(--font-display);
+  font-family: var(--mz-font-display);
   font-size: 36px;
   font-weight: 700;
-  color: var(--color-off-white);
+  color: var(--mz-on-surface);
   line-height: 1;
   margin-bottom: 6px;
 }
 
 .stat-label {
-  font-family: var(--font-display);
+  font-family: var(--mz-font-display);
   font-size: 12px;
   font-weight: 400;
   text-transform: uppercase;
-  letter-spacing: 2px;
-  color: var(--color-steel-light);
+  letter-spacing: 0.1em;
+  color: var(--mz-on-surface-variant);
 }
 
 /* ── Pricing / Fare Container ── */
 .pricing-box {
-  background: var(--color-bg4);
-  border: 1px solid rgba(131, 68, 23, 0.2);
-  border-radius: var(--radius-sm);
+  background: var(--mz-surface-container);
+  border: 1px solid var(--mz-outline-variant);
+  border-radius: var(--mz-r-field);
   padding: 12px 16px;
   margin: 12px 0;
 }
 
 /* ── Map Container Dark Border ── */
 .map-container {
-  border: 1px solid rgba(131, 68, 23, 0.2);
-  border-radius: var(--radius-sm);
+  border: 1px solid var(--mz-outline-variant);
+  border-radius: var(--mz-r-field);
   overflow: hidden;
 }
 

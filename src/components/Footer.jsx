@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import './Footer.css';
 import mechzeLogo from '../assets/mechze-logo.jpg';
 import customerQR from '../assets/customer-qr.png';
 import mechanicQR from '../assets/mechanic-qr.png';
@@ -24,258 +25,126 @@ const Footer = () => {
 
   return (
     <>
-      <footer style={{
-        background: 'var(--color-bg, #0E0C0A)',
-        borderTop: '1px solid rgba(131,68,23,0.2)',
-        padding: 'clamp(2rem, 6vw, 4rem) clamp(1rem, 5vw, 2rem)',
-      }}>
-        <div style={{
-          maxWidth: '1200px',
-          margin: '0 auto',
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
-          gap: '2rem',
-          marginBottom: '2rem',
-        }}>
+      <footer className="footer-wrapper">
+        <div className="footer-content">
           
           {/* Brand */}
-          <div>
-            <div style={{ marginBottom: '1rem' }}>
-              <img src={mechzeLogo} alt="Mechze" style={{ height: '36px', width: 'auto' }} />
-            </div>
-            <p style={{ color: 'var(--color-warm-gray)', fontSize: '0.95rem', lineHeight: 1.6 }}>
+          <div className="footer-brand">
+            <img src={mechzeLogo} alt="Mechze" className="footer-logo" />
+            <p>
               Mechze connects vehicle owners with mechanics through a simple, convenient, and transparent digital platform.
             </p>
           </div>
 
           {/* Company */}
-          <div>
-            <h4 style={{
-              fontFamily: "'Barlow Condensed', sans-serif",
-              fontSize: '1.1rem',
-              fontWeight: 600,
-              textTransform: 'uppercase',
-              letterSpacing: '1.5px',
-              marginBottom: '1rem',
-            }}>Company</h4>
-            <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
-              <li style={{ marginBottom: '0.5rem' }}>
-                <Link to="/" style={{ color: 'var(--color-warm-gray)', fontSize: '0.95rem', transition: 'color 0.2s' }}>Home</Link>
-              </li>
-              <li style={{ marginBottom: '0.5rem' }}>
-                <Link to="/about" style={{ color: 'var(--color-warm-gray)', fontSize: '0.95rem', transition: 'color 0.2s' }}>About Us</Link>
-              </li>
-              <li style={{ marginBottom: '0.5rem' }}>
-                <Link to="/nearby" style={{ color: 'var(--color-warm-gray)', fontSize: '0.95rem', transition: 'color 0.2s' }}>Services</Link>
-              </li>
+          <div className="footer-column">
+            <h4>Company</h4>
+            <ul className="footer-links">
+              <li><Link to="/">Home</Link></li>
+              <li><Link to="/about">About Us</Link></li>
+              <li><Link to="/nearby">Services</Link></li>
             </ul>
           </div>
 
           {/* Mechanics & Users */}
-          <div>
-            <h4 style={{
-              fontFamily: "'Barlow Condensed', sans-serif",
-              fontSize: '1.1rem',
-              fontWeight: 600,
-              textTransform: 'uppercase',
-              letterSpacing: '1.5px',
-              marginBottom: '1rem',
-            }}>Mechanics & Users</h4>
-            <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
-              <li style={{ marginBottom: '0.5rem' }}>
-                <Link to="/nearby" style={{ color: 'var(--color-warm-gray)', fontSize: '0.95rem' }}>Book Service</Link>
-              </li>
-              <li style={{ marginBottom: '0.5rem' }}>
-                <Link to="/mechanic/login" style={{ color: 'var(--color-warm-gray)', fontSize: '0.95rem' }}>For Mechanics</Link>
-              </li>
-              <li style={{ marginBottom: '0.5rem' }}>
-                <Link to="/login" style={{ color: 'var(--color-warm-gray)', fontSize: '0.95rem' }}>Login</Link>
-              </li>
-              <li style={{ marginBottom: '0.5rem' }}>
-                <button onClick={() => setShowDownloadModal(true)} style={{ background: 'none', border: 'none', color: 'var(--color-warm-gray)', fontSize: '0.95rem', cursor: 'pointer', padding: 0, textAlign: 'left', fontFamily: 'inherit' }}>Download App</button>
+          <div className="footer-column">
+            <h4>Mechanics & Users</h4>
+            <ul className="footer-links">
+              <li><Link to="/nearby">Book Service</Link></li>
+              <li><Link to="/mechanic/login">For Mechanics</Link></li>
+              <li><Link to="/login">Login</Link></li>
+              <li>
+                <button onClick={() => setShowDownloadModal(true)}>Download App</button>
               </li>
             </ul>
           </div>
 
           {/* Legal & Policy */}
-          <div>
-            <h4 style={{
-              fontFamily: "'Barlow Condensed', sans-serif",
-              fontSize: '1.1rem',
-              fontWeight: 600,
-              textTransform: 'uppercase',
-              letterSpacing: '1.5px',
-              marginBottom: '1rem',
-            }}>Legal & Policy</h4>
-            <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
-              <li style={{ marginBottom: '0.5rem' }}>
-                <button onClick={() => setShowPrivacyModal(true)} style={{ background: 'none', border: 'none', color: 'var(--color-warm-gray)', fontSize: '0.95rem', cursor: 'pointer', padding: 0, textAlign: 'left', fontFamily: 'inherit' }}>Privacy Policy</button>
+          <div className="footer-column">
+            <h4>Legal & Policy</h4>
+            <ul className="footer-links">
+              <li>
+                <button onClick={() => setShowPrivacyModal(true)}>Privacy Policy</button>
               </li>
-              <li style={{ marginBottom: '0.5rem' }}>
-                <button onClick={() => setShowTermsModal(true)} style={{ background: 'none', border: 'none', color: 'var(--color-warm-gray)', fontSize: '0.95rem', cursor: 'pointer', padding: 0, textAlign: 'left', fontFamily: 'inherit' }}>Terms & Conditions</button>
+              <li>
+                <button onClick={() => setShowTermsModal(true)}>Terms & Conditions</button>
               </li>
             </ul>
           </div>
 
         </div>
 
-        <div style={{
-          borderTop: '1px solid rgba(131,68,23,0.15)',
-          paddingTop: '2rem',
-          textAlign: 'center',
-        }}>
-          <p style={{ color: 'var(--color-warm-gray)', fontSize: '0.9rem' }}>
-            © 2025 Mechze. Your Trusted Mechanic, Just a Few Taps Away.
-          </p>
+        <div className="footer-bottom">
+          <p>© 2025 Mechze. Your Trusted Mechanic, Just a Few Taps Away.</p>
         </div>
       </footer>
 
       {/* Download Modal */}
       {showDownloadModal && (
-        <div onClick={() => setShowDownloadModal(false)} style={{
-          position: 'fixed',
-          top: 0,
-          left: 0,
-          right: 0,
-          bottom: 0,
-          background: 'rgba(0,0,0,0.85)',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          zIndex: 9999,
-          padding: '1rem',
-        }}>
-          <div onClick={(e) => e.stopPropagation()} style={{
-            background: 'var(--color-bg2)',
-            border: '1px solid rgba(131,68,23,0.3)',
-            borderRadius: '8px',
-            padding: '2rem',
-            maxWidth: '900px',
-            width: '100%',
-            position: 'relative',
-          }}>
-            <button onClick={() => setShowDownloadModal(false)} style={{
-              position: 'absolute',
-              top: '1rem',
-              right: '1rem',
-              background: 'none',
-              border: 'none',
-              color: 'var(--color-warm-gray)',
-              fontSize: '1.5rem',
-              cursor: 'pointer',
-            }}>✕</button>
+        <div className="modal-overlay" onClick={() => setShowDownloadModal(false)}>
+          <div className="modal-container" onClick={(e) => e.stopPropagation()}>
+            <button className="modal-close" onClick={() => setShowDownloadModal(false)}>✕</button>
 
-            <h3 style={{
-              fontFamily: "'Barlow Condensed', sans-serif",
-              fontSize: '1.8rem',
-              fontWeight: 600,
-              textTransform: 'uppercase',
-              marginBottom: '0.5rem',
-              textAlign: 'center',
-            }}>Download Mechze Apps</h3>
+            <h3 className="modal-title">Download Mechze Apps</h3>
 
-            <p style={{ color: 'var(--color-warm-gray)', marginBottom: '2rem', fontSize: '0.95rem', textAlign: 'center' }}>
+            <p className="modal-subtitle">
               Get the Mechze app on Google Play
             </p>
 
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '2rem' }}>
+            <div className="download-grid">
               
               {/* Customer App */}
-              <div style={{ textAlign: 'center' }}>
-                <div style={{
-                  fontFamily: "'Barlow Condensed', sans-serif",
-                  fontSize: '0.85rem',
-                  letterSpacing: '2px',
-                  textTransform: 'uppercase',
-                  color: 'var(--color-brown-light)',
-                  marginBottom: '1rem',
-                }}>FOR VEHICLE OWNERS</div>
+              <div className="download-card">
+                <div className="download-label">FOR VEHICLE OWNERS</div>
                 
-                <h4 style={{
-                  fontFamily: "'Barlow Condensed', sans-serif",
-                  fontSize: '1.3rem',
-                  fontWeight: 600,
-                  marginBottom: '1rem',
-                }}>Customer App</h4>
+                <h4>Customer App</h4>
 
-                <div style={{ marginBottom: '1.5rem' }}>
-                  <img src={customerQR} alt="Customer App QR" style={{ width: '150px', height: '150px', border: '2px solid rgba(131,68,23,0.2)', borderRadius: '6px' }} />
-                  <p style={{ marginTop: '0.75rem', fontSize: '0.85rem', color: 'var(--color-warm-gray)' }}>Scan QR to download</p>
+                <div className="qr-container">
+                  <img src={customerQR} alt="Customer App QR" className="qr-image" />
+                  <p className="qr-text">Scan QR to download</p>
                 </div>
 
                 <a 
                   href="https://play.google.com/store/apps/details?id=com.mechze.customer"
                   target="_blank"
                   rel="noopener noreferrer"
-                  style={{
-                    display: 'inline-flex',
-                    alignItems: 'center',
-                    gap: '10px',
-                    background: '#000',
-                    color: '#fff',
-                    padding: '10px 20px',
-                    borderRadius: '6px',
-                    textDecoration: 'none',
-                    fontFamily: "'Barlow', sans-serif",
-                  }}>
-                  <span style={{ fontSize: '1.3rem' }}>▶</span>
-                  <div style={{ textAlign: 'left' }}>
-                    <div style={{ fontSize: '0.65rem' }}>GET IT ON</div>
-                    <div style={{ fontSize: '0.95rem', fontWeight: 600 }}>Google Play</div>
+                  className="play-store-button">
+                  <span className="play-store-icon">▶</span>
+                  <div className="play-store-text">
+                    <div className="play-store-label">GET IT ON</div>
+                    <div className="play-store-name">Google Play</div>
                   </div>
                 </a>
               </div>
 
               {/* Mechanic App */}
-              <div style={{ textAlign: 'center' }}>
-                <div style={{
-                  fontFamily: "'Barlow Condensed', sans-serif",
-                  fontSize: '0.85rem',
-                  letterSpacing: '2px',
-                  textTransform: 'uppercase',
-                  color: 'var(--color-brown-light)',
-                  marginBottom: '1rem',
-                }}>FOR MECHANICS & GARAGES</div>
+              <div className="download-card">
+                <div className="download-label">FOR MECHANICS & GARAGES</div>
                 
-                <h4 style={{
-                  fontFamily: "'Barlow Condensed', sans-serif",
-                  fontSize: '1.3rem',
-                  fontWeight: 600,
-                  marginBottom: '1rem',
-                }}>Partner App</h4>
+                <h4>Partner App</h4>
 
-                <div style={{ marginBottom: '1.5rem' }}>
-                  <img src={mechanicQR} alt="Mechanic App QR" style={{ width: '150px', height: '150px', border: '2px solid rgba(131,68,23,0.2)', borderRadius: '6px' }} />
-                  <p style={{ marginTop: '0.75rem', fontSize: '0.85rem', color: 'var(--color-warm-gray)' }}>Scan QR to download</p>
+                <div className="qr-container">
+                  <img src={mechanicQR} alt="Mechanic App QR" className="qr-image" />
+                  <p className="qr-text">Scan QR to download</p>
                 </div>
 
                 <a 
                   href="https://play.google.com/store/apps/details?id=com.shrey_r.mechanicapp"
                   target="_blank"
                   rel="noopener noreferrer"
-                  style={{
-                    display: 'inline-flex',
-                    alignItems: 'center',
-                    gap: '10px',
-                    background: '#000',
-                    color: '#fff',
-                    padding: '10px 20px',
-                    borderRadius: '6px',
-                    textDecoration: 'none',
-                    fontFamily: "'Barlow', sans-serif",
-                  }}>
-                  <span style={{ fontSize: '1.3rem' }}>🔧</span>
-                  <div style={{ textAlign: 'left' }}>
-                    <div style={{ fontSize: '0.65rem' }}>GET IT ON</div>
-                    <div style={{ fontSize: '0.95rem', fontWeight: 600 }}>Google Play</div>
+                  className="play-store-button">
+                  <span className="play-store-icon">🔧</span>
+                  <div className="play-store-text">
+                    <div className="play-store-label">GET IT ON</div>
+                    <div className="play-store-name">Google Play</div>
                   </div>
                 </a>
               </div>
 
             </div>
 
-            <p style={{ textAlign: 'center', marginTop: '1.5rem', fontSize: '0.85rem', color: 'var(--color-warm-gray)' }}>
-              Press <kbd style={{ background: 'var(--color-bg3)', padding: '2px 8px', borderRadius: '3px', fontFamily: 'monospace' }}>ESC</kbd> to close
+            <p className="modal-footer">
+              Press <kbd>ESC</kbd> to close
             </p>
           </div>
         </div>
@@ -283,60 +152,23 @@ const Footer = () => {
 
       {/* Privacy Policy Modal */}
       {showPrivacyModal && (
-        <div onClick={() => setShowPrivacyModal(false)} style={{
-          position: 'fixed',
-          top: 0,
-          left: 0,
-          right: 0,
-          bottom: 0,
-          background: 'rgba(0,0,0,0.85)',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          zIndex: 9999,
-          padding: '1rem',
-        }}>
-          <div onClick={(e) => e.stopPropagation()} style={{
-            background: 'var(--color-bg2)',
-            border: '1px solid rgba(131,68,23,0.3)',
-            borderRadius: '8px',
-            padding: '2rem',
-            maxWidth: '600px',
-            width: '100%',
-            maxHeight: '90vh',
-            overflowY: 'auto',
-            position: 'relative',
-          }}>
-            <button onClick={() => setShowPrivacyModal(false)} style={{
-              position: 'absolute',
-              top: '1rem',
-              right: '1rem',
-              background: 'none',
-              border: 'none',
-              color: 'var(--color-warm-gray)',
-              fontSize: '1.5rem',
-              cursor: 'pointer',
-            }}>✕</button>
+        <div className="modal-overlay" onClick={() => setShowPrivacyModal(false)}>
+          <div className="modal-container modal-container-narrow" onClick={(e) => e.stopPropagation()}>
+            <button className="modal-close" onClick={() => setShowPrivacyModal(false)}>✕</button>
 
-            <h3 style={{
-              fontFamily: "'Barlow Condensed', sans-serif",
-              fontSize: '1.8rem',
-              fontWeight: 600,
-              textTransform: 'uppercase',
-              marginBottom: '1.5rem',
-            }}>Privacy Policy</h3>
+            <h3 className="modal-title">Privacy Policy</h3>
 
-            <p style={{ color: 'var(--color-warm-gray)', lineHeight: 1.8, marginBottom: '1.5rem' }}>
+            <p className="policy-content policy-intro">
               At Mechze, we value your privacy. This policy outlines how we handle user information on our digital platform:
             </p>
 
-            <div style={{ color: 'var(--color-warm-gray)', lineHeight: 1.8 }}>
-              <p style={{ marginBottom: '1rem' }}>
+            <div className="policy-content">
+              <p>
                 <strong>1. Information Collection:</strong> We collect essential contact information provided during service
                 booking or contact requests to facilitate mechanic connection.
               </p>
 
-              <p style={{ marginBottom: '1rem' }}>
+              <p>
                 <strong>2. Data Usage:</strong> Information is strictly used for vehicle servicing connection and platform
                 communication. We do not sell or lease user data to third parties.
               </p>
@@ -347,8 +179,8 @@ const Footer = () => {
               </p>
             </div>
 
-            <p style={{ textAlign: 'center', marginTop: '1.5rem', fontSize: '0.85rem', color: 'var(--color-warm-gray)' }}>
-              Press <kbd style={{ background: 'var(--color-bg3)', padding: '2px 8px', borderRadius: '3px', fontFamily: 'monospace' }}>ESC</kbd> to close
+            <p className="modal-footer">
+              Press <kbd>ESC</kbd> to close
             </p>
           </div>
         </div>
@@ -356,60 +188,23 @@ const Footer = () => {
 
       {/* Terms & Conditions Modal */}
       {showTermsModal && (
-        <div onClick={() => setShowTermsModal(false)} style={{
-          position: 'fixed',
-          top: 0,
-          left: 0,
-          right: 0,
-          bottom: 0,
-          background: 'rgba(0,0,0,0.85)',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          zIndex: 9999,
-          padding: '1rem',
-        }}>
-          <div onClick={(e) => e.stopPropagation()} style={{
-            background: 'var(--color-bg2)',
-            border: '1px solid rgba(131,68,23,0.3)',
-            borderRadius: '8px',
-            padding: '2rem',
-            maxWidth: '600px',
-            width: '100%',
-            maxHeight: '90vh',
-            overflowY: 'auto',
-            position: 'relative',
-          }}>
-            <button onClick={() => setShowTermsModal(false)} style={{
-              position: 'absolute',
-              top: '1rem',
-              right: '1rem',
-              background: 'none',
-              border: 'none',
-              color: 'var(--color-warm-gray)',
-              fontSize: '1.5rem',
-              cursor: 'pointer',
-            }}>✕</button>
+        <div className="modal-overlay" onClick={() => setShowTermsModal(false)}>
+          <div className="modal-container modal-container-narrow" onClick={(e) => e.stopPropagation()}>
+            <button className="modal-close" onClick={() => setShowTermsModal(false)}>✕</button>
 
-            <h3 style={{
-              fontFamily: "'Barlow Condensed', sans-serif",
-              fontSize: '1.8rem',
-              fontWeight: 600,
-              textTransform: 'uppercase',
-              marginBottom: '1.5rem',
-            }}>Terms & Conditions</h3>
+            <h3 className="modal-title">Terms & Conditions</h3>
 
-            <p style={{ color: 'var(--color-warm-gray)', lineHeight: 1.8, marginBottom: '1.5rem' }}>
+            <p className="policy-content policy-intro">
               Welcome to Mechze. By accessing our platform, you agree to the following standard terms:
             </p>
 
-            <div style={{ color: 'var(--color-warm-gray)', lineHeight: 1.8 }}>
-              <p style={{ marginBottom: '1rem' }}>
+            <div className="policy-content">
+              <p>
                 <strong>1. Platform Role:</strong> Mechze acts as a digital platform connecting vehicle owners with mechanics
                 for vehicle repair and servicing assistance.
               </p>
 
-              <p style={{ marginBottom: '1rem' }}>
+              <p>
                 <strong>2. User Responsibilities:</strong> Users agree to provide accurate information when booking or
                 submitting inquiries on the platform.
               </p>
@@ -420,8 +215,8 @@ const Footer = () => {
               </p>
             </div>
 
-            <p style={{ textAlign: 'center', marginTop: '1.5rem', fontSize: '0.85rem', color: 'var(--color-warm-gray)' }}>
-              Press <kbd style={{ background: 'var(--color-bg3)', padding: '2px 8px', borderRadius: '3px', fontFamily: 'monospace' }}>ESC</kbd> to close
+            <p className="modal-footer">
+              Press <kbd>ESC</kbd> to close
             </p>
           </div>
         </div>
