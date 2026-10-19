@@ -135,7 +135,7 @@ hr {
   display: inline-block;
   background: var(--color-brown);
   color: var(--color-off-white);
-  clip-path: polygon(10px 0%, 100% 0%, calc(100% - 10px) 100%, 0% 100%);
+  border-radius: var(--mz-r-pill);
   font-family: var(--mz-font-display);
   font-weight: 600;
   font-size: 14px;
@@ -149,12 +149,12 @@ hr {
 
 .btn-primary:hover {
   background: var(--color-brown-light);
-  transform: translateY(-2px);
+  transform: scale(0.98);
   box-shadow: 0 6px 24px rgba(131, 68, 23, 0.35);
 }
 
 .btn-primary:active {
-  transform: translateY(0) scale(0.97);
+  transform: scale(0.96);
 }
 
 /* ── Ghost Button ── */
@@ -163,7 +163,7 @@ hr {
   background: transparent;
   border: 1px solid rgba(131, 68, 23, 0.5);
   color: var(--color-warm-gray);
-  clip-path: polygon(10px 0%, 100% 0%, calc(100% - 10px) 100%, 0% 100%);
+  border-radius: var(--mz-r-pill);
   font-family: var(--mz-font-display);
   font-weight: 600;
   font-size: 14px;
@@ -177,7 +177,7 @@ hr {
 .btn-ghost:hover {
   border-color: rgba(131, 68, 23, 0.9);
   color: var(--color-off-white);
-  transform: translateY(-1px);
+  transform: scale(0.98);
 }
 
 /* ── Status Badges ── */

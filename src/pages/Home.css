@@ -86,7 +86,7 @@
 .hero-btn {
   background: var(--mz-primary-container);
   color: var(--mz-on-primary-container);
-  clip-path: polygon(10px 0%, 100% 0%, calc(100% - 10px) 100%, 0% 100%);
+  border-radius: var(--mz-r-pill);
   font-family: var(--mz-font-display);
   font-weight: 600;
   font-size: 14px;
@@ -101,6 +101,7 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  white-space: nowrap;
 }
 
 .hero-btn:hover {
@@ -117,7 +118,9 @@
   background: transparent;
   color: var(--mz-on-surface-variant);
   border: 1px solid var(--mz-outline);
+  border-radius: var(--mz-r-pill);
   padding: 12px 28px;
+  white-space: nowrap;
 }
 
 .hero-btn-secondary:hover {
@@ -502,7 +505,7 @@
   background: var(--mz-primary-container);
   color: var(--mz-on-primary-container);
   border: none;
-  clip-path: polygon(10px 0%, 100% 0%, calc(100% - 10px) 100%, 0% 100%);
+  border-radius: var(--mz-r-pill);
   font-family: var(--mz-font-display);
   font-weight: 600;
   font-size: 14px;
@@ -513,6 +516,7 @@
   cursor: pointer;
   margin-bottom: 1rem;
   transition: all 0.2s ease;
+  white-space: nowrap;
 }
 
 .partner-cta:hover {
@@ -673,7 +677,7 @@
   background: var(--mz-primary-container);
   color: var(--mz-on-primary-container);
   border: none;
-  clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+  border-radius: var(--mz-r-pill);
   font-family: var(--mz-font-display);
   font-weight: 600;
   font-size: 13px;

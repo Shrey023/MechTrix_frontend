@@ -7,9 +7,9 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: var(--mz-surface-container);
-  -webkit-backdrop-filter: blur(12px);
-  backdrop-filter: blur(12px);
+  background: rgba(255, 248, 246, 0.9);
+  -webkit-backdrop-filter: blur(24px);
+  backdrop-filter: blur(24px);
   padding: 0 clamp(1.25rem, 5vw, 3rem);
   height: 64px;
   position: fixed;
@@ -18,6 +18,7 @@
   right: 0;
   z-index: 1000;
   border-bottom: 1px solid var(--mz-outline-variant);
+  box-shadow: var(--mz-shadow-sm);
 }
 
 /* ── Logo ── */
@@ -27,15 +28,15 @@
   text-decoration: none;
   position: relative;
   padding: 8px 12px;
-  border-radius: var(--mz-r-field);
-  background: var(--mz-surface-high);
-  border: 1px solid var(--mz-outline-variant);
+  border-radius: var(--mz-r-pill);
+  background: transparent;
+  border: none;
   transition: all 0.3s ease;
+  white-space: nowrap;
 }
 
 .navbar .logo:hover {
-  background: var(--mz-surface-highest);
-  border-color: var(--mz-outline);
+  background: var(--mz-surface-container);
   transform: translateY(-1px);
   box-shadow: var(--mz-shadow-sm);
 }
@@ -60,34 +61,39 @@
   list-style: none;
   display: flex;
   align-items: center;
-  gap: clamp(1rem, 3vw, 2rem);
-  padding: 0;
+  gap: 4px;
+  padding: 4px;
   margin: 0;
+  background: var(--mz-surface-low);
+  border-radius: var(--mz-r-pill);
 }
 
 .nav-links a,
 .nav-links li > a {
   font-family: var(--mz-font-display);
-  font-weight: 500;
-  font-size: 13px;
+  font-weight: 600;
+  font-size: 12px;
   text-transform: uppercase;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.08em;
   color: var(--mz-on-surface-variant);
   text-decoration: none;
-  transition: color 0.2s ease;
-  padding: 4px 0;
-  border-bottom: 2px solid transparent;
+  transition: all 0.2s ease;
+  padding: 8px 16px;
+  border-radius: var(--mz-r-pill);
+  white-space: nowrap;
+  border-bottom: none;
 }
 
 .nav-links a:hover,
 .nav-links li > a:hover {
   color: var(--mz-on-surface);
+  background: var(--mz-surface-container);
 }
 
 .nav-links a.active,
 .nav-links li > a.active {
-  color: var(--mz-primary);
-  border-bottom-color: var(--mz-primary);
+  color: var(--mz-on-primary-container);
+  background: var(--mz-primary-container);
 }
 
 /* ── CTA Button in Nav ── */
@@ -97,24 +103,34 @@
   justify-content: center;
   background: var(--mz-primary-container);
   color: var(--mz-on-primary-container) !important;
-  clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+  border-radius: var(--mz-r-pill) !important;
   padding: 10px 24px !important;
   font-family: var(--mz-font-display) !important;
   font-weight: 600 !important;
-  font-size: 13px !important;
-  letter-spacing: 0.1em !important;
+  font-size: 12px !important;
+  letter-spacing: 0.08em !important;
   text-transform: uppercase !important;
   border: none !important;
-  border-bottom: none !important;
   text-decoration: none;
-  transition: background 0.2s ease, transform 0.15s ease !important;
+  transition: all 0.2s ease !important;
+  white-space: nowrap;
 }
 
 .nav-links button {
+  line-height: 1;
 }
 
 .nav-logout {
   line-height: 1;
+  background: transparent !important;
+  color: var(--mz-on-surface-variant) !important;
+  border: 1px solid var(--mz-outline) !important;
+}
+
+.nav-logout:hover {
+  background: var(--mz-error-container) !important;
+  color: var(--mz-error) !important;
+  border-color: var(--mz-error) !important;
 }
 
 .nav-cta:hover {
@@ -295,17 +311,18 @@
   justify-content: center;
   background: var(--mz-primary-container);
   color: var(--mz-on-primary-container);
-  clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+  border-radius: var(--mz-r-pill);
   padding: 14px 24px;
   min-height: 48px;
   font-family: var(--mz-font-display);
   font-weight: 600;
   font-size: 14px;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
   border: none;
   cursor: pointer;
   transition: all 0.2s ease;
+  white-space: nowrap;
 }
 
 .sidebar-btn:hover {
@@ -322,6 +339,7 @@
   background: var(--mz-surface-high);
   color: var(--mz-error);
   border: 1px solid var(--mz-error);
+  border-radius: var(--mz-r-pill);
 }
 
 .sidebar-btn-logout:hover {

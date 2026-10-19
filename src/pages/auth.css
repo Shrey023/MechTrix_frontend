@@ -86,7 +86,7 @@
   width: 100%;
   background: var(--mz-primary-container);
   color: var(--mz-on-primary-container);
-  clip-path: polygon(10px 0%, 100% 0%, calc(100% - 10px) 100%, 0% 100%);
+  border-radius: var(--mz-r-pill);
   font-family: var(--mz-font-display);
   font-weight: 600;
   font-size: 14px;
@@ -115,7 +115,7 @@
   background: var(--mz-error-container);
   border: 1px solid var(--mz-error);
   padding: 8px 14px;
-  border-radius: var(--mz-r-field);
+  border-radius: var(--mz-r-pill);
 }
 
 .auth-success {
