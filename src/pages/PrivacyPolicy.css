@@ -511,7 +511,7 @@
     font-size: 2rem;
   }
 
-  a {
+  .privacy-policy-page a {
     color: #000;
     text-decoration: underline;
   }
@@ -537,8 +537,8 @@
 }
 
 /* Accessibility - Focus states */
-a:focus,
-button:focus {
+.privacy-policy-page a:focus,
+.privacy-policy-page button:focus {
   outline: 2px solid #2563eb;
   outline-offset: 2px;
 }
