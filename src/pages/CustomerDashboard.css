@@ -469,14 +469,14 @@
 }
 
 /* ── Navbar override for dashboard inner nav ── */
-.navbar {
+.dashboard .navbar {
   background: rgba(14, 12, 10, 0.92) !important;
   -webkit-backdrop-filter: blur(12px);
   backdrop-filter: blur(12px);
   border-bottom: 1px solid rgba(131, 68, 23, 0.25) !important;
 }
 
-.navbar .logo  {
+.dashboard .navbar .logo  {
   font-family: 'Barlow Condensed', sans-serif;
   font-weight: 800;
   font-size: 1.25rem;
@@ -485,11 +485,11 @@
   color: var(--color-off-white);
 }
 
-.navbar .logo::after {
+.dashboard .navbar .logo::after {
   content: none !important;
 }
 
-.nav-links a {
+.dashboard .nav-links a {
   font-family: 'Barlow Condensed', sans-serif;
   font-size: 13px;
   text-transform: uppercase;
@@ -498,7 +498,7 @@
   transition: color 0.2s;
 }
 
-.nav-links a:hover {
+.dashboard .nav-links a:hover {
   color: var(--color-off-white) !important;
   transform: none;
 }
