@@ -135,23 +135,38 @@
   align-items: center;
   justify-content: center;
   gap: 8px;
-  padding: 10px 16px;
-  background: transparent;
-  border: 1px solid rgba(131, 68, 23, 0.3);
-  border-radius: var(--radius-sm);
-  color: var(--color-steel-light);
-  font-family: var(--font-display);
-  font-size: 13px;
-  font-weight: 600;
-  letter-spacing: 1px;
+  background: var(--mz-surface-container);
+  color: var(--mz-on-surface);
+  border: 0;
+  border-radius: var(--mz-r-pill);
+  font: 700 14px/20px var(--mz-font-body);
+  letter-spacing: .01em;
+  text-transform: none;
+  padding: 12px 24px;
+  min-height: 44px;
+  box-shadow: var(--mz-shadow-card);
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: transform .2s ease, box-shadow .2s ease, background-color .2s ease;
 }
 
 .admin-logout-btn:hover {
-  background: var(--color-bg3);
-  border-color: var(--color-brown);
-  color: var(--color-brown-light);
+  background: var(--mz-surface-high);
+  transform: scale(.98);
+  box-shadow: var(--mz-shadow-float);
+}
+
+.admin-logout-btn:active {
+  transform: scale(.96);
+}
+
+.admin-logout-btn:focus-visible {
+  outline: 3px solid var(--mz-primary);
+  outline-offset: 3px;
+}
+
+.admin-logout-btn:disabled {
+  opacity: .5;
+  cursor: not-allowed;
 }
 
 /* ── Main Content Area ── */

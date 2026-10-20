@@ -4,20 +4,36 @@
 
 .booking-detail-back-btn {
   margin-bottom: 24px;
-  padding: 8px 0;
   background: transparent;
+  color: var(--mz-secondary);
   border: 0;
-  color: var(--color-steel-light);
+  border-radius: var(--mz-r-pill);
+  font: 700 13px/20px var(--mz-font-body);
+  letter-spacing: .01em;
+  text-transform: none;
+  padding: 8px 16px;
+  min-height: 36px;
   cursor: pointer;
-  font-family: var(--font-display);
-  font-size: 13px;
-  font-weight: 600;
-  letter-spacing: 1px;
-  text-transform: uppercase;
+  transition: transform .2s ease, box-shadow .2s ease, background-color .2s ease;
 }
 
 .booking-detail-back-btn:hover {
-  color: var(--color-brown-light);
+  transform: scale(.98);
+  box-shadow: var(--mz-shadow-float);
+}
+
+.booking-detail-back-btn:active {
+  transform: scale(.96);
+}
+
+.booking-detail-back-btn:focus-visible {
+  outline: 3px solid var(--mz-primary);
+  outline-offset: 3px;
+}
+
+.booking-detail-back-btn:disabled {
+  opacity: .5;
+  cursor: not-allowed;
 }
 
 .booking-detail-hero,
@@ -278,27 +294,36 @@
 }
 
 .booking-detail-edit-btn {
-  padding: 10px 20px;
-  background: var(--color-brown);
-  color: white;
-  border: none;
-  border-radius: 2px;
-  font-family: var(--font-display);
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 2px;
-  text-transform: uppercase;
+  background: var(--mz-primary-container);
+  color: var(--mz-on-primary-container);
+  border: 0;
+  border-radius: var(--mz-r-pill);
+  font: 700 13px/20px var(--mz-font-body);
+  letter-spacing: .01em;
+  text-transform: none;
+  padding: 8px 16px;
+  min-height: 36px;
+  box-shadow: var(--mz-shadow-card);
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: transform .2s ease, box-shadow .2s ease, background-color .2s ease;
 }
 
 .booking-detail-edit-btn:hover:not(:disabled) {
-  background: var(--color-brown-dark);
-  transform: translateY(-1px);
+  transform: scale(.98);
+  box-shadow: var(--mz-shadow-float);
+}
+
+.booking-detail-edit-btn:active:not(:disabled) {
+  transform: scale(.96);
+}
+
+.booking-detail-edit-btn:focus-visible {
+  outline: 3px solid var(--mz-primary);
+  outline-offset: 3px;
 }
 
 .booking-detail-edit-btn:disabled {
-  opacity: 0.5;
+  opacity: .5;
   cursor: not-allowed;
 }
 
@@ -376,44 +401,54 @@
 
 .booking-detail-edit-cancel-btn,
 .booking-detail-edit-save-btn {
-  padding: 10px 20px;
-  border: none;
-  border-radius: 2px;
-  font-family: var(--font-display);
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 2px;
-  text-transform: uppercase;
+  border: 0;
+  border-radius: var(--mz-r-pill);
+  font: 700 13px/20px var(--mz-font-body);
+  letter-spacing: .01em;
+  text-transform: none;
+  padding: 8px 16px;
+  min-height: 36px;
+  box-shadow: var(--mz-shadow-card);
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: transform .2s ease, box-shadow .2s ease, background-color .2s ease;
 }
 
 .booking-detail-edit-cancel-btn {
-  background: transparent;
-  color: var(--color-steel-light);
-  border: 1px solid rgba(131, 68, 23, 0.3);
+  background: var(--mz-surface-container);
+  color: var(--mz-on-surface);
 }
 
 .booking-detail-edit-cancel-btn:hover:not(:disabled) {
-  background: rgba(131, 68, 23, 0.1);
-  border-color: rgba(131, 68, 23, 0.5);
+  background: var(--mz-surface-high);
+  transform: scale(.98);
+  box-shadow: var(--mz-shadow-float);
 }
 
 .booking-detail-edit-save-btn {
-  background: var(--color-brown);
-  color: white;
+  background: var(--mz-primary-container);
+  color: var(--mz-on-primary-container);
 }
 
 .booking-detail-edit-save-btn:hover:not(:disabled) {
-  background: var(--color-brown-dark);
-  transform: translateY(-1px);
+  transform: scale(.98);
+  box-shadow: var(--mz-shadow-float);
+}
+
+.booking-detail-edit-cancel-btn:active:not(:disabled),
+.booking-detail-edit-save-btn:active:not(:disabled) {
+  transform: scale(.96);
+}
+
+.booking-detail-edit-cancel-btn:focus-visible,
+.booking-detail-edit-save-btn:focus-visible {
+  outline: 3px solid var(--mz-primary);
+  outline-offset: 3px;
 }
 
 .booking-detail-edit-cancel-btn:disabled,
 .booking-detail-edit-save-btn:disabled {
-  opacity: 0.5;
+  opacity: .5;
   cursor: not-allowed;
-  transform: none;
 }
 
 .booking-detail-field-full {
