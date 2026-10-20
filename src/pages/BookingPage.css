@@ -113,30 +113,38 @@
 .booking-page .submit-button {
   display: block;
   width: 100%;
-  background: var(--color-brown, #834417);
-  color: var(--color-off-white);
-  clip-path: polygon(10px 0%, 100% 0%, calc(100% - 10px) 100%, 0% 100%);
-  font-family: 'Barlow Condensed', sans-serif;
-  font-weight: 600;
-  font-size: 14px;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  padding: 14px 32px;
-  border: none;
-  transition: background 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
+  background: var(--mz-primary-container);
+  color: var(--mz-on-primary-container);
+  border: 0;
+  border-radius: var(--mz-r-pill);
+  font: 700 14px/20px var(--mz-font-body);
+  letter-spacing: .01em;
+  text-transform: none;
+  padding: 12px 24px;
+  min-height: 52px;
+  box-shadow: var(--mz-shadow-card);
   text-align: center;
+  cursor: pointer;
+  transition: transform .2s ease, box-shadow .2s ease, background-color .2s ease;
 }
 
 .booking-page .submit-button:hover {
-  background: var(--color-brown-light);
-  transform: translateY(-2px);
-  box-shadow: 0 6px 24px rgba(131, 68, 23, 0.35);
+  transform: scale(.98);
+  box-shadow: var(--mz-shadow-float);
+}
+
+.booking-page .submit-button:active {
+  transform: scale(.96);
+}
+
+.booking-page .submit-button:focus-visible {
+  outline: 3px solid var(--mz-primary);
+  outline-offset: 3px;
 }
 
 .booking-page .submit-button:disabled {
-  opacity: 0.55;
-  transform: none;
-  box-shadow: none;
+  opacity: .5;
+  cursor: not-allowed;
 }
 
 .booking-page .message {
@@ -165,24 +173,37 @@
 
 .dashboard-button {
   display: inline-block;
-  background: var(--color-bg4);
-  color: var(--color-steel-light);
-  border: 1px solid rgba(131, 68, 23, 0.3);
-  clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
-  font-family: 'Barlow Condensed', sans-serif;
-  font-weight: 600;
-  font-size: 13px;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  padding: 10px 28px;
-  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+  background: var(--mz-surface-container);
+  color: var(--mz-on-surface);
+  border: 0;
+  border-radius: var(--mz-r-pill);
+  font: 700 14px/20px var(--mz-font-body);
+  letter-spacing: .01em;
+  text-transform: none;
+  padding: 12px 24px;
+  min-height: 44px;
+  cursor: pointer;
+  transition: transform .2s ease, box-shadow .2s ease, background-color .2s ease;
 }
 
 .dashboard-button:hover {
-  background: var(--color-brown);
-  color: var(--color-off-white);
-  border-color: transparent;
-  transform: translateY(-1px);
+  background: var(--mz-surface-high);
+  transform: scale(.98);
+  box-shadow: var(--mz-shadow-float);
+}
+
+.dashboard-button:active {
+  transform: scale(.96);
+}
+
+.dashboard-button:focus-visible {
+  outline: 3px solid var(--mz-primary);
+  outline-offset: 3px;
+}
+
+.dashboard-button:disabled {
+  opacity: .5;
+  cursor: not-allowed;
 }
 
 .booking-auth-actions {

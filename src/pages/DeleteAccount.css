@@ -193,31 +193,37 @@
 
 .delete-account-page .submit-button {
   width: 100%;
-  padding: 16px;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
-  border: none;
-  border-radius: 8px;
-  font-size: 1.05rem;
-  font-weight: 600;
+  background: var(--mz-error);
+  color: var(--mz-surface-lowest);
+  border: 0;
+  border-radius: var(--mz-r-pill);
+  font: 700 14px/20px var(--mz-font-body);
+  letter-spacing: .01em;
+  text-transform: none;
+  padding: 12px 24px;
+  min-height: 52px;
+  box-shadow: var(--mz-shadow-card);
   cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+  transition: transform .2s ease, box-shadow .2s ease, background-color .2s ease;
 }
 
 .delete-account-page .submit-button:hover:not(:disabled) {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+  transform: scale(.98);
+  box-shadow: var(--mz-shadow-float);
 }
 
 .delete-account-page .submit-button:active:not(:disabled) {
-  transform: translateY(0);
+  transform: scale(.96);
+}
+
+.delete-account-page .submit-button:focus-visible {
+  outline: 3px solid var(--mz-primary);
+  outline-offset: 3px;
 }
 
 .delete-account-page .submit-button:disabled {
-  opacity: 0.6;
+  opacity: .5;
   cursor: not-allowed;
-  transform: none;
 }
 
 .support-section {
