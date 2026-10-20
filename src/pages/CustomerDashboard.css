@@ -127,7 +127,7 @@
 }
 
 /* ── Mechanic Card ── */
-.mechanic-card {
+.dashboard .mechanic-card {
   background: var(--color-bg3, #1C1916);
   border: 1px solid rgba(131, 68, 23, 0.12);
   border-radius: 2px;
@@ -137,7 +137,7 @@
   overflow: hidden;
 }
 
-.mechanic-card::before {
+.dashboard .mechanic-card::before {
   content: '';
   position: absolute;
   top: 0; left: 0; right: 0; height: 2px;
@@ -146,16 +146,16 @@
   transition: opacity 0.3s ease;
 }
 
-.mechanic-card:hover::before { opacity: 1; }
+.dashboard .mechanic-card:hover::before { opacity: 1; }
 
-.mechanic-card:hover {
+.dashboard .mechanic-card:hover {
   background: var(--mz-surface-container);
   border-color: rgba(131, 68, 23, 0.3);
   transform: translateY(-2px);
   box-shadow: 0 8px 32px rgba(0,0,0,0.4);
 }
 
-.mechanic-card h3 {
+.dashboard .mechanic-card h3 {
   font-family: 'Barlow Condensed', sans-serif;
   font-size: clamp(1.1rem, 4vw, 1.3rem);
   font-weight: 600;
@@ -163,13 +163,13 @@
   margin-bottom: 0.5rem;
 }
 
-.mechanic-card p {
+.dashboard .mechanic-card p {
   margin: 0.3rem 0;
   font-size: clamp(0.85rem, 2.8vw, 0.95rem);
   color: var(--color-warm-gray);
 }
 
-.mechanic-card .text-green-600 {
+.dashboard .mechanic-card .text-green-600 {
   color: #6DBF7E;
   font-weight: 600;
 }
