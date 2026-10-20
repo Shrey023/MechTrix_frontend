@@ -42,20 +42,38 @@
 }
 
 .submit-btn {
-  background: #A64B0A;
-  color: #FFFFFF;
-  padding: 12px;
-  font-weight: 600;
-  border: none;
-  border-radius: 10px;
+  width: 100%;
+  background: var(--mz-primary-container);
+  color: var(--mz-on-primary-container);
+  border: 0;
+  border-radius: var(--mz-r-pill);
+  font: 700 14px/20px var(--mz-font-body);
+  letter-spacing: .01em;
+  text-transform: none;
+  padding: 12px 24px;
+  min-height: 52px;
+  box-shadow: var(--mz-shadow-card);
   cursor: pointer;
-  transition: background-color 0.15s ease, transform 0.15s ease, box-shadow 0.2s ease;
+  transition: transform .2s ease, box-shadow .2s ease, background-color .2s ease;
 }
 
 .submit-btn:hover {
-  background: #8F4108;
-  transform: translateY(-1px);
-  box-shadow: 0 8px 20px rgba(166, 75, 10, 0.25);
+  transform: scale(.98);
+  box-shadow: var(--mz-shadow-float);
+}
+
+.submit-btn:active {
+  transform: scale(.96);
+}
+
+.submit-btn:focus-visible {
+  outline: 3px solid var(--mz-primary);
+  outline-offset: 3px;
+}
+
+.submit-btn:disabled {
+  opacity: .5;
+  cursor: not-allowed;
 }
 
 .booking-message {

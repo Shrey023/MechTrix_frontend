@@ -522,24 +522,23 @@
   gap: 8px;
   background: var(--mz-primary-container);
   color: var(--mz-on-primary-container);
-  border: none;
+  border: 0;
   border-radius: var(--mz-r-pill);
-  font-family: var(--mz-font-display);
-  font-weight: 600;
-  font-size: 13px;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  padding: 10px 22px;
+  font: 700 14px/20px var(--mz-font-body);
+  letter-spacing: .01em;
+  text-transform: none;
+  padding: 12px 24px;
   min-height: 44px;
+  box-shadow: var(--mz-shadow-card);
   cursor: pointer;
-  transition: transform .2s ease, box-shadow .2s ease;
+  transition: transform .2s ease, box-shadow .2s ease, background-color .2s ease;
   white-space: nowrap;
   pointer-events: none; /* card div handles the click */
 }
 
 .download-section .download-card:hover .download-btn {
   transform: scale(.98);
-  box-shadow: var(--mz-shadow-card);
+  box-shadow: var(--mz-shadow-float);
 }
 
 /* ═══════════════════════════════════════════
@@ -611,29 +610,37 @@
 .partner-cta {
   background: var(--mz-primary-container);
   color: var(--mz-on-primary-container);
-  border: none;
+  border: 0;
   border-radius: var(--mz-r-pill);
-  font-family: var(--mz-font-display);
-  font-weight: 600;
-  font-size: 14px;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  padding: 14px 36px;
-  min-height: 48px;
+  font: 700 14px/20px var(--mz-font-body);
+  letter-spacing: .01em;
+  text-transform: none;
+  padding: 12px 24px;
+  min-height: 44px;
+  box-shadow: var(--mz-shadow-card);
   cursor: pointer;
   margin-bottom: 1rem;
-  transition: all 0.2s ease;
+  transition: transform .2s ease, box-shadow .2s ease, background-color .2s ease;
   white-space: nowrap;
 }
 
 .partner-cta:hover {
-  transform: scale(0.98);
-  box-shadow: var(--mz-shadow-card);
+  transform: scale(.98);
+  box-shadow: var(--mz-shadow-float);
+}
+
+.partner-cta:active {
+  transform: scale(.96);
 }
 
 .partner-cta:focus-visible {
-  outline: 2px solid var(--mz-primary);
-  outline-offset: 2px;
+  outline: 3px solid var(--mz-primary);
+  outline-offset: 3px;
+}
+
+.partner-cta:disabled {
+  opacity: .5;
+  cursor: not-allowed;
 }
 
 .partner-note {
@@ -783,27 +790,35 @@
   width: 100%;
   background: var(--mz-primary-container);
   color: var(--mz-on-primary-container);
-  border: none;
+  border: 0;
   border-radius: var(--mz-r-pill);
-  font-family: var(--mz-font-display);
-  font-weight: 600;
-  font-size: 13px;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  padding: 14px;
-  min-height: 48px;
+  font: 700 14px/20px var(--mz-font-body);
+  letter-spacing: .01em;
+  text-transform: none;
+  padding: 12px 24px;
+  min-height: 52px;
+  box-shadow: var(--mz-shadow-card);
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: transform .2s ease, box-shadow .2s ease, background-color .2s ease;
 }
 
 .modal-submit:hover {
-  transform: scale(0.98);
-  box-shadow: var(--mz-shadow-card);
+  transform: scale(.98);
+  box-shadow: var(--mz-shadow-float);
+}
+
+.modal-submit:active {
+  transform: scale(.96);
 }
 
 .modal-submit:focus-visible {
-  outline: 2px solid var(--mz-primary);
-  outline-offset: 2px;
+  outline: 3px solid var(--mz-primary);
+  outline-offset: 3px;
+}
+
+.modal-submit:disabled {
+  opacity: .5;
+  cursor: not-allowed;
 }
 
 .modal-success {
