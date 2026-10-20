@@ -157,7 +157,7 @@ const Home = () => {
       {/* ═══════════════════════════════════════════════════════
           WHY CHOOSE MECHZE
           ═══════════════════════════════════════════════════════ */}
-      <section className="section section-center">
+      <section id="why-choose" className="section section-center">
         <div className="section-kicker">
           <span className="section-kicker-line" />
           <span className="section-kicker-text">Key Advantages</span>
@@ -193,7 +193,7 @@ const Home = () => {
       {/* ═══════════════════════════════════════════════════════
           HOW MECHZE WORKS
           ═══════════════════════════════════════════════════════ */}
-      <section className="section section-bg2 section-center">
+      <section id="how-it-works" className="section section-bg2 section-center">
         <div className="section-kicker">
           <span className="section-kicker-line" />
           <span className="section-kicker-text">Simple 3-Step Process</span>

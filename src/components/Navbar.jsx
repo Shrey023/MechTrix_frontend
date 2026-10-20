@@ -20,6 +20,29 @@ const Navbar = () => {
     navigate('/');
   };
 
+  // Handle smooth scroll to sections
+  const handleHashScroll = (e, hash) => {
+    e.preventDefault();
+    
+    // If we're not on the home page, navigate there first
+    if (location.pathname !== '/') {
+      navigate('/');
+      // Wait for navigation, then scroll
+      setTimeout(() => {
+        const element = document.querySelector(hash);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }, 100);
+    } else {
+      // Already on home page, just scroll
+      const element = document.querySelector(hash);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
+  };
+
   // ESC key handler for both modal and sidebar
   useEffect(() => {
     const handleEsc = (e) => {
@@ -72,8 +95,24 @@ const Navbar = () => {
         <ul className="nav-links">
           <li><Link to="/" className={location.pathname === '/' ? 'active' : ''}>Home</Link></li>
           <li><Link to="/about" className={location.pathname === '/about' ? 'active' : ''}>About Us</Link></li>
-          <li><Link to="/#why-choose" className={location.pathname === '/#why-choose' ? 'active' : ''}>Why Choose Mechze</Link></li>
-          <li><Link to="/#how-it-works" className={location.pathname === '/#how-it-works' ? 'active' : ''}>How It Works</Link></li>
+          <li>
+            <a 
+              href="#why-choose" 
+              onClick={(e) => handleHashScroll(e, '#why-choose')}
+              className={location.hash === '#why-choose' ? 'active' : ''}
+            >
+              Why Choose Mechze
+            </a>
+          </li>
+          <li>
+            <a 
+              href="#how-it-works" 
+              onClick={(e) => handleHashScroll(e, '#how-it-works')}
+              className={location.hash === '#how-it-works' ? 'active' : ''}
+            >
+              How It Works
+            </a>
+          </li>
           <li><Link to="/mechanic/login" className={location.pathname === '/mechanic/login' ? 'active' : ''}>For Mechanics</Link></li>
 
           {isCustomerLoggedIn ? (
@@ -135,12 +174,20 @@ const Navbar = () => {
           <Link to="/about" className={location.pathname === '/about' ? 'active' : ''} onClick={handleLinkClick}>
             About Us
           </Link>
-          <Link to="/#why-choose" className={location.pathname === '/#why-choose' ? 'active' : ''} onClick={handleLinkClick}>
+          <a 
+            href="#why-choose" 
+            onClick={(e) => { handleHashScroll(e, '#why-choose'); handleLinkClick(); }}
+            className={location.hash === '#why-choose' ? 'active' : ''}
+          >
             Why Choose Mechze
-          </Link>
-          <Link to="/#how-it-works" className={location.pathname === '/#how-it-works' ? 'active' : ''} onClick={handleLinkClick}>
+          </a>
+          <a 
+            href="#how-it-works" 
+            onClick={(e) => { handleHashScroll(e, '#how-it-works'); handleLinkClick(); }}
+            className={location.hash === '#how-it-works' ? 'active' : ''}
+          >
             How It Works
-          </Link>
+          </a>
           <Link to="/mechanic/login" className={location.pathname === '/mechanic/login' ? 'active' : ''} onClick={handleLinkClick}>
             For Mechanics
           </Link>
