@@ -181,28 +181,37 @@
 }
 
 .guftagu-send-btn {
+  background: var(--mz-primary-container);
+  color: var(--mz-on-primary-container);
+  border: 0;
+  border-radius: var(--mz-r-pill);
+  font: 700 13px/20px var(--mz-font-body);
+  letter-spacing: .01em;
+  text-transform: none;
   padding: 12px 24px;
-  background: var(--color-brown);
-  color: var(--color-bg);
-  border: none;
-  border-radius: 2px;
-  font-family: var(--font-display);
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
+  min-height: 44px;
+  box-shadow: var(--mz-shadow-card);
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: transform .2s ease, box-shadow .2s ease, background-color .2s ease;
 }
 
 .guftagu-send-btn:hover:not(:disabled) {
-  background: var(--color-brown-light);
+  transform: scale(.98);
+  box-shadow: var(--mz-shadow-float);
+}
+
+.guftagu-send-btn:active:not(:disabled) {
+  transform: scale(.96);
+}
+
+.guftagu-send-btn:focus-visible {
+  outline: 3px solid var(--mz-primary);
+  outline-offset: 3px;
 }
 
 .guftagu-send-btn:disabled {
-  background: rgba(131, 68, 23, 0.3);
+  opacity: .5;
   cursor: not-allowed;
-  opacity: 0.5;
 }
 
 /* ── Suggestions Container ── */
@@ -222,22 +231,37 @@
 }
 
 .guftagu-new-btn {
+  background: var(--mz-primary-container);
+  color: var(--mz-on-primary-container);
+  border: 0;
+  border-radius: var(--mz-r-pill);
+  font: 700 13px/20px var(--mz-font-body);
+  letter-spacing: .01em;
+  text-transform: none;
   padding: 12px 24px;
-  background: var(--color-brown);
-  color: var(--color-bg);
-  border: none;
-  border-radius: 2px;
-  font-family: var(--font-display);
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
+  min-height: 44px;
+  box-shadow: var(--mz-shadow-card);
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: transform .2s ease, box-shadow .2s ease, background-color .2s ease;
 }
 
 .guftagu-new-btn:hover {
-  background: var(--color-brown-light);
+  transform: scale(.98);
+  box-shadow: var(--mz-shadow-float);
+}
+
+.guftagu-new-btn:active {
+  transform: scale(.96);
+}
+
+.guftagu-new-btn:focus-visible {
+  outline: 3px solid var(--mz-primary);
+  outline-offset: 3px;
+}
+
+.guftagu-new-btn:disabled {
+  opacity: .5;
+  cursor: not-allowed;
 }
 
 .guftagu-filter {
@@ -301,28 +325,37 @@
 
 .guftagu-save-btn {
   align-self: flex-start;
+  background: var(--mz-primary-container);
+  color: var(--mz-on-primary-container);
+  border: 0;
+  border-radius: var(--mz-r-pill);
+  font: 700 13px/20px var(--mz-font-body);
+  letter-spacing: .01em;
+  text-transform: none;
   padding: 12px 24px;
-  background: var(--color-brown);
-  color: var(--color-bg);
-  border: none;
-  border-radius: 2px;
-  font-family: var(--font-display);
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
+  min-height: 44px;
+  box-shadow: var(--mz-shadow-card);
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: transform .2s ease, box-shadow .2s ease, background-color .2s ease;
 }
 
 .guftagu-save-btn:hover:not(:disabled) {
-  background: var(--color-brown-light);
+  transform: scale(.98);
+  box-shadow: var(--mz-shadow-float);
+}
+
+.guftagu-save-btn:active:not(:disabled) {
+  transform: scale(.96);
+}
+
+.guftagu-save-btn:focus-visible {
+  outline: 3px solid var(--mz-primary);
+  outline-offset: 3px;
 }
 
 .guftagu-save-btn:disabled {
-  background: rgba(131, 68, 23, 0.3);
+  opacity: .5;
   cursor: not-allowed;
-  opacity: 0.5;
 }
 
 /* ── Suggestions List ── */
@@ -466,32 +499,54 @@
 
 .guftagu-expand-btn,
 .guftagu-delete-btn {
+  border: 0;
+  border-radius: var(--mz-r-pill);
+  font: 700 13px/20px var(--mz-font-body);
+  letter-spacing: .01em;
+  text-transform: none;
   padding: 8px 16px;
-  border: 1px solid rgba(115, 121, 134, 0.3);
-  border-radius: 2px;
-  font-family: var(--font-display);
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.5px;
+  min-height: 36px;
+  box-shadow: var(--mz-shadow-card);
   cursor: pointer;
-  transition: all 0.2s ease;
-  background: var(--color-bg);
-  color: var(--color-steel-light);
+  transition: transform .2s ease, box-shadow .2s ease, background-color .2s ease;
+}
+
+.guftagu-expand-btn {
+  background: var(--mz-surface-container);
+  color: var(--mz-on-surface);
 }
 
 .guftagu-expand-btn:hover {
-  border-color: var(--color-brown);
-  color: var(--color-brown);
+  background: var(--mz-surface-high);
+  transform: scale(.98);
+  box-shadow: var(--mz-shadow-float);
 }
 
 .guftagu-delete-btn {
-  color: var(--error);
-  border-color: rgba(224, 96, 96, 0.3);
+  background: var(--mz-error);
+  color: var(--mz-surface-lowest);
 }
 
 .guftagu-delete-btn:hover {
-  background: rgba(224, 96, 96, 0.1);
-  border-color: var(--error);
+  transform: scale(.98);
+  box-shadow: var(--mz-shadow-float);
+}
+
+.guftagu-expand-btn:active,
+.guftagu-delete-btn:active {
+  transform: scale(.96);
+}
+
+.guftagu-expand-btn:focus-visible,
+.guftagu-delete-btn:focus-visible {
+  outline: 3px solid var(--mz-primary);
+  outline-offset: 3px;
+}
+
+.guftagu-expand-btn:disabled,
+.guftagu-delete-btn:disabled {
+  opacity: .5;
+  cursor: not-allowed;
 }
 
 /* ── Comments Section ── */
@@ -592,28 +647,37 @@
 }
 
 .guftagu-comment-btn {
-  padding: 10px 16px;
-  background: var(--color-brown);
-  color: var(--color-bg);
-  border: none;
-  border-radius: 2px;
-  font-family: var(--font-display);
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 1px;
-  text-transform: uppercase;
+  background: var(--mz-primary-container);
+  color: var(--mz-on-primary-container);
+  border: 0;
+  border-radius: var(--mz-r-pill);
+  font: 700 13px/20px var(--mz-font-body);
+  letter-spacing: .01em;
+  text-transform: none;
+  padding: 8px 16px;
+  min-height: 36px;
+  box-shadow: var(--mz-shadow-card);
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: transform .2s ease, box-shadow .2s ease, background-color .2s ease;
 }
 
 .guftagu-comment-btn:hover:not(:disabled) {
-  background: var(--color-brown-light);
+  transform: scale(.98);
+  box-shadow: var(--mz-shadow-float);
+}
+
+.guftagu-comment-btn:active:not(:disabled) {
+  transform: scale(.96);
+}
+
+.guftagu-comment-btn:focus-visible {
+  outline: 3px solid var(--mz-primary);
+  outline-offset: 3px;
 }
 
 .guftagu-comment-btn:disabled {
-  background: rgba(131, 68, 23, 0.3);
+  opacity: .5;
   cursor: not-allowed;
-  opacity: 0.5;
 }
 
 /* ── Empty State ── */

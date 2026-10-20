@@ -360,27 +360,37 @@
   display: flex;
   align-items: center;
   gap: 6px;
+  background: var(--mz-surface-container);
+  color: var(--mz-on-surface);
+  border: 0;
+  border-radius: var(--mz-r-pill);
+  font: 700 13px/20px var(--mz-font-body);
+  letter-spacing: .01em;
+  text-transform: none;
   padding: 8px 16px;
-  background: transparent;
-  border: 1px solid rgba(131, 68, 23, 0.3);
-  border-radius: 2px;
-  color: var(--color-steel-light);
-  font-family: var(--font-display);
-  font-size: 13px;
-  font-weight: 600;
-  letter-spacing: 1px;
+  min-height: 36px;
+  box-shadow: var(--mz-shadow-card);
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: transform .2s ease, box-shadow .2s ease, background-color .2s ease;
 }
 
 .pagination-btn:hover:not(:disabled) {
-  background: var(--color-bg4);
-  border-color: var(--color-brown);
-  color: var(--color-brown-light);
+  background: var(--mz-surface-high);
+  transform: scale(.98);
+  box-shadow: var(--mz-shadow-float);
+}
+
+.pagination-btn:active:not(:disabled) {
+  transform: scale(.96);
+}
+
+.pagination-btn:focus-visible {
+  outline: 3px solid var(--mz-primary);
+  outline-offset: 3px;
 }
 
 .pagination-btn:disabled {
-  opacity: 0.3;
+  opacity: .3;
   cursor: not-allowed;
 }
 
