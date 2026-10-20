@@ -113,40 +113,70 @@
 
 .location-button {
   display: inline-block;
-  background: var(--color-brown);
-  color: var(--color-off-white);
-  clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
-  font-family: 'Barlow Condensed', sans-serif;
-  font-weight: 600;
-  font-size: 13px;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  padding: 10px 24px;
-  border: none;
-  transition: background 0.2s ease, transform 0.15s ease;
+  background: var(--mz-primary-container);
+  color: var(--mz-on-primary-container);
+  border: 0;
+  border-radius: var(--mz-r-pill);
+  font: 700 14px/20px var(--mz-font-body);
+  letter-spacing: .01em;
+  text-transform: none;
+  padding: 12px 24px;
+  min-height: 44px;
+  box-shadow: var(--mz-shadow-card);
+  cursor: pointer;
+  transition: transform .2s ease, box-shadow .2s ease, background-color .2s ease;
 }
 
 .location-button:hover {
-  background: var(--color-brown-light);
-  transform: translateY(-1px);
-  box-shadow: 0 4px 18px rgba(131, 68, 23, 0.3);
+  transform: scale(.98);
+  box-shadow: var(--mz-shadow-float);
+}
+
+.location-button:active {
+  transform: scale(.96);
+}
+
+.location-button:focus-visible {
+  outline: 3px solid var(--mz-primary);
+  outline-offset: 3px;
+}
+
+.location-button:disabled {
+  opacity: .5;
+  cursor: not-allowed;
 }
 
 .logout-button {
-  color: var(--color-steel-light);
-  font-family: 'Barlow Condensed', sans-serif;
-  font-size: 12px;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  text-decoration: none;
-  background: none;
-  border: none;
-  transition: color 0.2s;
-  padding: 4px 0;
+  background: transparent;
+  color: var(--mz-secondary);
+  border: 0;
+  border-radius: var(--mz-r-pill);
+  font: 700 14px/20px var(--mz-font-body);
+  letter-spacing: .01em;
+  text-transform: none;
+  padding: 12px 24px;
+  min-height: 44px;
+  cursor: pointer;
+  transition: transform .2s ease, box-shadow .2s ease, background-color .2s ease;
 }
 
 .logout-button:hover {
-  color: var(--color-off-white);
+  transform: scale(.98);
+  box-shadow: var(--mz-shadow-float);
+}
+
+.logout-button:active {
+  transform: scale(.96);
+}
+
+.logout-button:focus-visible {
+  outline: 3px solid var(--mz-primary);
+  outline-offset: 3px;
+}
+
+.logout-button:disabled {
+  opacity: .5;
+  cursor: not-allowed;
 }
 
 /* ── Bookings Section ── */
@@ -239,41 +269,55 @@
 
 .action-button {
   display: inline-block;
-  clip-path: polygon(6px 0%, 100% 0%, calc(100% - 6px) 100%, 0% 100%);
-  font-family: 'Barlow Condensed', sans-serif;
-  font-weight: 600;
-  font-size: 12px;
-  text-transform: uppercase;
-  letter-spacing: 1.5px;
-  padding: 8px 18px;
-  border: none;
-  transition: background 0.2s ease, transform 0.15s ease;
+  border: 0;
+  border-radius: var(--mz-r-pill);
+  font: 700 13px/20px var(--mz-font-body);
+  letter-spacing: .01em;
+  text-transform: none;
+  padding: 8px 16px;
+  min-height: 36px;
+  box-shadow: var(--mz-shadow-card);
+  cursor: pointer;
+  transition: transform .2s ease, box-shadow .2s ease, background-color .2s ease;
 }
 
 .action-button:hover {
-  transform: translateY(-1px);
-  filter: brightness(1.1);
+  transform: scale(.98);
+  box-shadow: var(--mz-shadow-float);
+}
+
+.action-button:active {
+  transform: scale(.96);
+}
+
+.action-button:focus-visible {
+  outline: 3px solid var(--mz-primary);
+  outline-offset: 3px;
+}
+
+.action-button:disabled {
+  opacity: .5;
+  cursor: not-allowed;
 }
 
 .action-button.accept {
-  background: rgba(40, 100, 50, 0.75);
-  color: #6DBF7E;
+  background: var(--mz-primary-container);
+  color: var(--mz-on-primary-container);
 }
 
 .action-button.reject {
-  background: rgba(150, 30, 30, 0.6);
-  color: #E06060;
+  background: var(--mz-error);
+  color: var(--mz-surface-lowest);
 }
 
 .action-button.complete {
-  background: var(--color-brown);
-  color: var(--color-off-white);
+  background: var(--mz-primary-container);
+  color: var(--mz-on-primary-container);
 }
 
 .action-button.navigate {
-  background: var(--color-bg4);
-  color: var(--color-steel-light);
-  border: 1px solid rgba(115, 121, 134, 0.3);
+  background: var(--mz-surface-container);
+  color: var(--mz-on-surface);
 }
 
 /* ── Responsive ── */
