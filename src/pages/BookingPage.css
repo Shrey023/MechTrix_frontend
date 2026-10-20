@@ -61,7 +61,7 @@
 }
 
 /* ── Booking Form ── */
-.booking-form {
+.booking-page .booking-form {
   background: var(--color-bg3, #1C1916);
   border: 1px solid rgba(131, 68, 23, 0.15);
   border-radius: 2px;
@@ -76,7 +76,7 @@
   overflow: hidden;
 }
 
-.booking-form::before {
+.booking-page .booking-form::before {
   content: '';
   position: absolute;
   top: 0; left: 0; right: 0; height: 2px;
@@ -110,7 +110,7 @@
   max-height: 220px;
 }
 
-.submit-button {
+.booking-page .submit-button {
   display: block;
   width: 100%;
   background: var(--color-brown, #834417);
@@ -127,19 +127,19 @@
   text-align: center;
 }
 
-.submit-button:hover {
+.booking-page .submit-button:hover {
   background: var(--color-brown-light);
   transform: translateY(-2px);
   box-shadow: 0 6px 24px rgba(131, 68, 23, 0.35);
 }
 
-.submit-button:disabled {
+.booking-page .submit-button:disabled {
   opacity: 0.55;
   transform: none;
   box-shadow: none;
 }
 
-.message {
+.booking-page .message {
   text-align: center;
   font-family: 'Barlow Condensed', sans-serif;
   font-size: 13px;
@@ -151,13 +151,13 @@
   max-width: 560px;
 }
 
-.message.success {
+.booking-page .message.success {
   color: #6DBF7E;
   background: rgba(40, 100, 50, 0.15);
   border: 1px solid rgba(40, 100, 50, 0.3);
 }
 
-.message.error {
+.booking-page .message.error {
   color: #E06060;
   background: rgba(150, 30, 30, 0.15);
   border: 1px solid rgba(150, 30, 30, 0.25);
@@ -194,5 +194,5 @@
 
 @media (max-width: 768px) {
   .booking-page { padding-top: 5rem; }
-  .booking-form { max-width: 95vw; }
+  .booking-page .booking-form { max-width: 95vw; }
 }
