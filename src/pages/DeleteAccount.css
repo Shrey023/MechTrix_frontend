@@ -171,7 +171,7 @@
   opacity: 0.6;
 }
 
-.message {
+.delete-account-page .message {
   padding: 14px 16px;
   border-radius: 8px;
   margin-bottom: 20px;
@@ -179,19 +179,19 @@
   font-weight: 500;
 }
 
-.message.success {
+.delete-account-page .message.success {
   background: #f0fff4;
   color: #2f855a;
   border: 1px solid #9ae6b4;
 }
 
-.message.error {
+.delete-account-page .message.error {
   background: #fff5f5;
   color: #c53030;
   border: 1px solid #fc8181;
 }
 
-.submit-button {
+.delete-account-page .submit-button {
   width: 100%;
   padding: 16px;
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -205,16 +205,16 @@
   box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
 }
 
-.submit-button:hover:not(:disabled) {
+.delete-account-page .submit-button:hover:not(:disabled) {
   transform: translateY(-2px);
   box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
 }
 
-.submit-button:active:not(:disabled) {
+.delete-account-page .submit-button:active:not(:disabled) {
   transform: translateY(0);
 }
 
-.submit-button:disabled {
+.delete-account-page .submit-button:disabled {
   opacity: 0.6;
   cursor: not-allowed;
   transform: none;
@@ -238,12 +238,12 @@
   text-decoration: underline;
 }
 
-.policy-section {
+.delete-account-page .policy-section {
   border-top: 2px solid #e2e8f0;
   padding-top: 30px;
 }
 
-.policy-toggle {
+.delete-account-page .policy-toggle {
   background: none;
   border: none;
   color: #667eea;
@@ -257,11 +257,11 @@
   transition: all 0.3s ease;
 }
 
-.policy-toggle:hover {
+.delete-account-page .policy-toggle:hover {
   color: #764ba2;
 }
 
-.policy-content {
+.delete-account-page .policy-content {
   margin-top: 20px;
   padding: 25px;
   background: #f7fafc;
@@ -269,22 +269,22 @@
   border-left: 4px solid #667eea;
 }
 
-.policy-content h3 {
+.delete-account-page .policy-content h3 {
   color: #333;
   margin: 0 0 15px 0;
 }
 
-.policy-content p,
-.policy-content ol {
+.delete-account-page .policy-content p,
+.delete-account-page .policy-content ol {
   color: #555;
   line-height: 1.7;
 }
 
-.policy-content ol {
+.delete-account-page .policy-content ol {
   padding-left: 20px;
 }
 
-.policy-content li {
+.delete-account-page .policy-content li {
   margin-bottom: 10px;
 }
 
