@@ -58,7 +58,6 @@ const CustomerProtectedRoute = ({ children }) => {
 const App = () => {
   return (
     <>
-      <CustomCursor />
       <Router>
         <Navbar />
         <Routes>
