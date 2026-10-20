@@ -14,7 +14,7 @@
   font-weight: 800;
 }
 
-.booking-form {
+.booking-container .booking-form {
   display: flex;
   flex-direction: column;
   gap: 12px;
@@ -26,15 +26,15 @@
   max-width: 480px;
 }
 
-.booking-form label {
+.booking-container .booking-form label {
   display: flex;
   flex-direction: column;
   font-weight: 500;
 }
 
-.booking-form textarea,
-.booking-form input,
-.booking-form select {
+.booking-container .booking-form textarea,
+.booking-container .booking-form input,
+.booking-container .booking-form select {
   padding: 12px;
   margin-top: 5px;
   border-radius: 10px;
