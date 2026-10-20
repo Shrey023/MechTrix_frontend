@@ -1,9 +1,9 @@
-/* Global.css — basic resets; variables.css handles real theming */
+/* global.css — basic resets; mechze-tokens.css handles theming */
 body {
   margin: 0;
-  font-family: 'Barlow', 'Arial', sans-serif;
-  background: var(--color-bg, #0E0C0A);
-  color: var(--color-off-white, #F6F6F7);
+  font-family: var(--mz-font-body);
+  background: var(--mz-surface);
+  color: var(--mz-on-surface);
 }
 
 a {

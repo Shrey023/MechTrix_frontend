@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import './Footer.css';
-import mechzeLogo from '../assets/mechze-logo.jpg';
+import mechzeFooterLogo from '../assets/mechze-footer.jpg';
 import customerQR from '../assets/customer-qr.png';
 import mechanicQR from '../assets/mechanic-qr.png';
 
@@ -30,7 +30,7 @@ const Footer = () => {
           
           {/* Brand */}
           <div className="footer-brand">
-            <img src={mechzeLogo} alt="Mechze" className="footer-logo" />
+            <img src={mechzeFooterLogo} alt="Mechze" className="footer-logo" />
             <p>
               Mechze connects vehicle owners with mechanics through a simple, convenient, and transparent digital platform.
             </p>

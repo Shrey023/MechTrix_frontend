@@ -53,8 +53,15 @@ const CustomerDashboard = () => {
     <div className="dashboard">
       {/* 🏠 HERO SECTION */}
       <header className="hero">
-        <h1>Fast, Reliable Mechanic Services</h1>
-        <p>Anytime. Anywhere. Trusted by thousands.</p>
+        <div className="hero-kicker">
+          <span className="hero-kicker-line" />
+          <span className="hero-kicker-text">Simplified Auto Repair Platform</span>
+          <span className="hero-kicker-line" />
+        </div>
+        
+        <h1>Your Trusted Mechanic,<br/>Just a Few Taps Away.</h1>
+        <p>Mechze makes vehicle repair and servicing simple, convenient, and transparent.</p>
+        
         <Link to="/nearby">
           <button className="cta-btn">Find Mechanics Near Me</button>
         </Link>

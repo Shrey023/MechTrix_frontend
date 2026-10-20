@@ -1,43 +1,39 @@
 /* =========================================
-   MECHZE — DESIGN SYSTEM TOKENS
+   MECHZE — LEGACY TOKENS (non-conflicting)
    Dark Industrial · Premium Automotive
+
+   NOTE: The following variables were moved
+   to mechze-tokens.css and aliased there:
+     --color-bg, --color-bg2, --color-bg3
+     --color-off-white, --color-warm-gray
+     --color-brown-light, --font-body
+
+   Do NOT re-add them here — they live in
+   mechze-tokens.css as legacy aliases.
    ========================================= */
 
 :root {
-  /* ── Brand Colors ── */
+  /* ── Brand Colors (non-aliased) ── */
   --color-brown:       #834417;
-  --color-brown-light: #A0561E;
   --color-brown-dark:  #5C2F0F;
   --color-steel:       #737986;
   --color-steel-light: #AFB3B9;
-  --color-warm-gray:   #ABA19C;
-  --color-off-white:   #F6F6F7;
 
-  /* ── Background Surfaces ── */
-  --color-bg:  #0E0C0A;
-  --color-bg2: #141210;
-  --color-bg3: #1C1916;
-  --color-bg4: #252018;
-
-  /* ── Legacy compat aliases ── */
+  /* ── Legacy compat aliases (kept for component CSS that references them) ── */
   --primary:       var(--color-brown);
   --primary-700:   var(--color-brown-dark);
   --primary-200:   #C8916A;
-  --text-900:      var(--color-off-white);
-  --text-700:      var(--color-warm-gray);
+  --text-900:      var(--mz-on-surface);
+  --text-700:      var(--mz-on-surface-variant);
   --muted-600:     var(--color-steel);
   --border:        rgba(131, 68, 23, 0.2);
-  --surface:       var(--color-bg3);
-  --bg-0:          var(--color-bg);
-  --bg-1:          var(--color-bg2);
+  --surface:       var(--mz-surface-container);
+  --bg-0:          var(--mz-surface);
+  --bg-1:          var(--mz-surface-low);
   --success:       #6DBF7E;
   --error:         #E06060;
 
-  /* ── Typography ── */
-  --font-display: 'Barlow Condensed', 'Arial Narrow', sans-serif;
-  --font-body:    'Barlow', 'Arial', sans-serif;
-
-  /* ── Radius (industrial = sharp) ── */
+  /* ── Radius (kept — not yet replaced by --mz-r-*) ── */
   --radius-sm: 2px;
   --radius-md: 4px;
 
@@ -46,7 +42,7 @@
   --transition-fast: all 0.15s ease;
 }
 
-/* ── Global Base ── */
+/* ── Global Base (non-conflicting resets only) ── */
 *, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
@@ -55,15 +51,4 @@
 
 html {
   scroll-behavior: smooth;
-}
-
-body {
-  font-family: var(--font-body);
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 1.75;
-  background: var(--color-bg);
-  color: var(--color-off-white);
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
 }

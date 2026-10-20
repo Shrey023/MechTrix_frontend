@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import { ShieldCheck } from 'lucide-react';
 import axios from '../api/axios';
+import './AdminLogin.css';
 
 const AdminLogin = () => {
   const navigate = useNavigate();
@@ -32,97 +34,54 @@ const AdminLogin = () => {
   };
 
   return (
-    <div style={{
-      backgroundColor: '#F7F8FA',
-      minHeight: '100vh',
-      display: 'flex',
-      justifyContent: 'center',
-      alignItems: 'center',
-      padding: '1rem',
-      fontFamily: "'Arial', sans-serif",
-    }}>
-      <div style={{
-        backgroundColor: '#FFFFFF',
-        padding: '2rem',
-        borderRadius: '12px',
-        boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)',
-        width: '100%',
-        maxWidth: '400px',
-      }}>
-        <h2 style={{
-          color: '#1E2A78',
-          fontSize: '1.8rem',
-          fontWeight: '700',
-          textAlign: 'center',
-          marginBottom: '1.5rem',
-        }}>Admin Login</h2>
+    <div className="admin-login-page">
+      <div className="admin-login-container">
+        <div className="admin-login-badge">
+          <ShieldCheck className="admin-login-badge-icon" />
+        </div>
+        
+        <h2 className="admin-login-title">Admin Access</h2>
+        <p className="admin-login-subtitle">Administrative Portal</p>
+        
+        <form className="admin-login-form" onSubmit={handleSubmit}>
+          <div className="admin-login-input-group">
+            <label className="admin-login-label">Email Address</label>
+            <input
+              type="email"
+              className="admin-login-input"
+              placeholder="Enter admin email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
+          </div>
 
-        <form onSubmit={handleSubmit}>
-          <input
-            type="email"
-            placeholder="Email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-            style={{
-              width: '100%',
-              padding: '0.75rem',
-              marginBottom: '1rem',
-              border: '1px solid #2D2D2D',
-              borderRadius: '8px',
-              fontSize: '1rem',
-              color: '#2D2D2D',
-              backgroundColor: '#F7F8FA',
-              outline: 'none',
-            }}
-          />
+          <div className="admin-login-input-group">
+            <label className="admin-login-label">Password</label>
+            <input
+              type="password"
+              className="admin-login-input"
+              placeholder="Enter admin password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+          </div>
 
-          <input
-            type="password"
-            placeholder="Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-            style={{
-              width: '100%',
-              padding: '0.75rem',
-              marginBottom: '1.5rem',
-              border: '1px solid #2D2D2D',
-              borderRadius: '8px',
-              fontSize: '1rem',
-              color: '#2D2D2D',
-              backgroundColor: '#F7F8FA',
-              outline: 'none',
-            }}
-          />
-
-          <button
-            type="submit"
-            style={{
-              width: '100%',
-              padding: '0.75rem',
-              backgroundColor: '#FF6B35',
-              color: '#F7F8FA',
-              border: 'none',
-              borderRadius: '8px',
-              fontSize: '1.1rem',
-              fontWeight: '600',
-              cursor: 'pointer',
-            }}
-          >
+          <button type="submit" className="admin-login-button">
             Login
           </button>
         </form>
 
         {error && (
-          <p style={{ color: '#FF6B35', fontSize: '0.9rem', textAlign: 'center', marginTop: '1rem' }}>
+          <div className="admin-login-error">
             {error}
-          </p>
+          </div>
         )}
 
-        <p style={{ textAlign: 'center', marginTop: '1rem', color: '#2D2D2D' }}>
-          {/* Admin registration is restricted for security */}
-        </p>
+        <div className="admin-login-footer">
+          Authorized personnel only
+        </div>
       </div>
     </div>
   );
