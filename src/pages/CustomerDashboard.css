@@ -70,22 +70,22 @@
   gap: 8px;
   background: var(--mz-primary-container);
   color: var(--mz-on-primary-container);
-  border: none;
+  border: 0;
   border-radius: var(--mz-r-pill);
-  font-family: var(--mz-font-display);
-  font-weight: 600;
-  font-size: clamp(13px, 2.5vw, 15px);
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  padding: clamp(10px, 2vw, 14px) clamp(24px, 4vw, 36px);
+  font: 700 14px/20px var(--mz-font-body);
+  letter-spacing: .01em;
+  text-transform: none;
+  padding: 12px 24px;
+  min-height: 44px;
+  box-shadow: var(--mz-shadow-card);
   cursor: pointer;
-  transition: transform .2s ease, box-shadow .2s ease;
+  transition: transform .2s ease, box-shadow .2s ease, background-color .2s ease;
   white-space: nowrap;
 }
 
 .cta-btn:hover {
   transform: scale(.98);
-  box-shadow: var(--mz-shadow-card);
+  box-shadow: var(--mz-shadow-float);
 }
 
 .cta-btn:active {
@@ -97,9 +97,15 @@
   outline-offset: 3px;
 }
 
+.cta-btn:disabled {
+  opacity: .5;
+  cursor: not-allowed;
+}
+
 .cta-btn.small {
-  padding: 8px 20px;
-  font-size: 12px;
+  padding: 8px 16px;
+  font-size: 13px;
+  min-height: 36px;
 }
 
 /* ── Available Mechanics ── */
@@ -384,26 +390,40 @@
   margin-right: 4px;
 }
 
-.booking-card button {
+.dashboard .booking-card button {
   display: inline-block;
-  background: var(--color-brown);
-  color: var(--color-off-white);
-  clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
-  font-family: 'Barlow Condensed', sans-serif;
-  font-weight: 600;
-  font-size: 12px;
-  text-transform: uppercase;
-  letter-spacing: 1.5px;
-  padding: 8px 20px;
-  border: none;
+  background: var(--mz-primary-container);
+  color: var(--mz-on-primary-container);
+  border: 0;
+  border-radius: var(--mz-r-pill);
+  font: 700 13px/20px var(--mz-font-body);
+  letter-spacing: .01em;
+  text-transform: none;
+  padding: 8px 16px;
+  min-height: 36px;
+  box-shadow: var(--mz-shadow-card);
   margin-top: 10px;
-  transition: background 0.2s ease, transform 0.15s ease;
+  cursor: pointer;
+  transition: transform .2s ease, box-shadow .2s ease, background-color .2s ease;
 }
 
-.booking-card button:hover {
-  background: var(--color-brown-light);
-  transform: translateY(-1px);
-  box-shadow: 0 4px 16px rgba(131, 68, 23, 0.3);
+.dashboard .booking-card button:hover {
+  transform: scale(.98);
+  box-shadow: var(--mz-shadow-float);
+}
+
+.dashboard .booking-card button:active {
+  transform: scale(.96);
+}
+
+.dashboard .booking-card button:focus-visible {
+  outline: 3px solid var(--mz-primary);
+  outline-offset: 3px;
+}
+
+.dashboard .booking-card button:disabled {
+  opacity: .5;
+  cursor: not-allowed;
 }
 
 /* ── Reviews Section ── */

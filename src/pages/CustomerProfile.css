@@ -104,23 +104,37 @@
 .profile-save-btn {
   display: block;
   width: 100%;
-  background: var(--color-brown);
-  color: var(--color-off-white);
-  clip-path: polygon(10px 0%, 100% 0%, calc(100% - 10px) 100%, 0% 100%);
-  font-family: 'Barlow Condensed', sans-serif;
-  font-weight: 600;
-  font-size: 14px;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  padding: 14px 24px;
-  border: none;
+  background: var(--mz-primary-container);
+  color: var(--mz-on-primary-container);
+  border: 0;
+  border-radius: var(--mz-r-pill);
+  font: 700 14px/20px var(--mz-font-body);
+  letter-spacing: .01em;
+  text-transform: none;
+  padding: 12px 24px;
+  min-height: 52px;
+  box-shadow: var(--mz-shadow-card);
   margin-top: 0.5rem;
-  transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
   text-align: center;
+  cursor: pointer;
+  transition: transform .2s ease, box-shadow .2s ease, background-color .2s ease;
 }
 
 .profile-save-btn:hover {
-  background: var(--color-brown-light);
-  transform: translateY(-2px);
-  box-shadow: 0 6px 24px rgba(131, 68, 23, 0.35);
+  transform: scale(.98);
+  box-shadow: var(--mz-shadow-float);
+}
+
+.profile-save-btn:active {
+  transform: scale(.96);
+}
+
+.profile-save-btn:focus-visible {
+  outline: 3px solid var(--mz-primary);
+  outline-offset: 3px;
+}
+
+.profile-save-btn:disabled {
+  opacity: .5;
+  cursor: not-allowed;
 }
