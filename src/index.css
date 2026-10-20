@@ -133,51 +133,74 @@ hr {
 /* ── Primary Button ── */
 .btn-primary {
   display: inline-block;
-  background: var(--color-brown);
-  color: var(--color-off-white);
+  background: var(--mz-primary-container);
+  color: var(--mz-on-primary-container);
   border-radius: var(--mz-r-pill);
-  font-family: var(--mz-font-display);
-  font-weight: 600;
-  font-size: 14px;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  padding: 12px 32px;
-  border: none;
-  transition: background 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
+  font: 700 14px/20px var(--mz-font-body);
+  letter-spacing: .01em;
+  text-transform: none;
+  padding: 12px 24px;
+  min-height: 44px;
+  border: 0;
+  box-shadow: var(--mz-shadow-card);
+  transition: transform .2s ease, box-shadow .2s ease, background-color .2s ease;
   white-space: nowrap;
+  cursor: pointer;
 }
 
 .btn-primary:hover {
-  background: var(--color-brown-light);
-  transform: scale(0.98);
-  box-shadow: 0 6px 24px rgba(131, 68, 23, 0.35);
+  transform: scale(.98);
+  box-shadow: var(--mz-shadow-float);
 }
 
 .btn-primary:active {
-  transform: scale(0.96);
+  transform: scale(.96);
+}
+
+.btn-primary:focus-visible {
+  outline: 3px solid var(--mz-primary);
+  outline-offset: 3px;
+}
+
+.btn-primary:disabled {
+  opacity: .5;
+  cursor: not-allowed;
 }
 
 /* ── Ghost Button ── */
 .btn-ghost {
   display: inline-block;
   background: transparent;
-  border: 1px solid rgba(131, 68, 23, 0.5);
-  color: var(--color-warm-gray);
+  color: var(--mz-secondary);
   border-radius: var(--mz-r-pill);
-  font-family: var(--mz-font-display);
-  font-weight: 600;
-  font-size: 14px;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  padding: 11px 32px;
-  transition: border-color 0.2s ease, color 0.2s ease, transform 0.15s ease;
+  font: 700 14px/20px var(--mz-font-body);
+  letter-spacing: .01em;
+  text-transform: none;
+  padding: 12px 24px;
+  min-height: 44px;
+  border: 0;
+  transition: transform .2s ease, box-shadow .2s ease, background-color .2s ease;
   white-space: nowrap;
+  cursor: pointer;
 }
 
 .btn-ghost:hover {
-  border-color: rgba(131, 68, 23, 0.9);
-  color: var(--color-off-white);
-  transform: scale(0.98);
+  transform: scale(.98);
+  box-shadow: var(--mz-shadow-float);
+}
+
+.btn-ghost:active {
+  transform: scale(.96);
+}
+
+.btn-ghost:focus-visible {
+  outline: 3px solid var(--mz-primary);
+  outline-offset: 3px;
+}
+
+.btn-ghost:disabled {
+  opacity: .5;
+  cursor: not-allowed;
 }
 
 /* ── Status Badges ── */
