@@ -165,7 +165,7 @@
   gap: 2rem;
 }
 
-.download-card {
+.modal-container .download-card {
   text-align: center;
 }
 
@@ -178,7 +178,7 @@
   margin-bottom: 1rem;
 }
 
-.download-card h4 {
+.modal-container .download-card h4 {
   font-family: var(--mz-font-display);
   font-size: 1.3rem;
   font-weight: 600;
@@ -255,16 +255,16 @@
 }
 
 /* Policy Modal Content */
-.policy-content {
+.modal-container .policy-content {
   color: var(--mz-on-surface-variant);
   line-height: 1.8;
 }
 
-.policy-content p {
+.modal-container .policy-content p {
   margin-bottom: 1rem;
 }
 
-.policy-content strong {
+.modal-container .policy-content strong {
   color: var(--mz-on-surface);
 }
 
