@@ -460,7 +460,7 @@
   flex-wrap: wrap;
 }
 
-.download-card {
+.download-section .download-card {
   background: var(--mz-surface-low);
   border: 1px solid var(--mz-outline-variant);
   border-radius: var(--mz-r-card);
@@ -472,13 +472,13 @@
   min-height: 48px;
 }
 
-.download-card:hover {
+.download-section .download-card:hover {
   border-color: var(--mz-outline);
   transform: translateY(-2px);
   box-shadow: var(--mz-shadow-sm);
 }
 
-.download-card:focus-visible {
+.download-section .download-card:focus-visible {
   outline: 2px solid var(--mz-primary);
   outline-offset: 2px;
 }
@@ -537,7 +537,7 @@
   pointer-events: none; /* card div handles the click */
 }
 
-.download-card:hover .download-btn {
+.download-section .download-card:hover .download-btn {
   transform: scale(.98);
   box-shadow: var(--mz-shadow-card);
 }
